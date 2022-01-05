@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tzion</title>
-    <link>https://tzion0.github.io/</link>
-    <description>Recent content on Tzion</description>
+    <title>THM on Tzion</title>
+    <link>https://tzion0.github.io/tags/thm/</link>
+    <description>Recent content in THM on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/thm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[THM] NoNameCTF</title>
       <link>https://tzion0.github.io/posts/thm-nonamectf/</link>
@@ -14,16 +14,6 @@
       
       <guid>https://tzion0.github.io/posts/thm-nonamectf/</guid>
       <description>Enumeration nmap -sCV -oN nmap/NoNameCTF &amp;lt;ip&amp;gt; Result Nmap scan report for 10.10.107.235 Host is up (0.36s latency). Not shown: 992 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 12:57:3f:cc:86:39:04:3b:f0:e6:46:bf:72:51:64:0b (RSA) | 256 81:05:75:ad:78:83:62:b2:06:41:5b:e5:a5:a9:82:4d (ECDSA) |_ 256 0f:8d:0e:19:e9:c7:cc:14:39:e9:34:60:5c:f7:aa:fe (ED25519) 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-title: Site doesn&#39;t have a title (text/html). |_http-server-header: Apache/2.4.18 (Ubuntu) 146/tcp filtered iso-tp0 2222/tcp open EtherNetIP-1?</description>
-    </item>
-    
-    <item>
-      <title>About Me</title>
-      <link>https://tzion0.github.io/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://tzion0.github.io/about/</guid>
-      <description>Information Technology Student, CTF Player, Bug Hunter, SRT Member, Script Kiddie
- Email: tz0x65@gmail.com  </description>
     </item>
     
   </channel>
