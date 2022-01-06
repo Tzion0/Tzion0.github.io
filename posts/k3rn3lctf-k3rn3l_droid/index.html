@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>[K3RN3LCTF] K3RN3L DROID // Tzion</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.91.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Tzion" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[K3RN3LCTF] K3RN3L DROID"/>
+<meta name="twitter:description" content="Task source : https://github.com/Tzion0/CTF/blob/master/K3RN3LCTF/K3RN3L%20DROID/kernel-droid.asm
+Our goal is to retrieve the valid pin number to combine with another half of the flag: flag{K3RN3L_DR0ID_%s}
+The only way to view validPinMessage is through valid_pin. We can see label5 is comparing the pinCode and jump to valid_pin if matched. The table below have references for intructions we need.
+Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow jc, jb, jnae CF = 1 carry / below / not above nor equal jnc, jae, jnb CF = 0 not carry / above or equal / not below je, jz ZF = 1 equal / zero jne, jnz ZF = 0 not equal / not zero jbe, jna CF or ZF = 1 below or equal / not above ja, jnbe CF or ZF = 0 above / not below or equal js SF = 1 sign jns SF = 0 not sign jp, jpe PF = 1 parity / parity even jnp, jpo PF = 0 not parity / parity odd jl, jnge SF xor OF = 1 less / not greater nor equal jge, jnl SF xor OF = 0 greater or equal / not less jle, jng (SF xor OF) or ZF = 1 less or equal / not greater jg, jnle (SF xor OF) or ZF = 0 greater / not less nor equal Apparently the length of pinCode was 8:"/>
+
+    <meta property="og:title" content="[K3RN3LCTF] K3RN3L DROID" />
+<meta property="og:description" content="Task source : https://github.com/Tzion0/CTF/blob/master/K3RN3LCTF/K3RN3L%20DROID/kernel-droid.asm
+Our goal is to retrieve the valid pin number to combine with another half of the flag: flag{K3RN3L_DR0ID_%s}
+The only way to view validPinMessage is through valid_pin. We can see label5 is comparing the pinCode and jump to valid_pin if matched. The table below have references for intructions we need.
+Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow jc, jb, jnae CF = 1 carry / below / not above nor equal jnc, jae, jnb CF = 0 not carry / above or equal / not below je, jz ZF = 1 equal / zero jne, jnz ZF = 0 not equal / not zero jbe, jna CF or ZF = 1 below or equal / not above ja, jnbe CF or ZF = 0 above / not below or equal js SF = 1 sign jns SF = 0 not sign jp, jpe PF = 1 parity / parity even jnp, jpo PF = 0 not parity / parity odd jl, jnge SF xor OF = 1 less / not greater nor equal jge, jnl SF xor OF = 0 greater or equal / not less jle, jng (SF xor OF) or ZF = 1 less or equal / not greater jg, jnle (SF xor OF) or ZF = 0 greater / not less nor equal Apparently the length of pinCode was 8:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tzion0.github.io/posts/k3rn3lctf-k3rn3l_droid/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-11-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-11-15T00:00:00+00:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tzion0.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Tzion" /></a>
+      <h1>Tzion</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/posts/">Blog</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>Yet Another Infosec Blog, Enjoy!</p>
+      <div class="app-header-social">
+        
+          <a href="https://twitter.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>My Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://github.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">[K3RN3LCTF] K3RN3L DROID</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Nov 15, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tzion0.github.io/tags/k3rn3lctf/">K3RN3LCTF</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h3 id="task-source-">Task source :</h3>
+<p><a href="https://github.com/Tzion0/CTF/blob/master/K3RN3LCTF/K3RN3L%20DROID/kernel-droid.asm">https://github.com/Tzion0/CTF/blob/master/K3RN3LCTF/K3RN3L%20DROID/kernel-droid.asm</a></p>
+<p>Our goal is to retrieve the valid pin number to combine with another half of the flag: <code>flag{K3RN3L_DR0ID_%s}</code></p>
+<p>The only way to view <code>validPinMessage</code> is through <code>valid_pin</code>. We can see <code>label5</code> is comparing the <strong>pinCode</strong> and jump to <code>valid_pin</code> if matched. The table below have references for intructions we need.</p>
+<pre tabindex="0"><code>Mnemonic        Condition tested  Description  
+jo              OF = 1            overflow 
+jno             OF = 0            not overflow 
+jc, jb, jnae    CF = 1            carry / below / not above nor equal
+jnc, jae, jnb   CF = 0            not carry / above or equal / not below
+je, jz          ZF = 1            equal / zero
+jne, jnz        ZF = 0            not equal / not zero
+jbe, jna        CF or ZF = 1      below or equal / not above
+ja, jnbe        CF or ZF = 0      above / not below or equal
+js              SF = 1            sign 
+jns             SF = 0            not sign 
+jp, jpe         PF = 1            parity / parity even 
+jnp, jpo        PF = 0            not parity / parity odd 
+jl, jnge        SF xor OF = 1     less / not greater nor equal
+jge, jnl        SF xor OF = 0     greater or equal / not less
+jle, jng    (SF xor OF) or ZF = 1 less or equal / not greater
+jg, jnle    (SF xor OF) or ZF = 0 greater / not less nor equal 
+</code></pre><p>Apparently the length of <strong>pinCode</strong> was 8:</p>
+<pre tabindex="0"><code>call strlen
+cmp rax, 0x8
+jne invalid_pin_length 
+</code></pre><h3 id="pincode-1">pinCode 1:</h3>
+<pre tabindex="0"><code>mov r9b, [pinCode + 0x0]
+cmp r9b, 0x30
+jne invalid_pin
+</code></pre><p>We can see it is comparing with <code>0x30</code> and jump to <code>invalid_pin</code> if not equal. So the first pinCode was <code>0x30</code> which is equivalent to 0 in ASCII.</p>
+<h4 id="flag-in-progress-flagk3rn3l_dr0id_0">Flag in progress: flag{K3RN3L_DR0ID_0}</h4>
+<h3 id="pincode-2">pinCode 2:</h3>
+<pre tabindex="0"><code>mov r9b, [pinCode + 0x1]
+cmp r9b, 0x34
+jne invalid_pin
+</code></pre><p>Same as first one, so the second pinCode was <code>0x34</code> which is equivalent to 4 in ASCII.</p>
+<h4 id="flag-in-progress-flagk3rn3l_dr0id_04">Flag in progress: flag{K3RN3L_DR0ID_04}</h4>
+<h3 id="pincode-3">pinCode 3:</h3>
+<pre tabindex="0"><code>mov r9b, [pinCode + 0x2]
+cmp r9b, 0x37
+jg invalid_pin
+cmp r9b, 0x30
+jne invalid_pin
+</code></pre><p>We can see it is comparing with <code>0x37</code> and jump to <code>invalid_pin</code> if it was greater than <code>0x37</code>, in other words, the correct pinCode was &lt; 0x37.
+Now for the second comparison, the instruction was jump if not equal, which means the correct pinCode was <code>0x30</code>, equivalent to 0 in ASCII.</p>
+<h4 id="flag-in-progress-flagk3rn3l_dr0id_040">Flag in progress: flag{K3RN3L_DR0ID_040}</h4>
+<h3 id="pincode-4">pinCode 4:</h3>
+<pre tabindex="0"><code>mov r9b, [pinCode + 0x3]
+cmp r9b, 0x39
+je invalid_pin
+cmp r9b, 0x30
+jne invalid_pin
+</code></pre><p>The first comparison compare if the pinCode is equal to <code>0x39</code>, jump to <code>invalid_pin</code>, which is useless for us. For second comparison, again, jump to <code>invalid_pin</code> if not equal, so the correct pinCode was <code>0x30</code>, equivalent to 0 in ASCII.</p>
+<h4 id="flag-in-progress-flagk3rn3l_dr0id_0400">Flag in progress: flag{K3RN3L_DR0ID_0400}</h4>
+<h3 id="pincode-5">pinCode 5:</h3>
+<pre tabindex="0"><code>mov r8b, [pinCode + 0x4]
+cmp r8b, 0x31
+jb invalid_pin
+cmp r8b, 0x32
+jge invalid_pin
+</code></pre><p>The first comparison compare if the pinCode was below than <code>0x31</code>, jump to <code>invalid_pin</code>. So the pinCode must be &gt;= 0x31. For second comparison, if the pinCode was greater or equal to <code>0x32</code>, jump to <code>invalid_pin</code>. Which means the correct pinCode is 0x32 &gt; x &gt;= 0x31. Thereforce the <code>0x31</code> was the correct pinCode, equivalent to 1 in ASCII.</p>
+<h4 id="flag-in-progress-flagk3rn3l_dr0id_04001">Flag in progress: flag{K3RN3L_DR0ID_04001}</h4>
+<h3 id="pincode-6">pinCode 6:</h3>
+<pre tabindex="0"><code>mov r8b, [pinCode + 0x5]
+cmp r8b, 0x30
+jbe invalid_pin
+cmp r8b, 0x32
+jae invalid_pin
+</code></pre><p>First comparison check if pinCode was below or equal to <code>0x30</code>, which means the pinCode must be &gt; 0x30. The second comparison check if the pinCode is above or equal to <code>0x32</code>, hence the correct pinCode is <code>0x31</code>, equivalent to 1 in ASCII.</p>
+<h4 id="flag-in-progress-flagk3rn3l_dr0id_040011">Flag in progress: flag{K3RN3L_DR0ID_040011}</h4>
+<h3 id="pincode-7">pinCode 7:</h3>
+<pre tabindex="0"><code>mov r8b, [pinCode + 0x6]
+cmp r8b, 0x39
+jne invalid_pin
+</code></pre><p>Again, jump if not equal. So the correct pinCode was <code>0x39</code>, equivalent to 9 in ASCII.</p>
+<h4 id="flag-in-progress-flagk3rn3l_dr0id_0400119">Flag in progress: flag{K3RN3L_DR0ID_0400119}</h4>
+<h3 id="pincode-8">pinCode 8:</h3>
+<pre tabindex="0"><code>mov r8b, [pinCode + 0x7]
+cmp r8b, 0x36
+jl invalid_pin
+cmp r8b, 0x36
+jg invalid_pin
+</code></pre><p>The first comparison check if the pinCode was less than <code>0x36</code>, means the correct pinCode is &gt;= 0x36. For second comparison, it check if the pinCode is greater than 0x36, hence the correct pinCode was <code>0x36</code>, equivalent to 6 in ASCII.</p>
+<h4 id="final-flag-flagk3rn3l_dr0id_04001196">Final Flag: flag{K3RN3L_DR0ID_04001196}</h4>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
