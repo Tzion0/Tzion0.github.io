@@ -96,7 +96,7 @@ Right click class tab -&gt; Class Mode -&gt; Table We can see the Source file." 
       <h3 id="task-source">Task source:</h3>
 <p><a href="https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF">https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF</a></p>
 <p>Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with <code>\u0000K3RN3L_CTF{{{{{{</code> with password as argument.<br>
-<img src="/posts/k3rn3lctf-integrity_checker/_resources/img.png" alt="IMG"></p>
+<img src="/posts/k3rn3lctf-integrity_checker/resources/img.png" alt="IMG"></p>
 <p>Apparently the calling function was the cause of error. Let&rsquo;s view its original class:</p>
 <pre tabindex="0"><code>Right click class tab -&gt; Class Mode -&gt; Table
 </code></pre><p>We can see the <code>Source file.</code> is <code>Decryptor.java</code> indicate its original class name was <code>Decryptor</code>
