@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>[KNIGHTCTF] Knight Switch Bank // Tzion</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.91.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Tzion" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[KNIGHTCTF] Knight Switch Bank"/>
+<meta name="twitter:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
+The encoding algorithm:
+ for (; inpt[i] != &#39;\0&#39;; i = i &#43; 1) { if ((inpt[i] &lt; &#39;A&#39;) || (&#39;M&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;a&#39;) || (&#39;m&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;N&#39;) || (&#39;Z&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;n&#39;) || (&#39;z&#39; &lt; inpt[i])) { temp[i] = inpt[i] &#43; -0x20; } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } for (; temp[x] !"/>
+
+    <meta property="og:title" content="[KNIGHTCTF] Knight Switch Bank" />
+<meta property="og:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
+The encoding algorithm:
+ for (; inpt[i] != &#39;\0&#39;; i = i &#43; 1) { if ((inpt[i] &lt; &#39;A&#39;) || (&#39;M&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;a&#39;) || (&#39;m&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;N&#39;) || (&#39;Z&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;n&#39;) || (&#39;z&#39; &lt; inpt[i])) { temp[i] = inpt[i] &#43; -0x20; } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } for (; temp[x] !" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tzion0.github.io/posts/knightctf-knight_switch_bank/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-23T00:00:00+00:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tzion0.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Tzion" /></a>
+      <h1>Tzion</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/posts/">Blog</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>Yet Another Infosec Blog, Enjoy!</p>
+      <div class="app-header-social">
+        
+          <a href="https://twitter.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>My Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://github.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">[KNIGHTCTF] Knight Switch Bank</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 23, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tzion0.github.io/tags/knightctf/">KNIGHTCTF</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h3 id="task-source-httpsgithubcomtzion0ctftreemasterknightctf">Task source: <a href="https://github.com/Tzion0/CTF/tree/master/KnightCTF">https://github.com/Tzion0/CTF/tree/master/KnightCTF</a></h3>
+<p>By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.</p>
+<p>The encoding algorithm:</p>
+<pre tabindex="0"><code>  for (; inpt[i] != '\0'; i = i + 1) {
+    if ((inpt[i] &lt; 'A') || ('M' &lt; inpt[i])) {
+      if ((inpt[i] &lt; 'a') || ('m' &lt; inpt[i])) {
+        if ((inpt[i] &lt; 'N') || ('Z' &lt; inpt[i])) {
+          if ((inpt[i] &lt; 'n') || ('z' &lt; inpt[i])) {
+            temp[i] = inpt[i] + -0x20;
+          }
+          else {
+            temp[i] = inpt[i] + -0xd;
+          }
+        }
+        else {
+          temp[i] = inpt[i] + -0xd;
+        }
+      }
+      else {
+        temp[i] = inpt[i] + '\r';
+      }
+    }
+    else {
+      temp[i] = inpt[i] + '\r';
+    }
+  }
+  for (; temp[x] != '\0'; x = x + 1) {
+    temp[x] = temp[x] + '\x02';
+  }
+</code></pre><p>Great, now we know the algorithm, let&rsquo;s see what is the encoded flag:</p>
+<pre tabindex="0"><code>local_38 = 0x4164485d5549525a;
+local_30 = 0x41494447414a644e;
+local_28 = 0x4173444476414978;
+local_20 = 0x71444479;
+local_1c = 0x5f;
+</code></pre><p>After unpacking it, we will get:</p>
+<pre tabindex="0"><code>ZRIU]HdANdJAGDIAxIAvDDsAyDDq_
+</code></pre><h4 id="note-i-did-some-adjustment-manually-because-the-initial-unpacked-value-looks-weird">Note: I did some adjustment manually because the initial unpacked value looks weird</h4>
+<p>My approach to solve this is to generate a list of printable string, let them goes through the encoding algorithm, loop each character to compare with encoded flag, if it matched, get its index, print the original not encoded value. Please do take note that my code probably wasn&rsquo;t the best in term of simplicity but at least it works. Let&rsquo;s get it started.</p>
+<p>First. initialize the required variables, the <code>enc</code> variable is the <code>temp</code> variable for above encoding algorithm:</p>
+<pre tabindex="0"><code>#!/usr/bin/env python3
+from pwn import *
+import string
+ct = list('ZRIU]HdANdJAGDIAxIAvDDsAyDDq_')
+printable = list(string.printable)
+enc = ['A' for i in range(len(printable))]
+</code></pre><p>Next, we can just mimic the encoding algorithm we saw in Ghidra:</p>
+<pre tabindex="0"><code>for i in range(len(printable)):
+	if printable[i] &lt; 'A' or printable[i] &gt; 'M':
+		if printable[i] &lt; 'a' or printable[i] &gt; 'm':
+			if printable[i] &lt; 'N' or printable[i] &gt; 'Z':
+				if printable[i] &lt; 'n' or printable[i] &gt; 'z':
+					enc[i] = ord(printable[i]) - 0x20
+				else:
+					enc[i] = ord(printable[i]) - 0xd
+			else:
+				enc[i] = ord(printable[i]) - 0xd
+		else:
+			enc[i] = ord(printable[i]) + 13
+	else:
+		enc[i] = ord(printable[i]) + 13
+
+for i in range(len(enc)):
+	enc[i] = chr(abs(enc[i] + 0x2))
+</code></pre><p>Lastly, loop through each <code>enc</code> value to compare with encoded flag:</p>
+<pre tabindex="0"><code>for i in range(len(ct)):
+	for x in range(len(enc)):
+		if ct[i] == enc[x]:
+			print(printable[x], end=&quot;&quot;)
+</code></pre><h3 id="final-code">Final Code</h3>
+<pre tabindex="0"><code>#!/usr/bin/env python3
+from pwn import *
+import string
+ct = list('ZRIU]HdANdJAGDIAxIAvDDsAyDDq_')
+printable = list(string.printable)
+enc = ['A' for i in range(len(printable))]
+
+for i in range(len(printable)):
+	if printable[i] &lt; 'A' or printable[i] &gt; 'M':
+		if printable[i] &lt; 'a' or printable[i] &gt; 'm':
+			if printable[i] &lt; 'N' or printable[i] &gt; 'Z':
+				if printable[i] &lt; 'n' or printable[i] &gt; 'z':
+					enc[i] = ord(printable[i]) - 0x20
+				else:
+					enc[i] = ord(printable[i]) - 0xd
+			else:
+				enc[i] = ord(printable[i]) - 0xd
+		else:
+			enc[i] = ord(printable[i]) + 13
+	else:
+		enc[i] = ord(printable[i]) + 13
+
+for i in range(len(enc)):
+	enc[i] = chr(abs(enc[i] + 0x2))
+
+for i in range(len(ct)):
+	for x in range(len(enc)):
+		if ct[i] == enc[x]:
+			print(printable[x], end=&quot;&quot;)
+</code></pre><h3 id="flag">Flag</h3>
+<pre tabindex="0"><code>KCTF{So_YoU_ROT_iT_gOOd_jOOb}
+</code></pre>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
