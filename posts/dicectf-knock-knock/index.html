@@ -172,7 +172,20 @@ app.listen(3000, () =&gt; {
     this.notes = [];
     this.secret = `secret-${crypto.randomUUID}`;
 }
-</code></pre><p>The calling of <code>crypto.randomUUID</code> missing a parenthesis, it actually will always return <code>undefined</code>. It should be <code>crypto.randomUUID()</code> instead. With that, I create a small script to generate URL of other paste, I assuming that the first paste <code>id=0</code> is the flag:</p>
+</code></pre><p>The calling of <code>crypto.randomUUID</code> missing parentheses, it actually will always return the below on recommended version of nodejs:</p>
+<pre tabindex="0"><code>secret-function randomUUID(options) {
+  if (options !== undefined)
+    validateObject(options, 'options');
+  const {
+    disableEntropyCache = false,
+  } = options || {};
+
+  validateBoolean(disableEntropyCache, 'options.disableEntropyCache');
+
+  return disableEntropyCache ? getUnbufferedUUID() : getBufferedUUID();
+}
+</code></pre><h4 id="note-for-lower-version-of-nodejs-it-will-return-undefined-instead">Note: For lower version of nodejs, it will return <code>undefined</code> instead.</h4>
+<p>So the correct code should be <code>crypto.randomUUID()</code> instead to get the proper random secret. With that, I create a small script to generate URL of other paste, I assuming that the first paste <code>id=0</code> is the flag:</p>
 <pre tabindex="0"><code>const crypt = require('crypto');
 secret = `secret-${crypt.randomUUID}`;
 
