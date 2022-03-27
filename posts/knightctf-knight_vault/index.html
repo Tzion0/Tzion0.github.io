@@ -4,7 +4,7 @@
     <title>[KNIGHTCTF] Knight Vault // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.68.3" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
@@ -22,10 +22,9 @@ The encoding algorithm:
 The encoding algorithm:
  for (c = 0; inpt[c] != &#39;\0&#39;; c = c &#43; 1) { temp[c] = inpt[c] &#43; -10; if (temp[c] == &#39;A&#39;) { temp[c] = &#39;*&#39;; } } Now, let&rsquo;s see what&rsquo;s the encoded flag:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tzion0.github.io/posts/knightctf-knight_vault/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://tzion0.github.io/posts/knightctf-knight_vault/" />
 <meta property="article:published_time" content="2022-01-23T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-01-23T00:00:00+00:00" />
-
 
 
   </head>
@@ -95,24 +94,24 @@ The encoding algorithm:
       <h3 id="task-source-httpsgithubcomtzion0ctftreemasterknightctf">Task source: <a href="https://github.com/Tzion0/CTF/tree/master/KnightCTF">https://github.com/Tzion0/CTF/tree/master/KnightCTF</a></h3>
 <p>By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now) and looping through each character of temp to do final comparison with the encoded flag.</p>
 <p>The encoding algorithm:</p>
-<pre tabindex="0"><code>  for (c = 0; inpt[c] != '\0'; c = c + 1) {
+<pre><code>  for (c = 0; inpt[c] != '\0'; c = c + 1) {
     temp[c] = inpt[c] + -10;
     if (temp[c] == 'A') {
       temp[c] = '*';
     }
   }
 </code></pre><p>Now, let&rsquo;s see what&rsquo;s the encoded flag:</p>
-<pre tabindex="0"><code>local_438 = 0x554569713c4a392a;
+<pre><code>local_438 = 0x554569713c4a392a;
 local_430 = 0x556a455d556b456f;
 local_428 = 0x555a45455d553b63;
 local_420 = 0x66375e5558454560;
 local_418 = 0x5f2a59375e556f46;
 local_410 = 0x735d44;
 </code></pre><p>After unpacking it, we will get:</p>
-<pre tabindex="0"><code>*9J&lt;qiEUoEkU]EjUc;U]EEZU`EEXU^7fFoU^7Y*_D]s
+<pre><code>*9J&lt;qiEUoEkU]EjUc;U]EEZU`EEXU^7fFoU^7Y*_D]s
 </code></pre><p>My Approach to solve this is just simply reverse back the encoded flag. So we will loop through each character of encoded flag, then we will now <code>+ 10</code> instead of <code>- 10</code> and if any of those character matched <code>*</code>, we will change back to <code>A</code>.</p>
 <h3 id="final-code">Final Code</h3>
-<pre tabindex="0"><code>#!/usr/bin/env python3
+<pre><code>#!/usr/bin/env python3
 from pwn import *
 
 ct = list('*9J&lt;qiEUoEkU]EjUc;U]EEZU`EEXU^7fFoU^7Y*_D]s')
@@ -124,7 +123,7 @@ for x in range(len(ct)):
 
 print(''.join(str(i) for i in ct))
 </code></pre><h3 id="flag">Flag</h3>
-<pre tabindex="0"><code>4CTF{sO_yOu_gOt_mE_gOOd_jOOb_hApPy_hAc4iNg}
+<pre><code>4CTF{sO_yOu_gOt_mE_gOOd_jOOb_hApPy_hAc4iNg}
 </code></pre><h4 id="note-the-flag-i-get-apparently-not-perfect-i-solve-it-by-replacing-some-characters-manually">Note: The flag i get apparently not perfect, i solve it by replacing some characters manually</h4>
 
     </div>

