@@ -18,8 +18,9 @@
       
       <guid>https://tzion0.github.io/posts/picoctf2022-binexp/</guid>
       <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Binary_Exploitation
-Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 10 out of 14 Binary Exploitation category challenges in PicoCTF 2022 that i manage to solve.
-basic-file-exploit Description The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!</description>
+Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 10 out of 14 Binary Exploitation category challenges in PicoCTF 2022 that i solved.
+basic-file-exploit Description The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!
+This challenge provided a C source code:</description>
     </item>
     
   </channel>
