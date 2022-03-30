@@ -18,7 +18,7 @@
       
       <guid>https://tzion0.github.io/posts/picoctf2022-for/</guid>
       <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Forensics
-Worth to note that we manage to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 13 Forensics category challenges in PicoCTF 2022 that i manage to solve.
+Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 13 Forensics category challenges in PicoCTF 2022 that i manage to solve.
 Enhance! Description Download this image file and find the flag.
 This challenge provided a SVG image file.
 To solve it, we just need to view the text inside the SVG image file:</description>

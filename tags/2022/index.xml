@@ -18,7 +18,7 @@
       
       <guid>https://tzion0.github.io/posts/picoctf2022-binexp/</guid>
       <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Binary_Exploitation
-Worth to note that we manage to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 10 out of 14 Binary Exploitation category challenges in PicoCTF 2022 that i manage to solve.
+Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 10 out of 14 Binary Exploitation category challenges in PicoCTF 2022 that i manage to solve.
 basic-file-exploit Description The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!</description>
     </item>
     
@@ -29,7 +29,7 @@ basic-file-exploit Description The program provided allows you to write to a fil
       
       <guid>https://tzion0.github.io/posts/picoctf2022-for/</guid>
       <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Forensics
-Worth to note that we manage to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 13 Forensics category challenges in PicoCTF 2022 that i manage to solve.
+Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 13 Forensics category challenges in PicoCTF 2022 that i manage to solve.
 Enhance! Description Download this image file and find the flag.
 This challenge provided a SVG image file.
 To solve it, we just need to view the text inside the SVG image file:</description>
@@ -42,7 +42,7 @@ To solve it, we just need to view the text inside the SVG image file:</descripti
       
       <guid>https://tzion0.github.io/posts/picoctf2022-rev/</guid>
       <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Reverse_Engineering
-Worth to note that we manage to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 12 Reverse Engineering category challenges in PicoCTF 2022 that i manage to solve.
+Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 12 Reverse Engineering category challenges in PicoCTF 2022 that i manage to solve.
 file-run1 Description A program has been provided to you, what happens if you try to run it on the command line?
 This challenge provided an executable.
 We just need to execute the executable to obtain the flag.</description>
