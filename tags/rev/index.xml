@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rev on Tzion</title>
+    <link>https://tzion0.github.io/tags/rev/</link>
+    <description>Recent content in Rev on Tzion</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://tzion0.github.io/tags/rev/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[PICOCTF 2022] Reverse Engineering</title>
+      <link>https://tzion0.github.io/posts/picoctf2022-rev/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/picoctf2022-rev/</guid>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Reverse_Engineering
+Worth to note that we manage to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 12 Reverse Engineering category challenges in PicoCTF 2022 that i manage to solve.
+file-run1 Description A program has been provided to you, what happens if you try to run it on the command line?
+This challenge provided an executable.
+We just need to execute the executable to obtain the flag.</description>
+    </item>
+    
+    <item>
+      <title>[KNIGHTCTF] Knight Switch Bank</title>
+      <link>https://tzion0.github.io/posts/knightctf-knight_switch_bank/</link>
+      <pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/knightctf-knight_switch_bank/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
+The encoding algorithm:
+ for (; inpt[i] != &#39;\0&#39;; i = i + 1) { if ((inpt[i] &amp;lt; &#39;A&#39;) || (&#39;M&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;a&#39;) || (&#39;m&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;N&#39;) || (&#39;Z&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;n&#39;) || (&#39;z&#39; &amp;lt; inpt[i])) { temp[i] = inpt[i] + -0x20; } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + &#39;\r&#39;; } } else { temp[i] = inpt[i] + &#39;\r&#39;; } } for (; temp[x] !</description>
+    </item>
+    
+    <item>
+      <title>[KNIGHTCTF] Knight Vault</title>
+      <link>https://tzion0.github.io/posts/knightctf-knight_vault/</link>
+      <pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/knightctf-knight_vault/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now) and looping through each character of temp to do final comparison with the encoded flag.
+The encoding algorithm:
+ for (c = 0; inpt[c] != &#39;\0&#39;; c = c + 1) { temp[c] = inpt[c] + -10; if (temp[c] == &#39;A&#39;) { temp[c] = &#39;*&#39;; } } Now, let&amp;rsquo;s see what&amp;rsquo;s the encoded flag:</description>
+    </item>
+    
+    <item>
+      <title>[K3RN3LCTF] Integrity Checker</title>
+      <link>https://tzion0.github.io/posts/k3rn3lctf-integrity_checker/</link>
+      <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/k3rn3lctf-integrity_checker/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF
+Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument.
+Apparently the calling function was the cause of error. Let&amp;rsquo;s view its original class:
+Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source file.</description>
+    </item>
+    
+    <item>
+      <title>[K3RN3LCTF] K3RN3L DROID</title>
+      <link>https://tzion0.github.io/posts/k3rn3lctf-k3rn3l_droid/</link>
+      <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/k3rn3lctf-k3rn3l_droid/</guid>
+      <description>Task source : https://github.com/Tzion0/CTF/blob/master/K3RN3LCTF/K3RN3L%20DROID/kernel-droid.asm
+Our goal is to retrieve the valid pin number to combine with another half of the flag: flag{K3RN3L_DR0ID_%s}
+The only way to view validPinMessage is through valid_pin. We can see label5 is comparing the pinCode and jump to valid_pin if matched. The table below have references for intructions we need.
+Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow jc, jb, jnae CF = 1 carry / below / not above nor equal jnc, jae, jnb CF = 0 not carry / above or equal / not below je, jz ZF = 1 equal / zero jne, jnz ZF = 0 not equal / not zero jbe, jna CF or ZF = 1 below or equal / not above ja, jnbe CF or ZF = 0 above / not below or equal js SF = 1 sign jns SF = 0 not sign jp, jpe PF = 1 parity / parity even jnp, jpo PF = 0 not parity / parity odd jl, jnge SF xor OF = 1 less / not greater nor equal jge, jnl SF xor OF = 0 greater or equal / not less jle, jng (SF xor OF) or ZF = 1 less or equal / not greater jg, jnle (SF xor OF) or ZF = 0 greater / not less nor equal Apparently the length of pinCode was 8:</description>
+    </item>
+    
+  </channel>
+</rss>

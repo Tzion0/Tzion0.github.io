@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PICOCTF on Tzion</title>
+    <link>https://tzion0.github.io/tags/picoctf/</link>
+    <description>Recent content in PICOCTF on Tzion</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://tzion0.github.io/tags/picoctf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[PICOCTF 2022] Binary Exploitation</title>
+      <link>https://tzion0.github.io/posts/picoctf2022-binexp/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/picoctf2022-binexp/</guid>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Binary_Exploitation
+Worth to note that we manage to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 10 out of 14 Binary Exploitation category challenges in PicoCTF 2022 that i manage to solve.
+basic-file-exploit Description The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!</description>
+    </item>
+    
+    <item>
+      <title>[PICOCTF 2022] Forensics</title>
+      <link>https://tzion0.github.io/posts/picoctf2022-for/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/picoctf2022-for/</guid>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Forensics
+Worth to note that we manage to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 13 Forensics category challenges in PicoCTF 2022 that i manage to solve.
+Enhance! Description Download this image file and find the flag.
+This challenge provided a SVG image file.
+To solve it, we just need to view the text inside the SVG image file:</description>
+    </item>
+    
+    <item>
+      <title>[PICOCTF 2022] Reverse Engineering</title>
+      <link>https://tzion0.github.io/posts/picoctf2022-rev/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/picoctf2022-rev/</guid>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Reverse_Engineering
+Worth to note that we manage to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 12 Reverse Engineering category challenges in PicoCTF 2022 that i manage to solve.
+file-run1 Description A program has been provided to you, what happens if you try to run it on the command line?
+This challenge provided an executable.
+We just need to execute the executable to obtain the flag.</description>
+    </item>
+    
+  </channel>
+</rss>

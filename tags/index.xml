@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tzion0.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,45 @@
     <item>
       <title>2022</title>
       <link>https://tzion0.github.io/tags/2022/</link>
-      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tzion0.github.io/tags/2022/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BinExp</title>
+      <link>https://tzion0.github.io/tags/binexp/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/tags/binexp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Forensics</title>
+      <link>https://tzion0.github.io/tags/forensics/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/tags/forensics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PICOCTF</title>
+      <link>https://tzion0.github.io/tags/picoctf/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/tags/picoctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rev</title>
+      <link>https://tzion0.github.io/tags/rev/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/tags/rev/</guid>
       <description></description>
     </item>
     
@@ -26,6 +62,15 @@
       <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tzion0.github.io/tags/dicectf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://tzion0.github.io/tags/web/</link>
+      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/tags/web/</guid>
       <description></description>
     </item>
     
