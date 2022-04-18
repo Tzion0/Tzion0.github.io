@@ -13,11 +13,11 @@
     
     <item>
       <title>[K3RN3LCTF] Integrity Checker</title>
-      <link>https://tzion0.github.io/posts/k3rn3lctf-integrity_checker/</link>
+      <link>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/k3rn3lctf-integrity_checker/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF
+      <guid>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker
 Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument.
 Apparently the calling function was the cause of error. Let&amp;rsquo;s view its original class:
 Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source file.</description>
@@ -25,11 +25,11 @@ Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source
     
     <item>
       <title>[K3RN3LCTF] K3RN3L DROID</title>
-      <link>https://tzion0.github.io/posts/k3rn3lctf-k3rn3l_droid/</link>
+      <link>https://tzion0.github.io/posts/k3rn3lctf2022-k3rn3l_droid/</link>
       <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/k3rn3lctf-k3rn3l_droid/</guid>
-      <description>Task source : https://github.com/Tzion0/CTF/blob/master/K3RN3LCTF/K3RN3L%20DROID/kernel-droid.asm
+      <guid>https://tzion0.github.io/posts/k3rn3lctf2022-k3rn3l_droid/</guid>
+      <description>Task source : https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/K3RN3L%20DROID
 Our goal is to retrieve the valid pin number to combine with another half of the flag: flag{K3RN3L_DR0ID_%s}
 The only way to view validPinMessage is through valid_pin. We can see label5 is comparing the pinCode and jump to valid_pin if matched. The table below have references for intructions we need.
 Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow jc, jb, jnae CF = 1 carry / below / not above nor equal jnc, jae, jnb CF = 0 not carry / above or equal / not below je, jz ZF = 1 equal / zero jne, jnz ZF = 0 not equal / not zero jbe, jna CF or ZF = 1 below or equal / not above ja, jnbe CF or ZF = 0 above / not below or equal js SF = 1 sign jns SF = 0 not sign jp, jpe PF = 1 parity / parity even jnp, jpo PF = 0 not parity / parity odd jl, jnge SF xor OF = 1 less / not greater nor equal jge, jnl SF xor OF = 0 greater or equal / not less jle, jng (SF xor OF) or ZF = 1 less or equal / not greater jg, jnle (SF xor OF) or ZF = 0 greater / not less nor equal Apparently the length of pinCode was 8:</description>

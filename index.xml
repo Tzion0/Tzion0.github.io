@@ -6,13 +6,26 @@
     <description>Recent content on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tzion0.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>[PICOCTF 2022] Binary Exploitation</title>
+      <title>[DCTF 2022] Forensics</title>
+      <link>https://tzion0.github.io/posts/dctf2022-for/</link>
+      <pubDate>Mon, 18 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/dctf2022-for/</guid>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/DCTF/2022/Forensics
+This writeup contains all Forensics category challenges in DCTF 2022 that i solved.
+Secure Creds Description With the connection to the victim&amp;rsquo;s computer you managed to dump the lsass.exe process. Can you get the password from the dump file?
+This challenge provided a zip file, unzip it we will get lsass.DMP file.
+From the description we know that we are dealing with lsass.exe, a bit of research shows that we can dump the content using Mimikatz.</description>
+    </item>
+    
+    <item>
+      <title>[PICOCTF] Binary Exploitation</title>
       <link>https://tzion0.github.io/posts/picoctf2022-binexp/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
       
@@ -24,7 +37,7 @@ This challenge provided a C source code:</description>
     </item>
     
     <item>
-      <title>[PICOCTF 2022] Forensics</title>
+      <title>[PICOCTF] Forensics</title>
       <link>https://tzion0.github.io/posts/picoctf2022-for/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
       
@@ -38,7 +51,7 @@ strings drawing.flag.svg Then concat the flag char by char:</description>
     </item>
     
     <item>
-      <title>[PICOCTF 2022] Reverse Engineering</title>
+      <title>[PICOCTF] Reverse Engineering</title>
       <link>https://tzion0.github.io/posts/picoctf2022-rev/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
       
@@ -52,11 +65,11 @@ We just need to execute the executable to obtain the flag.</description>
     
     <item>
       <title>[DICECTF] knock-knock</title>
-      <link>https://tzion0.github.io/posts/dicectf-knock-knock/</link>
+      <link>https://tzion0.github.io/posts/dicectf2022-knock-knock/</link>
       <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/dicectf-knock-knock/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/DiceCTF
+      <guid>https://tzion0.github.io/posts/dicectf2022-knock-knock/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/DiceCTF/2022/knock-knock
 Looking at the webpage, it is a site similar to pastebin that let us to create paste.
 After clicking the create button, it will redirect us to a page with an unique token that contains our paste:
 https://knock-knock.mc.ax/note?id=2249&amp;amp;token=262fedf8ca783b2fd19c581064ab48511877fe2bff4f3ad79726c9ae8277cfd5 Fortunately we have source code comes with this challenge:
@@ -65,33 +78,35 @@ const crypto = require(&#39;crypto&#39;); class Database { constructor() { this.
     
     <item>
       <title>[KNIGHTCTF] Knight Switch Bank</title>
-      <link>https://tzion0.github.io/posts/knightctf-knight_switch_bank/</link>
+      <link>https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/</link>
       <pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/knightctf-knight_switch_bank/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
+      <guid>https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank
+By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
 The encoding algorithm:
  for (; inpt[i] != &#39;\0&#39;; i = i + 1) { if ((inpt[i] &amp;lt; &#39;A&#39;) || (&#39;M&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;a&#39;) || (&#39;m&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;N&#39;) || (&#39;Z&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;n&#39;) || (&#39;z&#39; &amp;lt; inpt[i])) { temp[i] = inpt[i] + -0x20; } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + &#39;\r&#39;; } } else { temp[i] = inpt[i] + &#39;\r&#39;; } } for (; temp[x] !</description>
     </item>
     
     <item>
       <title>[KNIGHTCTF] Knight Vault</title>
-      <link>https://tzion0.github.io/posts/knightctf-knight_vault/</link>
+      <link>https://tzion0.github.io/posts/knightctf2022-knight_vault/</link>
       <pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/knightctf-knight_vault/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now) and looping through each character of temp to do final comparison with the encoded flag.
+      <guid>https://tzion0.github.io/posts/knightctf2022-knight_vault/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Vault
+By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now) and looping through each character of temp to do final comparison with the encoded flag.
 The encoding algorithm:
  for (c = 0; inpt[c] != &#39;\0&#39;; c = c + 1) { temp[c] = inpt[c] + -10; if (temp[c] == &#39;A&#39;) { temp[c] = &#39;*&#39;; } } Now, let&amp;rsquo;s see what&amp;rsquo;s the encoded flag:</description>
     </item>
     
     <item>
       <title>[K3RN3LCTF] Integrity Checker</title>
-      <link>https://tzion0.github.io/posts/k3rn3lctf-integrity_checker/</link>
+      <link>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/k3rn3lctf-integrity_checker/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF
+      <guid>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker
 Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument.
 Apparently the calling function was the cause of error. Let&amp;rsquo;s view its original class:
 Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source file.</description>
@@ -99,11 +114,11 @@ Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source
     
     <item>
       <title>[K3RN3LCTF] K3RN3L DROID</title>
-      <link>https://tzion0.github.io/posts/k3rn3lctf-k3rn3l_droid/</link>
+      <link>https://tzion0.github.io/posts/k3rn3lctf2022-k3rn3l_droid/</link>
       <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/k3rn3lctf-k3rn3l_droid/</guid>
-      <description>Task source : https://github.com/Tzion0/CTF/blob/master/K3RN3LCTF/K3RN3L%20DROID/kernel-droid.asm
+      <guid>https://tzion0.github.io/posts/k3rn3lctf2022-k3rn3l_droid/</guid>
+      <description>Task source : https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/K3RN3L%20DROID
 Our goal is to retrieve the valid pin number to combine with another half of the flag: flag{K3RN3L_DR0ID_%s}
 The only way to view validPinMessage is through valid_pin. We can see label5 is comparing the pinCode and jump to valid_pin if matched. The table below have references for intructions we need.
 Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow jc, jb, jnae CF = 1 carry / below / not above nor equal jnc, jae, jnb CF = 0 not carry / above or equal / not below je, jz ZF = 1 equal / zero jne, jnz ZF = 0 not equal / not zero jbe, jna CF or ZF = 1 below or equal / not above ja, jnbe CF or ZF = 0 above / not below or equal js SF = 1 sign jns SF = 0 not sign jp, jpe PF = 1 parity / parity even jnp, jpo PF = 0 not parity / parity odd jl, jnge SF xor OF = 1 less / not greater nor equal jge, jnl SF xor OF = 0 greater or equal / not less jle, jng (SF xor OF) or ZF = 1 less or equal / not greater jg, jnle (SF xor OF) or ZF = 0 greater / not less nor equal Apparently the length of pinCode was 8:</description>

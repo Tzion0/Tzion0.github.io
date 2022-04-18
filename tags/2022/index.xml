@@ -6,13 +6,26 @@
     <description>Recent content in 2022 on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tzion0.github.io/tags/2022/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>[PICOCTF 2022] Binary Exploitation</title>
+      <title>[DCTF 2022] Forensics</title>
+      <link>https://tzion0.github.io/posts/dctf2022-for/</link>
+      <pubDate>Mon, 18 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/dctf2022-for/</guid>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/DCTF/2022/Forensics
+This writeup contains all Forensics category challenges in DCTF 2022 that i solved.
+Secure Creds Description With the connection to the victim&amp;rsquo;s computer you managed to dump the lsass.exe process. Can you get the password from the dump file?
+This challenge provided a zip file, unzip it we will get lsass.DMP file.
+From the description we know that we are dealing with lsass.exe, a bit of research shows that we can dump the content using Mimikatz.</description>
+    </item>
+    
+    <item>
+      <title>[PICOCTF] Binary Exploitation</title>
       <link>https://tzion0.github.io/posts/picoctf2022-binexp/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
       
@@ -24,7 +37,7 @@ This challenge provided a C source code:</description>
     </item>
     
     <item>
-      <title>[PICOCTF 2022] Forensics</title>
+      <title>[PICOCTF] Forensics</title>
       <link>https://tzion0.github.io/posts/picoctf2022-for/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
       
@@ -38,7 +51,7 @@ strings drawing.flag.svg Then concat the flag char by char:</description>
     </item>
     
     <item>
-      <title>[PICOCTF 2022] Reverse Engineering</title>
+      <title>[PICOCTF] Reverse Engineering</title>
       <link>https://tzion0.github.io/posts/picoctf2022-rev/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
       
@@ -52,11 +65,11 @@ We just need to execute the executable to obtain the flag.</description>
     
     <item>
       <title>[DICECTF] knock-knock</title>
-      <link>https://tzion0.github.io/posts/dicectf-knock-knock/</link>
+      <link>https://tzion0.github.io/posts/dicectf2022-knock-knock/</link>
       <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/dicectf-knock-knock/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/DiceCTF
+      <guid>https://tzion0.github.io/posts/dicectf2022-knock-knock/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/DiceCTF/2022/knock-knock
 Looking at the webpage, it is a site similar to pastebin that let us to create paste.
 After clicking the create button, it will redirect us to a page with an unique token that contains our paste:
 https://knock-knock.mc.ax/note?id=2249&amp;amp;token=262fedf8ca783b2fd19c581064ab48511877fe2bff4f3ad79726c9ae8277cfd5 Fortunately we have source code comes with this challenge:
@@ -65,22 +78,24 @@ const crypto = require(&#39;crypto&#39;); class Database { constructor() { this.
     
     <item>
       <title>[KNIGHTCTF] Knight Switch Bank</title>
-      <link>https://tzion0.github.io/posts/knightctf-knight_switch_bank/</link>
+      <link>https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/</link>
       <pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/knightctf-knight_switch_bank/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
+      <guid>https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank
+By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
 The encoding algorithm:
  for (; inpt[i] != &#39;\0&#39;; i = i + 1) { if ((inpt[i] &amp;lt; &#39;A&#39;) || (&#39;M&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;a&#39;) || (&#39;m&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;N&#39;) || (&#39;Z&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;n&#39;) || (&#39;z&#39; &amp;lt; inpt[i])) { temp[i] = inpt[i] + -0x20; } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + &#39;\r&#39;; } } else { temp[i] = inpt[i] + &#39;\r&#39;; } } for (; temp[x] !</description>
     </item>
     
     <item>
       <title>[KNIGHTCTF] Knight Vault</title>
-      <link>https://tzion0.github.io/posts/knightctf-knight_vault/</link>
+      <link>https://tzion0.github.io/posts/knightctf2022-knight_vault/</link>
       <pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tzion0.github.io/posts/knightctf-knight_vault/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now) and looping through each character of temp to do final comparison with the encoded flag.
+      <guid>https://tzion0.github.io/posts/knightctf2022-knight_vault/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Vault
+By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now) and looping through each character of temp to do final comparison with the encoded flag.
 The encoding algorithm:
  for (c = 0; inpt[c] != &#39;\0&#39;; c = c + 1) { temp[c] = inpt[c] + -10; if (temp[c] == &#39;A&#39;) { temp[c] = &#39;*&#39;; } } Now, let&amp;rsquo;s see what&amp;rsquo;s the encoded flag:</description>
     </item>
