@@ -17,8 +17,7 @@
       <pubDate>Mon, 18 Apr 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tzion0.github.io/posts/crewctf2022-screenshot-pt1/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Forensics
-Description We have arrested a criminal and we think that he takes so many screenshots can you help me to find the secret? Q1. What is the Name of the secret file (without extension)? example flag: crew{{12345678-90AB-CDEF-GHIJ-KLMNOPQRSTUV}} Author: 0xSh3rl0ck#7219 This challenge provided a zip file, unzip it we will get a AD1 and text file.
+      <description>Description We have arrested a criminal and we think that he takes so many screenshots can you help me to find the secret? Q1. What is the Name of the secret file (without extension)? example flag: crew{{12345678-90AB-CDEF-GHIJ-KLMNOPQRSTUV}} Author: 0xSh3rl0ck#7219 This challenge provided a zip file, unzip it we will get a AD1 and text file.
 A bit of googling tells us that AD1 type file mostly used for Forensic Toolkit FTK Imager Image files.</description>
     </item>
     
