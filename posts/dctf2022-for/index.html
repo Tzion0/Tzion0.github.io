@@ -121,7 +121,7 @@ From the description we know that we are dealing with lsass.exe, a bit of resear
 <p><img src="/img/dctf2022-for/hidden_fox3.png" alt="IMG">
 <img src="/img/dctf2022-for/hidden_fox2.png" alt="IMG">
 <img src="/img/dctf2022-for/hidden_fox.png" alt="IMG"></p>
-<p>Combine it we will get:</p>
+<p>Combine the parts of flag and we will get:</p>
 <pre><code>4nd_v151t3d__th15_p455w0rd}
 </code></pre><p>So what&rsquo;s next? Chances are we can decrypt the credentials! I use <a href="https://github.com/unode/firefox_decrypt">firefox_decrypt</a> to decrypt it. Again, we just need to provide the profile location:</p>
 <pre><code>python3 firefox_decrypt.py ./Firefox/Profiles/br873ssy.default-release/
