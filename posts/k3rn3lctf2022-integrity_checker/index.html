@@ -97,11 +97,11 @@ Right click class tab -&gt; Class Mode -&gt; Table We can see the Source file." 
       <h3 id="task-source">Task source:</h3>
 <p><a href="https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker">https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker</a></p>
 <p>Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with <code>\u0000K3RN3L_CTF{{{{{{</code> with password as argument.<br>
-<img src="/img/k3rn3lctf-integrity_checker/img.png" alt="IMG"></p>
+<img src="/img/k3rn3lctf2022-integrity_checker/img.png" alt="IMG"></p>
 <p>Apparently the calling function was the cause of error. Let&rsquo;s view its original class:</p>
 <pre><code>Right click class tab -&gt; Class Mode -&gt; Table
 </code></pre><p>We can see the <code>Source file.</code> is <code>Decryptor.java</code> indicate its original class name was <code>Decryptor</code>
-<img src="/img/k3rn3lctf-integrity_checker/img2.png" alt="IMG2"></p>
+<img src="/img/k3rn3lctf2022-integrity_checker/img2.png" alt="IMG2"></p>
 <p>After knowing the original class name, we can rename it.</p>
 <pre><code>On left side, right click class name -&gt; Rename to Decryptor
 </code></pre><p>After that, we can take a look on <code>Decryptor</code> class. Apparently it is taking the class name <code>Decryptor</code> to convert to array then taking its first 5 characters, <code>throw9[0], throw9[1], throw9[2], throw9[3], throw9[4]</code> to XOR with specific bytes, <code>3, 0xC, 0x20, 5, 0x43</code> and compare with our password.</p>
@@ -124,7 +124,7 @@ for i in range(5):
 	print(f&quot;{class_name[i]} -&gt; {xored[i]}&quot;)
 
 print(&quot;Password : &quot; + &quot;&quot;.join(xored))
-</code></pre><p><img src="/img/k3rn3lctf-integrity_checker/img3.png" alt="IMG3"></p>
+</code></pre><p><img src="/img/k3rn3lctf2022-integrity_checker/img3.png" alt="IMG3"></p>
 <p>Now we have found the password, go back to Recaf then click File -&gt; Export program and save it as .jar file.
 Execute it with the password as argument to retrieve the flag:</p>
 <pre><code>$ java -Xverify:none -jar IntegrityCheck_out.jar GiCW:                                                        1 ⨯
