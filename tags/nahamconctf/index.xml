@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>BinExp on Tzion</title>
-    <link>https://tzion0.github.io/tags/binexp/</link>
-    <description>Recent content in BinExp on Tzion</description>
+    <title>NAHAMCONCTF on Tzion</title>
+    <link>https://tzion0.github.io/tags/nahamconctf/</link>
+    <description>Recent content in NAHAMCONCTF on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tzion0.github.io/tags/binexp/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tzion0.github.io/tags/nahamconctf/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,18 +22,6 @@ Description Become a baby! Take your first steps and jump around with BABY SIMUL
 This challenge provided a C source code and its binary.
 The C source code:
 #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt; #define BABYBUFFER 16 void setup(void) { setbuf(stdout, NULL); setbuf(stdin, NULL); } void whine() { puts(&amp;quot;You whine: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;\n&amp;quot;); } void scream() { puts(&amp;quot;You scream: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;\n&amp;quot;); } void cry() { puts(&amp;quot;You cry: &#39;WAAAAAAHHHH!</description>
-    </item>
-    
-    <item>
-      <title>[PICOCTF] Binary Exploitation</title>
-      <link>https://tzion0.github.io/posts/picoctf2022-binexp/</link>
-      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://tzion0.github.io/posts/picoctf2022-binexp/</guid>
-      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Binary_Exploitation
-Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 10 out of 14 Binary Exploitation category challenges in PicoCTF 2022 that i solved.
-basic-file-exploit Description The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!
-This challenge provided a C source code:</description>
     </item>
     
   </channel>

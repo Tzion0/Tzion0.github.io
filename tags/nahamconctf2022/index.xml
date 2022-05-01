@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NAHAMCONCTF2022 on Tzion</title>
+    <link>https://tzion0.github.io/tags/nahamconctf2022/</link>
+    <description>Recent content in NAHAMCONCTF2022 on Tzion</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://tzion0.github.io/tags/nahamconctf2022/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[NAHAMCONCTF2022] WhenAmI</title>
+      <link>https://tzion0.github.io/posts/nahamconctf2022-whenami/</link>
+      <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/nahamconctf2022-whenami/</guid>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Miscellaneous/WhenAmI
+Description I know where I am, but&amp;hellip; when am I?
+This challenge provided a txt file.
+Content of txt file:
+When am I?? So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, and I&#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14.</description>
+    </item>
+    
+  </channel>
+</rss>
