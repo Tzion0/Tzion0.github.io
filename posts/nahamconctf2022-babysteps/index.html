@@ -218,7 +218,7 @@ int main(int argc, char **argv){
   puts(&quot;First, what is your baby name?&quot;);
   return gets(buffer);
 }
-</code></pre><p>It asking for the baby name using <code>gets()</code> function which is insecure and the size of the buffer we input was set to 16 bytes which can be see here:</p>
+</code></pre><p>It asking for the baby name using <code>gets()</code> function which is insecure and the size of the buffer was set to 16 bytes which can be see here:</p>
 <pre><code>#define BABYBUFFER 16
 </code></pre><h2 id="exploitation">Exploitation</h2>
 <p>First, we need to check any protections in this binary, we can use <code>checksec</code> for that, the result is:</p>
