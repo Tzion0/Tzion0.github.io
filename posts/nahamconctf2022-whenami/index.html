@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <title>[NAHAMCONCTF2022] WhenAmI // Tzion</title>
+    <title>[NAHAMCONCTF] WhenAmI // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.68.3" />
@@ -12,14 +12,14 @@
 
     
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[NAHAMCONCTF2022] WhenAmI"/>
+<meta name="twitter:title" content="[NAHAMCONCTF] WhenAmI"/>
 <meta name="twitter:description" content="Tasks source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Miscellaneous/WhenAmI
 Description I know where I am, but&hellip; when am I?
 This challenge provided a txt file.
 Content of txt file:
 When am I?? So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, and I&#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14."/>
 
-    <meta property="og:title" content="[NAHAMCONCTF2022] WhenAmI" />
+    <meta property="og:title" content="[NAHAMCONCTF] WhenAmI" />
 <meta property="og:description" content="Tasks source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Miscellaneous/WhenAmI
 Description I know where I am, but&hellip; when am I?
 This challenge provided a txt file.
@@ -68,7 +68,7 @@ When am I?? So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, 
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">[NAHAMCONCTF2022] WhenAmI</h1>
+      <h1 class ="post-title">[NAHAMCONCTF] WhenAmI</h1>
       <div class="post-meta">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
@@ -89,7 +89,7 @@ When am I?? So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, 
   <title>tag</title>
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
-              <a class="tag" href="https://tzion0.github.io/tags/nahamconctf2022/">NAHAMCONCTF2022</a>
+              <a class="tag" href="https://tzion0.github.io/tags/nahamconctf/">NAHAMCONCTF</a>
               <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
               <a class="tag" href="https://tzion0.github.io/tags/misc/">Misc</a>
         </div>
@@ -114,7 +114,7 @@ It's been 10 hours since I landed on my most recent flight - how many seconds ha
 <p>Before we begin, let me convert those geographic coordinates into its places name:</p>
 <pre><code>-13.582075733990298, -172.5084838587106	 : &quot;A'opo Conservation Area, Samoa&quot;
 -14.327595989244111, -170.71287979386747 : &quot;Tualauta, Western District, American Samoa&quot;
-</code></pre><p>Google also shows that &ldquo;A&rsquo;opo Conservation Area, Samoa&rdquo; is 24 hours ahead of &ldquo;Tualauta, Western District, American Samoa&rdquo;.</p>
+</code></pre><p>Google also shows that <strong>A&rsquo;opo Conservation Area, Samoa</strong> is 24 hours ahead of <strong>Tualauta, Western District, American Samoa</strong>.</p>
 <p>Now let&rsquo;s start counting:</p>
 <pre><code>1 min + 12 hrs (29 December)
 + 24 hrs       (31 December)
@@ -124,11 +124,11 @@ It's been 10 hours since I landed on my most recent flight - how many seconds ha
 + 1 hr 		   (1 hour flight back to &quot;A'opo&quot;)
 + 10 hr    	   (&quot;It's been 10 hours since I landed on my most recent flight&quot;)
 + 1 hr 		   (DST)
-</code></pre><p>So, after 12 hrs and 1 min of 11:59 AM, December 28, 2011, we will enter 29 December, and after 24 hrs more we will be enter to 31 December. Why 31 instead of 30? Well, this is because Samoa changed its timezone on 2011, read more here:
+</code></pre><p>So, after 12 hrs and 1 min of 11:59 AM, December 28, 2011, we will enter 29 December, and after 24 hrs more we will be enter to 31 December. Why 31 instead of 30? Well, this is because <strong>Samoa</strong> changed its timezone on 2011, read more here:
 <a href="https://www.abc.net.au/news/2011-12-30/samoa-skips-friday-in-time-zone-change/3753350">https://www.abc.net.au/news/2011-12-30/samoa-skips-friday-in-time-zone-change/3753350</a></p>
-<p>After that, 1 hr for flight to Tualauta. After arriving Tualauta, &ldquo;A&rsquo;opo&rdquo; localtime was December 31th, 2 AM while Tualauta was December 30th, 2 AM. And then at December 20th, 12 PM in Tualauta, he flight back to &ldquo;A&rsquo;opo&rdquo; which means 12 - 2 = 10, so we need to add 10 hrs for that. Also don&rsquo;t forget to add the 1 hr for the flight back to &ldquo;A&rsquo;opo&rdquo;</p>
-<p>Next, we need to add more 10 hrs as he said: It&rsquo;s been 10 hours since I landed on my most recent flight&rdquo;</p>
-<p>Lastly, we need to add 1 hr more because of Daylight Saving Time (DST) in Samoa 2011:</p>
+<p>After that, 1 hr for flight to <strong>Tualauta</strong>. After arriving <strong>Tualauta</strong>, <strong>A&rsquo;opo</strong> localtime was December 31th, 2 AM while <strong>Tualauta</strong> was December 30th, 2 AM. And then at December 20th, 12 PM in <strong>Tualauta</strong>, he flight back to <strong>A&rsquo;opo</strong> which means 12 - 2 = 10, so we need to add 10 hrs for that. Also don&rsquo;t forget to add the 1 hr for the flight back to <strong>A&rsquo;opo</strong></p>
+<p>Next, we need to add more 10 hrs as he said: &ldquo;It&rsquo;s been 10 hours since I landed on my most recent flight&rdquo;</p>
+<p>Lastly, we need to add more 1 hr because of Daylight Saving Time (DST) in <strong>Samoa</strong> 2011:</p>
 <p><img src="/img/nahamconctf2022-whenami/nahamcon-misc.png" alt="IMG"></p>
 <p>So the total is 60 hrs and 1 min = 216060 secs</p>
 <p>Flag:</p>

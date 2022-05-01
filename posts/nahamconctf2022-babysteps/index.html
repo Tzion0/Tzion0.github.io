@@ -267,8 +267,8 @@ io.sendline(payload)
 # Get our shell
 io.interactive()
 </code></pre><p>From script above we basically use <code>shellcraft</code> to generate shellcode to spawn shell for us. For the payload structure, since this is 32-bit binary, we first overflow to the return function with NOP (&quot;\x90&rdquo;), then jmp_eax which means jump to the NOP we provided earlier, and the shellcode was after the NOP, hence it get executed.</p>
-<p>Result:
-<img src="/img/nahamconctf2022-babysteps/nahamcon-pwn3.png" alt="IMG"></p>
+<p>Result:</p>
+<p><img src="/img/nahamconctf2022-babysteps/nahamcon-pwn3.png" alt="IMG"></p>
 <p>Flag:</p>
 <pre><code>flag{7d4ce4594f7511f8d7d6d0b1edd1a162}
 </code></pre>
