@@ -6,10 +6,36 @@
     <description>Recent content in Posts on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 May 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tzion0.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HTBCACTF] Jenny From The Block</title>
+      <link>https://tzion0.github.io/posts/htbcactf2022-jftb/</link>
+      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/htbcactf2022-jftb/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Crypto/Jenny_From_The_Block
+This challenge provided a python source code.
+Looking at the source code, we can see there are few whitelisted commands that we can run:
+allowed_commands = [b&#39;whoami&#39;, b&#39;ls&#39;, b&#39;cat secret.txt&#39;, b&#39;pwd&#39;] In challenge function, the command we input will be execute after passing the check and the command itself and the output will be concat with a string for further block cipher encryption with a random 32 bytes password before sending back to us:</description>
+    </item>
+    
+    <item>
+      <title>[HTBCACTF] Snakecode</title>
+      <link>https://tzion0.github.io/posts/htbcactf2022-snakecode/</link>
+      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/htbcactf2022-snakecode/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Reversing/Snakecode
+This challenge provided a pyc file.
+First of all, we need to decompile this pyc file. In order to that, we will be using an online decompiler to assist us: https://www.decompiler.com/
+There are also few CLI decompiler tools like uncompyle, decompile3, pycdc where you can use to decompile it.
+After decompile, you will get the python code below:
+# uncompyle6 version 3.7.4 # Python bytecode 2.7 (62211) # Decompiled from: Python 2.</description>
+    </item>
     
     <item>
       <title>[NAHAMCONCTF] Babysteps</title>
@@ -17,7 +43,7 @@
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tzion0.github.io/posts/nahamconctf2022-babysteps/</guid>
-      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Binary_Exploitation/Babysteps
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Binary_Exploitation/Babysteps
 Description Become a baby! Take your first steps and jump around with BABY SIMULATOR 9000!
 This challenge provided a C source code and its binary.
 The C source code:
@@ -30,7 +56,7 @@ The C source code:
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tzion0.github.io/posts/nahamconctf2022-whenami/</guid>
-      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Miscellaneous/WhenAmI
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Miscellaneous/WhenAmI
 Description I know where I am, but&amp;hellip; when am I?
 This challenge provided a txt file.
 Content of txt file:

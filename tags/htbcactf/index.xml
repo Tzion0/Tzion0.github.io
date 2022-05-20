@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTBCACTF on Tzion</title>
+    <link>https://tzion0.github.io/tags/htbcactf/</link>
+    <description>Recent content in HTBCACTF on Tzion</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://tzion0.github.io/tags/htbcactf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[HTBCACTF] Jenny From The Block</title>
+      <link>https://tzion0.github.io/posts/htbcactf2022-jftb/</link>
+      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/htbcactf2022-jftb/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Crypto/Jenny_From_The_Block
+This challenge provided a python source code.
+Looking at the source code, we can see there are few whitelisted commands that we can run:
+allowed_commands = [b&#39;whoami&#39;, b&#39;ls&#39;, b&#39;cat secret.txt&#39;, b&#39;pwd&#39;] In challenge function, the command we input will be execute after passing the check and the command itself and the output will be concat with a string for further block cipher encryption with a random 32 bytes password before sending back to us:</description>
+    </item>
+    
+  </channel>
+</rss>
