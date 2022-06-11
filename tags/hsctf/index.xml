@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Misc on Tzion</title>
-    <link>https://tzion0.github.io/tags/misc/</link>
-    <description>Recent content in Misc on Tzion</description>
+    <title>HSCTF on Tzion</title>
+    <link>https://tzion0.github.io/tags/hsctf/</link>
+    <description>Recent content in HSCTF on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tzion0.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tzion0.github.io/tags/hsctf/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HSCTF] atcs-nightmare</title>
+      <link>https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/</link>
+      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare
+This challenge provided a java source code.
+Looking at the source code, there are 3 functions which are stackAttack, recurses and linkDemLists. The main function is basically taking our flag input, extract the content of flag input, perform operations with functions starting with stackAttack -&amp;gt; recurses -&amp;gt; linkDemLists, then compare with a cipher text to check whether it is correct or not.
+In order to reverse it, we have to reverse the operations with cipher text, linkDemLists -&amp;gt; recurses -&amp;gt; stackAttack.</description>
+    </item>
     
     <item>
       <title>[HSCTF] paas</title>
@@ -25,19 +37,6 @@ Original payload:
 exec(&amp;quot;__import__(&#39;os&#39;).system(&#39;cat flag&#39;)&amp;quot;&amp;quot;) Payload crafted to bypass restrictions:
 exec(chr(95)+chr(95)+chr(105)+chr(109)+chr(112)+chr(111)+chr(114)+chr(116)+chr(95)+chr(95)+chr(40)+chr(39)+chr(111)+chr(115)+chr(39)+chr(41)+chr(46)+chr(115)+chr(121)+chr(115)+chr(116)+chr(101)+chr(109)+chr(40)+chr(39)+chr(99)+chr(97)+chr(116)+chr(32)+chr(102)+chr(108)+chr(97)+chr(103)+chr(39)+chr(41)) Execute it and got the flag!
 Flag:</description>
-    </item>
-    
-    <item>
-      <title>[NAHAMCONCTF] WhenAmI</title>
-      <link>https://tzion0.github.io/posts/nahamconctf2022-whenami/</link>
-      <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://tzion0.github.io/posts/nahamconctf2022-whenami/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Miscellaneous/WhenAmI
-Description I know where I am, but&amp;hellip; when am I?
-This challenge provided a txt file.
-Content of txt file:
-When am I?? So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, and I&#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14.</description>
     </item>
     
   </channel>

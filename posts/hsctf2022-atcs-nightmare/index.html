@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>[HSCTF] atcs-nightmare // Tzion</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Tzion" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[HSCTF] atcs-nightmare"/>
+<meta name="twitter:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare
+This challenge provided a java source code.
+Looking at the source code, there are 3 functions which are stackAttack, recurses and linkDemLists. The main function is basically taking our flag input, extract the content of flag input, perform operations with functions starting with stackAttack -&gt; recurses -&gt; linkDemLists, then compare with a cipher text to check whether it is correct or not.
+In order to reverse it, we have to reverse the operations with cipher text, linkDemLists -&gt; recurses -&gt; stackAttack."/>
+
+    <meta property="og:title" content="[HSCTF] atcs-nightmare" />
+<meta property="og:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare
+This challenge provided a java source code.
+Looking at the source code, there are 3 functions which are stackAttack, recurses and linkDemLists. The main function is basically taking our flag input, extract the content of flag input, perform operations with functions starting with stackAttack -&gt; recurses -&gt; linkDemLists, then compare with a cipher text to check whether it is correct or not.
+In order to reverse it, we have to reverse the operations with cipher text, linkDemLists -&gt; recurses -&gt; stackAttack." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/" />
+<meta property="article:published_time" content="2022-06-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-10T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tzion0.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Tzion" /></a>
+      <h1>Tzion</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/posts/">Blog</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>Yet Another Infosec Blog, Enjoy!</p>
+      <div class="app-header-social">
+        
+          <a href="https://twitter.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>My Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://github.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">[HSCTF] atcs-nightmare</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 10, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tzion0.github.io/tags/hsctf/">HSCTF</a>
+              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
+              <a class="tag" href="https://tzion0.github.io/tags/rev/">Rev</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h3 id="task-source">Task source:</h3>
+<p><a href="https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare">https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare</a></p>
+<p>This challenge provided a java source code.</p>
+<p>Looking at the source code, there are 3 functions which are <code>stackAttack</code>, <code>recurses</code> and <code>linkDemLists</code>. The main function is basically taking our flag input, extract the content of flag input, perform operations with functions starting with <code>stackAttack</code> -&gt; <code>recurses</code> -&gt; <code>linkDemLists</code>, then compare with a cipher text to check whether it is correct or not.</p>
+<p>In order to reverse it, we have to reverse the operations with cipher text, <code>linkDemLists</code> -&gt; <code>recurses</code> -&gt; <code>stackAttack</code>.</p>
+<p>But first, let&rsquo;s see what these functions does.</p>
+<h3 id="linkdemlists">linkDemLists()</h3>
+<p>This function is basically iterates input provided starting from the middle of input:</p>
+<pre><code>ListIterator&lt;Character&gt; iter = lin.listIterator(in.length()/2);
+</code></pre><p>First it check whether the middle of input has next character, if it does, append it to the empty string <code>res</code>:</p>
+<pre><code>while (iter.hasNext())
+	res += iter.next();
+</code></pre><p>Before:</p>
+<pre><code># Staring point: c
+ABCDE
+</code></pre><p>After:</p>
+<pre><code>CDE
+</code></pre><p>Next it check whether the middle of input has previous character, if it does, append it to the string <code>res</code>:</p>
+<pre><code>while (iter.hasPrevious())
+	res += iter.previous();
+</code></pre><p>After:</p>
+<pre><code># Staring point: c
+ABCDE
+</code></pre><p>Before:</p>
+<pre><code>CDEBA
+</code></pre><p>After that, it just return the <code>res</code>.</p>
+<h3 id="recurses">recurses()</h3>
+<p>lemme show you the pattern of it so you can understand it better than my explanation.</p>
+<p>Before:</p>
+<pre><code>ABCDEFG
+</code></pre><p>After:</p>
+<pre><code>FDBACEG
+</code></pre><p>It start from &lsquo;A&rsquo; then append &lsquo;B&rsquo; to left side, &lsquo;C&rsquo; to right side, &lsquo;D&rsquo; to left side, and so on.</p>
+<h3 id="stackattack">stackAttack()</h3>
+<p>Again, without much explanation, lemme show you the pattern.</p>
+<p>Before:</p>
+<pre><code>AAAAAAAA
+</code></pre><p>After:</p>
+<pre><code>A@?&gt;A@?&gt;
+</code></pre><p>For your information, the ASCII number of <code>A</code> is 64, <code>@</code> is 64, <code>?</code> is 63, <code>&gt;</code> is 62. And it make sense because of this code:</p>
+<pre><code>res += (char)(s.pop() - i);
+i = (i + 1) % 4;
+</code></pre><h3 id="solution">Solution</h3>
+<p>Finally, after knowing what these functions does, we created a script to assist us in reversing:</p>
+<pre><code>#!/usr/bin/env python3
+ct3 = &quot;20_a1qti0]n/5f642kb\\2`qq4\\0q&quot;
+
+def rev_linkDemLists(ct):
+    ct2 = []
+    for i in range(len(ct)-1, 13, -1):
+        ct2.append(ord(ct[i]))
+    for x in range(0, 14):
+        ct2.append(ord(ct[x]))
+    return ct2
+
+
+def rev_recurses(ct2):
+    ct1 = []
+    i = 13
+    ct1.append(ct2[14])
+    x = 2
+    while i &gt;= 0:
+        ct1.append(ct2[i])
+        if i != 0:
+            ct1.append(ct2[i+x])
+        i -= 1
+        x += 2
+    return ct1
+
+def rev_stackAttack(ct1):
+    ct = []
+    for i in range(len(ct1)):
+        ct.append(ct1[i] + (i % 4))
+    return ct[::-1]
+
+pt = rev_stackAttack(rev_recurses(rev_linkDemLists(ct3)))
+print(&quot;flag{&quot;+&quot;&quot;.join(chr(i) for i in pt)+&quot;}&quot;)
+</code></pre><p>Flag:</p>
+<pre><code>flag{th15_15nt_r0ck3t_sc1nc3_7272}
+</code></pre>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

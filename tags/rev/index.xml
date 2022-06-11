@@ -6,10 +6,22 @@
     <description>Recent content in Rev on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tzion0.github.io/tags/rev/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HSCTF] atcs-nightmare</title>
+      <link>https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/</link>
+      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare
+This challenge provided a java source code.
+Looking at the source code, there are 3 functions which are stackAttack, recurses and linkDemLists. The main function is basically taking our flag input, extract the content of flag input, perform operations with functions starting with stackAttack -&amp;gt; recurses -&amp;gt; linkDemLists, then compare with a cipher text to check whether it is correct or not.
+In order to reverse it, we have to reverse the operations with cipher text, linkDemLists -&amp;gt; recurses -&amp;gt; stackAttack.</description>
+    </item>
     
     <item>
       <title>[HTBCACTF] Snakecode</title>

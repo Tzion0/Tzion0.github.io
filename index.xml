@@ -6,10 +6,38 @@
     <description>Recent content on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tzion0.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HSCTF] atcs-nightmare</title>
+      <link>https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/</link>
+      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare
+This challenge provided a java source code.
+Looking at the source code, there are 3 functions which are stackAttack, recurses and linkDemLists. The main function is basically taking our flag input, extract the content of flag input, perform operations with functions starting with stackAttack -&amp;gt; recurses -&amp;gt; linkDemLists, then compare with a cipher text to check whether it is correct or not.
+In order to reverse it, we have to reverse the operations with cipher text, linkDemLists -&amp;gt; recurses -&amp;gt; stackAttack.</description>
+    </item>
+    
+    <item>
+      <title>[HSCTF] paas</title>
+      <link>https://tzion0.github.io/posts/hsctf2022-paas/</link>
+      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/hsctf2022-paas/</guid>
+      <description>This is a python sandbox challenge.
+By inputting some characters, we can identify few Illegal characters:
+[]._&#39;&amp;quot; But luckily () is allowed, looking at locals(), we can see exec() is allowed.
+exec() required string argument but unfortunately &#39;&amp;quot; were restricted. However, we found out that chr() is allowed, so let&amp;rsquo;s create our payload:
+Original payload:
+exec(&amp;quot;__import__(&#39;os&#39;).system(&#39;cat flag&#39;)&amp;quot;&amp;quot;) Payload crafted to bypass restrictions:
+exec(chr(95)+chr(95)+chr(105)+chr(109)+chr(112)+chr(111)+chr(114)+chr(116)+chr(95)+chr(95)+chr(40)+chr(39)+chr(111)+chr(115)+chr(39)+chr(41)+chr(46)+chr(115)+chr(121)+chr(115)+chr(116)+chr(101)+chr(109)+chr(40)+chr(39)+chr(99)+chr(97)+chr(116)+chr(32)+chr(102)+chr(108)+chr(97)+chr(103)+chr(39)+chr(41)) Execute it and got the flag!
+Flag:</description>
+    </item>
     
     <item>
       <title>[HTBCACTF] Jenny From The Block</title>
