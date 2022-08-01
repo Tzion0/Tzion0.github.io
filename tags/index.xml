@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tzion0.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,27 @@
     <item>
       <title>2022</title>
       <link>https://tzion0.github.io/tags/2022/</link>
-      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tzion0.github.io/tags/2022/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Misc</title>
+      <link>https://tzion0.github.io/tags/misc/</link>
+      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/tags/misc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TFCCTF</title>
+      <link>https://tzion0.github.io/tags/tfcctf/</link>
+      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/tags/tfcctf/</guid>
       <description></description>
     </item>
     
@@ -26,15 +44,6 @@
       <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tzion0.github.io/tags/hsctf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Misc</title>
-      <link>https://tzion0.github.io/tags/misc/</link>
-      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://tzion0.github.io/tags/misc/</guid>
       <description></description>
     </item>
     

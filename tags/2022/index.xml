@@ -6,10 +6,21 @@
     <description>Recent content in 2022 on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tzion0.github.io/tags/2022/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[TFCCTF] Secrets Of Tenochtitlan</title>
+      <link>https://tzion0.github.io/posts/tfcctf2022-sot/</link>
+      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/tfcctf2022-sot/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/TFCCTF/2022/SOT
+Description Tenochtitlan was the island capital of the Aztec empire, believed to be founded in 1325, serving as an altar, awaiting the fulfillment of an ancient prophecy. However, it is highly unlikely that this prophecy comes true, as the city of Tenochtitlan, and the Aztec empire fell in 1521 August 13, after holding up for two years against the Spanish forces led by Cortés.
+This challenge provided a zip file.</description>
+    </item>
     
     <item>
       <title>[HSCTF] atcs-nightmare</title>

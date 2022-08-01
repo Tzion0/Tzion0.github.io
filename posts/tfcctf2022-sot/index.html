@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>[TFCCTF] Secrets Of Tenochtitlan // Tzion</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Tzion" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[TFCCTF] Secrets Of Tenochtitlan"/>
+<meta name="twitter:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/TFCCTF/2022/SOT
+Description Tenochtitlan was the island capital of the Aztec empire, believed to be founded in 1325, serving as an altar, awaiting the fulfillment of an ancient prophecy. However, it is highly unlikely that this prophecy comes true, as the city of Tenochtitlan, and the Aztec empire fell in 1521 August 13, after holding up for two years against the Spanish forces led by Cortés.
+This challenge provided a zip file."/>
+
+    <meta property="og:title" content="[TFCCTF] Secrets Of Tenochtitlan" />
+<meta property="og:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/TFCCTF/2022/SOT
+Description Tenochtitlan was the island capital of the Aztec empire, believed to be founded in 1325, serving as an altar, awaiting the fulfillment of an ancient prophecy. However, it is highly unlikely that this prophecy comes true, as the city of Tenochtitlan, and the Aztec empire fell in 1521 August 13, after holding up for two years against the Spanish forces led by Cortés.
+This challenge provided a zip file." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tzion0.github.io/posts/tfcctf2022-sot/" />
+<meta property="article:published_time" content="2022-07-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-31T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tzion0.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Tzion" /></a>
+      <h1>Tzion</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/posts/">Blog</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>Yet Another Infosec Blog, Enjoy!</p>
+      <div class="app-header-social">
+        
+          <a href="https://twitter.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>My Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://github.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">[TFCCTF] Secrets Of Tenochtitlan</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 31, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tzion0.github.io/tags/tfcctf/">TFCCTF</a>
+              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
+              <a class="tag" href="https://tzion0.github.io/tags/misc/">Misc</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h3 id="task-source">Task source:</h3>
+<p><a href="https://github.com/Tzion0/CTF/tree/master/TFCCTF/2022/SOT">https://github.com/Tzion0/CTF/tree/master/TFCCTF/2022/SOT</a></p>
+<h3 id="description">Description</h3>
+<p>Tenochtitlan was the island capital of the Aztec empire, believed to be founded in 1325, serving as an altar, awaiting the fulfillment of an ancient prophecy. However, it is highly unlikely that this prophecy comes true, as the city of Tenochtitlan, and the Aztec empire fell in 1521 August 13, after holding up for two years against the Spanish forces led by Cortés.</p>
+<p>This challenge provided a zip file.</p>
+<p>Unzip the zip file you will get a PNG file which is an <strong>Aztec</strong> barcode along with 2 more zip files. Unzip the others zip files you will get another Aztec barcode PNG image with new zip files. At this point it looks like we going to keep unzip this recursively until its end. We can use this command (not fully automated) to help us in unzip:</p>
+<pre><code>find . -name &quot;*.zip&quot; | while read filename; do unzip -o -d &quot;`dirname &quot;$filename&quot;`&quot; &quot;$filename&quot;; rm $filename; done;
+</code></pre><p>Everytime after I unzip the zip file, I move all the barcode images into new directory to organize it in a structural way (In layers). Eventually it will looks like this:</p>
+<p><img src="/img/tfcctf2022-SOT/img.png" alt="IMG"></p>
+<p>At first i thought that organize it in structural way might be help in later task, but turns out actually no needed.</p>
+<p>The next step is the most painful step which is scanning all the barcode. All barcode contains a character of flag. I do this manually because I don&rsquo;t know any automated tools available online.</p>
+<p>After gathering all the flag characters, we need to figure out the order of character to form a valid flag. While analyzing those barcode images, I found that each barcode contains a different <code>Date/Time Original</code> which can be obtain using this command:</p>
+<pre><code>exiftool -time:all *
+</code></pre><p><img src="/img/tfcctf2022-SOT/img2.png" alt="IMG"></p>
+<p>I rearrange each barcode image based on its <code>Date/Time Original</code> in ascending order, create an array of dictionary that use barcode image file name as the key to its corresponding character, then print out the flag. Below is the code in Python (The number in front of &lsquo;/&rsquo; in each value of <code>flag</code> array representing the folder, which can be ignore as I mentioned earlier it is no needed):</p>
+<pre><code>#!/usr/bin/env python3
+
+flag = [
+&quot;0/738c81a3-4036-4553-8c8d-065b7f490b6a&quot;,
+&quot;4/a46480fd-2887-4511-8e00-bbadf75b3903&quot;,
+&quot;5/a3625a77-7256-4432-9e8c-bce622ebf794&quot;,
+&quot;3/4121557f-07a5-4bb1-aaff-33336b96af95&quot;,
+&quot;5/799699d2-a58c-4660-abb1-d319d03bfb9d&quot;,
+&quot;4/d571120d-04b9-4333-84f0-e107b1e12b7b&quot;,
+&quot;5/28e722f0-1976-4300-9120-4118c532ff3a&quot;,
+&quot;5/aa908f25-a4b7-43d7-8c73-c6a26389cc77&quot;,
+&quot;4/21f23511-e468-47c5-986a-bc4a7afeaee8&quot;,
+&quot;5/ccdf60e1-a4d3-4755-b593-55d50c7b9a9e&quot;,
+&quot;4/29983b58-a220-4e68-9b2e-640ea15d7f41&quot;,
+&quot;5/51fb3d97-5ac4-4a46-b3a7-7bbca4384330&quot;,
+&quot;5/f74540a4-4949-4593-8cc0-c1ed13948d29&quot;,
+&quot;5/4807f95f-4298-43ca-a903-2795fbaeb5a4&quot;,
+&quot;4/7b14249f-0415-4b67-a5fc-85ad7973e98c&quot;,
+&quot;3/efc0700f-a0cf-40df-a6b7-41a3ad918e8d&quot;,
+&quot;3/f678e654-4498-4779-b5aa-7907296c6c49&quot;,
+&quot;5/a41a3d86-c630-4a88-9a13-ecba0091cbf8&quot;,
+&quot;5/699cd577-fcb1-4300-9611-af5d7a9d3d94&quot;,
+&quot;5/6eb25f88-d8b4-4f16-abca-5e9a3b53e11a&quot;,
+&quot;4/b9ad444f-5e2d-4ba5-869d-644f2d15cbf2&quot;,
+&quot;5/08ca58ac-dc06-41ad-a5e4-77ddc02d4b20&quot;,
+&quot;1/8ecd8915-445e-45b3-abf7-b4c81328ad8b&quot;,
+&quot;4/e5ae597e-7b8e-4f2d-824e-f9d2e066fedc&quot;,
+&quot;5/14f09500-eb58-4865-aca2-46e44160342f&quot;,
+&quot;5/37c40e16-c47d-4906-a081-12abb822380a&quot;,
+&quot;4/0e96ab5d-9e6f-47ba-8764-c20fbfcdc863&quot;,
+&quot;2/f8729933-e455-4a2d-84da-263c7d613179&quot;,
+&quot;5/1ddb3879-5b8e-4257-ad96-48c2c842dc80&quot;,
+&quot;5/01fd7c26-3de2-49f7-bd11-43dd0c09491b&quot;,
+&quot;4/02709749-7fd8-4d9a-a605-70ddcafb973a&quot;,
+&quot;3/45f2a087-a284-4add-8ee1-11ce8763ce3a&quot;,
+&quot;2/8441be40-f1b0-4c06-88fc-168c1544f7a5&quot;,
+&quot;2/2d42e973-89a4-473f-9bf9-3130d0a64f5b&quot;,
+&quot;3/77e8955d-745c-4d05-b84c-7cf394e247cb&quot;,
+&quot;1/8c9379b3-8dd8-4b49-891e-7d36fc7d9255&quot;,
+&quot;5/b2191064-5ca8-46cc-863a-da02b43c3307&quot;,
+&quot;5/90f1bf22-1c4d-45b8-b227-f0835df30865&quot;,
+&quot;4/39863c09-afa2-4e56-af1d-bf1c630f96a7&quot;,
+&quot;4/ace7f990-ac9b-442d-a80a-5469c1599995&quot;,
+&quot;3/a999e5d9-66ff-475c-a2b2-5f5e1913d9d2&quot;,
+&quot;4/25293981-e030-44c7-a918-f7fe3e07f33b&quot;,
+]
+
+database = [{
+	&quot;738c81a3-4036-4553-8c8d-065b7f490b6a&quot;:&quot;}&quot;	
+},{
+	&quot;8c9379b3-8dd8-4b49-891e-7d36fc7d9255&quot;:&quot;{&quot;,
+	&quot;8ecd8915-445e-45b3-abf7-b4c81328ad8b&quot;:&quot;n&quot;,
+},{
+	&quot;2d42e973-89a4-473f-9bf9-3130d0a64f5b&quot;:&quot;3&quot;,
+	&quot;8441be40-f1b0-4c06-88fc-168c1544f7a5&quot;:&quot;c&quot;,
+	&quot;f8729933-e455-4a2d-84da-263c7d613179&quot;:&quot;_&quot;,
+},{
+	&quot;45f2a087-a284-4add-8ee1-11ce8763ce3a&quot;:&quot;r&quot;,
+	&quot;77e8955d-745c-4d05-b84c-7cf394e247cb&quot;:&quot;5&quot;,
+	&quot;4121557f-07a5-4bb1-aaff-33336b96af95&quot;:&quot;1&quot;,
+	&quot;a999e5d9-66ff-475c-a2b2-5f5e1913d9d2&quot;:&quot;F&quot;,
+	&quot;efc0700f-a0cf-40df-a6b7-41a3ad918e8d&quot;:&quot;n&quot;,
+	&quot;f678e654-4498-4779-b5aa-7907296c6c49&quot;:&quot;3&quot;,
+},{
+	&quot;0e96ab5d-9e6f-47ba-8764-c20fbfcdc863&quot;:&quot;0&quot;,
+	&quot;7b14249f-0415-4b67-a5fc-85ad7973e98c&quot;:&quot;7&quot;,
+	&quot;21f23511-e468-47c5-986a-bc4a7afeaee8&quot;:&quot;l&quot;,
+	&quot;29983b58-a220-4e68-9b2e-640ea15d7f41&quot;:&quot;v&quot;,
+	&quot;39863c09-afa2-4e56-af1d-bf1c630f96a7&quot;:&quot;C&quot;,
+	&quot;02709749-7fd8-4d9a-a605-70ddcafb973a&quot;:&quot;3&quot;,
+	&quot;25293981-e030-44c7-a918-f7fe3e07f33b&quot;:&quot;T&quot;,
+	&quot;a46480fd-2887-4511-8e00-bbadf75b3903&quot;:&quot;n&quot;,
+	&quot;ace7f990-ac9b-442d-a80a-5469c1599995&quot;:&quot;C&quot;,
+	&quot;b9ad444f-5e2d-4ba5-869d-644f2d15cbf2&quot;:&quot;4&quot;,
+	&quot;d571120d-04b9-4333-84f0-e107b1e12b7b&quot;:&quot;4&quot;,
+	&quot;e5ae597e-7b8e-4f2d-824e-f9d2e066fedc&quot;:&quot;4&quot;,
+},{
+	&quot;1ddb3879-5b8e-4257-ad96-48c2c842dc80&quot;:&quot;5&quot;,
+	&quot;01fd7c26-3de2-49f7-bd11-43dd0c09491b&quot;:&quot;7&quot;,
+	&quot;6eb25f88-d8b4-4f16-abca-5e9a3b53e11a&quot;:&quot;n&quot;,
+	&quot;08ca58ac-dc06-41ad-a5e4-77ddc02d4b20&quot;:&quot;_&quot;,
+	&quot;14f09500-eb58-4865-aca2-46e44160342f&quot;:&quot;_&quot;,
+	&quot;28e722f0-1976-4300-9120-4118c532ff3a&quot;:&quot;z&quot;,
+	&quot;37c40e16-c47d-4906-a081-12abb822380a&quot;:&quot;f&quot;,
+	&quot;51fb3d97-5ac4-4a46-b3a7-7bbca4384330&quot;:&quot;1&quot;,
+	&quot;90f1bf22-1c4d-45b8-b227-f0835df30865&quot;:&quot;T&quot;,
+	&quot;699cd577-fcb1-4300-9611-af5d7a9d3d94&quot;:&quot;c&quot;,
+	&quot;4807f95f-4298-43ca-a903-2795fbaeb5a4&quot;:&quot;_&quot;,
+	&quot;799699d2-a58c-4660-abb1-d319d03bfb9d&quot;:&quot;7&quot;,
+	&quot;a41a3d86-c630-4a88-9a13-ecba0091cbf8&quot;:&quot;1&quot;,
+	&quot;a3625a77-7256-4432-9e8c-bce622ebf794&quot;:&quot;0&quot;,
+	&quot;aa908f25-a4b7-43d7-8c73-c6a26389cc77&quot;:&quot;1&quot;,
+	&quot;b2191064-5ca8-46cc-863a-da02b43c3307&quot;:&quot;F&quot;,
+	&quot;ccdf60e1-a4d3-4755-b593-55d50c7b9a9e&quot;:&quot;1&quot;,
+	&quot;f74540a4-4949-4593-8cc0-c1ed13948d29&quot;:&quot;c&quot;
+}]
+
+for c in flag[::-1]:
+	idx = int(c.split(&quot;/&quot;)[0])
+	key = c.split(&quot;/&quot;)[1]
+	print(database[idx][key], end=&quot;&quot;)
+</code></pre><p>Flag:</p>
+<pre><code>TFCCTF{53cr375_0f_4n_4nc13n7_c1v1l1z4710n}
+</code></pre>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
