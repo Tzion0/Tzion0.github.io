@@ -6,10 +6,21 @@
     <description>Recent content in 2022 on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tzion0.github.io/tags/2022/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[SHELLCTF] OX9OR2</title>
+      <link>https://tzion0.github.io/posts/shellctf2022-ox9or2/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/shellctf2022-ox9or2/</guid>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/ShellCTF/2022/OX9OR2
+This challenge provided two files called encryption.py and encrypted. encrypted file contains ciphertext produced by encryption.py
+encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o += chr(ord(msg[i]) ^ ord(key[i % len(key)])) return o with open(&#39;message&#39;, &#39;r&#39;) as f: msg = &#39;&#39;.join(f.readlines()).rstrip(&#39;\n&#39;) with open(&#39;key&#39;, &#39;r&#39;) as k: key = &#39;&#39;.join(k.readlines()).rstrip(&#39;\n&#39;) assert key.isalnum() and (len(key) == 9) assert &#39;SHELL&#39; in msg with open(&#39;encrypted&#39;, &#39;w&#39;) as fo: fo.</description>
+    </item>
     
     <item>
       <title>[TFCCTF] Secrets Of Tenochtitlan</title>
