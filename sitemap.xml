@@ -1,233 +1,147 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
+    <loc>https://tzion0.github.io/posts/boh2022-format2win/</loc>
+    <lastmod>2022-10-27T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://tzion0.github.io/tags/2022/</loc>
-    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2022-10-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/binexp/</loc>
+    <lastmod>2022-10-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/boh/</loc>
+    <lastmod>2022-10-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/posts/</loc>
+    <lastmod>2022-10-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/</loc>
+    <lastmod>2022-10-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/</loc>
+    <lastmod>2022-10-27T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://tzion0.github.io/posts/shellctf2022-ox9or2/</loc>
     <lastmod>2022-08-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/crypto/</loc>
     <lastmod>2022-08-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tzion0.github.io/posts/</loc>
-    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/shellctf/</loc>
     <lastmod>2022-08-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tzion0.github.io/tags/</loc>
-    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tzion0.github.io/</loc>
-    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/tfcctf2022-sot/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/misc/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/tfcctf/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/</loc>
     <lastmod>2022-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/hsctf2022-paas/</loc>
     <lastmod>2022-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/hsctf/</loc>
     <lastmod>2022-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/rev/</loc>
     <lastmod>2022-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/htbcactf2022-jftb/</loc>
     <lastmod>2022-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/htbcactf2022-snakecode/</loc>
     <lastmod>2022-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/htb/</loc>
     <lastmod>2022-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/htbcactf/</loc>
     <lastmod>2022-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/htbcactf2022/</loc>
     <lastmod>2022-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/nahamconctf2022-babysteps/</loc>
     <lastmod>2022-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/nahamconctf2022-whenami/</loc>
     <lastmod>2022-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tzion0.github.io/tags/binexp/</loc>
-    <lastmod>2022-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/nahamconctf/</loc>
     <lastmod>2022-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/crewctf2022-screenshot-pt1/</loc>
     <lastmod>2022-04-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/dctf2022-for/</loc>
     <lastmod>2022-04-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/crewctf/</loc>
     <lastmod>2022-04-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/dctf/</loc>
     <lastmod>2022-04-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/forensics/</loc>
     <lastmod>2022-04-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/picoctf2022-binexp/</loc>
     <lastmod>2022-03-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/picoctf2022-for/</loc>
     <lastmod>2022-03-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/picoctf2022-rev/</loc>
     <lastmod>2022-03-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/picoctf/</loc>
     <lastmod>2022-03-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/dicectf2022-knock-knock/</loc>
     <lastmod>2022-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/dicectf/</loc>
     <lastmod>2022-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/web/</loc>
     <lastmod>2022-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/</loc>
     <lastmod>2022-01-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/knightctf2022-knight_vault/</loc>
     <lastmod>2022-01-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/knightctf/</loc>
     <lastmod>2022-01-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tzion0.github.io/tags/2021/</loc>
-    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/2021/</loc>
+    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://tzion0.github.io/tags/k3rn3lctf/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/k3rn3lctf2022-k3rn3l_droid/</loc>
     <lastmod>2021-11-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/posts/thm-nonamectf/</loc>
     <lastmod>2021-09-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/tags/thm/</loc>
     <lastmod>2021-09-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/about/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tzion0.github.io/categories/</loc>
   </url>
-  
 </urlset>

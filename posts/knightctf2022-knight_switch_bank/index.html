@@ -4,7 +4,7 @@
     <title>[KNIGHTCTF] Knight Switch Bank // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="generator" content="Hugo 0.104.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
@@ -16,17 +16,18 @@
 <meta name="twitter:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank
 By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
 The encoding algorithm:
- for (; inpt[i] != &#39;\0&#39;; i = i &#43; 1) { if ((inpt[i] &lt; &#39;A&#39;) || (&#39;M&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;a&#39;) || (&#39;m&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;N&#39;) || (&#39;Z&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;n&#39;) || (&#39;z&#39; &lt; inpt[i])) { temp[i] = inpt[i] &#43; -0x20; } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } for (; temp[x] !"/>
+for (; inpt[i] != &#39;\0&#39;; i = i &#43; 1) { if ((inpt[i] &lt; &#39;A&#39;) || (&#39;M&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;a&#39;) || (&#39;m&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;N&#39;) || (&#39;Z&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;n&#39;) || (&#39;z&#39; &lt; inpt[i])) { temp[i] = inpt[i] &#43; -0x20; } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } for (; temp[x] !"/>
 
     <meta property="og:title" content="[KNIGHTCTF] Knight Switch Bank" />
 <meta property="og:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank
 By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
 The encoding algorithm:
- for (; inpt[i] != &#39;\0&#39;; i = i &#43; 1) { if ((inpt[i] &lt; &#39;A&#39;) || (&#39;M&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;a&#39;) || (&#39;m&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;N&#39;) || (&#39;Z&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;n&#39;) || (&#39;z&#39; &lt; inpt[i])) { temp[i] = inpt[i] &#43; -0x20; } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } for (; temp[x] !" />
+for (; inpt[i] != &#39;\0&#39;; i = i &#43; 1) { if ((inpt[i] &lt; &#39;A&#39;) || (&#39;M&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;a&#39;) || (&#39;m&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;N&#39;) || (&#39;Z&#39; &lt; inpt[i])) { if ((inpt[i] &lt; &#39;n&#39;) || (&#39;z&#39; &lt; inpt[i])) { temp[i] = inpt[i] &#43; -0x20; } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; -0xd; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } else { temp[i] = inpt[i] &#43; &#39;\r&#39;; } } for (; temp[x] !" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/" />
+<meta property="og:url" content="https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-23T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-01-23T00:00:00+00:00" />
+
 
 
   </head>
@@ -98,11 +99,11 @@ The encoding algorithm:
 <p><a href="https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank">https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank</a></p>
 <p>By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.</p>
 <p>The encoding algorithm:</p>
-<pre><code>  for (; inpt[i] != '\0'; i = i + 1) {
-    if ((inpt[i] &lt; 'A') || ('M' &lt; inpt[i])) {
-      if ((inpt[i] &lt; 'a') || ('m' &lt; inpt[i])) {
-        if ((inpt[i] &lt; 'N') || ('Z' &lt; inpt[i])) {
-          if ((inpt[i] &lt; 'n') || ('z' &lt; inpt[i])) {
+<pre tabindex="0"><code>  for (; inpt[i] != &#39;\0&#39;; i = i + 1) {
+    if ((inpt[i] &lt; &#39;A&#39;) || (&#39;M&#39; &lt; inpt[i])) {
+      if ((inpt[i] &lt; &#39;a&#39;) || (&#39;m&#39; &lt; inpt[i])) {
+        if ((inpt[i] &lt; &#39;N&#39;) || (&#39;Z&#39; &lt; inpt[i])) {
+          if ((inpt[i] &lt; &#39;n&#39;) || (&#39;z&#39; &lt; inpt[i])) {
             temp[i] = inpt[i] + -0x20;
           }
           else {
@@ -114,39 +115,39 @@ The encoding algorithm:
         }
       }
       else {
-        temp[i] = inpt[i] + '\r';
+        temp[i] = inpt[i] + &#39;\r&#39;;
       }
     }
     else {
-      temp[i] = inpt[i] + '\r';
+      temp[i] = inpt[i] + &#39;\r&#39;;
     }
   }
-  for (; temp[x] != '\0'; x = x + 1) {
-    temp[x] = temp[x] + '\x02';
+  for (; temp[x] != &#39;\0&#39;; x = x + 1) {
+    temp[x] = temp[x] + &#39;\x02&#39;;
   }
 </code></pre><p>Great, now we know the algorithm, let&rsquo;s see what is the encoded flag:</p>
-<pre><code>local_38 = 0x4164485d5549525a;
+<pre tabindex="0"><code>local_38 = 0x4164485d5549525a;
 local_30 = 0x41494447414a644e;
 local_28 = 0x4173444476414978;
 local_20 = 0x71444479;
 local_1c = 0x5f;
 </code></pre><p>After unpacking it, we will get:</p>
-<pre><code>ZRIU]HdANdJAGDIAxIAvDDsAyDDq_
+<pre tabindex="0"><code>ZRIU]HdANdJAGDIAxIAvDDsAyDDq_
 </code></pre><h4 id="note-i-did-some-adjustment-manually-because-the-initial-unpacked-value-looks-weird">Note: I did some adjustment manually because the initial unpacked value looks weird</h4>
 <p>My approach to solve this is to generate a list of printable string, let them goes through the encoding algorithm, loop each character to compare with encoded flag, if it matched, get its index, print the original not encoded value. Please do take note that my code probably wasn&rsquo;t the best in term of simplicity but at least it works. Let&rsquo;s get it started.</p>
 <p>First. initialize the required variables, the <code>enc</code> variable is the <code>temp</code> variable for above encoding algorithm:</p>
-<pre><code>#!/usr/bin/env python3
+<pre tabindex="0"><code>#!/usr/bin/env python3
 from pwn import *
 import string
-ct = list('ZRIU]HdANdJAGDIAxIAvDDsAyDDq_')
+ct = list(&#39;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&#39;)
 printable = list(string.printable)
-enc = ['A' for i in range(len(printable))]
+enc = [&#39;A&#39; for i in range(len(printable))]
 </code></pre><p>Next, we can just mimic the encoding algorithm we saw in Ghidra:</p>
-<pre><code>for i in range(len(printable)):
-	if printable[i] &lt; 'A' or printable[i] &gt; 'M':
-		if printable[i] &lt; 'a' or printable[i] &gt; 'm':
-			if printable[i] &lt; 'N' or printable[i] &gt; 'Z':
-				if printable[i] &lt; 'n' or printable[i] &gt; 'z':
+<pre tabindex="0"><code>for i in range(len(printable)):
+	if printable[i] &lt; &#39;A&#39; or printable[i] &gt; &#39;M&#39;:
+		if printable[i] &lt; &#39;a&#39; or printable[i] &gt; &#39;m&#39;:
+			if printable[i] &lt; &#39;N&#39; or printable[i] &gt; &#39;Z&#39;:
+				if printable[i] &lt; &#39;n&#39; or printable[i] &gt; &#39;z&#39;:
 					enc[i] = ord(printable[i]) - 0x20
 				else:
 					enc[i] = ord(printable[i]) - 0xd
@@ -160,23 +161,23 @@ enc = ['A' for i in range(len(printable))]
 for i in range(len(enc)):
 	enc[i] = chr(abs(enc[i] + 0x2))
 </code></pre><p>Lastly, loop through each <code>enc</code> value to compare with encoded flag:</p>
-<pre><code>for i in range(len(ct)):
+<pre tabindex="0"><code>for i in range(len(ct)):
 	for x in range(len(enc)):
 		if ct[i] == enc[x]:
-			print(printable[x], end=&quot;&quot;)
+			print(printable[x], end=&#34;&#34;)
 </code></pre><h3 id="final-code">Final Code</h3>
-<pre><code>#!/usr/bin/env python3
+<pre tabindex="0"><code>#!/usr/bin/env python3
 from pwn import *
 import string
-ct = list('ZRIU]HdANdJAGDIAxIAvDDsAyDDq_')
+ct = list(&#39;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&#39;)
 printable = list(string.printable)
-enc = ['A' for i in range(len(printable))]
+enc = [&#39;A&#39; for i in range(len(printable))]
 
 for i in range(len(printable)):
-	if printable[i] &lt; 'A' or printable[i] &gt; 'M':
-		if printable[i] &lt; 'a' or printable[i] &gt; 'm':
-			if printable[i] &lt; 'N' or printable[i] &gt; 'Z':
-				if printable[i] &lt; 'n' or printable[i] &gt; 'z':
+	if printable[i] &lt; &#39;A&#39; or printable[i] &gt; &#39;M&#39;:
+		if printable[i] &lt; &#39;a&#39; or printable[i] &gt; &#39;m&#39;:
+			if printable[i] &lt; &#39;N&#39; or printable[i] &gt; &#39;Z&#39;:
+				if printable[i] &lt; &#39;n&#39; or printable[i] &gt; &#39;z&#39;:
 					enc[i] = ord(printable[i]) - 0x20
 				else:
 					enc[i] = ord(printable[i]) - 0xd
@@ -193,9 +194,9 @@ for i in range(len(enc)):
 for i in range(len(ct)):
 	for x in range(len(enc)):
 		if ct[i] == enc[x]:
-			print(printable[x], end=&quot;&quot;)
+			print(printable[x], end=&#34;&#34;)
 </code></pre><h3 id="flag">Flag</h3>
-<pre><code>KCTF{So_YoU_ROT_iT_gOOd_jOOb}
+<pre tabindex="0"><code>KCTF{So_YoU_ROT_iT_gOOd_jOOb}
 </code></pre>
     </div>
     <div class="post-footer">

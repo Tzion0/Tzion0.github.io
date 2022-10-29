@@ -4,7 +4,7 @@
     <title>[HTBCACTF] Jenny From The Block // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="generator" content="Hugo 0.104.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
@@ -24,9 +24,10 @@ This challenge provided a python source code.
 Looking at the source code, we can see there are few whitelisted commands that we can run:
 allowed_commands = [b&#39;whoami&#39;, b&#39;ls&#39;, b&#39;cat secret.txt&#39;, b&#39;pwd&#39;] In challenge function, the command we input will be execute after passing the check and the command itself and the output will be concat with a string for further block cipher encryption with a random 32 bytes password before sending back to us:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tzion0.github.io/posts/htbcactf2022-jftb/" />
+<meta property="og:url" content="https://tzion0.github.io/posts/htbcactf2022-jftb/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-20T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-05-20T00:00:00+00:00" />
+
 
 
   </head>
@@ -99,31 +100,31 @@ allowed_commands = [b&#39;whoami&#39;, b&#39;ls&#39;, b&#39;cat secret.txt&#39;,
 <p><a href="https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Crypto/Jenny_From_The_Block">https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Crypto/Jenny_From_The_Block</a></p>
 <p>This challenge provided a python source code.</p>
 <p>Looking at the source code, we can see there are few whitelisted commands that we can run:</p>
-<pre><code>allowed_commands = [b'whoami', b'ls', b'cat secret.txt', b'pwd']
+<pre tabindex="0"><code>allowed_commands = [b&#39;whoami&#39;, b&#39;ls&#39;, b&#39;cat secret.txt&#39;, b&#39;pwd&#39;]
 </code></pre><p>In <code>challenge</code> function, the command we input will be execute after passing the check and the command itself and the output will be concat with a string for further block cipher encryption with a random 32 bytes password before sending back to us:</p>
-<pre><code>output = run_command(command)
-response = b'Command executed: ' + command + b'\n' + output
+<pre tabindex="0"><code>output = run_command(command)
+response = b&#39;Command executed: &#39; + command + b&#39;\n&#39; + output
 password = os.urandom(32)
 ct = encrypt(response, password)
 req.sendall(ct.encode())
 </code></pre><p>The function <code>encrypt</code> will split the <code>response</code> in blocks of size 32, which means the plaintext of first block will always be the below string as it was length 32:</p>
-<pre><code>b'Command executed: cat secret.txt'
+<pre tabindex="0"><code>b&#39;Command executed: cat secret.txt&#39;
 </code></pre><p>This makes the whole operation reversible as it is constant. Notice that in <code>encrypt</code> function, the password to encrypt will changed after the first iteration:</p>
-<pre><code>h = sha256(enc_block + block).digest()
+<pre tabindex="0"><code>h = sha256(enc_block + block).digest()
 </code></pre><p>And the password is basically used to encrypt the plain text by adding byte by byte where you can see in <code>encrypt_block</code> function:</p>
-<pre><code>def encrypt_block(block, secret):
-    enc_block = b''
+<pre tabindex="0"><code>def encrypt_block(block, secret):
+    enc_block = b&#39;&#39;
     for i in range(BLOCK_SIZE):
         val = (block[i]+secret[i]) % 256
         enc_block += bytes([val])
     return enc_block
 </code></pre><p>Knowing what the code does, we connect to the docker, get the <code>ct</code> and write a script to decode it:</p>
 <p><img src="/img/htbcactf2022-jftb/jftb.png" alt="IMG"></p>
-<pre><code>from binascii import unhexlify
+<pre tabindex="0"><code>from binascii import unhexlify
 from hashlib import sha256
 
 def decrypt_block(block, secret):
-    dec_block = b&quot;&quot;
+    dec_block = b&#34;&#34;
     for i in range(32):
         val = (block[i] - secret[i]) % 256
         dec_block += bytes([val])
@@ -132,9 +133,9 @@ def decrypt_block(block, secret):
 def decrypt(ct):
     ct = unhexlify(ct)
     blocks = [ct[i:i+32] for i in range(0, len(ct), 32)]
-    ori = b'Command executed: cat secret.txt'
+    ori = b&#39;Command executed: cat secret.txt&#39;
 
-    pt = b&quot;&quot;
+    pt = b&#34;&#34;
     h = sha256(bytes(blocks[0] + ori)).digest()
     for b in range(1, len(blocks)):
         dec_block = decrypt_block(blocks[b], h)
@@ -143,16 +144,16 @@ def decrypt(ct):
     return pt
 
 def main():
-    ori = b'Command executed: cat secret.txt'
-    ct = &quot;e67cfcfe40dddd1014117018e9fd98cdbb17e1d2bf43a316efd46f27347e1745df6b097a9122ea4148eaec162bae24119260a68b06ce89c339a6c5f9b28acf16c034aefb355f670e389389a42fe66b95691b3119ae2b2b63b094cb174f689852d1a5c8e125f9405e00265a5fbf2c93b8b774d32317d243ed4f7f7905b149818d7d22608b6834fdbeda02ceda13595467f0c316016725be0a2fca65fffef9bafc45ed349f715faffc61101c93d92922faa740bd222d81d501acfafef510c7c7365eeb3e44ae748d8b20ec21d1b89da60b40a5402f87eda9ae34f0c628ada142104e8baabd30deb467618f86a151d01ce44d38962241a1e6132adeb51ae80fbeaf&quot;
+    ori = b&#39;Command executed: cat secret.txt&#39;
+    ct = &#34;e67cfcfe40dddd1014117018e9fd98cdbb17e1d2bf43a316efd46f27347e1745df6b097a9122ea4148eaec162bae24119260a68b06ce89c339a6c5f9b28acf16c034aefb355f670e389389a42fe66b95691b3119ae2b2b63b094cb174f689852d1a5c8e125f9405e00265a5fbf2c93b8b774d32317d243ed4f7f7905b149818d7d22608b6834fdbeda02ceda13595467f0c316016725be0a2fca65fffef9bafc45ed349f715faffc61101c93d92922faa740bd222d81d501acfafef510c7c7365eeb3e44ae748d8b20ec21d1b89da60b40a5402f87eda9ae34f0c628ada142104e8baabd30deb467618f86a151d01ce44d38962241a1e6132adeb51ae80fbeaf&#34;
     message = decrypt(ct).decode()
     print(message)
 
-if __name__ == '__main__':
+if __name__ == &#39;__main__&#39;:
    main()
 </code></pre><p><img src="/img/htbcactf2022-jftb/jftb_flag.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>HTB{b451c_b10ck_c1ph3r_15_w34k!!!}
+<pre tabindex="0"><code>HTB{b451c_b10ck_c1ph3r_15_w34k!!!}
 </code></pre>
     </div>
     <div class="post-footer">

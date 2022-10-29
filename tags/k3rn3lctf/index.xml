@@ -6,11 +6,7 @@
     <description>Recent content in K3RN3LCTF on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tzion0.github.io/tags/k3rn3lctf/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/k3rn3lctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[K3RN3LCTF] Integrity Checker</title>
       <link>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</link>

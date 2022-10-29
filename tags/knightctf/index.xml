@@ -6,11 +6,7 @@
     <description>Recent content in KNIGHTCTF on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Jan 2022 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tzion0.github.io/tags/knightctf/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 23 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/knightctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[KNIGHTCTF] Knight Switch Bank</title>
       <link>https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/</link>
@@ -20,7 +16,7 @@
       <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank
 By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
 The encoding algorithm:
- for (; inpt[i] != &#39;\0&#39;; i = i + 1) { if ((inpt[i] &amp;lt; &#39;A&#39;) || (&#39;M&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;a&#39;) || (&#39;m&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;N&#39;) || (&#39;Z&#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &#39;n&#39;) || (&#39;z&#39; &amp;lt; inpt[i])) { temp[i] = inpt[i] + -0x20; } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + &#39;\r&#39;; } } else { temp[i] = inpt[i] + &#39;\r&#39;; } } for (; temp[x] !</description>
+for (; inpt[i] != &amp;#39;\0&amp;#39;; i = i + 1) { if ((inpt[i] &amp;lt; &amp;#39;A&amp;#39;) || (&amp;#39;M&amp;#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &amp;#39;a&amp;#39;) || (&amp;#39;m&amp;#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &amp;#39;N&amp;#39;) || (&amp;#39;Z&amp;#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &amp;#39;n&amp;#39;) || (&amp;#39;z&amp;#39; &amp;lt; inpt[i])) { temp[i] = inpt[i] + -0x20; } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + &amp;#39;\r&amp;#39;; } } else { temp[i] = inpt[i] + &amp;#39;\r&amp;#39;; } } for (; temp[x] !</description>
     </item>
     
     <item>
@@ -32,7 +28,7 @@ The encoding algorithm:
       <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Vault
 By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now) and looping through each character of temp to do final comparison with the encoded flag.
 The encoding algorithm:
- for (c = 0; inpt[c] != &#39;\0&#39;; c = c + 1) { temp[c] = inpt[c] + -10; if (temp[c] == &#39;A&#39;) { temp[c] = &#39;*&#39;; } } Now, let&amp;rsquo;s see what&amp;rsquo;s the encoded flag:</description>
+for (c = 0; inpt[c] != &amp;#39;\0&amp;#39;; c = c + 1) { temp[c] = inpt[c] + -10; if (temp[c] == &amp;#39;A&amp;#39;) { temp[c] = &amp;#39;*&amp;#39;; } } Now, let&amp;rsquo;s see what&amp;rsquo;s the encoded flag:</description>
     </item>
     
   </channel>

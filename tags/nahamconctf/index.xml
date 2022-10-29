@@ -6,11 +6,7 @@
     <description>Recent content in NAHAMCONCTF on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tzion0.github.io/tags/nahamconctf/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/nahamconctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[NAHAMCONCTF] Babysteps</title>
       <link>https://tzion0.github.io/posts/nahamconctf2022-babysteps/</link>
@@ -21,7 +17,7 @@
 Description Become a baby! Take your first steps and jump around with BABY SIMULATOR 9000!
 This challenge provided a C source code and its binary.
 The C source code:
-#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt; #define BABYBUFFER 16 void setup(void) { setbuf(stdout, NULL); setbuf(stdin, NULL); } void whine() { puts(&amp;quot;You whine: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;\n&amp;quot;); } void scream() { puts(&amp;quot;You scream: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;\n&amp;quot;); } void cry() { puts(&amp;quot;You cry: &#39;WAAAAAAHHHH!</description>
+#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt; #define BABYBUFFER 16 void setup(void) { setbuf(stdout, NULL); setbuf(stdin, NULL); } void whine() { puts(&amp;#34;You whine: &amp;#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&amp;#39;\n&amp;#34;); } void scream() { puts(&amp;#34;You scream: &amp;#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&amp;#39;\n&amp;#34;); } void cry() { puts(&amp;#34;You cry: &amp;#39;WAAAAAAHHHH!</description>
     </item>
     
     <item>
@@ -34,7 +30,7 @@ The C source code:
 Description I know where I am, but&amp;hellip; when am I?
 This challenge provided a txt file.
 Content of txt file:
-When am I?? So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, and I&#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14.</description>
+When am I?? So, I look down at my watch. It&amp;#39;s December 28, 2011 at 11:59AM, and I&amp;#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14.</description>
     </item>
     
   </channel>

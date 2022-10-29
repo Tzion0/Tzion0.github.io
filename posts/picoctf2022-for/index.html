@@ -4,7 +4,7 @@
     <title>[PICOCTF] Forensics // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="generator" content="Hugo 0.104.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
@@ -28,9 +28,10 @@ This challenge provided a SVG image file.
 To solve it, we just need to view the text inside the SVG image file:
 strings drawing.flag.svg Then concat the flag char by char:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tzion0.github.io/posts/picoctf2022-for/" />
+<meta property="og:url" content="https://tzion0.github.io/posts/picoctf2022-for/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-28T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-03-28T00:00:00+00:00" />
+
 
 
   </head>
@@ -109,58 +110,58 @@ strings drawing.flag.svg Then concat the flag char by char:" />
 <p>Download this image file and find the flag.</p>
 <p>This challenge provided a SVG image file.</p>
 <p>To solve it, we just need to view the text inside the SVG image file:</p>
-<pre><code>strings drawing.flag.svg
+<pre tabindex="0"><code>strings drawing.flag.svg
 </code></pre><p>Then concat the flag char by char:</p>
-<pre><code>&lt;tspan
- 	sodipodi:role=&quot;line&quot;
-	x=&quot;107.43014&quot;
-	y=&quot;132.08501&quot;
-	style=&quot;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&quot;
-	id=&quot;tspan3748&quot;&gt;p &lt;/tspan&gt;&lt;tspan
-	sodipodi:role=&quot;line&quot;
-	x=&quot;107.43014&quot;
-	y=&quot;132.08942&quot;
-	style=&quot;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&quot;
-	id=&quot;tspan3754&quot;&gt;i &lt;/tspan&gt;&lt;tspan
-	sodipodi:role=&quot;line&quot;
-	x=&quot;107.43014&quot;
-	y=&quot;132.09383&quot;
-	style=&quot;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&quot;
-	id=&quot;tspan3756&quot;&gt;c &lt;/tspan&gt;&lt;tspan
-	sodipodi:role=&quot;line&quot;
-	x=&quot;107.43014&quot;
-	y=&quot;132.09824&quot;
-	style=&quot;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&quot;
-	id=&quot;tspan3758&quot;&gt;o &lt;/tspan&gt;&lt;tspan
-	sodipodi:role=&quot;line&quot;
-	x=&quot;107.43014&quot;
-	y=&quot;132.10265&quot;
-	style=&quot;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&quot;
-	id=&quot;tspan3760&quot;&gt;C &lt;/tspan&gt;&lt;tspan
-	sodipodi:role=&quot;line&quot;
-	x=&quot;107.43014&quot;
-	y=&quot;132.10706&quot;
-	style=&quot;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&quot;
-	id=&quot;tspan3762&quot;&gt;T &lt;/tspan&gt;&lt;tspan
-	sodipodi:role=&quot;line&quot;
-	x=&quot;107.43014&quot;
-	y=&quot;132.11147&quot;
-	style=&quot;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&quot;
-	id=&quot;tspan3764&quot;&gt;F { 3 n h 4 n &lt;/tspan&gt;&lt;tspan
-	sodipodi:role=&quot;line&quot;
-	x=&quot;107.43014&quot;
-	y=&quot;132.11588&quot;
-	style=&quot;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&quot;
-	id=&quot;tspan3752&quot;&gt;c 3 d _ a a b 7 2 9 d d }
+<pre tabindex="0"><code>&lt;tspan
+ 	sodipodi:role=&#34;line&#34;
+	x=&#34;107.43014&#34;
+	y=&#34;132.08501&#34;
+	style=&#34;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&#34;
+	id=&#34;tspan3748&#34;&gt;p &lt;/tspan&gt;&lt;tspan
+	sodipodi:role=&#34;line&#34;
+	x=&#34;107.43014&#34;
+	y=&#34;132.08942&#34;
+	style=&#34;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&#34;
+	id=&#34;tspan3754&#34;&gt;i &lt;/tspan&gt;&lt;tspan
+	sodipodi:role=&#34;line&#34;
+	x=&#34;107.43014&#34;
+	y=&#34;132.09383&#34;
+	style=&#34;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&#34;
+	id=&#34;tspan3756&#34;&gt;c &lt;/tspan&gt;&lt;tspan
+	sodipodi:role=&#34;line&#34;
+	x=&#34;107.43014&#34;
+	y=&#34;132.09824&#34;
+	style=&#34;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&#34;
+	id=&#34;tspan3758&#34;&gt;o &lt;/tspan&gt;&lt;tspan
+	sodipodi:role=&#34;line&#34;
+	x=&#34;107.43014&#34;
+	y=&#34;132.10265&#34;
+	style=&#34;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&#34;
+	id=&#34;tspan3760&#34;&gt;C &lt;/tspan&gt;&lt;tspan
+	sodipodi:role=&#34;line&#34;
+	x=&#34;107.43014&#34;
+	y=&#34;132.10706&#34;
+	style=&#34;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&#34;
+	id=&#34;tspan3762&#34;&gt;T &lt;/tspan&gt;&lt;tspan
+	sodipodi:role=&#34;line&#34;
+	x=&#34;107.43014&#34;
+	y=&#34;132.11147&#34;
+	style=&#34;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&#34;
+	id=&#34;tspan3764&#34;&gt;F { 3 n h 4 n &lt;/tspan&gt;&lt;tspan
+	sodipodi:role=&#34;line&#34;
+	x=&#34;107.43014&#34;
+	y=&#34;132.11588&#34;
+	style=&#34;font-size:0.00352781px;line-height:1.25;fill:#ffffff;stroke-width:0.26458332;&#34;
+	id=&#34;tspan3752&#34;&gt;c 3 d _ a a b 7 2 9 d d }
 &lt;/tspan&gt;
 </code></pre><p>Flag:</p>
-<pre><code>picoCTF{3nh4nc3d_aab729dd}
+<pre tabindex="0"><code>picoCTF{3nh4nc3d_aab729dd}
 </code></pre><h2 id="file-types">File types</h2>
 <h3 id="description-1">Description</h3>
 <p>This file was found among some files marked confidential but my pdf reader cannot read it, maybe yours can.</p>
 <p>This challenge provided a .pdf shell text.</p>
 <p>This challenge file contains nested file with different type of compression, so we just need to uncompress it one by one and eventually will get the flag:</p>
-<pre><code># Execute shell script
+<pre tabindex="0"><code># Execute shell script
 chmod +x Flag.pdf
 ./Flag.pdf
 
@@ -199,23 +200,23 @@ xz -d 64.xz
 # Unhex to get flag
 unhex &lt; 64
 </code></pre><p>Flag:</p>
-<pre><code>picoCTF{f1len@m3_m@n1pul@t10n_f0r_0b2cur17y_3c79c5ba}
+<pre tabindex="0"><code>picoCTF{f1len@m3_m@n1pul@t10n_f0r_0b2cur17y_3c79c5ba}
 </code></pre><h2 id="lookey-here">Lookey here</h2>
 <h3 id="description-2">Description</h3>
 <p>Attackers have hidden information in a very large mass of data in the past, maybe they are still doing it.</p>
 <p>This challenge provided a text file.</p>
 <p>We just need to grep for flag format to obtain the flag:</p>
-<pre><code>grep pico anthem.flag.txt
+<pre tabindex="0"><code>grep pico anthem.flag.txt
 </code></pre><p>Flag:</p>
-<pre><code>picoCTF{gr3p_15_@w3s0m3_4c479940}
+<pre tabindex="0"><code>picoCTF{gr3p_15_@w3s0m3_4c479940}
 </code></pre><h2 id="packets-primer">Packets Primer</h2>
 <h3 id="description-3">Description</h3>
 <p>Download the packet capture file and use packet analysis software to find the flag.</p>
 <p>This challenge provided a pcap file.</p>
 <p>Solution to get flag:</p>
-<pre><code>Open pcap file with wireshark -&gt; Right click any of the TCP packet -&gt; Follow -&gt; TCP Stream
+<pre tabindex="0"><code>Open pcap file with wireshark -&gt; Right click any of the TCP packet -&gt; Follow -&gt; TCP Stream
 </code></pre><p>Flag:</p>
-<pre><code>picoCTF{p4ck37_5h4rk_ceccaa7f}
+<pre tabindex="0"><code>picoCTF{p4ck37_5h4rk_ceccaa7f}
 </code></pre><h2 id="sleuthkit-intro">Sleuthkit Intro</h2>
 <h3 id="description-4">Description</h3>
 <p>Download the disk image and use <code>mmls</code> on it to find the size of the Linux partition. Connect to the remote checker service to check your answer and get the flag.</p>
@@ -223,10 +224,10 @@ unhex &lt; 64
 <p>As stated in description, we just need to use the <code>mmls</code> command:
 <img src="/img/picoctf2022-for/sleuthkit_intro.png" alt="IMG"></p>
 <p>Answer:</p>
-<pre><code>202752
+<pre tabindex="0"><code>202752
 </code></pre><p><img src="/img/picoctf2022-for/sleuthkit_intro_flag.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{mm15_f7w!}
+<pre tabindex="0"><code>picoCTF{mm15_f7w!}
 </code></pre><h2 id="sleuthkit-apprentice">Sleuthkit Apprentice</h2>
 <h3 id="description-5">Description</h3>
 <p>Download this disk image and find the flag.</p>
@@ -239,7 +240,7 @@ unhex &lt; 64
 <h4 id="step-3">Step 3</h4>
 <p><img src="/img/picoctf2022-for/apprentice_s3.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{by73_5urf3r_3497ae6b}
+<pre tabindex="0"><code>picoCTF{by73_5urf3r_3497ae6b}
 </code></pre><h2 id="redaction-gone-wrong">Redaction gone wrong</h2>
 <h3 id="description-6">Description</h3>
 <p>Now you DON’T see me.
@@ -250,19 +251,19 @@ This report has some critical data in it, some of which have been redacted corre
 <p>However, when we highlight all the text (Ctrl + a), we can see the redacted fields, which shows us the flag:</p>
 <p><img src="/img/picoctf2022-for/rgw_highlight.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{C4n_Y0u_S33_m3_fully}
+<pre tabindex="0"><code>picoCTF{C4n_Y0u_S33_m3_fully}
 </code></pre><h2 id="eavesdrop">Eavesdrop</h2>
 <h3 id="description-7">Description</h3>
 <p>Download this packet capture and find the flag.</p>
 <p>This challenge provided a pcap file.</p>
 <p>Opening the pcap file using Wireshark and follow the TCP Stream at Stream 0, we can see a conversation:</p>
-<pre><code>Hey, how do you decrypt this file again?
-You're serious?
-Yeah, I'm serious
+<pre tabindex="0"><code>Hey, how do you decrypt this file again?
+You&#39;re serious?
+Yeah, I&#39;m serious
 *sigh* openssl des3 -d -salt -in file.des3 -out file.txt -k supersecretpassword123
 Ok, great, thanks.
-Let's use Discord next time, it's more secure.
-C'mon, no one knows we use this program like this!
+Let&#39;s use Discord next time, it&#39;s more secure.
+C&#39;mon, no one knows we use this program like this!
 Whatever.
 Hey.
 Yeah?
@@ -271,63 +272,63 @@ Oh great. Ok, over 9002?
 Yeah, listening.
 Sent it
 Got it.
-You're unbelievable
+You&#39;re unbelievable
 </code></pre><p>The key to takeaway from the conversation is how to decrypt the file using <code>openssl</code>:</p>
-<pre><code>openssl des3 -d -salt -in file.des3 -out file.txt -k supersecretpassword123
+<pre tabindex="0"><code>openssl des3 -d -salt -in file.des3 -out file.txt -k supersecretpassword123
 </code></pre><p>By increasing the TCP Stream to 2, we can see a stream starting with <code>Salted_</code>:
 <img src="/img/picoctf2022-for/eavesdrop1.png" alt="IMG"></p>
 <p>After that, change the value of field <code>Show and save data as</code> to <code>raw</code>, then click <code>Save as</code>:
 <img src="/img/picoctf2022-for/eavesdrop2.png" alt="IMG"></p>
 <p>Next, apply the command we noted down before to decrypt the file we saved just now:</p>
-<pre><code>openssl des3 -d -salt -in file.des3 -out file.txt -k supersecretpassword123
+<pre tabindex="0"><code>openssl des3 -d -salt -in file.des3 -out file.txt -k supersecretpassword123
 </code></pre><p>If the decryption is success, the <strong>file.txt</strong> will contains the flag.</p>
 <p>Flag:</p>
-<pre><code>picoCTF{nc_73115_411_5786acc3}
+<pre tabindex="0"><code>picoCTF{nc_73115_411_5786acc3}
 </code></pre><h2 id="operation-oni">Operation Oni</h2>
 <h3 id="description-8">Description</h3>
 <p>Download this disk image, find the key and log into the remote machine.
 Remote machine:</p>
-<pre><code>ssh -i key_file -p 59367 ctf-player@saturn.picoctf.net
+<pre tabindex="0"><code>ssh -i key_file -p 59367 ctf-player@saturn.picoctf.net
 </code></pre><p>This challenge provided a disk image file.</p>
 <p>The first step is to list the partitions inside the disk image:</p>
-<pre><code>mmls disk.img
+<pre tabindex="0"><code>mmls disk.img
 </code></pre><p><img src="/img/picoctf2022-for/oni1.png" alt="IMG"></p>
 <p>We can see at start of <code>206848</code> we have a <code>Linux (0x83)</code>. So let&rsquo;s try to list the files in it, we are specifically looking for SSH key and since SSH key normally starts with <code>id</code>, let&rsquo;s try to grep for it:</p>
-<pre><code>fls -r -o 206848 disk.img | grep id
+<pre tabindex="0"><code>fls -r -o 206848 disk.img | grep id
 </code></pre><p>We can see at the bottom of output shows <code>id_ed25519</code> and <code>id_ed25519.pub</code>. We can try our luck here by assuming it is the correct SSH key we are looking for:
 <img src="/img/picoctf2022-for/oni2.png" alt="IMG"></p>
 <p>Let&rsquo;s view the content of it:</p>
-<pre><code>icat -o 206848 disk.img 2345
+<pre tabindex="0"><code>icat -o 206848 disk.img 2345
 </code></pre><p><img src="/img/picoctf2022-for/oni3.png" alt="IMG"></p>
 <p>Let&rsquo;s save the file and remember to <code>chmod 600 &lt;file&gt;</code> before trying to login to remote machine:</p>
-<pre><code>ssh -i id_ed25519 -p 59367 ctf-player@saturn.picoctf.net
+<pre tabindex="0"><code>ssh -i id_ed25519 -p 59367 ctf-player@saturn.picoctf.net
 </code></pre><p><img src="/img/picoctf2022-for/oni4.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{k3y_5l3u7h_b5066e83}
+<pre tabindex="0"><code>picoCTF{k3y_5l3u7h_b5066e83}
 </code></pre><h2 id="operation-orchid">Operation Orchid</h2>
 <h3 id="description-9">Description</h3>
 <p>Download this disk image and find the flag.</p>
 <p>This challenge provided a disk image file.</p>
 <p>Again, first step is to list the partitions inside the disk image:</p>
-<pre><code>mmls disk.flag.img
+<pre tabindex="0"><code>mmls disk.flag.img
 </code></pre><p><img src="/img/picoctf2022-for/orchid1.png" alt="IMG"></p>
 <p>By listing files inside these partitions, we found that <code>411648</code> contains the flag file:</p>
-<pre><code>fls -r -o 411648 disk.flag.img | grep flag
+<pre tabindex="0"><code>fls -r -o 411648 disk.flag.img | grep flag
 </code></pre><p><img src="/img/picoctf2022-for/orchid2.png" alt="IMG"></p>
 <p>By viewing the content of <code>flag.txt.enc</code>. We can see it apparently was a OpenSSL encrypted file:</p>
-<pre><code>icat -o 411648 disk.flag.img 1782
+<pre tabindex="0"><code>icat -o 411648 disk.flag.img 1782
 </code></pre><p><img src="/img/picoctf2022-for/orchid3.png" alt="IMG"></p>
 <p>After saving the file as <code>flag.txt.enc</code>, now we to look for a way to decrypt it, by looking again at the list of files, i found a history file:</p>
-<pre><code>fls -r -o 411648 disk.flag.img | grep -v Orphan
+<pre tabindex="0"><code>fls -r -o 411648 disk.flag.img | grep -v Orphan
 </code></pre><p><img src="/img/picoctf2022-for/orchid4.png" alt="IMG"></p>
 <p>By viewing the content of history file, it tells us the way to encrypt the flag:</p>
-<pre><code>icat -o 411648 disk.flag.img 1875
+<pre tabindex="0"><code>icat -o 411648 disk.flag.img 1875
 </code></pre><p><img src="/img/picoctf2022-for/orchid5.png" alt="IMG"></p>
 <p>So now we have the information about the encryption type and the password, let&rsquo;s decrypt it:</p>
-<pre><code>openssl aes256 -d -in flag.txt.enc -out flag.txt
+<pre tabindex="0"><code>openssl aes256 -d -in flag.txt.enc -out flag.txt
 </code></pre><p><img src="/img/picoctf2022-for/orchid6.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{h4un71ng_p457_0a710765}
+<pre tabindex="0"><code>picoCTF{h4un71ng_p457_0a710765}
 </code></pre><h2 id="sidechannel">SideChannel</h2>
 <h3 id="description-10">Description</h3>
 <p>There&rsquo;s something fishy about this PIN-code checker, can you figure out the PIN and get the flag?
@@ -340,15 +341,15 @@ Once you&rsquo;ve figured out the PIN (and gotten the checker program to accept 
 <p>The theory is when a character/number is matched, it will take slightly longer to process than those not matched, so we can determine the correct character/number (PIN) by looking for the longest processing time:
 <img src="/img/picoctf2022-for/sidechannel2.png" alt="IMG"></p>
 <p>I made a script to automate this:</p>
-<pre><code>#!/usr/bin/env python3
+<pre tabindex="0"><code>#!/usr/bin/env python3
 # Timing-based Side Channel Attack
 from pwn import *
 import time
 import numpy as np
 import collections
 
-context.log_level = 'error'
-pin = [&quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;]
+context.log_level = &#39;error&#39;
+pin = [&#34;0&#34;, &#34;0&#34;, &#34;0&#34;, &#34;0&#34;, &#34;0&#34;, &#34;0&#34;, &#34;0&#34;, &#34;0&#34;]
 duration = {}
 
 for z in range(8):
@@ -356,36 +357,36 @@ for z in range(8):
     for x in range(48, 58):
         pin[z] = chr(x)
         start_time = time.time()
-        print(&quot;Pin:&quot;, &quot;&quot;.join(pin))
-        p = process(&quot;pin_checker&quot;)
-        p.sendlineafter(&quot;code:\n&quot;, &quot;&quot;.join(pin).encode())
+        print(&#34;Pin:&#34;, &#34;&#34;.join(pin))
+        p = process(&#34;pin_checker&#34;)
+        p.sendlineafter(&#34;code:\n&#34;, &#34;&#34;.join(pin).encode())
         p.recvline()
         p.recvline()
         p.recvline()
-        duration[chr(x)] = &quot;{:.2g}&quot;.format(time.time() - start_time)
+        duration[chr(x)] = &#34;{:.2g}&#34;.format(time.time() - start_time)
         # print(duration[chr(x)])
         p.close()
 
-    &quot;&quot;&quot;
-    most_common()        : [('0.13', 8), ('0.12', 1), ('0.25', 1)]
-    most_common()[-1]    : ('0.25', 1)
+    &#34;&#34;&#34;
+    most_common()        : [(&#39;0.13&#39;, 8), (&#39;0.12&#39;, 1), (&#39;0.25&#39;, 1)]
+    most_common()[-1]    : (&#39;0.25&#39;, 1)
     most_common()[-1][0] : 0.25
-    &quot;&quot;&quot;
+    &#34;&#34;&#34;
     uniq = collections.Counter(duration.values()).most_common()[-1][0]
     for key, value in duration.items():
         if uniq == value:
             pin[z] = key
 
 
-print(&quot;Final pin:&quot;, &quot;&quot;.join(pin))
+print(&#34;Final pin:&#34;, &#34;&#34;.join(pin))
 </code></pre><p>By running the script, we can get the final pin number:</p>
-<pre><code>48390513
+<pre tabindex="0"><code>48390513
 </code></pre><p><img src="/img/picoctf2022-for/sidechannel3.png" alt="IMG"></p>
 <h5 id="notes-since-this-is-time-based-and-my-script-isnt-perfect-you-may-not-getting-the-correct-pin-at-first-try">Notes: Since this is time-based and my script isn&rsquo;t perfect, you may not getting the correct PIN at first try.</h5>
 <p>Let&rsquo;s provide it to master server and get the flag!
 <img src="/img/picoctf2022-for/sidechannel4.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>picoCTF{t1m1ng_4tt4ck_9803bd25}
+<pre tabindex="0"><code>picoCTF{t1m1ng_4tt4ck_9803bd25}
 </code></pre><p>Thank you so much for reading till here, have a great day ahead !</p>
 
     </div>

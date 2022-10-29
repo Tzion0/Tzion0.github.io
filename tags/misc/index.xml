@@ -6,11 +6,7 @@
     <description>Recent content in Misc on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tzion0.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[TFCCTF] Secrets Of Tenochtitlan</title>
       <link>https://tzion0.github.io/posts/tfcctf2022-sot/</link>
@@ -30,10 +26,10 @@ This challenge provided a zip file.</description>
       <guid>https://tzion0.github.io/posts/hsctf2022-paas/</guid>
       <description>This is a python sandbox challenge.
 By inputting some characters, we can identify few Illegal characters:
-[]._&#39;&amp;quot; But luckily () is allowed, looking at locals(), we can see exec() is allowed.
+[]._&amp;#39;&amp;#34; But luckily () is allowed, looking at locals(), we can see exec() is allowed.
 exec() required string argument but unfortunately &#39;&amp;quot; were restricted. However, we found out that chr() is allowed, so let&amp;rsquo;s create our payload:
 Original payload:
-exec(&amp;quot;__import__(&#39;os&#39;).system(&#39;cat flag&#39;)&amp;quot;&amp;quot;) Payload crafted to bypass restrictions:
+exec(&amp;#34;__import__(&amp;#39;os&amp;#39;).system(&amp;#39;cat flag&amp;#39;)&amp;#34;&amp;#34;) Payload crafted to bypass restrictions:
 exec(chr(95)+chr(95)+chr(105)+chr(109)+chr(112)+chr(111)+chr(114)+chr(116)+chr(95)+chr(95)+chr(40)+chr(39)+chr(111)+chr(115)+chr(39)+chr(41)+chr(46)+chr(115)+chr(121)+chr(115)+chr(116)+chr(101)+chr(109)+chr(40)+chr(39)+chr(99)+chr(97)+chr(116)+chr(32)+chr(102)+chr(108)+chr(97)+chr(103)+chr(39)+chr(41)) Execute it and got the flag!
 Flag:</description>
     </item>
@@ -48,7 +44,7 @@ Flag:</description>
 Description I know where I am, but&amp;hellip; when am I?
 This challenge provided a txt file.
 Content of txt file:
-When am I?? So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, and I&#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14.</description>
+When am I?? So, I look down at my watch. It&amp;#39;s December 28, 2011 at 11:59AM, and I&amp;#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14.</description>
     </item>
     
   </channel>

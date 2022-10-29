@@ -4,7 +4,7 @@
     <title>[DCTF] Forensics // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="generator" content="Hugo 0.104.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
@@ -26,9 +26,10 @@ Secure Creds Description With the connection to the victim&rsquo;s computer you 
 This challenge provided a zip file, unzip it we will get lsass.DMP file.
 From the description we know that we are dealing with lsass.exe, a bit of research shows that we can dump the content using Mimikatz." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tzion0.github.io/posts/dctf2022-for/" />
+<meta property="og:url" content="https://tzion0.github.io/posts/dctf2022-for/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-18T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-04-18T00:00:00+00:00" />
+
 
 
   </head>
@@ -104,35 +105,35 @@ From the description we know that we are dealing with lsass.exe, a bit of resear
 <p>With the connection to the victim&rsquo;s computer you managed to dump the lsass.exe process. Can you get the password from the dump file?</p>
 <p>This challenge provided a zip file, unzip it we will get lsass.DMP file.</p>
 <p>From the description we know that we are dealing with lsass.exe, a bit of research shows that we can dump the content using Mimikatz. I use <a href="https://github.com/skelsec/pypykatz">pypykatz</a>, which is the Python implementation of Mimikatz to dump it:</p>
-<pre><code>pypykatz lsa minidump lsass.DMP
+<pre tabindex="0"><code>pypykatz lsa minidump lsass.DMP
 </code></pre><p><img src="/img/dctf2022-for/secure_creds.png" alt="IMG"></p>
 <p>Flag:</p>
-<pre><code>dctf{n0_ant1v1ru5_l0l}
+<pre tabindex="0"><code>dctf{n0_ant1v1ru5_l0l}
 </code></pre><h1 id="hidden-fox">Hidden Fox</h1>
 <h3 id="description-1">Description</h3>
 <p>I let Firefox save some of my stuff while browsing, it should be written somewhere in it&rsquo;s directory, can you find it? Flag is in two parts.</p>
 <p>This challenge provided a zip file, unzip it we will get a folder called Firefox.</p>
 <p>From the description we know that we need to somehow dump the Firefox saved contents.</p>
 <p>I use <a href="https://github.com/Busindre/dumpzilla">dumpzilla</a> in this case and we just need to provide the profile location which stated in the help menu of this tool. The profile location is:</p>
-<pre><code>Firefox/Profiles/b4873ssv.default-release/
+<pre tabindex="0"><code>Firefox/Profiles/b4873ssv.default-release/
 </code></pre><p>Full command:</p>
-<pre><code>python3 dumpzilla.py ./Firefox/Profiles/br873ssy.default-release/
+<pre tabindex="0"><code>python3 dumpzilla.py ./Firefox/Profiles/br873ssy.default-release/
 </code></pre><p>From the output we will see some interesting data and few parts of the flag:</p>
 <p><img src="/img/dctf2022-for/hidden_fox3.png" alt="IMG">
 <img src="/img/dctf2022-for/hidden_fox2.png" alt="IMG">
 <img src="/img/dctf2022-for/hidden_fox.png" alt="IMG"></p>
 <p>Combine the parts of flag and we will get:</p>
-<pre><code>4nd_v151t3d__th15_p455w0rd}
+<pre tabindex="0"><code>4nd_v151t3d__th15_p455w0rd}
 </code></pre><p>So what&rsquo;s next? Chances are we can decrypt the credentials! I use <a href="https://github.com/unode/firefox_decrypt">firefox_decrypt</a> to decrypt it. Again, we just need to provide the profile location:</p>
-<pre><code>python3 firefox_decrypt.py ./Firefox/Profiles/br873ssy.default-release/
+<pre tabindex="0"><code>python3 firefox_decrypt.py ./Firefox/Profiles/br873ssy.default-release/
 </code></pre><p>Output:</p>
-<pre><code>Website:   https://dctf.dragonsec.si
-Username: 'dragonflag'
-Password: 'dctf{1_b00km4rk3d_'
+<pre tabindex="0"><code>Website:   https://dctf.dragonsec.si
+Username: &#39;dragonflag&#39;
+Password: &#39;dctf{1_b00km4rk3d_&#39;
 </code></pre><p>Combine it we will get the flag:</p>
-<pre><code>dctf{1_b00km4rk3d_4nd_v151t3d__th15_p455w0rd}'
+<pre tabindex="0"><code>dctf{1_b00km4rk3d_4nd_v151t3d__th15_p455w0rd}&#39;
 </code></pre><p>Looks promising, huh? Unfortunately it wasn&rsquo;t the correct flag, turns out that from the description it stated &ldquo;Flag is in <strong>two</strong> parts&rdquo; and our combination consists of 3 parts. Notice that extra &lsquo;_&rsquo; in the flag above, it indicates that part was unnecessary, so the final flag should be:</p>
-<pre><code>dctf{1_b00km4rk3d_th15_p455w0rd}
+<pre tabindex="0"><code>dctf{1_b00km4rk3d_th15_p455w0rd}
 </code></pre>
     </div>
     <div class="post-footer">

@@ -4,7 +4,7 @@
     <title>[NAHAMCONCTF] WhenAmI // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="generator" content="Hugo 0.104.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
@@ -26,9 +26,10 @@ This challenge provided a txt file.
 Content of txt file:
 When am I?? So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, and I&#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tzion0.github.io/posts/nahamconctf2022-whenami/" />
+<meta property="og:url" content="https://tzion0.github.io/posts/nahamconctf2022-whenami/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-01T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-05-01T00:00:00+00:00" />
+
 
 
   </head>
@@ -102,27 +103,27 @@ When am I?? So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, 
 <p>I know where I am, but&hellip; when am I?</p>
 <p>This challenge provided a txt file.</p>
 <p>Content of txt file:</p>
-<pre><code>When am I??
+<pre tabindex="0"><code>When am I??
 
-So, I look down at my watch. It's December 28, 2011 at 11:59AM, and I'm just minding my own business at -13.582075733990298, -172.5084838587106.
+So, I look down at my watch. It&#39;s December 28, 2011 at 11:59AM, and I&#39;m just minding my own business at -13.582075733990298, -172.5084838587106.
 I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14.327595989244111, -170.71287979386747.
 Some time has passed since I landed, and on December 30th, 12PM local time, I took a 1 hour flight back to my original location.
-It's been 10 hours since I landed on my most recent flight - how many seconds have passed since I first looked at my watch?
+It&#39;s been 10 hours since I landed on my most recent flight - how many seconds have passed since I first looked at my watch?
 
 (Submission format is flag{&lt;number of seconds goes here&gt;}, such as flag{600}.)
 </code></pre><p>This is quite a fun challenge, and I enjoy solving it.</p>
 <p>Before we begin, let me convert those geographic coordinates into its places name:</p>
-<pre><code>-13.582075733990298, -172.5084838587106	 : &quot;A'opo Conservation Area, Samoa&quot;
--14.327595989244111, -170.71287979386747 : &quot;Tualauta, Western District, American Samoa&quot;
+<pre tabindex="0"><code>-13.582075733990298, -172.5084838587106	 : &#34;A&#39;opo Conservation Area, Samoa&#34;
+-14.327595989244111, -170.71287979386747 : &#34;Tualauta, Western District, American Samoa&#34;
 </code></pre><p>Google also shows that <strong>A&rsquo;opo Conservation Area, Samoa</strong> is 24 hours ahead of <strong>Tualauta, Western District, American Samoa</strong>.</p>
 <p>Now let&rsquo;s start counting:</p>
-<pre><code>1 min + 12 hrs (29 December)
+<pre tabindex="0"><code>1 min + 12 hrs (29 December)
 + 24 hrs       (31 December)
 + 1 hr         (Because local time 1 AM)
 + 1 hr         (1 hour flight to Tualauta)
-+ 10 hr        (Tualauta localtime December 30th, 12PM, which means &quot;A'opo&quot; is now December 31th, 12pm, and assuming &quot;A'opo&quot; was at 2 AM after arrived at Tualauta, so 12 - 2 = 10)
-+ 1 hr 		   (1 hour flight back to &quot;A'opo&quot;)
-+ 10 hr    	   (&quot;It's been 10 hours since I landed on my most recent flight&quot;)
++ 10 hr        (Tualauta localtime December 30th, 12PM, which means &#34;A&#39;opo&#34; is now December 31th, 12pm, and assuming &#34;A&#39;opo&#34; was at 2 AM after arrived at Tualauta, so 12 - 2 = 10)
++ 1 hr 		   (1 hour flight back to &#34;A&#39;opo&#34;)
++ 10 hr    	   (&#34;It&#39;s been 10 hours since I landed on my most recent flight&#34;)
 + 1 hr 		   (DST)
 </code></pre><p>So, after 12 hrs and 1 min of 11:59 AM, December 28, 2011, we will enter 29 December, and after 24 hrs more we will be enter to 31 December. Why 31 instead of 30? Well, this is because <strong>Samoa</strong> changed its timezone on 2011, read more here:
 <a href="https://www.abc.net.au/news/2011-12-30/samoa-skips-friday-in-time-zone-change/3753350">https://www.abc.net.au/news/2011-12-30/samoa-skips-friday-in-time-zone-change/3753350</a></p>
@@ -132,7 +133,7 @@ It's been 10 hours since I landed on my most recent flight - how many seconds ha
 <p><img src="/img/nahamconctf2022-whenami/nahamcon-misc.png" alt="IMG"></p>
 <p>So the total is 60 hrs and 1 min = 216060 secs</p>
 <p>Flag:</p>
-<pre><code>flag{216060}
+<pre tabindex="0"><code>flag{216060}
 </code></pre>
     </div>
     <div class="post-footer">

@@ -6,11 +6,7 @@
     <description>Recent content in DCTF on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tzion0.github.io/tags/dctf/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/dctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[DCTF] Forensics</title>
       <link>https://tzion0.github.io/posts/dctf2022-for/</link>

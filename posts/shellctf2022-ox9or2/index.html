@@ -4,7 +4,7 @@
     <title>[SHELLCTF] OX9OR2 // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="generator" content="Hugo 0.104.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
@@ -22,9 +22,10 @@ encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43
 This challenge provided two files called encryption.py and encrypted. encrypted file contains ciphertext produced by encryption.py
 encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43;= chr(ord(msg[i]) ^ ord(key[i % len(key)])) return o with open(&#39;message&#39;, &#39;r&#39;) as f: msg = &#39;&#39;.join(f.readlines()).rstrip(&#39;\n&#39;) with open(&#39;key&#39;, &#39;r&#39;) as k: key = &#39;&#39;.join(k.readlines()).rstrip(&#39;\n&#39;) assert key.isalnum() and (len(key) == 9) assert &#39;SHELL&#39; in msg with open(&#39;encrypted&#39;, &#39;w&#39;) as fo: fo." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tzion0.github.io/posts/shellctf2022-ox9or2/" />
+<meta property="og:url" content="https://tzion0.github.io/posts/shellctf2022-ox9or2/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-08-14T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-08-14T00:00:00+00:00" />
+
 
 
   </head>
@@ -96,52 +97,52 @@ encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43
 <p><a href="https://github.com/Tzion0/CTF/tree/master/ShellCTF/2022/OX9OR2">https://github.com/Tzion0/CTF/tree/master/ShellCTF/2022/OX9OR2</a></p>
 <p>This challenge provided two files called <code>encryption.py</code> and <code>encrypted</code>. <code>encrypted</code> file contains ciphertext produced by <code>encryption.py</code></p>
 <h4 id="encryptionpy">encryption.py</h4>
-<pre><code>def xor(msg, key):
-    o = ''
+<pre tabindex="0"><code>def xor(msg, key):
+    o = &#39;&#39;
     for i in range(len(msg)):
         o += chr(ord(msg[i]) ^ ord(key[i % len(key)]))
     return o
  
-with open('message', 'r') as f:
-    msg = ''.join(f.readlines()).rstrip('\n')
+with open(&#39;message&#39;, &#39;r&#39;) as f:
+    msg = &#39;&#39;.join(f.readlines()).rstrip(&#39;\n&#39;)
  
-with open('key', 'r') as k:
-    key = ''.join(k.readlines()).rstrip('\n')
+with open(&#39;key&#39;, &#39;r&#39;) as k:
+    key = &#39;&#39;.join(k.readlines()).rstrip(&#39;\n&#39;)
     
 assert key.isalnum() and (len(key) == 9)
-assert 'SHELL' in msg
+assert &#39;SHELL&#39; in msg
  
-with open('encrypted', 'w') as fo:
+with open(&#39;encrypted&#39;, &#39;w&#39;) as fo:
     fo.write(xor(msg, key))
 </code></pre><p>Looking at encryption.py, we can conclude that the script is basically doing XOR on message with a key where the key is alphanumeric (isalnum) with the length of 9 and contains &ldquo;SHELL&rdquo; string in it.</p>
 <p>We can assume that the &ldquo;SHELL{&rdquo; string is at beginning of the plaintext message since it is the flag format.</p>
-<p>By using the XOR recipe in CyberChef with the key &ldquo;SHELL{&quot;, we get the first 6 plaintext key: <code>XORISC</code></p>
+<p>By using the XOR recipe in CyberChef with the key &ldquo;SHELL{&rdquo;, we get the first 6 plaintext key: <code>XORISC</code></p>
 <p><img src="/img/shellctf2022-ox9or2/img.png" alt="IMG"></p>
 <p>At this point we are left with remaining 3 characters to get the full key, we can achieve this by bruteforcing it. I created a python script to do this:</p>
-<pre><code>#!/usr/bin/env python3
+<pre tabindex="0"><code>#!/usr/bin/env python3
 from itertools import product 
 import string
 import re
 
-with open('encrypted', 'rb') as f:
+with open(&#39;encrypted&#39;, &#39;rb&#39;) as f:
     ct = list(f.read())
 
-pt = list(&quot;SHELL{&quot;)
+pt = list(&#34;SHELL{&#34;)
 perm = list(product(list(string.ascii_lowercase + string.ascii_uppercase + string.digits), repeat=3))
 
 for p in perm:
-	flag = &quot;&quot;
-	key = list(&quot;XORISC&quot;) + list(p)
+	flag = &#34;&#34;
+	key = list(&#34;XORISC&#34;) + list(p)
 	for c in range(len(ct)):
 		flag += chr(ct[c] ^ ord(key[c % len(key)]))
-	if re.match(r&quot;^SHELL{X[A-Za-z0-9]R_1S_R3[A-Za-z0-9]{3}51BL3}&quot;, flag):
-		print(&quot;Flag: &quot; + flag, &quot;Key: &quot; + &quot;&quot;.join(key))
+	if re.match(r&#34;^SHELL{X[A-Za-z0-9]R_1S_R3[A-Za-z0-9]{3}51BL3}&#34;, flag):
+		print(&#34;Flag: &#34; + flag, &#34;Key: &#34; + &#34;&#34;.join(key))
 </code></pre><p>The regex match is basically obtained through trial and error where some of the trials produced some promising plaintext message.</p>
 <p>Execute the script will get output below:
 <img src="/img/shellctf2022-ox9or2/img2.png" alt="IMG"></p>
 <p>Just like that, we got the flag!</p>
 <p>Flag:</p>
-<pre><code>SHELL{X0R_1S_R3VeR51BL3}
+<pre tabindex="0"><code>SHELL{X0R_1S_R3VeR51BL3}
 </code></pre>
     </div>
     <div class="post-footer">
