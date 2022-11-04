@@ -137,7 +137,7 @@ printf(&#34;%s&#34;, ex);
 <h2 id="exploit-plan">Exploit plan</h2>
 <p>With all of the information obtained, we can start planning the exploit. Its kinda obvious that first we need to overflow the return address of <strong>main</strong> by exploiting the <code>gets()</code> to redirect the control flow of binary to <code>login</code> function. After that, we can abuse the <code>printf(local_d8)</code> (Format String Vulnerability) to pop out the flag data off the stack. You might be wondering, why the flag data is in the stack? Well, this is because of this line of code in <code>login</code> function:</p>
 <pre tabindex="0"><code>fgets(local_98, 0x80, local_10);
-</code></pre><p>The above line of code is essentially loading the flag data into <code>local_98</code> variable, but do where variables live? You&rsquo;re right, in STACK!</p>
+</code></pre><p>The above line of code is essentially loading the flag data into <code>local_98</code> variable, but where do variables live? You&rsquo;re right, in STACK!</p>
 <h2 id="before-we-begin-stack-introduction">Before we begin&hellip; (Stack Introduction)</h2>
 <p>This section is an introduction of Stack for those who aren&rsquo;t familiar with, feel free to skip this part if you know how Stack operates.</p>
 <p>Stack is an ordered collection of items where it PUSH/POP data on/off the stack using <strong>Last In First Out (LIFO)</strong> method. Whenever a function call is made, a stack frame will be created in the stack. Also, stack grows from higher address to lower address. Below is the example diagram of what <code>main</code> function briefly looks like in stack (Note: Details is not included to avoid confusion):</p>
