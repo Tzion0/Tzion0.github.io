@@ -307,7 +307,7 @@ $jhVI[$i] = chr(ord($jhVI[$i])-1);
 <p><img src="/img/thm-fuscator/14.png" alt="IMG"></p>
 <p>The objective of hiding the cronjob is to match the storyline of this machine, and the inspiration is obtained from <a href="https://cybergladius.com/redteam-tip-hiding-cronjobs/">here</a></p>
 <p>From the cronjob we know that a suspicious binary is executing as root every minute, so let&rsquo;s start analyzing it.</p>
-<p>This binary is actually obfuscated using <a href="https://github.com/xoreaxeaxeax/movfuscator">movfuscator</a> and you can deobfuscate it using <a href="https://github.com/kirschju/demovfuscator">demovfuscator</a>. However, deobfuscate the binary won&rsquo;t recover much but atleast you learn more about the behavior of the binary. Moreover, since this is a medium machine, reversing/deobfuscating/decrypting is not required but readers who are interested can attempt to decrypt it.</p>
+<p>This binary is actually obfuscated using <a href="https://github.com/xoreaxeaxeax/movfuscator">movfuscator</a> and you can deobfuscate it using <a href="https://github.com/kirschju/demovfuscator">demovfuscator</a>. However, deobfuscate the binary won&rsquo;t recover much but atleast you learn more about the behavior of the binary. Moreover, since this is a medium machine, reversing/deobfuscating/decrypting is not required but readers who are interested can attempt to deobfuscate it.</p>
 <p>Moving on, the hint given <code>Root - Don't trace my path!</code> actually indicating <code>ltrace</code> and <code>path injection</code>. Hence we can attempt to ltrace the binary:</p>
 <pre tabindex="0"><code>ltrace ./66-motd-update
 </code></pre><p><img src="/img/thm-fuscator/15.png" alt="IMG"></p>
