@@ -130,7 +130,7 @@ There are two ways to get user foothold and one way to get root as far as I know
 |_http-title: Fuscator
 |_http-generator: WordPress 6.1
 Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
-</code></pre><p>From the result we can see 3 ports are open and port 21 (FTP) allows anonymous login, lets connect anonymously it using ftp:</p>
+</code></pre><p>From the result we can see 3 ports are open and port 21 (FTP) allows anonymous login, lets connect it anonymously using ftp:</p>
 <pre tabindex="0"><code>ftp -i 10.10.139.146
 </code></pre><p>After login with anonymous:<!-- raw HTML omitted -->, we can download all the files in it:</p>
 <p><img src="/img/thm-fuscator/1.png" alt="IMG"></p>
@@ -323,7 +323,7 @@ $jhVI[$i] = chr(ord($jhVI[$i])-1);
 </code></pre><p>Since <code>nc</code> is located in <code>/bin/nc</code>, if we place a binary with the same name as <code>nc</code> in preceding directories of <code>/bin</code>, Linux will execute it instead of the actual <code>/bin/nc</code>.</p>
 <p>Looking at <code>/usr/local/sbin</code> and <code>/usr/local/bin</code>, we have the privilege to write into it as we are belong to staff group:</p>
 <p><img src="/img/thm-fuscator/18.png" alt="IMG"></p>
-<p>Hence, write a reverse shell into <code>/usr/local/sbin/nc</code>, finger cross, and we eventually will get a shell:</p>
+<p>Hence, write a reverse shell into <code>/usr/local/sbin/nc</code>, finger cross, and eventually we will get a shell:</p>
 <p><img src="/img/thm-fuscator/19.png" alt="IMG"></p>
 <p>That&rsquo;s it, the root flag is located in <code>/root/root.txt</code>.</p>
 <p>Thank you for reading till the end and hopefully you learned something new &lt;3</p>
