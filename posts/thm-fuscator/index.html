@@ -304,7 +304,7 @@ $jhVI[$i] = chr(ord($jhVI[$i])-1);
 <p>The privilege escalation point actually lies at <code>/etc/crontab</code>, however when you view it using <code>cat</code>, you won&rsquo;t see any suspicious cronjob:</p>
 <p><img src="/img/thm-fuscator/13.png" alt="IMG"></p>
 <p>To view the suspicious cronjob, you have use text editor like nano (<del>I love vim</del>):</p>
-<p><img src="/img/thm-fuscator/13.png" alt="IMG"></p>
+<p><img src="/img/thm-fuscator/14.png" alt="IMG"></p>
 <p>The objective of hiding the cronjob is to match the storyline of this machine, and the inspiration is obtained from <a href="https://cybergladius.com/redteam-tip-hiding-cronjobs/">here</a></p>
 <p>From the cronjob we know that a suspicious binary is executing as root every minute, so let&rsquo;s start analyzing it.</p>
 <p>This binary is actually obfuscated using <a href="https://github.com/xoreaxeaxeax/movfuscator">movfuscator</a> and you can deobfuscate it using <a href="https://github.com/kirschju/demovfuscator">demovfuscator</a>. However, deobfuscate the binary won&rsquo;t recover much but atleast you learn more about the behavior of the binary. Moreover, since this is a medium machine, reversing/deobfuscating/decrypting is not required but readers who are interested can attempt to decrypt it.</p>
