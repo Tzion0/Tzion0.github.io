@@ -138,38 +138,38 @@ $ gdb gdbme
 <p>Can you get the flag?
 Run this Python program in the same directory as this encrypted flag.</p>
 <p>This challenge provided an encrypted flag in text file and a python script:</p>
-<pre tabindex="0"><code>### THIS FUNCTION WILL NOT HELP YOU FIND THE FLAG --LT ########################
-def str_xor(secret, key):
-    #extend key to secret length
-    new_key = key
-    i = 0
-    while len(new_key) &lt; len(secret):
-        new_key = new_key + key[i]
-        i = (i + 1) % len(key)        
-    return &#34;&#34;.join([chr(ord(secret_c) ^ ord(new_key_c)) for (secret_c,new_key_c) in zip(secret,new_key)])
-###############################################################################
-
-
-flag_enc = open(&#39;flag.txt.enc&#39;, &#39;rb&#39;).read()
-
-
-
-def level_1_pw_check():
-    user_pw = input(&#34;Please enter correct password for flag: &#34;)
-    if( user_pw == &#34;ak98&#34; + \
-                   &#34;-=90&#34; + \
-                   &#34;adfjhgj321&#34; + \
-                   &#34;sleuth9000&#34;):
-        print(&#34;Welcome back... your flag, user:&#34;)
-        decryption = str_xor(flag_enc.decode(), &#34;utilitarian&#34;)
-        print(decryption)
-        return
-    print(&#34;That password is incorrect&#34;)
-
-
-
-level_1_pw_check()
-</code></pre><p>From the source code we can see this script is used to decrypt the encrypted flag by providing the correct password, and the correct password apparently is hardcoded, so we just need to concat it. The password is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">### THIS FUNCTION WILL NOT HELP YOU FIND THE FLAG --LT ########################</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">str_xor</span>(secret, key):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#extend key to secret length</span>
+</span></span><span style="display:flex;"><span>    new_key <span style="color:#f92672">=</span> key
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(new_key) <span style="color:#f92672">&lt;</span> len(secret):
+</span></span><span style="display:flex;"><span>        new_key <span style="color:#f92672">=</span> new_key <span style="color:#f92672">+</span> key[i]
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len(key)        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join([chr(ord(secret_c) <span style="color:#f92672">^</span> ord(new_key_c)) <span style="color:#66d9ef">for</span> (secret_c,new_key_c) <span style="color:#f92672">in</span> zip(secret,new_key)])
+</span></span><span style="display:flex;"><span><span style="color:#75715e">###############################################################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>flag_enc <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;flag.txt.enc&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">level_1_pw_check</span>():
+</span></span><span style="display:flex;"><span>    user_pw <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Please enter correct password for flag: &#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>( user_pw <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;ak98&#34;</span> <span style="color:#f92672">+</span> \
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#34;-=90&#34;</span> <span style="color:#f92672">+</span> \
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#34;adfjhgj321&#34;</span> <span style="color:#f92672">+</span> \
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#34;sleuth9000&#34;</span>):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Welcome back... your flag, user:&#34;</span>)
+</span></span><span style="display:flex;"><span>        decryption <span style="color:#f92672">=</span> str_xor(flag_enc<span style="color:#f92672">.</span>decode(), <span style="color:#e6db74">&#34;utilitarian&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(decryption)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;That password is incorrect&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>level_1_pw_check()
+</span></span></code></pre></div><p>From the source code we can see this script is used to decrypt the encrypted flag by providing the correct password, and the correct password apparently is hardcoded, so we just need to concat it. The password is:</p>
 <pre tabindex="0"><code>ak98-=90adfjhgj321sleuth9000
 </code></pre><p><img src="/img/picoctf2022-rev/patchme.png" alt="IMG"></p>
 <p>Flag:</p>
@@ -181,49 +181,49 @@ I forgot the key to my safe but this program is supposed to help me with retriev
 Put the password you recover into the picoCTF flag format like:</p>
 <pre tabindex="0"><code>picoCTF{password}
 </code></pre><p>This challenge provided a plain text java file:</p>
-<pre tabindex="0"><code>import java.io.*;
-import java.util.*;  
-public class SafeOpener {
-    public static void main(String args[]) throws IOException {
-        BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
-        Base64.Encoder encoder = Base64.getEncoder();
-        String encodedkey = &#34;&#34;;
-        String key = &#34;&#34;;
-        int i = 0;
-        boolean isOpen;
-        
-
-        while (i &lt; 3) {
-            System.out.print(&#34;Enter password for the safe: &#34;);
-            key = keyboard.readLine();
-
-            encodedkey = encoder.encodeToString(key.getBytes());
-            System.out.println(encodedkey);
-              
-            isOpen = openSafe(encodedkey);
-            if (!isOpen) {
-                System.out.println(&#34;You have  &#34; + (2 - i) + &#34; attempt(s) left&#34;);
-                i++;
-                continue;
-            }
-            break;
-        }
-    }
-    
-    public static boolean openSafe(String password) {
-        String encodedkey = &#34;cGwzYXMzX2wzdF9tM18xbnQwX3RoM19zYWYz&#34;;
-        
-        if (password.equals(encodedkey)) {
-            System.out.println(&#34;Sesame open&#34;);
-            return true;
-        }
-        else {
-            System.out.println(&#34;Password is incorrect\n&#34;);
-            return false;
-        }
-    }
-}
-</code></pre><p>Again, the password key is hardcoded with base64 encoding. We just need to base64 decode it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.*<span style="color:#f92672">;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SafeOpener</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String args<span style="color:#f92672">[])</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        BufferedReader keyboard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> InputStreamReader<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>        Base64<span style="color:#f92672">.</span><span style="color:#a6e22e">Encoder</span> encoder <span style="color:#f92672">=</span> Base64<span style="color:#f92672">.</span><span style="color:#a6e22e">getEncoder</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        String encodedkey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        String key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> isOpen<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;</span> 3<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Enter password for the safe: &#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            key <span style="color:#f92672">=</span> keyboard<span style="color:#f92672">.</span><span style="color:#a6e22e">readLine</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            encodedkey <span style="color:#f92672">=</span> encoder<span style="color:#f92672">.</span><span style="color:#a6e22e">encodeToString</span><span style="color:#f92672">(</span>key<span style="color:#f92672">.</span><span style="color:#a6e22e">getBytes</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>encodedkey<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>              
+</span></span><span style="display:flex;"><span>            isOpen <span style="color:#f92672">=</span> openSafe<span style="color:#f92672">(</span>encodedkey<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>isOpen<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;You have  &#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>2 <span style="color:#f92672">-</span> i<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; attempt(s) left&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                i<span style="color:#f92672">++;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">openSafe</span><span style="color:#f92672">(</span>String password<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        String encodedkey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cGwzYXMzX2wzdF9tM18xbnQwX3RoM19zYWYz&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>password<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>encodedkey<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Sesame open&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Password is incorrect\n&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Again, the password key is hardcoded with base64 encoding. We just need to base64 decode it:</p>
 <pre tabindex="0"><code>echo -n &#34;cGwzYXMzX2wzdF9tM18xbnQwX3RoM19zYWYz&#34; | base64 -d
 </code></pre><p><img src="/img/picoctf2022-rev/safeopener.png" alt="IMG"></p>
 <p>Flag:</p>
@@ -233,87 +233,87 @@ public class SafeOpener {
 <p>Can you get the flag?
 Run this Python program in the same directory as this encrypted flag.</p>
 <p>This challenge provided an encrypted flag in text file and a python script:</p>
-<pre tabindex="0"><code>import sys
-a = &#34;!\&#34;#$%&amp;&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;+ \
-            &#34;[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ &#34;
-def arg133(arg432):
-  if arg432 == a[71]+a[64]+a[79]+a[79]+a[88]+a[66]+a[71]+a[64]+a[77]+a[66]+a[68]:
-    return True
-  else:
-    print(a[51]+a[71]+a[64]+a[83]+a[94]+a[79]+a[64]+a[82]+a[82]+a[86]+a[78]+\
-a[81]+a[67]+a[94]+a[72]+a[82]+a[94]+a[72]+a[77]+a[66]+a[78]+a[81]+\
-a[81]+a[68]+a[66]+a[83])
-    sys.exit(0)
-    return False
-def arg111(arg444):
-  return arg122(arg444.decode(), a[81]+a[64]+a[79]+a[82]+a[66]+a[64]+a[75]+\
-a[75]+a[72]+a[78]+a[77])
-def arg232():
-  return input(a[47]+a[75]+a[68]+a[64]+a[82]+a[68]+a[94]+a[68]+a[77]+a[83]+\
-a[68]+a[81]+a[94]+a[66]+a[78]+a[81]+a[81]+a[68]+a[66]+a[83]+\
-a[94]+a[79]+a[64]+a[82]+a[82]+a[86]+a[78]+a[81]+a[67]+a[94]+\
-a[69]+a[78]+a[81]+a[94]+a[69]+a[75]+a[64]+a[70]+a[25]+a[94])
-def arg132():
-  return open(&#39;flag.txt.enc&#39;, &#39;rb&#39;).read()
-def arg112():
-  print(a[54]+a[68]+a[75]+a[66]+a[78]+a[76]+a[68]+a[94]+a[65]+a[64]+a[66]+\
-a[74]+a[13]+a[13]+a[13]+a[94]+a[88]+a[78]+a[84]+a[81]+a[94]+a[69]+\
-a[75]+a[64]+a[70]+a[11]+a[94]+a[84]+a[82]+a[68]+a[81]+a[25])
-def arg122(arg432, arg423):
-    arg433 = arg423
-    i = 0
-    while len(arg433) &lt; len(arg432):
-        arg433 = arg433 + arg423[i]
-        i = (i + 1) % len(arg423)        
-    return &#34;&#34;.join([chr(ord(arg422) ^ ord(arg442)) for (arg422,arg442) in zip(arg432,arg433)])
-arg444 = arg132()
-arg432 = arg232()
-arg133(arg432)
-arg112()
-arg423 = arg111(arg444)
-print(arg423)
-sys.exit(0)
-</code></pre><p>We can see the python script was deobfuscated. By manually deobfuscating it, we will get:</p>
-<pre tabindex="0"><code>import sys
-a = &#34;!\&#34;#$%&amp;&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;+ \
-            &#34;[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ &#34;
-            
-def check_usr_input(usr_input):
-  if usr_input == &#34;happychance&#34;:
-    return True
-  else:
-    print(&#39;That password is incorrect&#39;)
-    sys.exit(0)
-    return False
-
-def decode_with_key(encoded):
-  return decode_process(encoded.decode(), &#34;rapscallion&#34;)
-
-def ask_input():
-  return input(&#34;Please enter correct password for flag:&#34;)
-
-def open_encoded_txt_file():
-  return open(&#39;flag.txt.enc&#39;, &#39;rb&#39;).read()
-
-def print_msg():
-  print(&#34;Welcome back... your flag, user:&#34;)
-
-def decode_process(usr_input, plain_flag):
-    temp = plain_flag
-    i = 0
-    while len(temp) &lt; len(usr_input):
-        temp = temp + plain_flag[i]
-        i = (i + 1) % len(plain_flag)        
-    return &#34;&#34;.join([chr(ord(x) ^ ord(y)) for (x,y) in zip(usr_input,temp)])
-
-encoded = open_encoded_txt_file()
-usr_input = ask_input()
-check_usr_input(usr_input)
-print_msg()
-plain_flag = decode_with_key(encoded)
-print(plain_flag)
-sys.exit(0)
-</code></pre><p>From the deobfuscated source code, we can see we need to input a password in order to decrypt the encoded flag text file. However, the password is hardcoded:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;!</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">#$%&amp;&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span><span style="color:#f92672">+</span> \
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;[</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">]^_`abcdefghijklmnopqrstuvwxyz{|}~ &#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">arg133</span>(arg432):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> arg432 <span style="color:#f92672">==</span> a[<span style="color:#ae81ff">71</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">79</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">79</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">88</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">66</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">71</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">77</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">66</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">68</span>]:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    print(a[<span style="color:#ae81ff">51</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">71</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">83</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">79</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">82</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">82</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">86</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">78</span>]<span style="color:#f92672">+</span>\
+</span></span><span style="display:flex;"><span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">67</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">72</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">82</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">72</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">77</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">66</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">78</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>\
+</span></span><span style="display:flex;"><span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">68</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">66</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">83</span>])
+</span></span><span style="display:flex;"><span>    sys<span style="color:#f92672">.</span>exit(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">arg111</span>(arg444):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> arg122(arg444<span style="color:#f92672">.</span>decode(), a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">79</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">82</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">66</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">75</span>]<span style="color:#f92672">+</span>\
+</span></span><span style="display:flex;"><span>a[<span style="color:#ae81ff">75</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">72</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">78</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">77</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">arg232</span>():
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> input(a[<span style="color:#ae81ff">47</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">75</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">68</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">82</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">68</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">68</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">77</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">83</span>]<span style="color:#f92672">+</span>\
+</span></span><span style="display:flex;"><span>a[<span style="color:#ae81ff">68</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">66</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">78</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">68</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">66</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">83</span>]<span style="color:#f92672">+</span>\
+</span></span><span style="display:flex;"><span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">79</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">82</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">82</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">86</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">78</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">67</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>\
+</span></span><span style="display:flex;"><span>a[<span style="color:#ae81ff">69</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">78</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">69</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">75</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">70</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">25</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">arg132</span>():
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> open(<span style="color:#e6db74">&#39;flag.txt.enc&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">arg112</span>():
+</span></span><span style="display:flex;"><span>  print(a[<span style="color:#ae81ff">54</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">68</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">75</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">66</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">78</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">76</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">68</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">65</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">66</span>]<span style="color:#f92672">+</span>\
+</span></span><span style="display:flex;"><span>a[<span style="color:#ae81ff">74</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">13</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">13</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">13</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">88</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">78</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">84</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">69</span>]<span style="color:#f92672">+</span>\
+</span></span><span style="display:flex;"><span>a[<span style="color:#ae81ff">75</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">64</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">70</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">11</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">94</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">84</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">82</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">68</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">81</span>]<span style="color:#f92672">+</span>a[<span style="color:#ae81ff">25</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">arg122</span>(arg432, arg423):
+</span></span><span style="display:flex;"><span>    arg433 <span style="color:#f92672">=</span> arg423
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(arg433) <span style="color:#f92672">&lt;</span> len(arg432):
+</span></span><span style="display:flex;"><span>        arg433 <span style="color:#f92672">=</span> arg433 <span style="color:#f92672">+</span> arg423[i]
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len(arg423)        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join([chr(ord(arg422) <span style="color:#f92672">^</span> ord(arg442)) <span style="color:#66d9ef">for</span> (arg422,arg442) <span style="color:#f92672">in</span> zip(arg432,arg433)])
+</span></span><span style="display:flex;"><span>arg444 <span style="color:#f92672">=</span> arg132()
+</span></span><span style="display:flex;"><span>arg432 <span style="color:#f92672">=</span> arg232()
+</span></span><span style="display:flex;"><span>arg133(arg432)
+</span></span><span style="display:flex;"><span>arg112()
+</span></span><span style="display:flex;"><span>arg423 <span style="color:#f92672">=</span> arg111(arg444)
+</span></span><span style="display:flex;"><span>print(arg423)
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>exit(<span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><p>We can see the python script was deobfuscated. By manually deobfuscating it, we will get:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;!</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">#$%&amp;&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span><span style="color:#f92672">+</span> \
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;[</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">]^_`abcdefghijklmnopqrstuvwxyz{|}~ &#34;</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_usr_input</span>(usr_input):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> usr_input <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;happychance&#34;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;That password is incorrect&#39;</span>)
+</span></span><span style="display:flex;"><span>    sys<span style="color:#f92672">.</span>exit(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decode_with_key</span>(encoded):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> decode_process(encoded<span style="color:#f92672">.</span>decode(), <span style="color:#e6db74">&#34;rapscallion&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ask_input</span>():
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> input(<span style="color:#e6db74">&#34;Please enter correct password for flag:&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">open_encoded_txt_file</span>():
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> open(<span style="color:#e6db74">&#39;flag.txt.enc&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_msg</span>():
+</span></span><span style="display:flex;"><span>  print(<span style="color:#e6db74">&#34;Welcome back... your flag, user:&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decode_process</span>(usr_input, plain_flag):
+</span></span><span style="display:flex;"><span>    temp <span style="color:#f92672">=</span> plain_flag
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(temp) <span style="color:#f92672">&lt;</span> len(usr_input):
+</span></span><span style="display:flex;"><span>        temp <span style="color:#f92672">=</span> temp <span style="color:#f92672">+</span> plain_flag[i]
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len(plain_flag)        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join([chr(ord(x) <span style="color:#f92672">^</span> ord(y)) <span style="color:#66d9ef">for</span> (x,y) <span style="color:#f92672">in</span> zip(usr_input,temp)])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>encoded <span style="color:#f92672">=</span> open_encoded_txt_file()
+</span></span><span style="display:flex;"><span>usr_input <span style="color:#f92672">=</span> ask_input()
+</span></span><span style="display:flex;"><span>check_usr_input(usr_input)
+</span></span><span style="display:flex;"><span>print_msg()
+</span></span><span style="display:flex;"><span>plain_flag <span style="color:#f92672">=</span> decode_with_key(encoded)
+</span></span><span style="display:flex;"><span>print(plain_flag)
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>exit(<span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><p>From the deobfuscated source code, we can see we need to input a password in order to decrypt the encoded flag text file. However, the password is hardcoded:</p>
 <pre tabindex="0"><code>happychance
 </code></pre><p>With that being said, we just need to get the flag with the hardcoded password.</p>
 <p><img src="/img/picoctf2022-rev/bloat.png" alt="IMG"></p>
@@ -324,159 +324,159 @@ sys.exit(0)
 <p>Can you get the flag?
 Reverse engineer this Java program.</p>
 <p>This challenge provided a java file, by decompiling it, we get:</p>
-<pre tabindex="0"><code>// Decompiled with: CFR 0.151
-// Class Version: 11
-import java.util.Scanner;
-
-public class KeygenMe {
-    public static void main(String[] stringArray) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(&#34;Enter key:&#34;);
-        String string = scanner.nextLine();
-        if (string.length() != 34) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(33) != &#39;}&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(32) != &#39;9&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(31) != &#39;8&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(30) != &#39;c&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(29) != &#39;a&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(28) != &#39;c&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(27) != &#39;8&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(26) != &#39;3&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(25) != &#39;7&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(24) != &#39;_&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(23) != &#39;d&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(22) != &#39;3&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(21) != &#39;r&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(20) != &#39;1&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(19) != &#39;u&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(18) != &#39;q&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(17) != &#39;3&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(16) != &#39;r&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(15) != &#39;_&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(14) != &#39;g&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(13) != &#39;n&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(12) != &#39;1&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(11) != &#39;l&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(10) != &#39;0&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(9) != &#39;0&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(8) != &#39;7&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(7) != &#39;{&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(6) != &#39;F&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(5) != &#39;T&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(4) != &#39;C&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(3) != &#39;o&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(2) != &#39;c&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(1) != &#39;i&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        if (string.charAt(0) != &#39;p&#39;) {
-            System.out.println(&#34;Invalid key&#34;);
-            return;
-        }
-        System.out.println(&#34;Valid key&#34;);
-    }
-}
-</code></pre><p>Again, hardcoded key, by concating it, we will get the flag.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Decompiled with: CFR 0.151
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Class Version: 11
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">import</span> java.util.Scanner<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KeygenMe</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> stringArray<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Scanner scanner <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Scanner<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Enter key:&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        String string <span style="color:#f92672">=</span> scanner<span style="color:#f92672">.</span><span style="color:#a6e22e">nextLine</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> 34<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>33<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;}&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>32<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;9&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>31<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;8&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>30<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>29<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>28<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>27<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;8&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>26<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;3&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>25<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;7&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>24<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>23<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>22<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;3&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>21<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;r&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>20<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>19<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;u&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>18<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;q&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>17<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;3&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>16<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;r&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>15<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>14<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;g&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>13<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;n&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>12<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>11<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;l&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>10<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>9<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>8<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;7&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>7<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;{&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>6<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;F&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>5<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;T&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>4<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;C&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;o&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>2<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;i&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>0<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;p&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Valid key&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Again, hardcoded key, by concating it, we will get the flag.</p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{700l1ng_r3qu1r3d_738cac89}
 </code></pre><h2 id="bbbbloat">Bbbbloat</h2>
@@ -485,49 +485,49 @@ public class KeygenMe {
 Reverse engineer this binary.</p>
 <p>This challenge provided a binary file.</p>
 <p>I use Ghidra to disassemble this binary:</p>
-<pre tabindex="0"><code>
-undefined8 FUN_00101307(void)
-
-{
-  char *__s;
-  long in_FS_OFFSET;
-  int local_48;
-  undefined8 local_38;
-  undefined8 local_30;
-  undefined8 local_28;
-  undefined8 local_20;
-  long local_10;
-  
-  local_10 = *(long *)(in_FS_OFFSET + 0x28);
-  local_38 = 0x4c75257240343a41;
-  local_30 = 0x3062396630664634;
-  local_28 = 0x65623066635f3d33;
-  local_20 = 0x4e326560623535;
-  printf(&#34;What\&#39;s my favorite number? &#34;);
-  __isoc99_scanf();
-  if (local_48 == 549255) {
-    __s = (char *)FUN_00101249(0,&amp;local_38);
-    fputs(__s,stdout);
-    putchar(10);
-    free(__s);
-  }
-  else {
-    puts(&#34;Sorry, that\&#39;s not it!&#34;);
-  }
-  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
-                    /* WARNING: Subroutine does not return */
-    __stack_chk_fail();
-  }
-  return 0;
-}
-</code></pre><p>From the decompiled code, we can see after it was for favorite number, it performs some kind of comparison:</p>
-<pre tabindex="0"><code>if (local_48 == 549255) {
-	__s = (char *)FUN_00101249(0,&amp;local_38);
-	fputs(__s,stdout);
-	putchar(10);
-	free(__s);
-}
-</code></pre><p>So, let&rsquo;s try run the program with the number <code>549255</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>undefined8 <span style="color:#a6e22e">FUN_00101307</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>__s;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> in_FS_OFFSET;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> local_48;
+</span></span><span style="display:flex;"><span>  undefined8 local_38;
+</span></span><span style="display:flex;"><span>  undefined8 local_30;
+</span></span><span style="display:flex;"><span>  undefined8 local_28;
+</span></span><span style="display:flex;"><span>  undefined8 local_20;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> local_10;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  local_10 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>);
+</span></span><span style="display:flex;"><span>  local_38 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4c75257240343a41</span>;
+</span></span><span style="display:flex;"><span>  local_30 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x3062396630664634</span>;
+</span></span><span style="display:flex;"><span>  local_28 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x65623066635f3d33</span>;
+</span></span><span style="display:flex;"><span>  local_20 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4e326560623535</span>;
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;What</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s my favorite number? &#34;</span>);
+</span></span><span style="display:flex;"><span>  __isoc99_scanf();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (local_48 <span style="color:#f92672">==</span> <span style="color:#ae81ff">549255</span>) {
+</span></span><span style="display:flex;"><span>    __s <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)FUN_00101249(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
+</span></span><span style="display:flex;"><span>    fputs(__s,stdout);
+</span></span><span style="display:flex;"><span>    putchar(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    free(__s);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Sorry, that</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s not it!&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (local_10 <span style="color:#f92672">!=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>)) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">/* WARNING: Subroutine does not return */</span>
+</span></span><span style="display:flex;"><span>    __stack_chk_fail();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>From the decompiled code, we can see after it was for favorite number, it performs some kind of comparison:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (local_48 <span style="color:#f92672">==</span> <span style="color:#ae81ff">549255</span>) {
+</span></span><span style="display:flex;"><span>	__s <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)FUN_00101249(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
+</span></span><span style="display:flex;"><span>	fputs(__s,stdout);
+</span></span><span style="display:flex;"><span>	putchar(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>	free(__s);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So, let&rsquo;s try run the program with the number <code>549255</code>.</p>
 <p><img src="/img/picoctf2022-rev/Bbbbloat.png" alt="IMG"></p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{cu7_7h3_bl047_36dd316a}
@@ -539,51 +539,51 @@ Reverse engineer this binary.</p>
 <p>The binary file was packed by using UPX, to unpack it, run the command below:</p>
 <pre tabindex="0"><code>upx -d &lt;file&gt;
 </code></pre><p>After that, same as <strong>Bbbbloat</strong> challenge, we use Ghidra to disassemble the binary:</p>
-<pre tabindex="0"><code>
-undefined8 main(void)
-
-{
-  long in_FS_OFFSET;
-  int local_44;
-  char *local_40;
-  undefined8 local_38;
-  undefined8 local_30;
-  undefined8 local_28;
-  undefined4 local_20;
-  undefined2 local_1c;
-  long local_10;
-  
-  local_10 = *(long *)(in_FS_OFFSET + 0x28);
-  local_38 = 0x4c75257240343a41;
-  local_30 = 0x30623e306b6d4146;
-  local_28 = 0x3532666630486637;
-  local_20 = 0x36665f60;
-  local_1c = 0x4e;
-  printf(&#34;What\&#39;s my favorite number? &#34;);
-  __isoc99_scanf(&amp;DAT_004b3020,&amp;local_44);
-  if (local_44 == 754635) {
-    local_40 = (char *)rotate_encrypt(0,&amp;local_38);
-    fputs(local_40,(FILE *)stdout);
-    putchar(10);
-    free(local_40);
-  }
-  else {
-    puts(&#34;Sorry, that\&#39;s not it!&#34;);
-  }
-  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
-                    /* WARNING: Subroutine does not return */
-    __stack_chk_fail();
-  }
-  return 0;
-}
-</code></pre><p>From the decompiled code, we can see after it was for favorite number, it performs some kind of comparison:</p>
-<pre tabindex="0"><code>if (local_44 == 754635) {
-	local_40 = (char *)rotate_encrypt(0,&amp;local_38);
-	fputs(local_40,(FILE *)stdout);
-	putchar(10);
-	free(local_40);
-}
-</code></pre><p>So, let&rsquo;s try run the program with the number <code>754635</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>undefined8 <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> in_FS_OFFSET;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> local_44;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>local_40;
+</span></span><span style="display:flex;"><span>  undefined8 local_38;
+</span></span><span style="display:flex;"><span>  undefined8 local_30;
+</span></span><span style="display:flex;"><span>  undefined8 local_28;
+</span></span><span style="display:flex;"><span>  undefined4 local_20;
+</span></span><span style="display:flex;"><span>  undefined2 local_1c;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> local_10;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  local_10 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>);
+</span></span><span style="display:flex;"><span>  local_38 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4c75257240343a41</span>;
+</span></span><span style="display:flex;"><span>  local_30 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x30623e306b6d4146</span>;
+</span></span><span style="display:flex;"><span>  local_28 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x3532666630486637</span>;
+</span></span><span style="display:flex;"><span>  local_20 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x36665f60</span>;
+</span></span><span style="display:flex;"><span>  local_1c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4e</span>;
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;What</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s my favorite number? &#34;</span>);
+</span></span><span style="display:flex;"><span>  __isoc99_scanf(<span style="color:#f92672">&amp;</span>DAT_004b3020,<span style="color:#f92672">&amp;</span>local_44);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (local_44 <span style="color:#f92672">==</span> <span style="color:#ae81ff">754635</span>) {
+</span></span><span style="display:flex;"><span>    local_40 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)rotate_encrypt(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
+</span></span><span style="display:flex;"><span>    fputs(local_40,(FILE <span style="color:#f92672">*</span>)stdout);
+</span></span><span style="display:flex;"><span>    putchar(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    free(local_40);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Sorry, that</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s not it!&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (local_10 <span style="color:#f92672">!=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>)) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">/* WARNING: Subroutine does not return */</span>
+</span></span><span style="display:flex;"><span>    __stack_chk_fail();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>From the decompiled code, we can see after it was for favorite number, it performs some kind of comparison:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (local_44 <span style="color:#f92672">==</span> <span style="color:#ae81ff">754635</span>) {
+</span></span><span style="display:flex;"><span>	local_40 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)rotate_encrypt(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
+</span></span><span style="display:flex;"><span>	fputs(local_40,(FILE <span style="color:#f92672">*</span>)stdout);
+</span></span><span style="display:flex;"><span>	putchar(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>	free(local_40);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So, let&rsquo;s try run the program with the number <code>754635</code>.</p>
 <p><img src="/img/picoctf2022-rev/unpackme.png" alt="IMG"></p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{up&gt;&lt;_m3_f7w_77ad107e}
@@ -595,120 +595,120 @@ Reverse engineer this binary.</p>
 <p>By running the binary file, we can see it ask for license key:
 <img src="/img/picoctf2022-rev/run-keygenme.png" alt="IMG"></p>
 <p>Below is the decompiled main function in Ghidra:</p>
-<pre tabindex="0"><code>undefined8 main(void)
-
-{
-  char result;
-  long in_FS_OFFSET;
-  char inpt [40];
-  long canary;
-  
-  canary = *(long *)(in_FS_OFFSET + 0x28);
-  printf(&#34;Enter your license key: &#34;);
-  fgets(inpt,0x25,stdin);
-  result = validate(inpt);
-  if (result == &#39;\0&#39;) {
-    puts(&#34;That key is invalid.&#34;);
-  }
-  else {
-    puts(&#34;That key is valid.&#34;);
-  }
-  if (canary != *(long *)(in_FS_OFFSET + 0x28)) {
-                    /* WARNING: Subroutine does not return */
-    __stack_chk_fail();
-  }
-  return 0;
-}
-</code></pre><p>From the source code above, it asks for the license key, and then pass into the <code>validate()</code> function to validate whether the key is valid or not.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>undefined8 <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> result;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> in_FS_OFFSET;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> inpt [<span style="color:#ae81ff">40</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> canary;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  canary <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>);
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Enter your license key: &#34;</span>);
+</span></span><span style="display:flex;"><span>  fgets(inpt,<span style="color:#ae81ff">0x25</span>,stdin);
+</span></span><span style="display:flex;"><span>  result <span style="color:#f92672">=</span> validate(inpt);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\0&#39;</span>) {
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;That key is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;That key is valid.&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (canary <span style="color:#f92672">!=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>)) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">/* WARNING: Subroutine does not return */</span>
+</span></span><span style="display:flex;"><span>    __stack_chk_fail();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>From the source code above, it asks for the license key, and then pass into the <code>validate()</code> function to validate whether the key is valid or not.</p>
 <p>Looking into <code>validate()</code> function in Ghidra, it looks like nightmare for me, hence I decided to view it with IDA:</p>
-<pre tabindex="0"><code>__int64 __fastcall sub_55F390A28209(const char *inpt)
-{
-  int v2; // [rsp+18h] [rbp-C8h]
-  int v3; // [rsp+18h] [rbp-C8h]
-  int i; // [rsp+1Ch] [rbp-C4h]
-  int j; // [rsp+20h] [rbp-C0h]
-  int k; // [rsp+24h] [rbp-BCh]
-  int m; // [rsp+28h] [rbp-B8h]
-  char v8[34]; // [rsp+2Eh] [rbp-B2h] BYREF
-  char half_flag[61]; // [rsp+50h] [rbp-90h] BYREF
-  char v10; // [rsp+8Dh] [rbp-53h]
-  char full_flag[72]; // [rsp+90h] [rbp-50h] BYREF
-  unsigned __int64 v12; // [rsp+D8h] [rbp-8h]
-
-  v12 = __readfsqword(0x28u);
-  strcpy(half_flag, &#34;picoCTF{br1ng_y0ur_0wn_k3y_&#34;);// half_flag_len = 27
-                                                // flag_len = 37
-                                                // 
-  strcpy(v8, &#34;}&#34;);
-  strlen(half_flag);                            // 27
-  MD5();
-  strlen(v8);                                   // 1
-  MD5();
-  v2 = 0;
-  for ( i = 0; i &lt;= 15; ++i )
-  {
-    sprintf(&amp;half_flag[v2 + 32], &#34;%02x&#34;, (unsigned __int8)v8[i + 2]);
-    v2 += 2;
-  }
-  v3 = 0;
-  for ( j = 0; j &lt;= 15; ++j )
-  {
-    sprintf(&amp;full_flag[v3], &#34;%02x&#34;, (unsigned __int8)v8[j + 18]);
-    v3 += 2;
-  }
-  for ( k = 0; k &lt;= 26; ++k )
-    full_flag[k + 32] = half_flag[k];
-  full_flag[59] = half_flag[45];
-  full_flag[60] = half_flag[50];
-  full_flag[61] = v10;
-  full_flag[62] = half_flag[33];
-  full_flag[63] = half_flag[46];
-  full_flag[64] = half_flag[56];
-  full_flag[65] = half_flag[58];
-  full_flag[66] = v10;
-  full_flag[67] = v8[0];
-  if ( strlen(inpt) != 36 )
-    return 0LL;
-  for ( m = 0; m &lt;= 35; ++m )
-  {
-    if ( inpt[m] != full_flag[m + 32] )
-      return 0LL;
-  }
-  return 1LL;
-}
-</code></pre><p>The code above is the cleaned version by me but i have to admit it still looks messy to be honest.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">sub_55F390A28209</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>inpt)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> v2; <span style="color:#75715e">// [rsp+18h] [rbp-C8h]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> v3; <span style="color:#75715e">// [rsp+18h] [rbp-C8h]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> i; <span style="color:#75715e">// [rsp+1Ch] [rbp-C4h]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> j; <span style="color:#75715e">// [rsp+20h] [rbp-C0h]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> k; <span style="color:#75715e">// [rsp+24h] [rbp-BCh]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> m; <span style="color:#75715e">// [rsp+28h] [rbp-B8h]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> v8[<span style="color:#ae81ff">34</span>]; <span style="color:#75715e">// [rsp+2Eh] [rbp-B2h] BYREF
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> half_flag[<span style="color:#ae81ff">61</span>]; <span style="color:#75715e">// [rsp+50h] [rbp-90h] BYREF
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> v10; <span style="color:#75715e">// [rsp+8Dh] [rbp-53h]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> full_flag[<span style="color:#ae81ff">72</span>]; <span style="color:#75715e">// [rsp+90h] [rbp-50h] BYREF
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int64</span> v12; <span style="color:#75715e">// [rsp+D8h] [rbp-8h]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  v12 <span style="color:#f92672">=</span> __readfsqword(<span style="color:#ae81ff">0x28u</span>);
+</span></span><span style="display:flex;"><span>  strcpy(half_flag, <span style="color:#e6db74">&#34;picoCTF{br1ng_y0ur_0wn_k3y_&#34;</span>);<span style="color:#75715e">// half_flag_len = 27
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                                <span style="color:#75715e">// flag_len = 37
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                                <span style="color:#75715e">// 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  strcpy(v8, <span style="color:#e6db74">&#34;}&#34;</span>);
+</span></span><span style="display:flex;"><span>  strlen(half_flag);                            <span style="color:#75715e">// 27
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  MD5();
+</span></span><span style="display:flex;"><span>  strlen(v8);                                   <span style="color:#75715e">// 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  MD5();
+</span></span><span style="display:flex;"><span>  v2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> ( i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">15</span>; <span style="color:#f92672">++</span>i )
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    sprintf(<span style="color:#f92672">&amp;</span>half_flag[v2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>], <span style="color:#e6db74">&#34;%02x&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span>)v8[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>    v2 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  v3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> ( j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">15</span>; <span style="color:#f92672">++</span>j )
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    sprintf(<span style="color:#f92672">&amp;</span>full_flag[v3], <span style="color:#e6db74">&#34;%02x&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span>)v8[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">18</span>]);
+</span></span><span style="display:flex;"><span>    v3 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> ( k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">26</span>; <span style="color:#f92672">++</span>k )
+</span></span><span style="display:flex;"><span>    full_flag[k <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>] <span style="color:#f92672">=</span> half_flag[k];
+</span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">59</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">45</span>];
+</span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">60</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">50</span>];
+</span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">61</span>] <span style="color:#f92672">=</span> v10;
+</span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">62</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">33</span>];
+</span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">63</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">46</span>];
+</span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">64</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">56</span>];
+</span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">65</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">58</span>];
+</span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">66</span>] <span style="color:#f92672">=</span> v10;
+</span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">67</span>] <span style="color:#f92672">=</span> v8[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ( strlen(inpt) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">36</span> )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0LL</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> ( m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">35</span>; <span style="color:#f92672">++</span>m )
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ( inpt[m] <span style="color:#f92672">!=</span> full_flag[m <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>] )
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0LL</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1LL</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The code above is the cleaned version by me but i have to admit it still looks messy to be honest.</p>
 <p>From the code above, we can see half of the flag:</p>
 <pre tabindex="0"><code>picoCTF{br1ng_y0ur_0wn_k3y_
 </code></pre><p>Besides that, the only information i observed is the length of of the full flag, which is 37. Next, we can see the code contains <code>MD5()</code> function. I&rsquo;m guessing that the result of that function is used in further iterations.</p>
 <p>Furthermore, we can guess that the full flag will exists by concating the <code>half_flag</code> array in this piece of code:</p>
-<pre tabindex="0"><code>for ( k = 0; k &lt;= 26; ++k )
-	full_flag[k + 32] = half_flag[k];
-full_flag[59] = half_flag[45];
-full_flag[60] = half_flag[50];
-full_flag[61] = v10;
-full_flag[62] = half_flag[33];
-full_flag[63] = half_flag[46];
-full_flag[64] = half_flag[56];
-full_flag[65] = half_flag[58];
-full_flag[66] = v10;
-full_flag[67] = v8[0];
-</code></pre><p>Because it will perform checking with our input later by comparing with the full flag:</p>
-<pre tabindex="0"><code>for ( m = 0; m &lt;= 35; ++m )
-{
-	if ( inpt[m] != full_flag[m + 32] )
-  		return 0LL;
-}
-</code></pre><p>At this point, i decides to debug it using debugger, i specifically paying extra attention when approaching these code while debugging:</p>
-<pre tabindex="0"><code>full_flag[59] = half_flag[45];
-full_flag[60] = half_flag[50];
-full_flag[61] = v10;
-full_flag[62] = half_flag[33];
-full_flag[63] = half_flag[46];
-full_flag[64] = half_flag[56];
-full_flag[65] = half_flag[58];
-full_flag[66] = v10;
-full_flag[67] = v8[0];
-</code></pre><p>Eventually, i got the 8 last bytes of full flag byte by byte, which are the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> ( k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">26</span>; <span style="color:#f92672">++</span>k )
+</span></span><span style="display:flex;"><span>	full_flag[k <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>] <span style="color:#f92672">=</span> half_flag[k];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">59</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">45</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">60</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">50</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">61</span>] <span style="color:#f92672">=</span> v10;
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">62</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">33</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">63</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">46</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">64</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">56</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">65</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">58</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">66</span>] <span style="color:#f92672">=</span> v10;
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">67</span>] <span style="color:#f92672">=</span> v8[<span style="color:#ae81ff">0</span>];
+</span></span></code></pre></div><p>Because it will perform checking with our input later by comparing with the full flag:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> ( m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">35</span>; <span style="color:#f92672">++</span>m )
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ( inpt[m] <span style="color:#f92672">!=</span> full_flag[m <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>] )
+</span></span><span style="display:flex;"><span>  		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0LL</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>At this point, i decides to debug it using debugger, i specifically paying extra attention when approaching these code while debugging:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">59</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">45</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">60</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">50</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">61</span>] <span style="color:#f92672">=</span> v10;
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">62</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">33</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">63</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">46</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">64</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">56</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">65</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">58</span>];
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">66</span>] <span style="color:#f92672">=</span> v10;
+</span></span><span style="display:flex;"><span>full_flag[<span style="color:#ae81ff">67</span>] <span style="color:#f92672">=</span> v8[<span style="color:#ae81ff">0</span>];
+</span></span></code></pre></div><p>Eventually, i got the 8 last bytes of full flag byte by byte, which are the following:</p>
 <pre tabindex="0"><code>0x7d
 0x39
 0x38

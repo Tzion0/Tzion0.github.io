@@ -106,26 +106,26 @@ Right click class tab -&gt; Class Mode -&gt; Table We can see the Source file." 
 <p>After knowing the original class name, we can rename it.</p>
 <pre tabindex="0"><code>On left side, right click class name -&gt; Rename to Decryptor
 </code></pre><p>After that, we can take a look on <code>Decryptor</code> class. Apparently it is taking the class name <code>Decryptor</code> to convert to array then taking its first 5 characters, <code>throw9[0], throw9[1], throw9[2], throw9[3], throw9[4]</code> to XOR with specific bytes, <code>3, 0xC, 0x20, 5, 0x43</code> and compare with our password.</p>
-<pre tabindex="0"><code>String throw8 = throw6[0].getClassName();
-char[] throw9 = throw8.toCharArray();
-
-if ((char)(throw9[0] ^ 3) != throw10[0] &amp;&amp; (char)(throw9[1] ^ 0xC) != throw10[1] &amp;&amp; (char)(throw9[2] ^ 0x20) != throw10[2] &amp;&amp; (char)(throw9[3] ^ 5) != throw10[3] &amp;&amp; (char)(throw9[4] ^ 0x43) != throw10[4]) {
-	System.out.println(&#34;Your password input is invalid!&#34;);
-    return &#34;INVALID PASSWORD!&#34;;
-}
-</code></pre><p>We can create a script to find then password:</p>
-<pre tabindex="0"><code>#!/usr/bin/env python3
-
-class_name = &#34;Decryptor&#34;
-byte = [3, 0xC, 0x20, 5, 0x43]
-xored = []
-
-for i in range(5):
-	xored.append(chr(ord(class_name[i]) ^ byte[i]))
-	print(f&#34;{class_name[i]} -&gt; {xored[i]}&#34;)
-
-print(&#34;Password : &#34; + &#34;&#34;.join(xored))
-</code></pre><p><img src="/img/k3rn3lctf2022-integrity_checker/img3.png" alt="IMG3"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String throw8 <span style="color:#f92672">=</span> throw6<span style="color:#f92672">[</span>0<span style="color:#f92672">].</span><span style="color:#a6e22e">getClassName</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> throw9 <span style="color:#f92672">=</span> throw8<span style="color:#f92672">.</span><span style="color:#a6e22e">toCharArray</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">((</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 3<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 0xC<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 0x20<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 5<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>4<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 0x43<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>4<span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Your password input is invalid!&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;INVALID PASSWORD!&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>We can create a script to find then password:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>class_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Decryptor&#34;</span>
+</span></span><span style="display:flex;"><span>byte <span style="color:#f92672">=</span> [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0xC</span>, <span style="color:#ae81ff">0x20</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0x43</span>]
+</span></span><span style="display:flex;"><span>xored <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>	xored<span style="color:#f92672">.</span>append(chr(ord(class_name[i]) <span style="color:#f92672">^</span> byte[i]))
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>class_name[i]<span style="color:#e6db74">}</span><span style="color:#e6db74"> -&gt; </span><span style="color:#e6db74">{</span>xored[i]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Password : &#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(xored))
+</span></span></code></pre></div><p><img src="/img/k3rn3lctf2022-integrity_checker/img3.png" alt="IMG3"></p>
 <p>Now we have found the password, go back to Recaf then click File -&gt; Export program and save it as .jar file.
 Execute it with the password as argument to retrieve the flag:</p>
 <pre tabindex="0"><code>$ java -Xverify:none -jar IntegrityCheck_out.jar GiCW:                                                        1 ⨯

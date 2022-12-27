@@ -97,47 +97,47 @@ encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43
 <p><a href="https://github.com/Tzion0/CTF/tree/master/ShellCTF/2022/OX9OR2">https://github.com/Tzion0/CTF/tree/master/ShellCTF/2022/OX9OR2</a></p>
 <p>This challenge provided two files called <code>encryption.py</code> and <code>encrypted</code>. <code>encrypted</code> file contains ciphertext produced by <code>encryption.py</code></p>
 <h4 id="encryptionpy">encryption.py</h4>
-<pre tabindex="0"><code>def xor(msg, key):
-    o = &#39;&#39;
-    for i in range(len(msg)):
-        o += chr(ord(msg[i]) ^ ord(key[i % len(key)]))
-    return o
- 
-with open(&#39;message&#39;, &#39;r&#39;) as f:
-    msg = &#39;&#39;.join(f.readlines()).rstrip(&#39;\n&#39;)
- 
-with open(&#39;key&#39;, &#39;r&#39;) as k:
-    key = &#39;&#39;.join(k.readlines()).rstrip(&#39;\n&#39;)
-    
-assert key.isalnum() and (len(key) == 9)
-assert &#39;SHELL&#39; in msg
- 
-with open(&#39;encrypted&#39;, &#39;w&#39;) as fo:
-    fo.write(xor(msg, key))
-</code></pre><p>Looking at encryption.py, we can conclude that the script is basically doing XOR on message with a key where the key is alphanumeric (isalnum) with the length of 9 and contains &ldquo;SHELL&rdquo; string in it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">xor</span>(msg, key):
+</span></span><span style="display:flex;"><span>    o <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(msg)):
+</span></span><span style="display:flex;"><span>        o <span style="color:#f92672">+=</span> chr(ord(msg[i]) <span style="color:#f92672">^</span> ord(key[i <span style="color:#f92672">%</span> len(key)]))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> o
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;message&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(f<span style="color:#f92672">.</span>readlines())<span style="color:#f92672">.</span>rstrip(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;key&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> k:
+</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(k<span style="color:#f92672">.</span>readlines())<span style="color:#f92672">.</span>rstrip(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> key<span style="color:#f92672">.</span>isalnum() <span style="color:#f92672">and</span> (len(key) <span style="color:#f92672">==</span> <span style="color:#ae81ff">9</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> <span style="color:#e6db74">&#39;SHELL&#39;</span> <span style="color:#f92672">in</span> msg
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;encrypted&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> fo:
+</span></span><span style="display:flex;"><span>    fo<span style="color:#f92672">.</span>write(xor(msg, key))
+</span></span></code></pre></div><p>Looking at encryption.py, we can conclude that the script is basically doing XOR on message with a key where the key is alphanumeric (isalnum) with the length of 9 and contains &ldquo;SHELL&rdquo; string in it.</p>
 <p>We can assume that the &ldquo;SHELL{&rdquo; string is at beginning of the plaintext message since it is the flag format.</p>
 <p>By using the XOR recipe in CyberChef with the key &ldquo;SHELL{&rdquo;, we get the first 6 plaintext key: <code>XORISC</code></p>
 <p><img src="/img/shellctf2022-ox9or2/img.png" alt="IMG"></p>
 <p>At this point we are left with remaining 3 characters to get the full key, we can achieve this by bruteforcing it. I created a python script to do this:</p>
-<pre tabindex="0"><code>#!/usr/bin/env python3
-from itertools import product 
-import string
-import re
-
-with open(&#39;encrypted&#39;, &#39;rb&#39;) as f:
-    ct = list(f.read())
-
-pt = list(&#34;SHELL{&#34;)
-perm = list(product(list(string.ascii_lowercase + string.ascii_uppercase + string.digits), repeat=3))
-
-for p in perm:
-	flag = &#34;&#34;
-	key = list(&#34;XORISC&#34;) + list(p)
-	for c in range(len(ct)):
-		flag += chr(ct[c] ^ ord(key[c % len(key)]))
-	if re.match(r&#34;^SHELL{X[A-Za-z0-9]R_1S_R3[A-Za-z0-9]{3}51BL3}&#34;, flag):
-		print(&#34;Flag: &#34; + flag, &#34;Key: &#34; + &#34;&#34;.join(key))
-</code></pre><p>The regex match is basically obtained through trial and error where some of the trials produced some promising plaintext message.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> product 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> string
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;encrypted&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    ct <span style="color:#f92672">=</span> list(f<span style="color:#f92672">.</span>read())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pt <span style="color:#f92672">=</span> list(<span style="color:#e6db74">&#34;SHELL{&#34;</span>)
+</span></span><span style="display:flex;"><span>perm <span style="color:#f92672">=</span> list(product(list(string<span style="color:#f92672">.</span>ascii_lowercase <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>ascii_uppercase <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>digits), repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> perm:
+</span></span><span style="display:flex;"><span>	flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>	key <span style="color:#f92672">=</span> list(<span style="color:#e6db74">&#34;XORISC&#34;</span>) <span style="color:#f92672">+</span> list(p)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> range(len(ct)):
+</span></span><span style="display:flex;"><span>		flag <span style="color:#f92672">+=</span> chr(ct[c] <span style="color:#f92672">^</span> ord(key[c <span style="color:#f92672">%</span> len(key)]))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^SHELL{X[A-Za-z0-9]R_1S_R3[A-Za-z0-9]</span><span style="color:#e6db74">{3}</span><span style="color:#e6db74">51BL3}&#34;</span>, flag):
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;Flag: &#34;</span> <span style="color:#f92672">+</span> flag, <span style="color:#e6db74">&#34;Key: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(key))
+</span></span></code></pre></div><p>The regex match is basically obtained through trial and error where some of the trials produced some promising plaintext message.</p>
 <p>Execute the script will get output below:
 <img src="/img/shellctf2022-ox9or2/img2.png" alt="IMG"></p>
 <p>Just like that, we got the flag!</p>

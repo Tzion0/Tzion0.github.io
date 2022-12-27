@@ -99,103 +99,103 @@ for (; inpt[i] != &#39;\0&#39;; i = i &#43; 1) { if ((inpt[i] &lt; &#39;A&#39;) 
 <p><a href="https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank">https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank</a></p>
 <p>By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.</p>
 <p>The encoding algorithm:</p>
-<pre tabindex="0"><code>  for (; inpt[i] != &#39;\0&#39;; i = i + 1) {
-    if ((inpt[i] &lt; &#39;A&#39;) || (&#39;M&#39; &lt; inpt[i])) {
-      if ((inpt[i] &lt; &#39;a&#39;) || (&#39;m&#39; &lt; inpt[i])) {
-        if ((inpt[i] &lt; &#39;N&#39;) || (&#39;Z&#39; &lt; inpt[i])) {
-          if ((inpt[i] &lt; &#39;n&#39;) || (&#39;z&#39; &lt; inpt[i])) {
-            temp[i] = inpt[i] + -0x20;
-          }
-          else {
-            temp[i] = inpt[i] + -0xd;
-          }
-        }
-        else {
-          temp[i] = inpt[i] + -0xd;
-        }
-      }
-      else {
-        temp[i] = inpt[i] + &#39;\r&#39;;
-      }
-    }
-    else {
-      temp[i] = inpt[i] + &#39;\r&#39;;
-    }
-  }
-  for (; temp[x] != &#39;\0&#39;; x = x + 1) {
-    temp[x] = temp[x] + &#39;\x02&#39;;
-  }
-</code></pre><p>Great, now we know the algorithm, let&rsquo;s see what is the encoded flag:</p>
-<pre tabindex="0"><code>local_38 = 0x4164485d5549525a;
-local_30 = 0x41494447414a644e;
-local_28 = 0x4173444476414978;
-local_20 = 0x71444479;
-local_1c = 0x5f;
-</code></pre><p>After unpacking it, we will get:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (; inpt[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>; i <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((inpt[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;A&#39;</span>) <span style="color:#f92672">||</span> (<span style="color:#e6db74">&#39;M&#39;</span> <span style="color:#f92672">&lt;</span> inpt[i])) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> ((inpt[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">||</span> (<span style="color:#e6db74">&#39;m&#39;</span> <span style="color:#f92672">&lt;</span> inpt[i])) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ((inpt[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;N&#39;</span>) <span style="color:#f92672">||</span> (<span style="color:#e6db74">&#39;Z&#39;</span> <span style="color:#f92672">&lt;</span> inpt[i])) {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ((inpt[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;n&#39;</span>) <span style="color:#f92672">||</span> (<span style="color:#e6db74">&#39;z&#39;</span> <span style="color:#f92672">&lt;</span> inpt[i])) {
+</span></span><span style="display:flex;"><span>            temp[i] <span style="color:#f92672">=</span> inpt[i] <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x20</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            temp[i] <span style="color:#f92672">=</span> inpt[i] <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0xd</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>          temp[i] <span style="color:#f92672">=</span> inpt[i] <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0xd</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        temp[i] <span style="color:#f92672">=</span> inpt[i] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;\r&#39;</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      temp[i] <span style="color:#f92672">=</span> inpt[i] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;\r&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (; temp[x] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>; x <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    temp[x] <span style="color:#f92672">=</span> temp[x] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;\x02&#39;</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>Great, now we know the algorithm, let&rsquo;s see what is the encoded flag:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>local_38 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4164485d5549525a</span>;
+</span></span><span style="display:flex;"><span>local_30 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x41494447414a644e</span>;
+</span></span><span style="display:flex;"><span>local_28 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4173444476414978</span>;
+</span></span><span style="display:flex;"><span>local_20 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x71444479</span>;
+</span></span><span style="display:flex;"><span>local_1c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x5f</span>;
+</span></span></code></pre></div><p>After unpacking it, we will get:</p>
 <pre tabindex="0"><code>ZRIU]HdANdJAGDIAxIAvDDsAyDDq_
 </code></pre><h4 id="note-i-did-some-adjustment-manually-because-the-initial-unpacked-value-looks-weird">Note: I did some adjustment manually because the initial unpacked value looks weird</h4>
 <p>My approach to solve this is to generate a list of printable string, let them goes through the encoding algorithm, loop each character to compare with encoded flag, if it matched, get its index, print the original not encoded value. Please do take note that my code probably wasn&rsquo;t the best in term of simplicity but at least it works. Let&rsquo;s get it started.</p>
 <p>First. initialize the required variables, the <code>enc</code> variable is the <code>temp</code> variable for above encoding algorithm:</p>
-<pre tabindex="0"><code>#!/usr/bin/env python3
-from pwn import *
-import string
-ct = list(&#39;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&#39;)
-printable = list(string.printable)
-enc = [&#39;A&#39; for i in range(len(printable))]
-</code></pre><p>Next, we can just mimic the encoding algorithm we saw in Ghidra:</p>
-<pre tabindex="0"><code>for i in range(len(printable)):
-	if printable[i] &lt; &#39;A&#39; or printable[i] &gt; &#39;M&#39;:
-		if printable[i] &lt; &#39;a&#39; or printable[i] &gt; &#39;m&#39;:
-			if printable[i] &lt; &#39;N&#39; or printable[i] &gt; &#39;Z&#39;:
-				if printable[i] &lt; &#39;n&#39; or printable[i] &gt; &#39;z&#39;:
-					enc[i] = ord(printable[i]) - 0x20
-				else:
-					enc[i] = ord(printable[i]) - 0xd
-			else:
-				enc[i] = ord(printable[i]) - 0xd
-		else:
-			enc[i] = ord(printable[i]) + 13
-	else:
-		enc[i] = ord(printable[i]) + 13
-
-for i in range(len(enc)):
-	enc[i] = chr(abs(enc[i] + 0x2))
-</code></pre><p>Lastly, loop through each <code>enc</code> value to compare with encoded flag:</p>
-<pre tabindex="0"><code>for i in range(len(ct)):
-	for x in range(len(enc)):
-		if ct[i] == enc[x]:
-			print(printable[x], end=&#34;&#34;)
-</code></pre><h3 id="final-code">Final Code</h3>
-<pre tabindex="0"><code>#!/usr/bin/env python3
-from pwn import *
-import string
-ct = list(&#39;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&#39;)
-printable = list(string.printable)
-enc = [&#39;A&#39; for i in range(len(printable))]
-
-for i in range(len(printable)):
-	if printable[i] &lt; &#39;A&#39; or printable[i] &gt; &#39;M&#39;:
-		if printable[i] &lt; &#39;a&#39; or printable[i] &gt; &#39;m&#39;:
-			if printable[i] &lt; &#39;N&#39; or printable[i] &gt; &#39;Z&#39;:
-				if printable[i] &lt; &#39;n&#39; or printable[i] &gt; &#39;z&#39;:
-					enc[i] = ord(printable[i]) - 0x20
-				else:
-					enc[i] = ord(printable[i]) - 0xd
-			else:
-				enc[i] = ord(printable[i]) - 0xd
-		else:
-			enc[i] = ord(printable[i]) + 13
-	else:
-		enc[i] = ord(printable[i]) + 13
-
-for i in range(len(enc)):
-	enc[i] = chr(abs(enc[i] + 0x2))
-
-for i in range(len(ct)):
-	for x in range(len(enc)):
-		if ct[i] == enc[x]:
-			print(printable[x], end=&#34;&#34;)
-</code></pre><h3 id="flag">Flag</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> string
+</span></span><span style="display:flex;"><span>ct <span style="color:#f92672">=</span> list(<span style="color:#e6db74">&#39;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&#39;</span>)
+</span></span><span style="display:flex;"><span>printable <span style="color:#f92672">=</span> list(string<span style="color:#f92672">.</span>printable)
+</span></span><span style="display:flex;"><span>enc <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(printable))]
+</span></span></code></pre></div><p>Next, we can just mimic the encoding algorithm we saw in Ghidra:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(printable)):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> printable[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">or</span> printable[i] <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;M&#39;</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> printable[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">or</span> printable[i] <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;m&#39;</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> printable[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;N&#39;</span> <span style="color:#f92672">or</span> printable[i] <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;Z&#39;</span>:
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> printable[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;n&#39;</span> <span style="color:#f92672">or</span> printable[i] <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;z&#39;</span>:
+</span></span><span style="display:flex;"><span>					enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x20</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>					enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0xd</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>				enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0xd</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>			enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(enc)):
+</span></span><span style="display:flex;"><span>	enc[i] <span style="color:#f92672">=</span> chr(abs(enc[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x2</span>))
+</span></span></code></pre></div><p>Lastly, loop through each <code>enc</code> value to compare with encoded flag:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(ct)):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(len(enc)):
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> ct[i] <span style="color:#f92672">==</span> enc[x]:
+</span></span><span style="display:flex;"><span>			print(printable[x], end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span></code></pre></div><h3 id="final-code">Final Code</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> string
+</span></span><span style="display:flex;"><span>ct <span style="color:#f92672">=</span> list(<span style="color:#e6db74">&#39;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&#39;</span>)
+</span></span><span style="display:flex;"><span>printable <span style="color:#f92672">=</span> list(string<span style="color:#f92672">.</span>printable)
+</span></span><span style="display:flex;"><span>enc <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(printable))]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(printable)):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> printable[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">or</span> printable[i] <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;M&#39;</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> printable[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">or</span> printable[i] <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;m&#39;</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> printable[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;N&#39;</span> <span style="color:#f92672">or</span> printable[i] <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;Z&#39;</span>:
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> printable[i] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;n&#39;</span> <span style="color:#f92672">or</span> printable[i] <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;z&#39;</span>:
+</span></span><span style="display:flex;"><span>					enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x20</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>					enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0xd</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>				enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0xd</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>			enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		enc[i] <span style="color:#f92672">=</span> ord(printable[i]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(enc)):
+</span></span><span style="display:flex;"><span>	enc[i] <span style="color:#f92672">=</span> chr(abs(enc[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(ct)):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(len(enc)):
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> ct[i] <span style="color:#f92672">==</span> enc[x]:
+</span></span><span style="display:flex;"><span>			print(printable[x], end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span></code></pre></div><h3 id="flag">Flag</h3>
 <pre tabindex="0"><code>KCTF{So_YoU_ROT_iT_gOOd_jOOb}
 </code></pre>
     </div>

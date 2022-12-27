@@ -100,408 +100,408 @@ arr = vars(__builtins__) BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKX
 </code></pre><p>This challenge provided a Python file called <code>stable.py</code>.</p>
 <p>Please note that I did not solve this challenge during the competition, only solved it after the competition with the help of hints. Huge thanks to <strong>Catz</strong> for the hints.</p>
 <p>Looking into the Python file, we can see it was obfuscated</p>
-<pre tabindex="0"><code>arr = vars(__builtins__)
-BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3 = arr[&#34;\x5f_\u0069\155p\u006fr\u0074\137_&#34;]
-LZOGJVLBQSWZO7XGEM4T5LXNT4DVYVTI3ITSTEDHBZNDE4ZCLYINMBPIP62 = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&#34;\151\u006esp\x65\U00000063t&#34;)
-M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ = arr[&#34;v\x61\U00000072\x73&#34;]
-LQJ5TKYMCG4BOHSKBGROAB6LQAJIHIWDW2HHGCYR6CKT5YERSO6GNHYO2Z = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(LZOGJVLBQSWZO7XGEM4T5LXNT4DVYVTI3ITSTEDHBZNDE4ZCLYINMBPIP62)[&#34;\147\x65\164\x73\U0000006fu\U00000072\u0063e&#34;]
-HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&#34;\U00000073\u0079s&#34;)
-XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED = arr[&#34;\x70\162\u0069nt&#34;]
-ODZYEJDEIBAQOTUP265UQSON5XNQ6K6VU2JLJCE576B5BMAVMJ2GNSN3EH = LQJ5TKYMCG4BOHSKBGROAB6LQAJIHIWDW2HHGCYR6CKT5YERSO6GNHYO2Z(M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[&#34;\x6d\U0000006f\144\x75\u006c\U00000065\163&#34;][&#34;_\U0000005f\u006d\141i\u006e\U0000005f_&#34;])
-YQZ5ROM4W3C3E7OPYI6BN4XSGG6CAR76JZYGEV73NP6DEUT5MTQ3IVZGVP = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[&#34;\x61\U00000072g\x76&#34;]
-ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[&#34;\u0065\x78i\U00000074&#34;]
-ZWDPZJHUEX4LZK6TNL3X7ABBACBY2XZR4HQR6CDVOFLOOHRWAXZGNYD3OF = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&#34;\x72\u0065&#34;)
-QI5FPMPNP3FNLBUTFG23VRTIRD3QURRB26DVM5X4GYYEDVFCBJRF3T3AEB = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(ZWDPZJHUEX4LZK6TNL3X7ABBACBY2XZR4HQR6CDVOFLOOHRWAXZGNYD3OF)[&#34;\x66\u0069\156\x64a\U0000006c\x6c&#34;]
-EBNIQQWVCVPSF2UM5T56XXII7MP4MEGGNICNWZ2WU6HXDQSCRRXJGHMPP6 = QI5FPMPNP3FNLBUTFG23VRTIRD3QURRB26DVM5X4GYYEDVFCBJRF3T3AEB(&#39;_?([^\n?\\[\\]\&#39;]+?)\\s=&#39;, ODZYEJDEIBAQOTUP265UQSON5XNQ6K6VU2JLJCE576B5BMAVMJ2GNSN3EH)
-QRN64DOU74HGX6YQ7Y5QHLWT2E64375UTTAI3GDVQPJSPR2GZTQLJU6DYX = arr[&#34;s\164\u0072&#34;]
-K3SJIHD3YW5CHGVNKHB4BJ53ZJ6XIM3X2CZQECDLQNIOQNKLEZ5DS6MORP = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(QRN64DOU74HGX6YQ7Y5QHLWT2E64375UTTAI3GDVQPJSPR2GZTQLJU6DYX)[&#34;j\157\x69n&#34;]
-A7RQQ7PC4WLBAFY3PDAOUOCME5DZMEAR5ZEFBNN2PQKYIAWOPIAA5QSL2J = K3SJIHD3YW5CHGVNKHB4BJ53ZJ6XIM3X2CZQECDLQNIOQNKLEZ5DS6MORP(&#34;&#34;, EBNIQQWVCVPSF2UM5T56XXII7MP4MEGGNICNWZ2WU6HXDQSCRRXJGHMPP6)
-A5CXS7GCTRQQV2G7SFIVU3TI5KZKLUK7TC2GQ7UKMWKPKI6GWR65RFHJK4 = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(QRN64DOU74HGX6YQ7Y5QHLWT2E64375UTTAI3GDVQPJSPR2GZTQLJU6DYX)[&#34;\154\x6au\u0073\164&#34;]
-GKIJDAGEEVN2IPUHBLY5OL2L2IY4RG64OTGMSMJDZQJMOPMW6L4QCDV7L2 = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&#34;\x6d\141\U00000074\x68&#34;)
-M74NWW5W4BA35KFV6ROMY3XV4YASUZ733DEDSLTDLJTZUSQBDY7HYAFTVU = arr[&#34;\U0000006cen&#34;]
-P2VMOBU2U7GTIITCNEWRKSATW3CVBQJ5BZKSFEDWDWTJAAFI34KLK7U32U = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(GKIJDAGEEVN2IPUHBLY5OL2L2IY4RG64OTGMSMJDZQJMOPMW6L4QCDV7L2)[&#34;\x63e\U00000069\x6c&#34;]
-XMW3PCO7YGXIOA6KQXBHSRGPEUHRU5ARLDRDDF7VF74JSTDUM2QKD4NXNQ = 1 &lt;&lt; 3
-Y6LZNPP33FDJYSFFG72QMET4WKJNNRIGQ2XSSO5676YXW572FRANDC3BGU = A5CXS7GCTRQQV2G7SFIVU3TI5KZKLUK7TC2GQ7UKMWKPKI6GWR65RFHJK4(A7RQQ7PC4WLBAFY3PDAOUOCME5DZMEAR5ZEFBNN2PQKYIAWOPIAA5QSL2J, P2VMOBU2U7GTIITCNEWRKSATW3CVBQJ5BZKSFEDWDWTJAAFI34KLK7U32U(M74NWW5W4BA35KFV6ROMY3XV4YASUZ733DEDSLTDLJTZUSQBDY7HYAFTVU(A7RQQ7PC4WLBAFY3PDAOUOCME5DZMEAR5ZEFBNN2PQKYIAWOPIAA5QSL2J) / XMW3PCO7YGXIOA6KQXBHSRGPEUHRU5ARLDRDDF7VF74JSTDUM2QKD4NXNQ) * XMW3PCO7YGXIOA6KQXBHSRGPEUHRU5ARLDRDDF7VF74JSTDUM2QKD4NXNQ, chr(0x3d))
-ZCDX6JR53HGJHYQI6NKQASBSHTVTKYJ4GXG4RENEQS6IEFK3UYSRSSCTPL4 = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&#34;\U00000062a\x73e\U000000364&#34;)
-ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7 = arr[&#34;\x6f\162\u0064&#34;]
-VRRYA7Q3RVJP4GGXKJJ2RWL3F5B3RFFI4TY3YL2A7CBOLG5CVD5EAMVWRM = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(ZCDX6JR53HGJHYQI6NKQASBSHTVTKYJ4GXG4RENEQS6IEFK3UYSRSSCTPL4)[&#34;\U0000006232\U00000064e\143\U0000006fd\145&#34;]
-CZ5EDUTIPYA32OYMZI2FHSPUAKIRV2FCDHLDCSLDJ42PUV4EU5QKO57R2A = VRRYA7Q3RVJP4GGXKJJ2RWL3F5B3RFFI4TY3YL2A7CBOLG5CVD5EAMVWRM(Y6LZNPP33FDJYSFFG72QMET4WKJNNRIGQ2XSSO5676YXW572FRANDC3BGU)
-FHHTAJYJTNJTF2U7UODGZLRNRHTCD4KSFHJLWQZEATMLW4VJE2QW6OA2475 = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&#34;\u006c\172m\141&#34;)
-XGDOCXHDIYD4YMH7UZKGOYGEDDGO2FPO3QRELCML5KZTMAXMTG47T2K2I = arr[&#34;li\u0073\x74&#34;]
-ZH7DTVYSP5K53Q6BWIYSLETCPK75NDZX4QKJUONCOYBOJZCETPKRSUAVKW = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(FHHTAJYJTNJTF2U7UODGZLRNRHTCD4KSFHJLWQZEATMLW4VJE2QW6OA2475)[&#34;d\U00000065\x63\U0000006fm\u0070\162e\163\x73&#34;]
-D3U5DC4TIQARJSIOR6CJG7X3S2EYLBGDVSSJ7HNPYMLPS7IHQILQH7NNY6 = ZH7DTVYSP5K53Q6BWIYSLETCPK75NDZX4QKJUONCOYBOJZCETPKRSUAVKW(CZ5EDUTIPYA32OYMZI2FHSPUAKIRV2FCDHLDCSLDJ42PUV4EU5QKO57R2A)
-OHZE337P5F643ACVSLUSMMTSS6TRJG6QFKFNTA7OWIIIQ4CE3PPN4FJHYL = M74NWW5W4BA35KFV6ROMY3XV4YASUZ733DEDSLTDLJTZUSQBDY7HYAFTVU(YQZ5ROM4W3C3E7OPYI6BN4XSGG6CAR76JZYGEV73NP6DEUT5MTQ3IVZGVP)
-ENWGRMLCF5R2KMTPBXDXXFWYU2TR3MAQJIA7NZVGNW3P6GNIMGTFISZKVF = arr[&#34;b\171\U00000074\x65s&#34;]
-if OHZE337P5F643ACVSLUSMMTSS6TRJG6QFKFNTA7OWIIIQ4CE3PPN4FJHYL &lt; 2:
-    XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED(&#34;N\x6ft\40\U00000065nou\147\u0068 \x61\u0072\147\u0075me\x6e\164\u0073&#34;)
-    ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX(1)
-ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS = YQZ5ROM4W3C3E7OPYI6BN4XSGG6CAR76JZYGEV73NP6DEUT5MTQ3IVZGVP[1]
-QCMBEDAI2CWIXIDOH5A5IS5QD6NB5XL2IX4FNFMUN52YJXXC4PCA23CQ7W = 7
-SLKSRY3IAGFOYU3XNCWKHT66TZSP2GY6I5NMWYNCZ7WCVXHLDMIOEWJUQ6 = arr[&#34;\U00000065\166\U00000061l&#34;]
-E2UV76DGSKK7RSUPTTDQ2DUEKAYJ6Q7TGGCCM2MPN2OTGZDAFBSOZJEWZ22 = M74NWW5W4BA35KFV6ROMY3XV4YASUZ733DEDSLTDLJTZUSQBDY7HYAFTVU(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS)
-if E2UV76DGSKK7RSUPTTDQ2DUEKAYJ6Q7TGGCCM2MPN2OTGZDAFBSOZJEWZ22 &lt; QCMBEDAI2CWIXIDOH5A5IS5QD6NB5XL2IX4FNFMUN52YJXXC4PCA23CQ7W:
-    XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED(&#34;\U00000061r\U00000067\x20\151\x73\40t\U0000006f\157\x20\U00000073\x68\u006fr\164&#34;)
-    ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX(1)
-SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3 = XGDOCXHDIYD4YMH7UZKGOYGEDDGO2FPO3QRELCML5KZTMAXMTG47T2K2I(D3U5DC4TIQARJSIOR6CJG7X3S2EYLBGDVSSJ7HNPYMLPS7IHQILQH7NNY6)
-SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[235] = ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[0])
-SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[515] = ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[1])
-SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[507] = ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[2])
-SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[519] = ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[3])
-SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[1552] = ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[4])
-SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[1586] = ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[5])
-SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[1617] = ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[6])
-CFUHRDBDBYKZRQTLHSOLMASJAW5DE2A74SVFKIWRTFJCEIDO2OMZFB5QZ = ENWGRMLCF5R2KMTPBXDXXFWYU2TR3MAQJIA7NZVGNW3P6GNIMGTFISZKVF(SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3)
-R57WEYHUFJ2L72N5HFD5NOKYEO2LGEMLPK5TAVNZLFTQYJMMVAWVMXYD6L = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&#34;m\x61\162\U00000073h\U00000061\154&#34;)
-CNXXJNEWE4AYG2FRYIIESI35RR3IF4IXNTA4IJJ5N3QRIAAAAPN7GSZQFY = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(R57WEYHUFJ2L72N5HFD5NOKYEO2LGEMLPK5TAVNZLFTQYJMMVAWVMXYD6L)[&#34;\x6co\u0061\U00000064\x73&#34;]
-O4SAAANABOIBGAAAV4ELSDVRYRT7WAQAAAAAABCZLI = CNXXJNEWE4AYG2FRYIIESI35RR3IF4IXNTA4IJJ5N3QRIAAAAPN7GSZQFY(CFUHRDBDBYKZRQTLHSOLMASJAW5DE2A74SVFKIWRTFJCEIDO2OMZFB5QZ)
-try:
-    SLKSRY3IAGFOYU3XNCWKHT66TZSP2GY6I5NMWYNCZ7WCVXHLDMIOEWJUQ6(O4SAAANABOIBGAAAV4ELSDVRYRT7WAQAAAAAABCZLI)
-except:
-    XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED(&#34;T\150\x69s\u0020\U00000069s \166e\162\u0079 un\x73t\u0061b\x6c\U00000065,\u0020\x68\165\U00000068?&#34;)
-    ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX(1)
-</code></pre><p>Spending some time to deobfuscate it, we will get something similar like this:</p>
-<pre tabindex="0"><code>import inspect, sys, re, math, base64, lzma, marshal
-
-def main():
-
-	BLOCK_SIZE = 8
-
-	blocks = re.findall(&#39;_?([^\n?\\[\\]\&#39;]+?)\\s=&#39;, inspect.getsource(sys.modules[&#39;__main__&#39;]))
-
-	block = str.join(&#34;&#34;, blocks)
-
-	padded_block = str.ljust(block, math.ceil(len(block) / BLOCK_SIZE), chr(0x3d))
-
-	l2 = lzma.decompress(base64.b32decode(padded_block))
-
-	if len(sys.argv) &lt; 2:
-		print(&#34;Not enough arguments&#34;)
-		exit(1)
-
-	if len(sys.argv[1]) &lt; 7:
-		print(&#34;arg is too short&#34;)
-		exit(-1)
-
-	lst_l2 = list(l2)
-	lst_l2[235] = ord(argv[1][0])
-	lst_l2[515] = ord(argv[1][1])
-	lst_l2[507] = ord(argv[1][2])
-	lst_l2[519] = ord(argv[1][3])
-	lst_l2[1552] = ord(argv[1][4])
-	lst_l2[1586] = ord(argv[1][5])
-	lst_l2[1617] = ord(argv[1][6])
-
-	data = marshal.loads(bytes(lst_l2))
-
-	try:
-		eval(data)
-	except:
-		print(&#34;This is very unstable, huh?&#34;)
-		exit(-1)
-
-if __name__ == &#39;__main__&#39;:
-	main()
-</code></pre><p>From the deobfuscated code we can see it looks like extracting base32 encoded text from itself using regex, pad it -&gt; base32 decode -&gt; decompress -&gt; marshal -&gt; eval. We also see that we need to provide an argument and the argument length must greater than 7.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>arr <span style="color:#f92672">=</span> vars(__builtins__)
+</span></span><span style="display:flex;"><span>BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3 <span style="color:#f92672">=</span> arr[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x5f</span><span style="color:#e6db74">_</span><span style="color:#ae81ff">\u0069\155</span><span style="color:#e6db74">p</span><span style="color:#ae81ff">\u006f</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\u0074\137</span><span style="color:#e6db74">_&#34;</span>]
+</span></span><span style="display:flex;"><span>LZOGJVLBQSWZO7XGEM4T5LXNT4DVYVTI3ITSTEDHBZNDE4ZCLYINMBPIP62 <span style="color:#f92672">=</span> BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\151\u006e</span><span style="color:#e6db74">sp</span><span style="color:#ae81ff">\x65\U00000063</span><span style="color:#e6db74">t&#34;</span>)
+</span></span><span style="display:flex;"><span>M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ <span style="color:#f92672">=</span> arr[<span style="color:#e6db74">&#34;v</span><span style="color:#ae81ff">\x61\U00000072\x73</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>LQJ5TKYMCG4BOHSKBGROAB6LQAJIHIWDW2HHGCYR6CKT5YERSO6GNHYO2Z <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(LZOGJVLBQSWZO7XGEM4T5LXNT4DVYVTI3ITSTEDHBZNDE4ZCLYINMBPIP62)[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\147\x65\164\x73\U0000006f</span><span style="color:#e6db74">u</span><span style="color:#ae81ff">\U00000072\u0063</span><span style="color:#e6db74">e&#34;</span>]
+</span></span><span style="display:flex;"><span>HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A <span style="color:#f92672">=</span> BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\U00000073\u0079</span><span style="color:#e6db74">s&#34;</span>)
+</span></span><span style="display:flex;"><span>XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED <span style="color:#f92672">=</span> arr[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x70\162\u0069</span><span style="color:#e6db74">nt&#34;</span>]
+</span></span><span style="display:flex;"><span>ODZYEJDEIBAQOTUP265UQSON5XNQ6K6VU2JLJCE576B5BMAVMJ2GNSN3EH <span style="color:#f92672">=</span> LQJ5TKYMCG4BOHSKBGROAB6LQAJIHIWDW2HHGCYR6CKT5YERSO6GNHYO2Z(M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x6d\U0000006f\144\x75\u006c\U00000065\163</span><span style="color:#e6db74">&#34;</span>][<span style="color:#e6db74">&#34;_</span><span style="color:#ae81ff">\U0000005f\u006d\141</span><span style="color:#e6db74">i</span><span style="color:#ae81ff">\u006e\U0000005f</span><span style="color:#e6db74">_&#34;</span>])
+</span></span><span style="display:flex;"><span>YQZ5ROM4W3C3E7OPYI6BN4XSGG6CAR76JZYGEV73NP6DEUT5MTQ3IVZGVP <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x61\U00000072</span><span style="color:#e6db74">g</span><span style="color:#ae81ff">\x76</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\u0065\x78</span><span style="color:#e6db74">i</span><span style="color:#ae81ff">\U00000074</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>ZWDPZJHUEX4LZK6TNL3X7ABBACBY2XZR4HQR6CDVOFLOOHRWAXZGNYD3OF <span style="color:#f92672">=</span> BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x72\u0065</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>QI5FPMPNP3FNLBUTFG23VRTIRD3QURRB26DVM5X4GYYEDVFCBJRF3T3AEB <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(ZWDPZJHUEX4LZK6TNL3X7ABBACBY2XZR4HQR6CDVOFLOOHRWAXZGNYD3OF)[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x66\u0069\156\x64</span><span style="color:#e6db74">a</span><span style="color:#ae81ff">\U0000006c\x6c</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>EBNIQQWVCVPSF2UM5T56XXII7MP4MEGGNICNWZ2WU6HXDQSCRRXJGHMPP6 <span style="color:#f92672">=</span> QI5FPMPNP3FNLBUTFG23VRTIRD3QURRB26DVM5X4GYYEDVFCBJRF3T3AEB(<span style="color:#e6db74">&#39;_?([^</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">]+?)</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">s=&#39;</span>, ODZYEJDEIBAQOTUP265UQSON5XNQ6K6VU2JLJCE576B5BMAVMJ2GNSN3EH)
+</span></span><span style="display:flex;"><span>QRN64DOU74HGX6YQ7Y5QHLWT2E64375UTTAI3GDVQPJSPR2GZTQLJU6DYX <span style="color:#f92672">=</span> arr[<span style="color:#e6db74">&#34;s</span><span style="color:#ae81ff">\164\u0072</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>K3SJIHD3YW5CHGVNKHB4BJ53ZJ6XIM3X2CZQECDLQNIOQNKLEZ5DS6MORP <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(QRN64DOU74HGX6YQ7Y5QHLWT2E64375UTTAI3GDVQPJSPR2GZTQLJU6DYX)[<span style="color:#e6db74">&#34;j</span><span style="color:#ae81ff">\157\x69</span><span style="color:#e6db74">n&#34;</span>]
+</span></span><span style="display:flex;"><span>A7RQQ7PC4WLBAFY3PDAOUOCME5DZMEAR5ZEFBNN2PQKYIAWOPIAA5QSL2J <span style="color:#f92672">=</span> K3SJIHD3YW5CHGVNKHB4BJ53ZJ6XIM3X2CZQECDLQNIOQNKLEZ5DS6MORP(<span style="color:#e6db74">&#34;&#34;</span>, EBNIQQWVCVPSF2UM5T56XXII7MP4MEGGNICNWZ2WU6HXDQSCRRXJGHMPP6)
+</span></span><span style="display:flex;"><span>A5CXS7GCTRQQV2G7SFIVU3TI5KZKLUK7TC2GQ7UKMWKPKI6GWR65RFHJK4 <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(QRN64DOU74HGX6YQ7Y5QHLWT2E64375UTTAI3GDVQPJSPR2GZTQLJU6DYX)[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\154\x6a</span><span style="color:#e6db74">u</span><span style="color:#ae81ff">\u0073\164</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>GKIJDAGEEVN2IPUHBLY5OL2L2IY4RG64OTGMSMJDZQJMOPMW6L4QCDV7L2 <span style="color:#f92672">=</span> BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x6d\141\U00000074\x68</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>M74NWW5W4BA35KFV6ROMY3XV4YASUZ733DEDSLTDLJTZUSQBDY7HYAFTVU <span style="color:#f92672">=</span> arr[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\U0000006c</span><span style="color:#e6db74">en&#34;</span>]
+</span></span><span style="display:flex;"><span>P2VMOBU2U7GTIITCNEWRKSATW3CVBQJ5BZKSFEDWDWTJAAFI34KLK7U32U <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(GKIJDAGEEVN2IPUHBLY5OL2L2IY4RG64OTGMSMJDZQJMOPMW6L4QCDV7L2)[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x63</span><span style="color:#e6db74">e</span><span style="color:#ae81ff">\U00000069\x6c</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>XMW3PCO7YGXIOA6KQXBHSRGPEUHRU5ARLDRDDF7VF74JSTDUM2QKD4NXNQ <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>Y6LZNPP33FDJYSFFG72QMET4WKJNNRIGQ2XSSO5676YXW572FRANDC3BGU <span style="color:#f92672">=</span> A5CXS7GCTRQQV2G7SFIVU3TI5KZKLUK7TC2GQ7UKMWKPKI6GWR65RFHJK4(A7RQQ7PC4WLBAFY3PDAOUOCME5DZMEAR5ZEFBNN2PQKYIAWOPIAA5QSL2J, P2VMOBU2U7GTIITCNEWRKSATW3CVBQJ5BZKSFEDWDWTJAAFI34KLK7U32U(M74NWW5W4BA35KFV6ROMY3XV4YASUZ733DEDSLTDLJTZUSQBDY7HYAFTVU(A7RQQ7PC4WLBAFY3PDAOUOCME5DZMEAR5ZEFBNN2PQKYIAWOPIAA5QSL2J) <span style="color:#f92672">/</span> XMW3PCO7YGXIOA6KQXBHSRGPEUHRU5ARLDRDDF7VF74JSTDUM2QKD4NXNQ) <span style="color:#f92672">*</span> XMW3PCO7YGXIOA6KQXBHSRGPEUHRU5ARLDRDDF7VF74JSTDUM2QKD4NXNQ, chr(<span style="color:#ae81ff">0x3d</span>))
+</span></span><span style="display:flex;"><span>ZCDX6JR53HGJHYQI6NKQASBSHTVTKYJ4GXG4RENEQS6IEFK3UYSRSSCTPL4 <span style="color:#f92672">=</span> BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\U00000062</span><span style="color:#e6db74">a</span><span style="color:#ae81ff">\x73</span><span style="color:#e6db74">e</span><span style="color:#ae81ff">\U00000036</span><span style="color:#e6db74">4&#34;</span>)
+</span></span><span style="display:flex;"><span>ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7 <span style="color:#f92672">=</span> arr[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x6f\162\u0064</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>VRRYA7Q3RVJP4GGXKJJ2RWL3F5B3RFFI4TY3YL2A7CBOLG5CVD5EAMVWRM <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(ZCDX6JR53HGJHYQI6NKQASBSHTVTKYJ4GXG4RENEQS6IEFK3UYSRSSCTPL4)[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\U00000062</span><span style="color:#e6db74">32</span><span style="color:#ae81ff">\U00000064</span><span style="color:#e6db74">e</span><span style="color:#ae81ff">\143\U0000006f</span><span style="color:#e6db74">d</span><span style="color:#ae81ff">\145</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>CZ5EDUTIPYA32OYMZI2FHSPUAKIRV2FCDHLDCSLDJ42PUV4EU5QKO57R2A <span style="color:#f92672">=</span> VRRYA7Q3RVJP4GGXKJJ2RWL3F5B3RFFI4TY3YL2A7CBOLG5CVD5EAMVWRM(Y6LZNPP33FDJYSFFG72QMET4WKJNNRIGQ2XSSO5676YXW572FRANDC3BGU)
+</span></span><span style="display:flex;"><span>FHHTAJYJTNJTF2U7UODGZLRNRHTCD4KSFHJLWQZEATMLW4VJE2QW6OA2475 <span style="color:#f92672">=</span> BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\u006c\172</span><span style="color:#e6db74">m</span><span style="color:#ae81ff">\141</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>XGDOCXHDIYD4YMH7UZKGOYGEDDGO2FPO3QRELCML5KZTMAXMTG47T2K2I <span style="color:#f92672">=</span> arr[<span style="color:#e6db74">&#34;li</span><span style="color:#ae81ff">\u0073\x74</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>ZH7DTVYSP5K53Q6BWIYSLETCPK75NDZX4QKJUONCOYBOJZCETPKRSUAVKW <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(FHHTAJYJTNJTF2U7UODGZLRNRHTCD4KSFHJLWQZEATMLW4VJE2QW6OA2475)[<span style="color:#e6db74">&#34;d</span><span style="color:#ae81ff">\U00000065\x63\U0000006f</span><span style="color:#e6db74">m</span><span style="color:#ae81ff">\u0070\162</span><span style="color:#e6db74">e</span><span style="color:#ae81ff">\163\x73</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>D3U5DC4TIQARJSIOR6CJG7X3S2EYLBGDVSSJ7HNPYMLPS7IHQILQH7NNY6 <span style="color:#f92672">=</span> ZH7DTVYSP5K53Q6BWIYSLETCPK75NDZX4QKJUONCOYBOJZCETPKRSUAVKW(CZ5EDUTIPYA32OYMZI2FHSPUAKIRV2FCDHLDCSLDJ42PUV4EU5QKO57R2A)
+</span></span><span style="display:flex;"><span>OHZE337P5F643ACVSLUSMMTSS6TRJG6QFKFNTA7OWIIIQ4CE3PPN4FJHYL <span style="color:#f92672">=</span> M74NWW5W4BA35KFV6ROMY3XV4YASUZ733DEDSLTDLJTZUSQBDY7HYAFTVU(YQZ5ROM4W3C3E7OPYI6BN4XSGG6CAR76JZYGEV73NP6DEUT5MTQ3IVZGVP)
+</span></span><span style="display:flex;"><span>ENWGRMLCF5R2KMTPBXDXXFWYU2TR3MAQJIA7NZVGNW3P6GNIMGTFISZKVF <span style="color:#f92672">=</span> arr[<span style="color:#e6db74">&#34;b</span><span style="color:#ae81ff">\171\U00000074\x65</span><span style="color:#e6db74">s&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> OHZE337P5F643ACVSLUSMMTSS6TRJG6QFKFNTA7OWIIIQ4CE3PPN4FJHYL <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>    XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED(<span style="color:#e6db74">&#34;N</span><span style="color:#ae81ff">\x6f</span><span style="color:#e6db74">t</span><span style="color:#ae81ff">\40\U00000065</span><span style="color:#e6db74">nou</span><span style="color:#ae81ff">\147\u0068</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\x61\u0072\147\u0075</span><span style="color:#e6db74">me</span><span style="color:#ae81ff">\x6e\164\u0073</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS <span style="color:#f92672">=</span> YQZ5ROM4W3C3E7OPYI6BN4XSGG6CAR76JZYGEV73NP6DEUT5MTQ3IVZGVP[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>QCMBEDAI2CWIXIDOH5A5IS5QD6NB5XL2IX4FNFMUN52YJXXC4PCA23CQ7W <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>SLKSRY3IAGFOYU3XNCWKHT66TZSP2GY6I5NMWYNCZ7WCVXHLDMIOEWJUQ6 <span style="color:#f92672">=</span> arr[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\U00000065\166\U00000061</span><span style="color:#e6db74">l&#34;</span>]
+</span></span><span style="display:flex;"><span>E2UV76DGSKK7RSUPTTDQ2DUEKAYJ6Q7TGGCCM2MPN2OTGZDAFBSOZJEWZ22 <span style="color:#f92672">=</span> M74NWW5W4BA35KFV6ROMY3XV4YASUZ733DEDSLTDLJTZUSQBDY7HYAFTVU(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> E2UV76DGSKK7RSUPTTDQ2DUEKAYJ6Q7TGGCCM2MPN2OTGZDAFBSOZJEWZ22 <span style="color:#f92672">&lt;</span> QCMBEDAI2CWIXIDOH5A5IS5QD6NB5XL2IX4FNFMUN52YJXXC4PCA23CQ7W:
+</span></span><span style="display:flex;"><span>    XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\U00000061</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\U00000067\x20\151\x73\40</span><span style="color:#e6db74">t</span><span style="color:#ae81ff">\U0000006f\157\x20\U00000073\x68\u006f</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\164</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3 <span style="color:#f92672">=</span> XGDOCXHDIYD4YMH7UZKGOYGEDDGO2FPO3QRELCML5KZTMAXMTG47T2K2I(D3U5DC4TIQARJSIOR6CJG7X3S2EYLBGDVSSJ7HNPYMLPS7IHQILQH7NNY6)
+</span></span><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">235</span>] <span style="color:#f92672">=</span> ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">515</span>] <span style="color:#f92672">=</span> ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">507</span>] <span style="color:#f92672">=</span> ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[<span style="color:#ae81ff">2</span>])
+</span></span><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">519</span>] <span style="color:#f92672">=</span> ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[<span style="color:#ae81ff">3</span>])
+</span></span><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">1552</span>] <span style="color:#f92672">=</span> ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[<span style="color:#ae81ff">4</span>])
+</span></span><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">1586</span>] <span style="color:#f92672">=</span> ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[<span style="color:#ae81ff">5</span>])
+</span></span><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">1617</span>] <span style="color:#f92672">=</span> ZCGHHSY2HIUON3NW3VCQUCK5LGNAM62WNW47PAO46RFHVWVN4DG42JIV7(ZY6U6VY2PEVPRQLYCY47IPREAJQWM3CGARQLVLUYTDY3K4Z66FS3I5EQWS[<span style="color:#ae81ff">6</span>])
+</span></span><span style="display:flex;"><span>CFUHRDBDBYKZRQTLHSOLMASJAW5DE2A74SVFKIWRTFJCEIDO2OMZFB5QZ <span style="color:#f92672">=</span> ENWGRMLCF5R2KMTPBXDXXFWYU2TR3MAQJIA7NZVGNW3P6GNIMGTFISZKVF(SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3)
+</span></span><span style="display:flex;"><span>R57WEYHUFJ2L72N5HFD5NOKYEO2LGEMLPK5TAVNZLFTQYJMMVAWVMXYD6L <span style="color:#f92672">=</span> BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(<span style="color:#e6db74">&#34;m</span><span style="color:#ae81ff">\x61\162\U00000073</span><span style="color:#e6db74">h</span><span style="color:#ae81ff">\U00000061\154</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>CNXXJNEWE4AYG2FRYIIESI35RR3IF4IXNTA4IJJ5N3QRIAAAAPN7GSZQFY <span style="color:#f92672">=</span> M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(R57WEYHUFJ2L72N5HFD5NOKYEO2LGEMLPK5TAVNZLFTQYJMMVAWVMXYD6L)[<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x6c</span><span style="color:#e6db74">o</span><span style="color:#ae81ff">\u0061\U00000064\x73</span><span style="color:#e6db74">&#34;</span>]
+</span></span><span style="display:flex;"><span>O4SAAANABOIBGAAAV4ELSDVRYRT7WAQAAAAAABCZLI <span style="color:#f92672">=</span> CNXXJNEWE4AYG2FRYIIESI35RR3IF4IXNTA4IJJ5N3QRIAAAAPN7GSZQFY(CFUHRDBDBYKZRQTLHSOLMASJAW5DE2A74SVFKIWRTFJCEIDO2OMZFB5QZ)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    SLKSRY3IAGFOYU3XNCWKHT66TZSP2GY6I5NMWYNCZ7WCVXHLDMIOEWJUQ6(O4SAAANABOIBGAAAV4ELSDVRYRT7WAQAAAAAABCZLI)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>    XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED(<span style="color:#e6db74">&#34;T</span><span style="color:#ae81ff">\150\x69</span><span style="color:#e6db74">s</span><span style="color:#ae81ff">\u0020\U00000069</span><span style="color:#e6db74">s </span><span style="color:#ae81ff">\166</span><span style="color:#e6db74">e</span><span style="color:#ae81ff">\162\u0079</span><span style="color:#e6db74"> un</span><span style="color:#ae81ff">\x73</span><span style="color:#e6db74">t</span><span style="color:#ae81ff">\u0061</span><span style="color:#e6db74">b</span><span style="color:#ae81ff">\x6c\U00000065</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\u0020\x68\165\U00000068</span><span style="color:#e6db74">?&#34;</span>)
+</span></span><span style="display:flex;"><span>    ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX(<span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><p>Spending some time to deobfuscate it, we will get something similar like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> inspect<span style="color:#f92672">,</span> sys<span style="color:#f92672">,</span> re<span style="color:#f92672">,</span> math<span style="color:#f92672">,</span> base64<span style="color:#f92672">,</span> lzma<span style="color:#f92672">,</span> marshal
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	BLOCK_SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	blocks <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;_?([^</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">]+?)</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">s=&#39;</span>, inspect<span style="color:#f92672">.</span>getsource(sys<span style="color:#f92672">.</span>modules[<span style="color:#e6db74">&#39;__main__&#39;</span>]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	block <span style="color:#f92672">=</span> str<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;&#34;</span>, blocks)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	padded_block <span style="color:#f92672">=</span> str<span style="color:#f92672">.</span>ljust(block, math<span style="color:#f92672">.</span>ceil(len(block) <span style="color:#f92672">/</span> BLOCK_SIZE), chr(<span style="color:#ae81ff">0x3d</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	l2 <span style="color:#f92672">=</span> lzma<span style="color:#f92672">.</span>decompress(base64<span style="color:#f92672">.</span>b32decode(padded_block))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;Not enough arguments&#34;</span>)
+</span></span><span style="display:flex;"><span>		exit(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">7</span>:
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;arg is too short&#34;</span>)
+</span></span><span style="display:flex;"><span>		exit(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	lst_l2 <span style="color:#f92672">=</span> list(l2)
+</span></span><span style="display:flex;"><span>	lst_l2[<span style="color:#ae81ff">235</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>	lst_l2[<span style="color:#ae81ff">515</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>	lst_l2[<span style="color:#ae81ff">507</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">2</span>])
+</span></span><span style="display:flex;"><span>	lst_l2[<span style="color:#ae81ff">519</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">3</span>])
+</span></span><span style="display:flex;"><span>	lst_l2[<span style="color:#ae81ff">1552</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">4</span>])
+</span></span><span style="display:flex;"><span>	lst_l2[<span style="color:#ae81ff">1586</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">5</span>])
+</span></span><span style="display:flex;"><span>	lst_l2[<span style="color:#ae81ff">1617</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">6</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	data <span style="color:#f92672">=</span> marshal<span style="color:#f92672">.</span>loads(bytes(lst_l2))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>		eval(data)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;This is very unstable, huh?&#34;</span>)
+</span></span><span style="display:flex;"><span>		exit(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>	main()
+</span></span></code></pre></div><p>From the deobfuscated code we can see it looks like extracting base32 encoded text from itself using regex, pad it -&gt; base32 decode -&gt; decompress -&gt; marshal -&gt; eval. We also see that we need to provide an argument and the argument length must greater than 7.</p>
 <p>Moreover, we also see that it did some changes on the code data based on our input before eval:</p>
-<pre tabindex="0"><code>lst_l2 = list(l2)
-lst_l2[235] = ord(argv[1][0])
-lst_l2[515] = ord(argv[1][1])
-lst_l2[507] = ord(argv[1][2])
-lst_l2[519] = ord(argv[1][3])
-lst_l2[1552] = ord(argv[1][4])
-lst_l2[1586] = ord(argv[1][5])
-lst_l2[1617] = ord(argv[1][6])
-</code></pre><p>To investigate the code data, I append these into the <code>stable.py</code>:</p>
-<pre tabindex="0"><code>import dis
-print(dis.code_info(O4SAAANABOIBGAAAV4ELSDVRYRT7WAQAAAAAABCZLI))
-print(dis.dis(O4SAAANABOIBGAAAV4ELSDVRYRT7WAQAAAAAABCZLI))
-</code></pre><p>After that, run it with any input you desire:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>lst_l2 <span style="color:#f92672">=</span> list(l2)
+</span></span><span style="display:flex;"><span>lst_l2[<span style="color:#ae81ff">235</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>lst_l2[<span style="color:#ae81ff">515</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>lst_l2[<span style="color:#ae81ff">507</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">2</span>])
+</span></span><span style="display:flex;"><span>lst_l2[<span style="color:#ae81ff">519</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">3</span>])
+</span></span><span style="display:flex;"><span>lst_l2[<span style="color:#ae81ff">1552</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">4</span>])
+</span></span><span style="display:flex;"><span>lst_l2[<span style="color:#ae81ff">1586</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">5</span>])
+</span></span><span style="display:flex;"><span>lst_l2[<span style="color:#ae81ff">1617</span>] <span style="color:#f92672">=</span> ord(argv[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">6</span>])
+</span></span></code></pre></div><p>To investigate the code data, I append these into the <code>stable.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> dis
+</span></span><span style="display:flex;"><span>print(dis<span style="color:#f92672">.</span>code_info(O4SAAANABOIBGAAAV4ELSDVRYRT7WAQAAAAAABCZLI))
+</span></span><span style="display:flex;"><span>print(dis<span style="color:#f92672">.</span>dis(O4SAAANABOIBGAAAV4ELSDVRYRT7WAQAAAAAABCZLI))
+</span></span></code></pre></div><p>After that, run it with any input you desire:</p>
 <pre tabindex="0"><code>python3 stable.py 1234567
 </code></pre><h3 id="code_info-output">code_info output:</h3>
-<pre tabindex="0"><code>Name:              &lt;module&gt;
-Filename:          &lt;string&gt;
-Argument count:    0
-Positional-only arguments: 0
-Kw-only arguments: 0
-Number of locals:  0
-Stack size:        4
-Flags:             NOFREE
-Constants:
-   0: 10000
-&lt;SNIP&gt;
-  99: 100099
- 100: 0
- 101: (&#39;argv&#39;, &#39;exit&#39;)
- 102: (&#39;sha256&#39;,)
- 103: 2
- 104: &#39;Usage: &#39;
- 105: &#39; &lt;passwd&gt;&#39;
- 106: 1
- 107: 9711424565004377232685487241741130660537817718394316136522340067127964227885525022420001661646939496718599540608081579347013032655061764133877156925827123786333371798400278520894719018619930240463131452457577184074345537847657937111838070040487887401817080124695053692442303799118926077741439148690994150505024166983196233674022816843702592633467144395379448888439860974578091544834372961055549393844525096383940669190823316777609479779106281969726063297357182244423570155395852153018645790744470507852109998305853670898441956711998028819529790437018901157587797430995171274861607645732279735938817560714148831826813
- 108: 14577897362821085283869313971595837572237381973528035997480016212662401635116
- 109: -34514
- 110: b&#39;\x96094\xdc\x1e\xd0\xe0\xa5\xabs\x16\xcb5\xb5\xed\x04\xa2\xd8\xb0\x86_6\xdf\x8c\x81G#\xcc\x0b8\xfe[\x93\xae\x97\xa9T\x8d\x99\xe1Yj\xf2\xb2\x1e\xcf6\x93J\xd8\x81\xe9\x1fO\x84T?J\x9f\xaat\x05p&gt;\xc8\x12\xf71wh\x13\xef\x9d\x7f\xf7\xcb\x867\x08\xf4I\x0f\xa7\x0e\xb9re\xd3_\xfa\xcd\xd1\xbfv\xcfB\x9a\x13\xcfx\xfd\xb4D/\xe914;\xf2c\xee\x96:\xf8 \xf9\xf6g\x8c\xd3\xfa\xcd\xb13\xb9\xdf\x04w\x0cF\xb4\xb6\xf8\x88\x02re\xe2Oq\xa56\xe1v7\x0b\xd2\xe6\xe0\xc4+\xb8\xdfH\xd9\xa8u\x8d\xa1\xd7]\xd5\xff\x81\xb6\x15\xfc\x89a#\xc8@\xdc,\xb0\xa9\x1e\xdc\xe84x\x94\xcb\x8dP\x15\x0br\x8d8\x9f\x9cHN\xa6\x08_\xf0\xc2\x1cF\xd6p;\xb1r\xcf\x94\xf8\x92]\xddq\xdc?\xea\xc7\xb6\xffN\x06AhL\xeb\xb0\xe2\xf7\xdcG\x08S5\xc2\xaa\xcd&lt;J\x99\x8a\xae\xad\xcdO\x00\x19\x1e%x}e\x00\xbf5\x8d&#39;
- 111: &#39;big&#39;
- 112: &lt;code object encrypt at 0x7fabfe4c4f50, file &#34;&lt;string&gt;&#34;, line 128&gt;
- 113: &#39;encrypt&#39;
- 114: &#39;Correct password: &#39;
- 115: &#39;Flag: &#39;
- 116: &#39;Wrong password: &#39;
- 117: &#39;Try again&#39;
- 118: None
-Names:
-   0: pad
-   1: sys
-   2: argv
-   3: exit
-   4: hashlib
-   5: sha256
-   6: len
-   7: print
-   8: passwd
-   9: enc_flag
-  10: flag_hash
-  11: e1
-  12: e
-  13: int
-  14: from_bytes
-  15: n
-  16: encrypt
-  17: dec_flag
-  18: digest
-  19: h
-  20: decode
-</code></pre><h3 id="dis-disassembly-output">dis (disassembly) output:</h3>
-<pre tabindex="0"><code>  2           0 LOAD_CONST               0 (10000)
-              2 STORE_NAME               0 (pad)
-
-&lt;SNIP&gt;
-
-101         396 LOAD_CONST              99 (100099)
-            398 STORE_NAME               0 (pad)
-
-102         400 LOAD_CONST             100 (0)
-            402 LOAD_CONST             101 ((&#39;argv&#39;, &#39;exit&#39;))
-            404 IMPORT_NAME              1 (sys)
-            406 IMPORT_FROM              2 (argv)
-            408 STORE_NAME               2 (argv)
-            410 IMPORT_FROM              3 (exit)
-            412 STORE_NAME               3 (exit)
-            414 POP_TOP
-
-104         416 LOAD_CONST             100 (0)
-            418 LOAD_CONST             102 ((&#39;sha256&#39;,))
-            420 IMPORT_NAME              4 (hashlib)
-            422 IMPORT_FROM              5 (sha256)
-            424 STORE_NAME               5 (sha256)
-            426 POP_TOP
-
-105         428 LOAD_NAME                6 (len)
-            430 LOAD_NAME                2 (argv)
-            432 CALL_FUNCTION            1
-            434 LOAD_CONST             103 (2)
-            436 COMPARE_OP               0 (&lt;)
-            438 POP_JUMP_IF_FALSE      234 (to 468)
-
-106         440 LOAD_NAME                7 (print)
-            442 LOAD_CONST             104 (&#39;Usage: &#39;)
-            444 LOAD_NAME                2 (argv)
-            446 LOAD_CONST             100 (0)
-            448 BINARY_SUBSCR
-            450 FORMAT_VALUE             0
-            452 LOAD_CONST             105 (&#39; &lt;passwd&gt;&#39;)
-            454 BUILD_STRING             3
-            456 CALL_FUNCTION            1
-            458 POP_TOP
-
-108         460 LOAD_NAME                3 (exit)
-            462 LOAD_CONST             106 (1)
-            464 CALL_FUNCTION            1
-            466 POP_TOP
-
-112     &gt;&gt;  468 LOAD_NAME                2 (argv)
-            470 LOAD_CONST             106 (1)
-            472 BINARY_SUBSCR
-            474 STORE_NAME               8 (passwd)
-
-113         476 LOAD_CONST              51 (100051)
-            478 STORE_NAME               9 (enc_flag)
-
-116         480 LOAD_CONST             108 (14577897362821085283869313971595837572237381973528035997480016212662401635116)
-            482 STORE_NAME              10 (flag_hash)
-
-117         484 LOAD_CONST              50 (100050)
-            486 STORE_NAME              11 (e1)
-
-120         488 LOAD_CONST              52 (100052)
-            490 LOAD_NAME               11 (e1)
-            492 BINARY_ADD
-            494 STORE_NAME              12 (e)
-
-128         496 LOAD_NAME               13 (int)
-            498 LOAD_METHOD             14 (from_bytes)
-            500 LOAD_CONST             110 (b&#39;\x96094\xdc\x1e\xd0\xe0\xa5\xabs\x16\xcb5\xb5\xed\x04\xa2\xd8\xb0\x86_6\xdf\x8c\x81G#\xcc\x0b8\xfe[\x93\xae\x97\xa9T\x8d\x99\xe1Yj\xf2\xb2\x1e\xcf6\x93J\xd8\x81\xe9\x1fO\x84T?J\x9f\xaat\x05p&gt;\xc8\x12\xf71wh\x13\xef\x9d\x7f\xf7\xcb\x867\x08\xf4I\x0f\xa7\x0e\xb9re\xd3_\xfa\xcd\xd1\xbfv\xcfB\x9a\x13\xcfx\xfd\xb4D/\xe914;\xf2c\xee\x96:\xf8 \xf9\xf6g\x8c\xd3\xfa\xcd\xb13\xb9\xdf\x04w\x0cF\xb4\xb6\xf8\x88\x02re\xe2Oq\xa56\xe1v7\x0b\xd2\xe6\xe0\xc4+\xb8\xdfH\xd9\xa8u\x8d\xa1\xd7]\xd5\xff\x81\xb6\x15\xfc\x89a#\xc8@\xdc,\xb0\xa9\x1e\xdc\xe84x\x94\xcb\x8dP\x15\x0br\x8d8\x9f\x9cHN\xa6\x08_\xf0\xc2\x1cF\xd6p;\xb1r\xcf\x94\xf8\x92]\xddq\xdc?\xea\xc7\xb6\xffN\x06AhL\xeb\xb0\xe2\xf7\xdcG\x08S5\xc2\xaa\xcd&lt;J\x99\x8a\xae\xad\xcdO\x00\x19\x1e%x}e\x00\xbf5\x8d&#39;)
-            502 LOAD_CONST             111 (&#39;big&#39;)
-            504 CALL_METHOD              2
-            506 STORE_NAME              15 (n)
-
-138         508 LOAD_CONST             112 (&lt;code object encrypt at 0x7fabfe4c4f50, file &#34;&lt;string&gt;&#34;, line 128&gt;)
-            510 LOAD_CONST             113 (&#39;encrypt&#39;)
-            512 MAKE_FUNCTION            0
-            514 STORE_NAME              16 (encrypt)
-
-140         516 LOAD_NAME               16 (encrypt)
-            518 LOAD_NAME                9 (enc_flag)
-            520 CALL_FUNCTION            1
-            522 STORE_NAME              17 (dec_flag)
-
-141         524 LOAD_NAME                5 (sha256)
-            526 LOAD_NAME               17 (dec_flag)
-            528 CALL_FUNCTION            1
-            530 LOAD_METHOD             18 (digest)
-            532 CALL_METHOD              0
-            534 STORE_NAME              19 (h)
-
-143         536 LOAD_NAME               13 (int)
-            538 LOAD_METHOD             14 (from_bytes)
-            540 LOAD_NAME               19 (h)
-            542 LOAD_CONST             111 (&#39;big&#39;)
-            544 CALL_METHOD              2
-            546 STORE_NAME              19 (h)
-
-144         548 LOAD_NAME               19 (h)
-            550 LOAD_NAME               10 (flag_hash)
-            552 COMPARE_OP               2 (==)
-            554 EXTENDED_ARG             1
-            556 POP_JUMP_IF_FALSE      297 (to 594)
-
-145         558 LOAD_NAME                7 (print)
-            560 LOAD_CONST             114 (&#39;Correct password: &#39;)
-            562 LOAD_NAME                8 (passwd)
-            564 FORMAT_VALUE             0
-            566 BUILD_STRING             2
-            568 CALL_FUNCTION            1
-            570 POP_TOP
-
-147         572 LOAD_NAME                7 (print)
-            574 LOAD_CONST             115 (&#39;Flag: &#39;)
-            576 LOAD_NAME               17 (dec_flag)
-            578 LOAD_METHOD             20 (decode)
-            580 CALL_METHOD              0
-            582 FORMAT_VALUE             0
-            584 BUILD_STRING             2
-            586 CALL_FUNCTION            1
-            588 POP_TOP
-            590 LOAD_CONST             118 (None)
-            592 RETURN_VALUE
-
-148     &gt;&gt;  594 LOAD_NAME                7 (print)
-            596 LOAD_CONST             116 (&#39;Wrong password: &#39;)
-            598 LOAD_NAME                8 (passwd)
-            600 FORMAT_VALUE             0
-            602 BUILD_STRING             2
-            604 CALL_FUNCTION            1
-            606 POP_TOP
-            608 LOAD_NAME                7 (print)
-            610 LOAD_CONST             117 (&#39;Try again&#39;)
-            612 CALL_FUNCTION            1
-            614 POP_TOP
-            616 LOAD_CONST             118 (None)
-            618 RETURN_VALUE
-
-Disassembly of &lt;code object encrypt at 0x7fabfe4c4f50, file &#34;&lt;string&gt;&#34;, line 128&gt;:
-130           0 LOAD_GLOBAL              0 (pow)
-              2 LOAD_FAST                0 (m)
-              4 LOAD_GLOBAL              1 (e)
-              6 LOAD_GLOBAL              2 (n)
-              8 CALL_FUNCTION            3
-             10 STORE_FAST               1 (c)
-
-132          12 LOAD_FAST                1 (c)
-             14 LOAD_METHOD              3 (to_bytes)
-             16 LOAD_FAST                1 (c)
-             18 LOAD_METHOD              4 (bit_length)
-             20 CALL_METHOD              0
-             22 LOAD_CONST               1 (7)
-             24 BINARY_ADD
-             26 LOAD_CONST               2 (8)
-             28 BINARY_FLOOR_DIVIDE
-             30 LOAD_CONST               3 (&#39;big&#39;)
-             32 CALL_METHOD              2
-             34 RETURN_VALUE
-None
-Wrong password: 1234567
-Try again
-</code></pre><p>From the disassembly output, I create a source code based on it:</p>
-<pre tabindex="0"><code>import hashlib
-import math
-from Crypto.Util.number import bytes_to_long
-
-def encrypt(enc_flag):
-	e = 100050 + 100052  
-	b = b&#39;\x96094\xdc\x1e\xd0\xe0\xa5\xabs\x16\xcba\xb5\xed\x04\xa2\xd8\xb0\x86_6\xdf\x8c\x81G#\xcc\x0b8\xfe[\x93\xae\x97\xa9T\x8d\x99\xe1Yj\xf2\xb2\x1e\xcfa\x93J\xd8\x81\xe9\x1fO\x84T?J\x9f\xaat\x05p&gt;\xc8\x12\xf71wh\x13\xef\x9d\x7f\xf7\xcb\x86a\x08\xf4I\x0f\xa7\x0e\xb9re\xd3_\xfa\xcd\xd1\xbfv\xcfB\x9a\x13\xcfx\xfd\xb4D/\xe914;\xf2c\xee\x96:\xf8 \xf9\xf6g\x8c\xd3\xfa\xcd\xb13\xb9\xdf\x04w\x0cF\xb4\xb6\xf8\x88\x02re\xe2Oq\xa56\xe1v7\x0b\xd2\xe6\xe0\xc4+\xb8\xdfH\xd9\xa8u\x8d\xa1\xd7]\xd5\xff\x81\xb6\x15\xfc\x89a#\xc8@\xdc,\xb0\xa9\x1e\xdc\xe84x\x94\xcb\x8dP\x15\x0br\x8d8\x9f\x9cHN\xa6\x08_\xf0\xc2\x1cF\xd6p;\xb1r\xcf\x94\xf8\x92]\xddq\xdc?\xea\xc7\xb6\xffN\x06AhL\xeb\xb0\xe2\xf7\xdcG\x08S5\xc2\xaa\xcd&lt;J\x99\x8a\xae\xad\xcdO\x00\x19\x1e%x}e\x00\xbf5\x8d&#39;
-	n = int.from_bytes(b,&#39;big&#39;)
-	c = pow(enc_flag,e,n)
-	dec_flag = int.to_bytes(c, math.floor(c.bit_length() + 7 / 8), &#39;big&#39;)	
-	return dec_flag
- 
-flag_hash = 14577897362821085283869313971595837572237381973528035997480016212662401635116
-
-enc_flag = 100051
-dec_flag = encrypt(enc_flag)
-
-h = int.from_bytes(hashlib.sha256(dec_flag).digest(), &#39;big&#39;)
-
-if h == flag_hash:
-	print(&#39;Correct password:&#39;, passwd)
-	print(&#39;Flag:&#39;, dec_flag.decode())
-else:
-	print(&#39;Wrong password:&#39;, passwd)
-	print(&#39;Try again&#39;)
-</code></pre><p>From the source code, we know that it is performing RSA encryption using <code>enc_flag</code> with the value of <code>100051</code> and later compare with <code>flag_hash</code> to determine whether the provided password is correct.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>Name:              <span style="color:#f92672">&lt;</span>module<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>Filename:          <span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>Argument count:    <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>Positional<span style="color:#f92672">-</span>only arguments: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>Kw<span style="color:#f92672">-</span>only arguments: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>Number of locals:  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>Stack size:        <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>Flags:             NOFREE
+</span></span><span style="display:flex;"><span>Constants:
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">0</span>: <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>SNIP<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">99</span>: <span style="color:#ae81ff">100099</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">100</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">101</span>: (<span style="color:#e6db74">&#39;argv&#39;</span>, <span style="color:#e6db74">&#39;exit&#39;</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">102</span>: (<span style="color:#e6db74">&#39;sha256&#39;</span>,)
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">103</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">104</span>: <span style="color:#e6db74">&#39;Usage: &#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">105</span>: <span style="color:#e6db74">&#39; &lt;passwd&gt;&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">106</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">107</span>: <span style="color:#ae81ff">9711424565004377232685487241741130660537817718394316136522340067127964227885525022420001661646939496718599540608081579347013032655061764133877156925827123786333371798400278520894719018619930240463131452457577184074345537847657937111838070040487887401817080124695053692442303799118926077741439148690994150505024166983196233674022816843702592633467144395379448888439860974578091544834372961055549393844525096383940669190823316777609479779106281969726063297357182244423570155395852153018645790744470507852109998305853670898441956711998028819529790437018901157587797430995171274861607645732279735938817560714148831826813</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">108</span>: <span style="color:#ae81ff">14577897362821085283869313971595837572237381973528035997480016212662401635116</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">109</span>: <span style="color:#f92672">-</span><span style="color:#ae81ff">34514</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">110</span>: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x96</span><span style="color:#e6db74">094</span><span style="color:#ae81ff">\xdc\x1e\xd0\xe0\xa5\xab</span><span style="color:#e6db74">s</span><span style="color:#ae81ff">\x16\xcb</span><span style="color:#e6db74">5</span><span style="color:#ae81ff">\xb5\xed\x04\xa2\xd8\xb0\x86</span><span style="color:#e6db74">_6</span><span style="color:#ae81ff">\xdf\x8c\x81</span><span style="color:#e6db74">G#</span><span style="color:#ae81ff">\xcc\x0b</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\xfe</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x93\xae\x97\xa9</span><span style="color:#e6db74">T</span><span style="color:#ae81ff">\x8d\x99\xe1</span><span style="color:#e6db74">Yj</span><span style="color:#ae81ff">\xf2\xb2\x1e\xcf</span><span style="color:#e6db74">6</span><span style="color:#ae81ff">\x93</span><span style="color:#e6db74">J</span><span style="color:#ae81ff">\xd8\x81\xe9\x1f</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\x84</span><span style="color:#e6db74">T?J</span><span style="color:#ae81ff">\x9f\xaa</span><span style="color:#e6db74">t</span><span style="color:#ae81ff">\x05</span><span style="color:#e6db74">p&gt;</span><span style="color:#ae81ff">\xc8\x12\xf7</span><span style="color:#e6db74">1wh</span><span style="color:#ae81ff">\x13\xef\x9d\x7f\xf7\xcb\x86</span><span style="color:#e6db74">7</span><span style="color:#ae81ff">\x08\xf4</span><span style="color:#e6db74">I</span><span style="color:#ae81ff">\x0f\xa7\x0e\xb9</span><span style="color:#e6db74">re</span><span style="color:#ae81ff">\xd3</span><span style="color:#e6db74">_</span><span style="color:#ae81ff">\xfa\xcd\xd1\xbf</span><span style="color:#e6db74">v</span><span style="color:#ae81ff">\xcf</span><span style="color:#e6db74">B</span><span style="color:#ae81ff">\x9a\x13\xcf</span><span style="color:#e6db74">x</span><span style="color:#ae81ff">\xfd\xb4</span><span style="color:#e6db74">D/</span><span style="color:#ae81ff">\xe9</span><span style="color:#e6db74">14;</span><span style="color:#ae81ff">\xf2</span><span style="color:#e6db74">c</span><span style="color:#ae81ff">\xee\x96</span><span style="color:#e6db74">:</span><span style="color:#ae81ff">\xf8</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\xf9\xf6</span><span style="color:#e6db74">g</span><span style="color:#ae81ff">\x8c\xd3\xfa\xcd\xb1</span><span style="color:#e6db74">3</span><span style="color:#ae81ff">\xb9\xdf\x04</span><span style="color:#e6db74">w</span><span style="color:#ae81ff">\x0c</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xb4\xb6\xf8\x88\x02</span><span style="color:#e6db74">re</span><span style="color:#ae81ff">\xe2</span><span style="color:#e6db74">Oq</span><span style="color:#ae81ff">\xa5</span><span style="color:#e6db74">6</span><span style="color:#ae81ff">\xe1</span><span style="color:#e6db74">v7</span><span style="color:#ae81ff">\x0b\xd2\xe6\xe0\xc4</span><span style="color:#e6db74">+</span><span style="color:#ae81ff">\xb8\xdf</span><span style="color:#e6db74">H</span><span style="color:#ae81ff">\xd9\xa8</span><span style="color:#e6db74">u</span><span style="color:#ae81ff">\x8d\xa1\xd7</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\xd5\xff\x81\xb6\x15\xfc\x89</span><span style="color:#e6db74">a#</span><span style="color:#ae81ff">\xc8</span><span style="color:#e6db74">@</span><span style="color:#ae81ff">\xdc</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\xb0\xa9\x1e\xdc\xe8</span><span style="color:#e6db74">4x</span><span style="color:#ae81ff">\x94\xcb\x8d</span><span style="color:#e6db74">P</span><span style="color:#ae81ff">\x15\x0b</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\x8d</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\x9f\x9c</span><span style="color:#e6db74">HN</span><span style="color:#ae81ff">\xa6\x08</span><span style="color:#e6db74">_</span><span style="color:#ae81ff">\xf0\xc2\x1c</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xd6</span><span style="color:#e6db74">p;</span><span style="color:#ae81ff">\xb1</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\xcf\x94\xf8\x92</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\xdd</span><span style="color:#e6db74">q</span><span style="color:#ae81ff">\xdc</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\xea\xc7\xb6\xff</span><span style="color:#e6db74">N</span><span style="color:#ae81ff">\x06</span><span style="color:#e6db74">AhL</span><span style="color:#ae81ff">\xeb\xb0\xe2\xf7\xdc</span><span style="color:#e6db74">G</span><span style="color:#ae81ff">\x08</span><span style="color:#e6db74">S5</span><span style="color:#ae81ff">\xc2\xaa\xcd</span><span style="color:#e6db74">&lt;J</span><span style="color:#ae81ff">\x99\x8a\xae\xad\xcd</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\x00\x19\x1e</span><span style="color:#e6db74">%x</span><span style="color:#e6db74">}e</span><span style="color:#ae81ff">\x00\xbf</span><span style="color:#e6db74">5</span><span style="color:#ae81ff">\x8d</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">111</span>: <span style="color:#e6db74">&#39;big&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">112</span>: <span style="color:#f92672">&lt;</span>code object encrypt at <span style="color:#ae81ff">0x7fabfe4c4f50</span>, file <span style="color:#e6db74">&#34;&lt;string&gt;&#34;</span>, line <span style="color:#ae81ff">128</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">113</span>: <span style="color:#e6db74">&#39;encrypt&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">114</span>: <span style="color:#e6db74">&#39;Correct password: &#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">115</span>: <span style="color:#e6db74">&#39;Flag: &#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">116</span>: <span style="color:#e6db74">&#39;Wrong password: &#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">117</span>: <span style="color:#e6db74">&#39;Try again&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">118</span>: <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>Names:
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">0</span>: pad
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">1</span>: sys
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">2</span>: argv
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">3</span>: exit
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">4</span>: hashlib
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">5</span>: sha256
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">6</span>: len
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">7</span>: print
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">8</span>: passwd
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">9</span>: enc_flag
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">10</span>: flag_hash
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">11</span>: e1
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">12</span>: e
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">13</span>: int
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">14</span>: from_bytes
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">15</span>: n
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">16</span>: encrypt
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">17</span>: dec_flag
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">18</span>: digest
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">19</span>: h
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">20</span>: decode
+</span></span></code></pre></div><h3 id="dis-disassembly-output">dis (disassembly) output:</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>  <span style="color:#ae81ff">2</span>           <span style="color:#ae81ff">0</span> LOAD_CONST               <span style="color:#ae81ff">0</span> (<span style="color:#ae81ff">10000</span>)
+</span></span><span style="display:flex;"><span>              <span style="color:#ae81ff">2</span> STORE_NAME               <span style="color:#ae81ff">0</span> (pad)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>SNIP<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">101</span>         <span style="color:#ae81ff">396</span> LOAD_CONST              <span style="color:#ae81ff">99</span> (<span style="color:#ae81ff">100099</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">398</span> STORE_NAME               <span style="color:#ae81ff">0</span> (pad)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">102</span>         <span style="color:#ae81ff">400</span> LOAD_CONST             <span style="color:#ae81ff">100</span> (<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">402</span> LOAD_CONST             <span style="color:#ae81ff">101</span> ((<span style="color:#e6db74">&#39;argv&#39;</span>, <span style="color:#e6db74">&#39;exit&#39;</span>))
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">404</span> IMPORT_NAME              <span style="color:#ae81ff">1</span> (sys)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">406</span> IMPORT_FROM              <span style="color:#ae81ff">2</span> (argv)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">408</span> STORE_NAME               <span style="color:#ae81ff">2</span> (argv)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">410</span> IMPORT_FROM              <span style="color:#ae81ff">3</span> (exit)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">412</span> STORE_NAME               <span style="color:#ae81ff">3</span> (exit)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">414</span> POP_TOP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">104</span>         <span style="color:#ae81ff">416</span> LOAD_CONST             <span style="color:#ae81ff">100</span> (<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">418</span> LOAD_CONST             <span style="color:#ae81ff">102</span> ((<span style="color:#e6db74">&#39;sha256&#39;</span>,))
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">420</span> IMPORT_NAME              <span style="color:#ae81ff">4</span> (hashlib)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">422</span> IMPORT_FROM              <span style="color:#ae81ff">5</span> (sha256)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">424</span> STORE_NAME               <span style="color:#ae81ff">5</span> (sha256)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">426</span> POP_TOP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">105</span>         <span style="color:#ae81ff">428</span> LOAD_NAME                <span style="color:#ae81ff">6</span> (len)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">430</span> LOAD_NAME                <span style="color:#ae81ff">2</span> (argv)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">432</span> CALL_FUNCTION            <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">434</span> LOAD_CONST             <span style="color:#ae81ff">103</span> (<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">436</span> COMPARE_OP               <span style="color:#ae81ff">0</span> (<span style="color:#f92672">&lt;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">438</span> POP_JUMP_IF_FALSE      <span style="color:#ae81ff">234</span> (to <span style="color:#ae81ff">468</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">106</span>         <span style="color:#ae81ff">440</span> LOAD_NAME                <span style="color:#ae81ff">7</span> (print)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">442</span> LOAD_CONST             <span style="color:#ae81ff">104</span> (<span style="color:#e6db74">&#39;Usage: &#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">444</span> LOAD_NAME                <span style="color:#ae81ff">2</span> (argv)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">446</span> LOAD_CONST             <span style="color:#ae81ff">100</span> (<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">448</span> BINARY_SUBSCR
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">450</span> FORMAT_VALUE             <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">452</span> LOAD_CONST             <span style="color:#ae81ff">105</span> (<span style="color:#e6db74">&#39; &lt;passwd&gt;&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">454</span> BUILD_STRING             <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">456</span> CALL_FUNCTION            <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">458</span> POP_TOP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">108</span>         <span style="color:#ae81ff">460</span> LOAD_NAME                <span style="color:#ae81ff">3</span> (exit)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">462</span> LOAD_CONST             <span style="color:#ae81ff">106</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">464</span> CALL_FUNCTION            <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">466</span> POP_TOP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">112</span>     <span style="color:#f92672">&gt;&gt;</span>  <span style="color:#ae81ff">468</span> LOAD_NAME                <span style="color:#ae81ff">2</span> (argv)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">470</span> LOAD_CONST             <span style="color:#ae81ff">106</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">472</span> BINARY_SUBSCR
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">474</span> STORE_NAME               <span style="color:#ae81ff">8</span> (passwd)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">113</span>         <span style="color:#ae81ff">476</span> LOAD_CONST              <span style="color:#ae81ff">51</span> (<span style="color:#ae81ff">100051</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">478</span> STORE_NAME               <span style="color:#ae81ff">9</span> (enc_flag)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">116</span>         <span style="color:#ae81ff">480</span> LOAD_CONST             <span style="color:#ae81ff">108</span> (<span style="color:#ae81ff">14577897362821085283869313971595837572237381973528035997480016212662401635116</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">482</span> STORE_NAME              <span style="color:#ae81ff">10</span> (flag_hash)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">117</span>         <span style="color:#ae81ff">484</span> LOAD_CONST              <span style="color:#ae81ff">50</span> (<span style="color:#ae81ff">100050</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">486</span> STORE_NAME              <span style="color:#ae81ff">11</span> (e1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">120</span>         <span style="color:#ae81ff">488</span> LOAD_CONST              <span style="color:#ae81ff">52</span> (<span style="color:#ae81ff">100052</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">490</span> LOAD_NAME               <span style="color:#ae81ff">11</span> (e1)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">492</span> BINARY_ADD
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">494</span> STORE_NAME              <span style="color:#ae81ff">12</span> (e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">128</span>         <span style="color:#ae81ff">496</span> LOAD_NAME               <span style="color:#ae81ff">13</span> (int)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">498</span> LOAD_METHOD             <span style="color:#ae81ff">14</span> (from_bytes)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">500</span> LOAD_CONST             <span style="color:#ae81ff">110</span> (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x96</span><span style="color:#e6db74">094</span><span style="color:#ae81ff">\xdc\x1e\xd0\xe0\xa5\xab</span><span style="color:#e6db74">s</span><span style="color:#ae81ff">\x16\xcb</span><span style="color:#e6db74">5</span><span style="color:#ae81ff">\xb5\xed\x04\xa2\xd8\xb0\x86</span><span style="color:#e6db74">_6</span><span style="color:#ae81ff">\xdf\x8c\x81</span><span style="color:#e6db74">G#</span><span style="color:#ae81ff">\xcc\x0b</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\xfe</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x93\xae\x97\xa9</span><span style="color:#e6db74">T</span><span style="color:#ae81ff">\x8d\x99\xe1</span><span style="color:#e6db74">Yj</span><span style="color:#ae81ff">\xf2\xb2\x1e\xcf</span><span style="color:#e6db74">6</span><span style="color:#ae81ff">\x93</span><span style="color:#e6db74">J</span><span style="color:#ae81ff">\xd8\x81\xe9\x1f</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\x84</span><span style="color:#e6db74">T?J</span><span style="color:#ae81ff">\x9f\xaa</span><span style="color:#e6db74">t</span><span style="color:#ae81ff">\x05</span><span style="color:#e6db74">p&gt;</span><span style="color:#ae81ff">\xc8\x12\xf7</span><span style="color:#e6db74">1wh</span><span style="color:#ae81ff">\x13\xef\x9d\x7f\xf7\xcb\x86</span><span style="color:#e6db74">7</span><span style="color:#ae81ff">\x08\xf4</span><span style="color:#e6db74">I</span><span style="color:#ae81ff">\x0f\xa7\x0e\xb9</span><span style="color:#e6db74">re</span><span style="color:#ae81ff">\xd3</span><span style="color:#e6db74">_</span><span style="color:#ae81ff">\xfa\xcd\xd1\xbf</span><span style="color:#e6db74">v</span><span style="color:#ae81ff">\xcf</span><span style="color:#e6db74">B</span><span style="color:#ae81ff">\x9a\x13\xcf</span><span style="color:#e6db74">x</span><span style="color:#ae81ff">\xfd\xb4</span><span style="color:#e6db74">D/</span><span style="color:#ae81ff">\xe9</span><span style="color:#e6db74">14;</span><span style="color:#ae81ff">\xf2</span><span style="color:#e6db74">c</span><span style="color:#ae81ff">\xee\x96</span><span style="color:#e6db74">:</span><span style="color:#ae81ff">\xf8</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\xf9\xf6</span><span style="color:#e6db74">g</span><span style="color:#ae81ff">\x8c\xd3\xfa\xcd\xb1</span><span style="color:#e6db74">3</span><span style="color:#ae81ff">\xb9\xdf\x04</span><span style="color:#e6db74">w</span><span style="color:#ae81ff">\x0c</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xb4\xb6\xf8\x88\x02</span><span style="color:#e6db74">re</span><span style="color:#ae81ff">\xe2</span><span style="color:#e6db74">Oq</span><span style="color:#ae81ff">\xa5</span><span style="color:#e6db74">6</span><span style="color:#ae81ff">\xe1</span><span style="color:#e6db74">v7</span><span style="color:#ae81ff">\x0b\xd2\xe6\xe0\xc4</span><span style="color:#e6db74">+</span><span style="color:#ae81ff">\xb8\xdf</span><span style="color:#e6db74">H</span><span style="color:#ae81ff">\xd9\xa8</span><span style="color:#e6db74">u</span><span style="color:#ae81ff">\x8d\xa1\xd7</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\xd5\xff\x81\xb6\x15\xfc\x89</span><span style="color:#e6db74">a#</span><span style="color:#ae81ff">\xc8</span><span style="color:#e6db74">@</span><span style="color:#ae81ff">\xdc</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\xb0\xa9\x1e\xdc\xe8</span><span style="color:#e6db74">4x</span><span style="color:#ae81ff">\x94\xcb\x8d</span><span style="color:#e6db74">P</span><span style="color:#ae81ff">\x15\x0b</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\x8d</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\x9f\x9c</span><span style="color:#e6db74">HN</span><span style="color:#ae81ff">\xa6\x08</span><span style="color:#e6db74">_</span><span style="color:#ae81ff">\xf0\xc2\x1c</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xd6</span><span style="color:#e6db74">p;</span><span style="color:#ae81ff">\xb1</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\xcf\x94\xf8\x92</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\xdd</span><span style="color:#e6db74">q</span><span style="color:#ae81ff">\xdc</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\xea\xc7\xb6\xff</span><span style="color:#e6db74">N</span><span style="color:#ae81ff">\x06</span><span style="color:#e6db74">AhL</span><span style="color:#ae81ff">\xeb\xb0\xe2\xf7\xdc</span><span style="color:#e6db74">G</span><span style="color:#ae81ff">\x08</span><span style="color:#e6db74">S5</span><span style="color:#ae81ff">\xc2\xaa\xcd</span><span style="color:#e6db74">&lt;J</span><span style="color:#ae81ff">\x99\x8a\xae\xad\xcd</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\x00\x19\x1e</span><span style="color:#e6db74">%x</span><span style="color:#e6db74">}e</span><span style="color:#ae81ff">\x00\xbf</span><span style="color:#e6db74">5</span><span style="color:#ae81ff">\x8d</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">502</span> LOAD_CONST             <span style="color:#ae81ff">111</span> (<span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">504</span> CALL_METHOD              <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">506</span> STORE_NAME              <span style="color:#ae81ff">15</span> (n)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">138</span>         <span style="color:#ae81ff">508</span> LOAD_CONST             <span style="color:#ae81ff">112</span> (<span style="color:#f92672">&lt;</span>code object encrypt at <span style="color:#ae81ff">0x7fabfe4c4f50</span>, file <span style="color:#e6db74">&#34;&lt;string&gt;&#34;</span>, line <span style="color:#ae81ff">128</span><span style="color:#f92672">&gt;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">510</span> LOAD_CONST             <span style="color:#ae81ff">113</span> (<span style="color:#e6db74">&#39;encrypt&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">512</span> MAKE_FUNCTION            <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">514</span> STORE_NAME              <span style="color:#ae81ff">16</span> (encrypt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">140</span>         <span style="color:#ae81ff">516</span> LOAD_NAME               <span style="color:#ae81ff">16</span> (encrypt)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">518</span> LOAD_NAME                <span style="color:#ae81ff">9</span> (enc_flag)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">520</span> CALL_FUNCTION            <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">522</span> STORE_NAME              <span style="color:#ae81ff">17</span> (dec_flag)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">141</span>         <span style="color:#ae81ff">524</span> LOAD_NAME                <span style="color:#ae81ff">5</span> (sha256)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">526</span> LOAD_NAME               <span style="color:#ae81ff">17</span> (dec_flag)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">528</span> CALL_FUNCTION            <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">530</span> LOAD_METHOD             <span style="color:#ae81ff">18</span> (digest)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">532</span> CALL_METHOD              <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">534</span> STORE_NAME              <span style="color:#ae81ff">19</span> (h)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">143</span>         <span style="color:#ae81ff">536</span> LOAD_NAME               <span style="color:#ae81ff">13</span> (int)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">538</span> LOAD_METHOD             <span style="color:#ae81ff">14</span> (from_bytes)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">540</span> LOAD_NAME               <span style="color:#ae81ff">19</span> (h)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">542</span> LOAD_CONST             <span style="color:#ae81ff">111</span> (<span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">544</span> CALL_METHOD              <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">546</span> STORE_NAME              <span style="color:#ae81ff">19</span> (h)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">144</span>         <span style="color:#ae81ff">548</span> LOAD_NAME               <span style="color:#ae81ff">19</span> (h)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">550</span> LOAD_NAME               <span style="color:#ae81ff">10</span> (flag_hash)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">552</span> COMPARE_OP               <span style="color:#ae81ff">2</span> (<span style="color:#f92672">==</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">554</span> EXTENDED_ARG             <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">556</span> POP_JUMP_IF_FALSE      <span style="color:#ae81ff">297</span> (to <span style="color:#ae81ff">594</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">145</span>         <span style="color:#ae81ff">558</span> LOAD_NAME                <span style="color:#ae81ff">7</span> (print)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">560</span> LOAD_CONST             <span style="color:#ae81ff">114</span> (<span style="color:#e6db74">&#39;Correct password: &#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">562</span> LOAD_NAME                <span style="color:#ae81ff">8</span> (passwd)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">564</span> FORMAT_VALUE             <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">566</span> BUILD_STRING             <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">568</span> CALL_FUNCTION            <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">570</span> POP_TOP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">147</span>         <span style="color:#ae81ff">572</span> LOAD_NAME                <span style="color:#ae81ff">7</span> (print)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">574</span> LOAD_CONST             <span style="color:#ae81ff">115</span> (<span style="color:#e6db74">&#39;Flag: &#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">576</span> LOAD_NAME               <span style="color:#ae81ff">17</span> (dec_flag)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">578</span> LOAD_METHOD             <span style="color:#ae81ff">20</span> (decode)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">580</span> CALL_METHOD              <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">582</span> FORMAT_VALUE             <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">584</span> BUILD_STRING             <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">586</span> CALL_FUNCTION            <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">588</span> POP_TOP
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">590</span> LOAD_CONST             <span style="color:#ae81ff">118</span> (<span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">592</span> RETURN_VALUE
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">148</span>     <span style="color:#f92672">&gt;&gt;</span>  <span style="color:#ae81ff">594</span> LOAD_NAME                <span style="color:#ae81ff">7</span> (print)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">596</span> LOAD_CONST             <span style="color:#ae81ff">116</span> (<span style="color:#e6db74">&#39;Wrong password: &#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">598</span> LOAD_NAME                <span style="color:#ae81ff">8</span> (passwd)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">600</span> FORMAT_VALUE             <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">602</span> BUILD_STRING             <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">604</span> CALL_FUNCTION            <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">606</span> POP_TOP
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">608</span> LOAD_NAME                <span style="color:#ae81ff">7</span> (print)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">610</span> LOAD_CONST             <span style="color:#ae81ff">117</span> (<span style="color:#e6db74">&#39;Try again&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">612</span> CALL_FUNCTION            <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">614</span> POP_TOP
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">616</span> LOAD_CONST             <span style="color:#ae81ff">118</span> (<span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">618</span> RETURN_VALUE
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Disassembly of <span style="color:#f92672">&lt;</span>code object encrypt at <span style="color:#ae81ff">0x7fabfe4c4f50</span>, file <span style="color:#e6db74">&#34;&lt;string&gt;&#34;</span>, line <span style="color:#ae81ff">128</span><span style="color:#f92672">&gt;</span>:
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">130</span>           <span style="color:#ae81ff">0</span> LOAD_GLOBAL              <span style="color:#ae81ff">0</span> (pow)
+</span></span><span style="display:flex;"><span>              <span style="color:#ae81ff">2</span> LOAD_FAST                <span style="color:#ae81ff">0</span> (m)
+</span></span><span style="display:flex;"><span>              <span style="color:#ae81ff">4</span> LOAD_GLOBAL              <span style="color:#ae81ff">1</span> (e)
+</span></span><span style="display:flex;"><span>              <span style="color:#ae81ff">6</span> LOAD_GLOBAL              <span style="color:#ae81ff">2</span> (n)
+</span></span><span style="display:flex;"><span>              <span style="color:#ae81ff">8</span> CALL_FUNCTION            <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">10</span> STORE_FAST               <span style="color:#ae81ff">1</span> (c)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">132</span>          <span style="color:#ae81ff">12</span> LOAD_FAST                <span style="color:#ae81ff">1</span> (c)
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">14</span> LOAD_METHOD              <span style="color:#ae81ff">3</span> (to_bytes)
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">16</span> LOAD_FAST                <span style="color:#ae81ff">1</span> (c)
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">18</span> LOAD_METHOD              <span style="color:#ae81ff">4</span> (bit_length)
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">20</span> CALL_METHOD              <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">22</span> LOAD_CONST               <span style="color:#ae81ff">1</span> (<span style="color:#ae81ff">7</span>)
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">24</span> BINARY_ADD
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">26</span> LOAD_CONST               <span style="color:#ae81ff">2</span> (<span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">28</span> BINARY_FLOOR_DIVIDE
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">30</span> LOAD_CONST               <span style="color:#ae81ff">3</span> (<span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">32</span> CALL_METHOD              <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">34</span> RETURN_VALUE
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>Wrong password: <span style="color:#ae81ff">1234567</span>
+</span></span><span style="display:flex;"><span>Try again
+</span></span></code></pre></div><p>From the disassembly output, I create a source code based on it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> math
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> bytes_to_long
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(enc_flag):
+</span></span><span style="display:flex;"><span>	e <span style="color:#f92672">=</span> <span style="color:#ae81ff">100050</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">100052</span>  
+</span></span><span style="display:flex;"><span>	b <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x96</span><span style="color:#e6db74">094</span><span style="color:#ae81ff">\xdc\x1e\xd0\xe0\xa5\xab</span><span style="color:#e6db74">s</span><span style="color:#ae81ff">\x16\xcb</span><span style="color:#e6db74">a</span><span style="color:#ae81ff">\xb5\xed\x04\xa2\xd8\xb0\x86</span><span style="color:#e6db74">_6</span><span style="color:#ae81ff">\xdf\x8c\x81</span><span style="color:#e6db74">G#</span><span style="color:#ae81ff">\xcc\x0b</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\xfe</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x93\xae\x97\xa9</span><span style="color:#e6db74">T</span><span style="color:#ae81ff">\x8d\x99\xe1</span><span style="color:#e6db74">Yj</span><span style="color:#ae81ff">\xf2\xb2\x1e\xcf</span><span style="color:#e6db74">a</span><span style="color:#ae81ff">\x93</span><span style="color:#e6db74">J</span><span style="color:#ae81ff">\xd8\x81\xe9\x1f</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\x84</span><span style="color:#e6db74">T?J</span><span style="color:#ae81ff">\x9f\xaa</span><span style="color:#e6db74">t</span><span style="color:#ae81ff">\x05</span><span style="color:#e6db74">p&gt;</span><span style="color:#ae81ff">\xc8\x12\xf7</span><span style="color:#e6db74">1wh</span><span style="color:#ae81ff">\x13\xef\x9d\x7f\xf7\xcb\x86</span><span style="color:#e6db74">a</span><span style="color:#ae81ff">\x08\xf4</span><span style="color:#e6db74">I</span><span style="color:#ae81ff">\x0f\xa7\x0e\xb9</span><span style="color:#e6db74">re</span><span style="color:#ae81ff">\xd3</span><span style="color:#e6db74">_</span><span style="color:#ae81ff">\xfa\xcd\xd1\xbf</span><span style="color:#e6db74">v</span><span style="color:#ae81ff">\xcf</span><span style="color:#e6db74">B</span><span style="color:#ae81ff">\x9a\x13\xcf</span><span style="color:#e6db74">x</span><span style="color:#ae81ff">\xfd\xb4</span><span style="color:#e6db74">D/</span><span style="color:#ae81ff">\xe9</span><span style="color:#e6db74">14;</span><span style="color:#ae81ff">\xf2</span><span style="color:#e6db74">c</span><span style="color:#ae81ff">\xee\x96</span><span style="color:#e6db74">:</span><span style="color:#ae81ff">\xf8</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\xf9\xf6</span><span style="color:#e6db74">g</span><span style="color:#ae81ff">\x8c\xd3\xfa\xcd\xb1</span><span style="color:#e6db74">3</span><span style="color:#ae81ff">\xb9\xdf\x04</span><span style="color:#e6db74">w</span><span style="color:#ae81ff">\x0c</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xb4\xb6\xf8\x88\x02</span><span style="color:#e6db74">re</span><span style="color:#ae81ff">\xe2</span><span style="color:#e6db74">Oq</span><span style="color:#ae81ff">\xa5</span><span style="color:#e6db74">6</span><span style="color:#ae81ff">\xe1</span><span style="color:#e6db74">v7</span><span style="color:#ae81ff">\x0b\xd2\xe6\xe0\xc4</span><span style="color:#e6db74">+</span><span style="color:#ae81ff">\xb8\xdf</span><span style="color:#e6db74">H</span><span style="color:#ae81ff">\xd9\xa8</span><span style="color:#e6db74">u</span><span style="color:#ae81ff">\x8d\xa1\xd7</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\xd5\xff\x81\xb6\x15\xfc\x89</span><span style="color:#e6db74">a#</span><span style="color:#ae81ff">\xc8</span><span style="color:#e6db74">@</span><span style="color:#ae81ff">\xdc</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\xb0\xa9\x1e\xdc\xe8</span><span style="color:#e6db74">4x</span><span style="color:#ae81ff">\x94\xcb\x8d</span><span style="color:#e6db74">P</span><span style="color:#ae81ff">\x15\x0b</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\x8d</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\x9f\x9c</span><span style="color:#e6db74">HN</span><span style="color:#ae81ff">\xa6\x08</span><span style="color:#e6db74">_</span><span style="color:#ae81ff">\xf0\xc2\x1c</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xd6</span><span style="color:#e6db74">p;</span><span style="color:#ae81ff">\xb1</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\xcf\x94\xf8\x92</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\xdd</span><span style="color:#e6db74">q</span><span style="color:#ae81ff">\xdc</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\xea\xc7\xb6\xff</span><span style="color:#e6db74">N</span><span style="color:#ae81ff">\x06</span><span style="color:#e6db74">AhL</span><span style="color:#ae81ff">\xeb\xb0\xe2\xf7\xdc</span><span style="color:#e6db74">G</span><span style="color:#ae81ff">\x08</span><span style="color:#e6db74">S5</span><span style="color:#ae81ff">\xc2\xaa\xcd</span><span style="color:#e6db74">&lt;J</span><span style="color:#ae81ff">\x99\x8a\xae\xad\xcd</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\x00\x19\x1e</span><span style="color:#e6db74">%x</span><span style="color:#e6db74">}e</span><span style="color:#ae81ff">\x00\xbf</span><span style="color:#e6db74">5</span><span style="color:#ae81ff">\x8d</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>	n <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>from_bytes(b,<span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>	c <span style="color:#f92672">=</span> pow(enc_flag,e,n)
+</span></span><span style="display:flex;"><span>	dec_flag <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>to_bytes(c, math<span style="color:#f92672">.</span>floor(c<span style="color:#f92672">.</span>bit_length() <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">8</span>), <span style="color:#e6db74">&#39;big&#39;</span>)	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> dec_flag
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>flag_hash <span style="color:#f92672">=</span> <span style="color:#ae81ff">14577897362821085283869313971595837572237381973528035997480016212662401635116</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>enc_flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">100051</span>
+</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> encrypt(enc_flag)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>h <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>from_bytes(hashlib<span style="color:#f92672">.</span>sha256(dec_flag)<span style="color:#f92672">.</span>digest(), <span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> h <span style="color:#f92672">==</span> flag_hash:
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;Correct password:&#39;</span>, passwd)
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;Flag:&#39;</span>, dec_flag<span style="color:#f92672">.</span>decode())
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;Wrong password:&#39;</span>, passwd)
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;Try again&#39;</span>)
+</span></span></code></pre></div><p>From the source code, we know that it is performing RSA encryption using <code>enc_flag</code> with the value of <code>100051</code> and later compare with <code>flag_hash</code> to determine whether the provided password is correct.</p>
 <p>At this point, we have to investigate where our input will affect the behavior of the code.</p>
 <p>Before that, looking into <code>code_info</code> output, we see there is a constant is not being used and it looks like typical encrypted blob, so we can assume that its actual position should belong to <code>enc_flag</code>:</p>
-<pre tabindex="0"><code>107: 9711424565004377232685487241741130660537817718394316136522340067127964227885525022420001661646939496718599540608081579347013032655061764133877156925827123786333371798400278520894719018619930240463131452457577184074345537847657937111838070040487887401817080124695053692442303799118926077741439148690994150505024166983196233674022816843702592633467144395379448888439860974578091544834372961055549393844525096383940669190823316777609479779106281969726063297357182244423570155395852153018645790744470507852109998305853670898441956711998028819529790437018901157587797430995171274861607645732279735938817560714148831826813
-</code></pre><p>With some trial &amp; error, we know our third character of input must be <code>k</code> (ASCII value 107) because it will assign the constant value properly to <code>enc_flag</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#ae81ff">107</span>: <span style="color:#ae81ff">9711424565004377232685487241741130660537817718394316136522340067127964227885525022420001661646939496718599540608081579347013032655061764133877156925827123786333371798400278520894719018619930240463131452457577184074345537847657937111838070040487887401817080124695053692442303799118926077741439148690994150505024166983196233674022816843702592633467144395379448888439860974578091544834372961055549393844525096383940669190823316777609479779106281969726063297357182244423570155395852153018645790744470507852109998305853670898441956711998028819529790437018901157587797430995171274861607645732279735938817560714148831826813</span>
+</span></span></code></pre></div><p>With some trial &amp; error, we know our third character of input must be <code>k</code> (ASCII value 107) because it will assign the constant value properly to <code>enc_flag</code>:</p>
 <p><img src="/img/wgmy2022-stable/img1.png" alt="IMG"></p>
 <p>So let&rsquo;s change the <code>stable.py</code>:</p>
-<pre tabindex="0"><code>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[507] = 107
-</code></pre><p>Through more trial &amp; error, we also know that the second and fourth characters entered will affect <code>e1</code> and thus <code>e</code> because:</p>
-<pre tabindex="0"><code>117         484 LOAD_CONST              50 (100050)
-            486 STORE_NAME              11 (e1)
-
-120         488 LOAD_CONST              52 (100052)
-            490 LOAD_NAME               11 (e1)
-            492 BINARY_ADD
-            494 STORE_NAME              12 (e)
-</code></pre><p>In RSA, the most common value of <code>e</code> is <code>65537</code>, so we can assume that the <code>e</code> is using <code>65537</code>. If not, we have to bruteforce with combination of other constants. From the output of <code>code_info</code>, we can use the constants below to get <code>65537</code>:</p>
-<pre tabindex="0"><code>51: 100051
-&lt;SNIP&gt;
-109: -34514
-</code></pre><p>Let&rsquo;s update <code>stable.py</code> again:</p>
-<pre tabindex="0"><code>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[515] = 51
-&lt;SNIP&gt;
-SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[519] = 109
-</code></pre><p>Moving on, after some more investigation, the first byte can be any value and the last three bytes of our input will affect the <code>n</code>, hence we have to bruteforce it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">507</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">107</span>
+</span></span></code></pre></div><p>Through more trial &amp; error, we also know that the second and fourth characters entered will affect <code>e1</code> and thus <code>e</code> because:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#ae81ff">117</span>         <span style="color:#ae81ff">484</span> LOAD_CONST              <span style="color:#ae81ff">50</span> (<span style="color:#ae81ff">100050</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">486</span> STORE_NAME              <span style="color:#ae81ff">11</span> (e1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">120</span>         <span style="color:#ae81ff">488</span> LOAD_CONST              <span style="color:#ae81ff">52</span> (<span style="color:#ae81ff">100052</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">490</span> LOAD_NAME               <span style="color:#ae81ff">11</span> (e1)
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">492</span> BINARY_ADD
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">494</span> STORE_NAME              <span style="color:#ae81ff">12</span> (e)
+</span></span></code></pre></div><p>In RSA, the most common value of <code>e</code> is <code>65537</code>, so we can assume that the <code>e</code> is using <code>65537</code>. If not, we have to bruteforce with combination of other constants. From the output of <code>code_info</code>, we can use the constants below to get <code>65537</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#ae81ff">51</span>: <span style="color:#ae81ff">100051</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>SNIP<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">109</span>: <span style="color:#f92672">-</span><span style="color:#ae81ff">34514</span>
+</span></span></code></pre></div><p>Let&rsquo;s update <code>stable.py</code> again:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">515</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>SNIP<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>SFBE2D5Q64KKE3V6ID5E7IY34DKU3IH47JQRIPAEQ2776MF2UBZOTS2II3[<span style="color:#ae81ff">519</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">109</span>
+</span></span></code></pre></div><p>Moving on, after some more investigation, the first byte can be any value and the last three bytes of our input will affect the <code>n</code>, hence we have to bruteforce it.</p>
 <p>With these information obtained, we can write a script to decrypt it:</p>
-<pre tabindex="0"><code>from Crypto.Util.number import long_to_bytes
-import tqdm
-
-c = 9711424565004377232685487241741130660537817718394316136522340067127964227885525022420001661646939496718599540608081579347013032655061764133877156925827123786333371798400278520894719018619930240463131452457577184074345537847657937111838070040487887401817080124695053692442303799118926077741439148690994150505024166983196233674022816843702592633467144395379448888439860974578091544834372961055549393844525096383940669190823316777609479779106281969726063297357182244423570155395852153018645790744470507852109998305853670898441956711998028819529790437018901157587797430995171274861607645732279735938817560714148831826813
-
-for b1 in tqdm.tqdm(range(255)):
-	for b2 in range(255):
-		for b3 in range(255):
-			b = b&#39;\x96094\xdc\x1e\xd0\xe0\xa5\xabs\x16\xcb&#39; + b1.to_bytes(1,&#39;little&#39;) + b&#39;\xb5\xed\x04\xa2\xd8\xb0\x86_6\xdf\x8c\x81G#\xcc\x0b8\xfe[\x93\xae\x97\xa9T\x8d\x99\xe1Yj\xf2\xb2\x1e\xcf&#39; + b2.to_bytes(1,&#39;little&#39;) +  b&#39;\x93J\xd8\x81\xe9\x1fO\x84T?J\x9f\xaat\x05p&gt;\xc8\x12\xf71wh\x13\xef\x9d\x7f\xf7\xcb\x86&#39; + b3.to_bytes(1,&#39;little&#39;) + b&#39;\x08\xf4I\x0f\xa7\x0e\xb9re\xd3_\xfa\xcd\xd1\xbfv\xcfB\x9a\x13\xcfx\xfd\xb4D/\xe914;\xf2c\xee\x96:\xf8 \xf9\xf6g\x8c\xd3\xfa\xcd\xb13\xb9\xdf\x04w\x0cF\xb4\xb6\xf8\x88\x02re\xe2Oq\xa56\xe1v7\x0b\xd2\xe6\xe0\xc4+\xb8\xdfH\xd9\xa8u\x8d\xa1\xd7]\xd5\xff\x81\xb6\x15\xfc\x89a#\xc8@\xdc,\xb0\xa9\x1e\xdc\xe84x\x94\xcb\x8dP\x15\x0br\x8d8\x9f\x9cHN\xa6\x08_\xf0\xc2\x1cF\xd6p;\xb1r\xcf\x94\xf8\x92]\xddq\xdc?\xea\xc7\xb6\xffN\x06AhL\xeb\xb0\xe2\xf7\xdcG\x08S5\xc2\xaa\xcd&lt;J\x99\x8a\xae\xad\xcdO\x00\x19\x1e%x}e\x00\xbf5\x8d&#39;
-			n = int.from_bytes(b,&#39;big&#39;)
-
-			e = 0x10001
-			m = pow(c,e,n)
-			flag = long_to_bytes(m)
-
-			if b&#34;wgmy&#34; in flag:
-				print(flag)
-</code></pre><p>After some while, we will get the flag:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> long_to_bytes
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> tqdm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#ae81ff">9711424565004377232685487241741130660537817718394316136522340067127964227885525022420001661646939496718599540608081579347013032655061764133877156925827123786333371798400278520894719018619930240463131452457577184074345537847657937111838070040487887401817080124695053692442303799118926077741439148690994150505024166983196233674022816843702592633467144395379448888439860974578091544834372961055549393844525096383940669190823316777609479779106281969726063297357182244423570155395852153018645790744470507852109998305853670898441956711998028819529790437018901157587797430995171274861607645732279735938817560714148831826813</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> b1 <span style="color:#f92672">in</span> tqdm<span style="color:#f92672">.</span>tqdm(range(<span style="color:#ae81ff">255</span>)):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> b2 <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">255</span>):
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> b3 <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">255</span>):
+</span></span><span style="display:flex;"><span>			b <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x96</span><span style="color:#e6db74">094</span><span style="color:#ae81ff">\xdc\x1e\xd0\xe0\xa5\xab</span><span style="color:#e6db74">s</span><span style="color:#ae81ff">\x16\xcb</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> b1<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;little&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xb5\xed\x04\xa2\xd8\xb0\x86</span><span style="color:#e6db74">_6</span><span style="color:#ae81ff">\xdf\x8c\x81</span><span style="color:#e6db74">G#</span><span style="color:#ae81ff">\xcc\x0b</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\xfe</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x93\xae\x97\xa9</span><span style="color:#e6db74">T</span><span style="color:#ae81ff">\x8d\x99\xe1</span><span style="color:#e6db74">Yj</span><span style="color:#ae81ff">\xf2\xb2\x1e\xcf</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> b2<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;little&#39;</span>) <span style="color:#f92672">+</span>  <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x93</span><span style="color:#e6db74">J</span><span style="color:#ae81ff">\xd8\x81\xe9\x1f</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\x84</span><span style="color:#e6db74">T?J</span><span style="color:#ae81ff">\x9f\xaa</span><span style="color:#e6db74">t</span><span style="color:#ae81ff">\x05</span><span style="color:#e6db74">p&gt;</span><span style="color:#ae81ff">\xc8\x12\xf7</span><span style="color:#e6db74">1wh</span><span style="color:#ae81ff">\x13\xef\x9d\x7f\xf7\xcb\x86</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> b3<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;little&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x08\xf4</span><span style="color:#e6db74">I</span><span style="color:#ae81ff">\x0f\xa7\x0e\xb9</span><span style="color:#e6db74">re</span><span style="color:#ae81ff">\xd3</span><span style="color:#e6db74">_</span><span style="color:#ae81ff">\xfa\xcd\xd1\xbf</span><span style="color:#e6db74">v</span><span style="color:#ae81ff">\xcf</span><span style="color:#e6db74">B</span><span style="color:#ae81ff">\x9a\x13\xcf</span><span style="color:#e6db74">x</span><span style="color:#ae81ff">\xfd\xb4</span><span style="color:#e6db74">D/</span><span style="color:#ae81ff">\xe9</span><span style="color:#e6db74">14;</span><span style="color:#ae81ff">\xf2</span><span style="color:#e6db74">c</span><span style="color:#ae81ff">\xee\x96</span><span style="color:#e6db74">:</span><span style="color:#ae81ff">\xf8</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\xf9\xf6</span><span style="color:#e6db74">g</span><span style="color:#ae81ff">\x8c\xd3\xfa\xcd\xb1</span><span style="color:#e6db74">3</span><span style="color:#ae81ff">\xb9\xdf\x04</span><span style="color:#e6db74">w</span><span style="color:#ae81ff">\x0c</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xb4\xb6\xf8\x88\x02</span><span style="color:#e6db74">re</span><span style="color:#ae81ff">\xe2</span><span style="color:#e6db74">Oq</span><span style="color:#ae81ff">\xa5</span><span style="color:#e6db74">6</span><span style="color:#ae81ff">\xe1</span><span style="color:#e6db74">v7</span><span style="color:#ae81ff">\x0b\xd2\xe6\xe0\xc4</span><span style="color:#e6db74">+</span><span style="color:#ae81ff">\xb8\xdf</span><span style="color:#e6db74">H</span><span style="color:#ae81ff">\xd9\xa8</span><span style="color:#e6db74">u</span><span style="color:#ae81ff">\x8d\xa1\xd7</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\xd5\xff\x81\xb6\x15\xfc\x89</span><span style="color:#e6db74">a#</span><span style="color:#ae81ff">\xc8</span><span style="color:#e6db74">@</span><span style="color:#ae81ff">\xdc</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\xb0\xa9\x1e\xdc\xe8</span><span style="color:#e6db74">4x</span><span style="color:#ae81ff">\x94\xcb\x8d</span><span style="color:#e6db74">P</span><span style="color:#ae81ff">\x15\x0b</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\x8d</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\x9f\x9c</span><span style="color:#e6db74">HN</span><span style="color:#ae81ff">\xa6\x08</span><span style="color:#e6db74">_</span><span style="color:#ae81ff">\xf0\xc2\x1c</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xd6</span><span style="color:#e6db74">p;</span><span style="color:#ae81ff">\xb1</span><span style="color:#e6db74">r</span><span style="color:#ae81ff">\xcf\x94\xf8\x92</span><span style="color:#e6db74">]</span><span style="color:#ae81ff">\xdd</span><span style="color:#e6db74">q</span><span style="color:#ae81ff">\xdc</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\xea\xc7\xb6\xff</span><span style="color:#e6db74">N</span><span style="color:#ae81ff">\x06</span><span style="color:#e6db74">AhL</span><span style="color:#ae81ff">\xeb\xb0\xe2\xf7\xdc</span><span style="color:#e6db74">G</span><span style="color:#ae81ff">\x08</span><span style="color:#e6db74">S5</span><span style="color:#ae81ff">\xc2\xaa\xcd</span><span style="color:#e6db74">&lt;J</span><span style="color:#ae81ff">\x99\x8a\xae\xad\xcd</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\x00\x19\x1e</span><span style="color:#e6db74">%x</span><span style="color:#e6db74">}e</span><span style="color:#ae81ff">\x00\xbf</span><span style="color:#e6db74">5</span><span style="color:#ae81ff">\x8d</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>			n <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>from_bytes(b,<span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			e <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x10001</span>
+</span></span><span style="display:flex;"><span>			m <span style="color:#f92672">=</span> pow(c,e,n)
+</span></span><span style="display:flex;"><span>			flag <span style="color:#f92672">=</span> long_to_bytes(m)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;wgmy&#34;</span> <span style="color:#f92672">in</span> flag:
+</span></span><span style="display:flex;"><span>				print(flag)
+</span></span></code></pre></div><p>After some while, we will get the flag:</p>
 <p><img src="/img/wgmy2022-stable/img2.png" alt="IMG"></p>
 <h3 id="flag">Flag:</h3>
 <pre tabindex="0"><code>wgmy{bc2d2a189608a8614e99afdd49bc5c49}

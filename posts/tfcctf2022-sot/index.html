@@ -108,108 +108,108 @@ This challenge provided a zip file." />
 <pre tabindex="0"><code>exiftool -time:all *
 </code></pre><p><img src="/img/tfcctf2022-SOT/img2.png" alt="IMG"></p>
 <p>I rearrange each barcode image based on its <code>Date/Time Original</code> in ascending order, create an array of dictionary that use barcode image file name as the key to its corresponding character, then print out the flag. Below is the code in Python (The number in front of &lsquo;/&rsquo; in each value of <code>flag</code> array representing the folder, which can be ignore as I mentioned earlier it is no needed):</p>
-<pre tabindex="0"><code>#!/usr/bin/env python3
-
-flag = [
-&#34;0/738c81a3-4036-4553-8c8d-065b7f490b6a&#34;,
-&#34;4/a46480fd-2887-4511-8e00-bbadf75b3903&#34;,
-&#34;5/a3625a77-7256-4432-9e8c-bce622ebf794&#34;,
-&#34;3/4121557f-07a5-4bb1-aaff-33336b96af95&#34;,
-&#34;5/799699d2-a58c-4660-abb1-d319d03bfb9d&#34;,
-&#34;4/d571120d-04b9-4333-84f0-e107b1e12b7b&#34;,
-&#34;5/28e722f0-1976-4300-9120-4118c532ff3a&#34;,
-&#34;5/aa908f25-a4b7-43d7-8c73-c6a26389cc77&#34;,
-&#34;4/21f23511-e468-47c5-986a-bc4a7afeaee8&#34;,
-&#34;5/ccdf60e1-a4d3-4755-b593-55d50c7b9a9e&#34;,
-&#34;4/29983b58-a220-4e68-9b2e-640ea15d7f41&#34;,
-&#34;5/51fb3d97-5ac4-4a46-b3a7-7bbca4384330&#34;,
-&#34;5/f74540a4-4949-4593-8cc0-c1ed13948d29&#34;,
-&#34;5/4807f95f-4298-43ca-a903-2795fbaeb5a4&#34;,
-&#34;4/7b14249f-0415-4b67-a5fc-85ad7973e98c&#34;,
-&#34;3/efc0700f-a0cf-40df-a6b7-41a3ad918e8d&#34;,
-&#34;3/f678e654-4498-4779-b5aa-7907296c6c49&#34;,
-&#34;5/a41a3d86-c630-4a88-9a13-ecba0091cbf8&#34;,
-&#34;5/699cd577-fcb1-4300-9611-af5d7a9d3d94&#34;,
-&#34;5/6eb25f88-d8b4-4f16-abca-5e9a3b53e11a&#34;,
-&#34;4/b9ad444f-5e2d-4ba5-869d-644f2d15cbf2&#34;,
-&#34;5/08ca58ac-dc06-41ad-a5e4-77ddc02d4b20&#34;,
-&#34;1/8ecd8915-445e-45b3-abf7-b4c81328ad8b&#34;,
-&#34;4/e5ae597e-7b8e-4f2d-824e-f9d2e066fedc&#34;,
-&#34;5/14f09500-eb58-4865-aca2-46e44160342f&#34;,
-&#34;5/37c40e16-c47d-4906-a081-12abb822380a&#34;,
-&#34;4/0e96ab5d-9e6f-47ba-8764-c20fbfcdc863&#34;,
-&#34;2/f8729933-e455-4a2d-84da-263c7d613179&#34;,
-&#34;5/1ddb3879-5b8e-4257-ad96-48c2c842dc80&#34;,
-&#34;5/01fd7c26-3de2-49f7-bd11-43dd0c09491b&#34;,
-&#34;4/02709749-7fd8-4d9a-a605-70ddcafb973a&#34;,
-&#34;3/45f2a087-a284-4add-8ee1-11ce8763ce3a&#34;,
-&#34;2/8441be40-f1b0-4c06-88fc-168c1544f7a5&#34;,
-&#34;2/2d42e973-89a4-473f-9bf9-3130d0a64f5b&#34;,
-&#34;3/77e8955d-745c-4d05-b84c-7cf394e247cb&#34;,
-&#34;1/8c9379b3-8dd8-4b49-891e-7d36fc7d9255&#34;,
-&#34;5/b2191064-5ca8-46cc-863a-da02b43c3307&#34;,
-&#34;5/90f1bf22-1c4d-45b8-b227-f0835df30865&#34;,
-&#34;4/39863c09-afa2-4e56-af1d-bf1c630f96a7&#34;,
-&#34;4/ace7f990-ac9b-442d-a80a-5469c1599995&#34;,
-&#34;3/a999e5d9-66ff-475c-a2b2-5f5e1913d9d2&#34;,
-&#34;4/25293981-e030-44c7-a918-f7fe3e07f33b&#34;,
-]
-
-database = [{
-	&#34;738c81a3-4036-4553-8c8d-065b7f490b6a&#34;:&#34;}&#34;	
-},{
-	&#34;8c9379b3-8dd8-4b49-891e-7d36fc7d9255&#34;:&#34;{&#34;,
-	&#34;8ecd8915-445e-45b3-abf7-b4c81328ad8b&#34;:&#34;n&#34;,
-},{
-	&#34;2d42e973-89a4-473f-9bf9-3130d0a64f5b&#34;:&#34;3&#34;,
-	&#34;8441be40-f1b0-4c06-88fc-168c1544f7a5&#34;:&#34;c&#34;,
-	&#34;f8729933-e455-4a2d-84da-263c7d613179&#34;:&#34;_&#34;,
-},{
-	&#34;45f2a087-a284-4add-8ee1-11ce8763ce3a&#34;:&#34;r&#34;,
-	&#34;77e8955d-745c-4d05-b84c-7cf394e247cb&#34;:&#34;5&#34;,
-	&#34;4121557f-07a5-4bb1-aaff-33336b96af95&#34;:&#34;1&#34;,
-	&#34;a999e5d9-66ff-475c-a2b2-5f5e1913d9d2&#34;:&#34;F&#34;,
-	&#34;efc0700f-a0cf-40df-a6b7-41a3ad918e8d&#34;:&#34;n&#34;,
-	&#34;f678e654-4498-4779-b5aa-7907296c6c49&#34;:&#34;3&#34;,
-},{
-	&#34;0e96ab5d-9e6f-47ba-8764-c20fbfcdc863&#34;:&#34;0&#34;,
-	&#34;7b14249f-0415-4b67-a5fc-85ad7973e98c&#34;:&#34;7&#34;,
-	&#34;21f23511-e468-47c5-986a-bc4a7afeaee8&#34;:&#34;l&#34;,
-	&#34;29983b58-a220-4e68-9b2e-640ea15d7f41&#34;:&#34;v&#34;,
-	&#34;39863c09-afa2-4e56-af1d-bf1c630f96a7&#34;:&#34;C&#34;,
-	&#34;02709749-7fd8-4d9a-a605-70ddcafb973a&#34;:&#34;3&#34;,
-	&#34;25293981-e030-44c7-a918-f7fe3e07f33b&#34;:&#34;T&#34;,
-	&#34;a46480fd-2887-4511-8e00-bbadf75b3903&#34;:&#34;n&#34;,
-	&#34;ace7f990-ac9b-442d-a80a-5469c1599995&#34;:&#34;C&#34;,
-	&#34;b9ad444f-5e2d-4ba5-869d-644f2d15cbf2&#34;:&#34;4&#34;,
-	&#34;d571120d-04b9-4333-84f0-e107b1e12b7b&#34;:&#34;4&#34;,
-	&#34;e5ae597e-7b8e-4f2d-824e-f9d2e066fedc&#34;:&#34;4&#34;,
-},{
-	&#34;1ddb3879-5b8e-4257-ad96-48c2c842dc80&#34;:&#34;5&#34;,
-	&#34;01fd7c26-3de2-49f7-bd11-43dd0c09491b&#34;:&#34;7&#34;,
-	&#34;6eb25f88-d8b4-4f16-abca-5e9a3b53e11a&#34;:&#34;n&#34;,
-	&#34;08ca58ac-dc06-41ad-a5e4-77ddc02d4b20&#34;:&#34;_&#34;,
-	&#34;14f09500-eb58-4865-aca2-46e44160342f&#34;:&#34;_&#34;,
-	&#34;28e722f0-1976-4300-9120-4118c532ff3a&#34;:&#34;z&#34;,
-	&#34;37c40e16-c47d-4906-a081-12abb822380a&#34;:&#34;f&#34;,
-	&#34;51fb3d97-5ac4-4a46-b3a7-7bbca4384330&#34;:&#34;1&#34;,
-	&#34;90f1bf22-1c4d-45b8-b227-f0835df30865&#34;:&#34;T&#34;,
-	&#34;699cd577-fcb1-4300-9611-af5d7a9d3d94&#34;:&#34;c&#34;,
-	&#34;4807f95f-4298-43ca-a903-2795fbaeb5a4&#34;:&#34;_&#34;,
-	&#34;799699d2-a58c-4660-abb1-d319d03bfb9d&#34;:&#34;7&#34;,
-	&#34;a41a3d86-c630-4a88-9a13-ecba0091cbf8&#34;:&#34;1&#34;,
-	&#34;a3625a77-7256-4432-9e8c-bce622ebf794&#34;:&#34;0&#34;,
-	&#34;aa908f25-a4b7-43d7-8c73-c6a26389cc77&#34;:&#34;1&#34;,
-	&#34;b2191064-5ca8-46cc-863a-da02b43c3307&#34;:&#34;F&#34;,
-	&#34;ccdf60e1-a4d3-4755-b593-55d50c7b9a9e&#34;:&#34;1&#34;,
-	&#34;f74540a4-4949-4593-8cc0-c1ed13948d29&#34;:&#34;c&#34;
-}]
-
-for c in flag[::-1]:
-	idx = int(c.split(&#34;/&#34;)[0])
-	key = c.split(&#34;/&#34;)[1]
-	print(database[idx][key], end=&#34;&#34;)
-</code></pre><p>Flag:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;0/738c81a3-4036-4553-8c8d-065b7f490b6a&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/a46480fd-2887-4511-8e00-bbadf75b3903&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/a3625a77-7256-4432-9e8c-bce622ebf794&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;3/4121557f-07a5-4bb1-aaff-33336b96af95&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/799699d2-a58c-4660-abb1-d319d03bfb9d&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/d571120d-04b9-4333-84f0-e107b1e12b7b&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/28e722f0-1976-4300-9120-4118c532ff3a&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/aa908f25-a4b7-43d7-8c73-c6a26389cc77&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/21f23511-e468-47c5-986a-bc4a7afeaee8&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/ccdf60e1-a4d3-4755-b593-55d50c7b9a9e&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/29983b58-a220-4e68-9b2e-640ea15d7f41&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/51fb3d97-5ac4-4a46-b3a7-7bbca4384330&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/f74540a4-4949-4593-8cc0-c1ed13948d29&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/4807f95f-4298-43ca-a903-2795fbaeb5a4&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/7b14249f-0415-4b67-a5fc-85ad7973e98c&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;3/efc0700f-a0cf-40df-a6b7-41a3ad918e8d&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;3/f678e654-4498-4779-b5aa-7907296c6c49&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/a41a3d86-c630-4a88-9a13-ecba0091cbf8&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/699cd577-fcb1-4300-9611-af5d7a9d3d94&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/6eb25f88-d8b4-4f16-abca-5e9a3b53e11a&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/b9ad444f-5e2d-4ba5-869d-644f2d15cbf2&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/08ca58ac-dc06-41ad-a5e4-77ddc02d4b20&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;1/8ecd8915-445e-45b3-abf7-b4c81328ad8b&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/e5ae597e-7b8e-4f2d-824e-f9d2e066fedc&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/14f09500-eb58-4865-aca2-46e44160342f&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/37c40e16-c47d-4906-a081-12abb822380a&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/0e96ab5d-9e6f-47ba-8764-c20fbfcdc863&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;2/f8729933-e455-4a2d-84da-263c7d613179&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/1ddb3879-5b8e-4257-ad96-48c2c842dc80&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/01fd7c26-3de2-49f7-bd11-43dd0c09491b&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/02709749-7fd8-4d9a-a605-70ddcafb973a&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;3/45f2a087-a284-4add-8ee1-11ce8763ce3a&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;2/8441be40-f1b0-4c06-88fc-168c1544f7a5&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;2/2d42e973-89a4-473f-9bf9-3130d0a64f5b&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;3/77e8955d-745c-4d05-b84c-7cf394e247cb&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;1/8c9379b3-8dd8-4b49-891e-7d36fc7d9255&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/b2191064-5ca8-46cc-863a-da02b43c3307&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5/90f1bf22-1c4d-45b8-b227-f0835df30865&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/39863c09-afa2-4e56-af1d-bf1c630f96a7&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/ace7f990-ac9b-442d-a80a-5469c1599995&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;3/a999e5d9-66ff-475c-a2b2-5f5e1913d9d2&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;4/25293981-e030-44c7-a918-f7fe3e07f33b&#34;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>database <span style="color:#f92672">=</span> [{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;738c81a3-4036-4553-8c8d-065b7f490b6a&#34;</span>:<span style="color:#e6db74">&#34;}&#34;</span>	
+</span></span><span style="display:flex;"><span>},{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;8c9379b3-8dd8-4b49-891e-7d36fc7d9255&#34;</span>:<span style="color:#e6db74">&#34;{&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;8ecd8915-445e-45b3-abf7-b4c81328ad8b&#34;</span>:<span style="color:#e6db74">&#34;n&#34;</span>,
+</span></span><span style="display:flex;"><span>},{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;2d42e973-89a4-473f-9bf9-3130d0a64f5b&#34;</span>:<span style="color:#e6db74">&#34;3&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;8441be40-f1b0-4c06-88fc-168c1544f7a5&#34;</span>:<span style="color:#e6db74">&#34;c&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;f8729933-e455-4a2d-84da-263c7d613179&#34;</span>:<span style="color:#e6db74">&#34;_&#34;</span>,
+</span></span><span style="display:flex;"><span>},{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;45f2a087-a284-4add-8ee1-11ce8763ce3a&#34;</span>:<span style="color:#e6db74">&#34;r&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;77e8955d-745c-4d05-b84c-7cf394e247cb&#34;</span>:<span style="color:#e6db74">&#34;5&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;4121557f-07a5-4bb1-aaff-33336b96af95&#34;</span>:<span style="color:#e6db74">&#34;1&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;a999e5d9-66ff-475c-a2b2-5f5e1913d9d2&#34;</span>:<span style="color:#e6db74">&#34;F&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;efc0700f-a0cf-40df-a6b7-41a3ad918e8d&#34;</span>:<span style="color:#e6db74">&#34;n&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;f678e654-4498-4779-b5aa-7907296c6c49&#34;</span>:<span style="color:#e6db74">&#34;3&#34;</span>,
+</span></span><span style="display:flex;"><span>},{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;0e96ab5d-9e6f-47ba-8764-c20fbfcdc863&#34;</span>:<span style="color:#e6db74">&#34;0&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;7b14249f-0415-4b67-a5fc-85ad7973e98c&#34;</span>:<span style="color:#e6db74">&#34;7&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;21f23511-e468-47c5-986a-bc4a7afeaee8&#34;</span>:<span style="color:#e6db74">&#34;l&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;29983b58-a220-4e68-9b2e-640ea15d7f41&#34;</span>:<span style="color:#e6db74">&#34;v&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;39863c09-afa2-4e56-af1d-bf1c630f96a7&#34;</span>:<span style="color:#e6db74">&#34;C&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;02709749-7fd8-4d9a-a605-70ddcafb973a&#34;</span>:<span style="color:#e6db74">&#34;3&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;25293981-e030-44c7-a918-f7fe3e07f33b&#34;</span>:<span style="color:#e6db74">&#34;T&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;a46480fd-2887-4511-8e00-bbadf75b3903&#34;</span>:<span style="color:#e6db74">&#34;n&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;ace7f990-ac9b-442d-a80a-5469c1599995&#34;</span>:<span style="color:#e6db74">&#34;C&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;b9ad444f-5e2d-4ba5-869d-644f2d15cbf2&#34;</span>:<span style="color:#e6db74">&#34;4&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;d571120d-04b9-4333-84f0-e107b1e12b7b&#34;</span>:<span style="color:#e6db74">&#34;4&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;e5ae597e-7b8e-4f2d-824e-f9d2e066fedc&#34;</span>:<span style="color:#e6db74">&#34;4&#34;</span>,
+</span></span><span style="display:flex;"><span>},{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;1ddb3879-5b8e-4257-ad96-48c2c842dc80&#34;</span>:<span style="color:#e6db74">&#34;5&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;01fd7c26-3de2-49f7-bd11-43dd0c09491b&#34;</span>:<span style="color:#e6db74">&#34;7&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;6eb25f88-d8b4-4f16-abca-5e9a3b53e11a&#34;</span>:<span style="color:#e6db74">&#34;n&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;08ca58ac-dc06-41ad-a5e4-77ddc02d4b20&#34;</span>:<span style="color:#e6db74">&#34;_&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;14f09500-eb58-4865-aca2-46e44160342f&#34;</span>:<span style="color:#e6db74">&#34;_&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;28e722f0-1976-4300-9120-4118c532ff3a&#34;</span>:<span style="color:#e6db74">&#34;z&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;37c40e16-c47d-4906-a081-12abb822380a&#34;</span>:<span style="color:#e6db74">&#34;f&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;51fb3d97-5ac4-4a46-b3a7-7bbca4384330&#34;</span>:<span style="color:#e6db74">&#34;1&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;90f1bf22-1c4d-45b8-b227-f0835df30865&#34;</span>:<span style="color:#e6db74">&#34;T&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;699cd577-fcb1-4300-9611-af5d7a9d3d94&#34;</span>:<span style="color:#e6db74">&#34;c&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;4807f95f-4298-43ca-a903-2795fbaeb5a4&#34;</span>:<span style="color:#e6db74">&#34;_&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;799699d2-a58c-4660-abb1-d319d03bfb9d&#34;</span>:<span style="color:#e6db74">&#34;7&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;a41a3d86-c630-4a88-9a13-ecba0091cbf8&#34;</span>:<span style="color:#e6db74">&#34;1&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;a3625a77-7256-4432-9e8c-bce622ebf794&#34;</span>:<span style="color:#e6db74">&#34;0&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;aa908f25-a4b7-43d7-8c73-c6a26389cc77&#34;</span>:<span style="color:#e6db74">&#34;1&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;b2191064-5ca8-46cc-863a-da02b43c3307&#34;</span>:<span style="color:#e6db74">&#34;F&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;ccdf60e1-a4d3-4755-b593-55d50c7b9a9e&#34;</span>:<span style="color:#e6db74">&#34;1&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;f74540a4-4949-4593-8cc0-c1ed13948d29&#34;</span>:<span style="color:#e6db74">&#34;c&#34;</span>
+</span></span><span style="display:flex;"><span>}]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> flag[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
+</span></span><span style="display:flex;"><span>	idx <span style="color:#f92672">=</span> int(c<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>	key <span style="color:#f92672">=</span> c<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>	print(database[idx][key], end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span></code></pre></div><p>Flag:</p>
 <pre tabindex="0"><code>TFCCTF{53cr375_0f_4n_4nc13n7_c1v1l1z4710n}
 </code></pre>
     </div>

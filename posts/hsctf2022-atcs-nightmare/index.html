@@ -103,19 +103,19 @@ In order to reverse it, we have to reverse the operations with cipher text, link
 <p>But first, let&rsquo;s see what these functions does.</p>
 <h3 id="linkdemlists">linkDemLists()</h3>
 <p>This function is basically iterates input provided starting from the middle of input:</p>
-<pre tabindex="0"><code>ListIterator&lt;Character&gt; iter = lin.listIterator(in.length()/2);
-</code></pre><p>First it check whether the middle of input has next character, if it does, append it to the empty string <code>res</code>:</p>
-<pre tabindex="0"><code>while (iter.hasNext())
-	res += iter.next();
-</code></pre><p>Before:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ListIterator<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">&gt;</span> iter <span style="color:#f92672">=</span> lin<span style="color:#f92672">.</span><span style="color:#a6e22e">listIterator</span><span style="color:#f92672">(</span>in<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">()/</span>2<span style="color:#f92672">);</span>
+</span></span></code></pre></div><p>First it check whether the middle of input has next character, if it does, append it to the empty string <code>res</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>iter<span style="color:#f92672">.</span><span style="color:#a6e22e">hasNext</span><span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>	res <span style="color:#f92672">+=</span> iter<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">();</span>
+</span></span></code></pre></div><p>Before:</p>
 <pre tabindex="0"><code># Staring point: c
 ABCDE
 </code></pre><p>After:</p>
 <pre tabindex="0"><code>CDE
 </code></pre><p>Next it check whether the middle of input has previous character, if it does, append it to the string <code>res</code>:</p>
-<pre tabindex="0"><code>while (iter.hasPrevious())
-	res += iter.previous();
-</code></pre><p>Before:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>iter<span style="color:#f92672">.</span><span style="color:#a6e22e">hasPrevious</span><span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>	res <span style="color:#f92672">+=</span> iter<span style="color:#f92672">.</span><span style="color:#a6e22e">previous</span><span style="color:#f92672">();</span>
+</span></span></code></pre></div><p>Before:</p>
 <pre tabindex="0"><code># Staring point: c
 ABCDE
 </code></pre><p>After:</p>
@@ -135,44 +135,44 @@ ABCDE
 </code></pre><p>After:</p>
 <pre tabindex="0"><code>A@?&gt;A@?&gt;
 </code></pre><p>For your information, the ASCII number of <code>A</code> is 64, <code>@</code> is 64, <code>?</code> is 63, <code>&gt;</code> is 62. And it make sense because of this code:</p>
-<pre tabindex="0"><code>res += (char)(s.pop() - i);
-i = (i + 1) % 4;
-</code></pre><h3 id="solution">Solution</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>res <span style="color:#f92672">+=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">pop</span><span style="color:#f92672">()</span> <span style="color:#f92672">-</span> i<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>i <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> 4<span style="color:#f92672">;</span>
+</span></span></code></pre></div><h3 id="solution">Solution</h3>
 <p>Finally, after knowing what these functions does, we created a script to assist us in reversing:</p>
-<pre tabindex="0"><code>#!/usr/bin/env python3
-ct3 = &#34;20_a1qti0]n/5f642kb\\2`qq4\\0q&#34;
-
-def rev_linkDemLists(ct):
-    ct2 = []
-    for i in range(len(ct)-1, 13, -1):
-        ct2.append(ord(ct[i]))
-    for x in range(0, 14):
-        ct2.append(ord(ct[x]))
-    return ct2
-
-
-def rev_recurses(ct2):
-    ct1 = []
-    i = 13
-    ct1.append(ct2[14])
-    x = 2
-    while i &gt;= 0:
-        ct1.append(ct2[i])
-        if i != 0:
-            ct1.append(ct2[i+x])
-        i -= 1
-        x += 2
-    return ct1
-
-def rev_stackAttack(ct1):
-    ct = []
-    for i in range(len(ct1)):
-        ct.append(ct1[i] + (i % 4))
-    return ct[::-1]
-
-pt = rev_stackAttack(rev_recurses(rev_linkDemLists(ct3)))
-print(&#34;flag{&#34;+&#34;&#34;.join(chr(i) for i in pt)+&#34;}&#34;)
-</code></pre><p>Flag:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>ct3 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;20_a1qti0]n/5f642kb</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">2`qq4</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">0q&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rev_linkDemLists</span>(ct):
+</span></span><span style="display:flex;"><span>    ct2 <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(ct)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">13</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        ct2<span style="color:#f92672">.</span>append(ord(ct[i]))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">14</span>):
+</span></span><span style="display:flex;"><span>        ct2<span style="color:#f92672">.</span>append(ord(ct[x]))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ct2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rev_recurses</span>(ct2):
+</span></span><span style="display:flex;"><span>    ct1 <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>    ct1<span style="color:#f92672">.</span>append(ct2[<span style="color:#ae81ff">14</span>])
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        ct1<span style="color:#f92672">.</span>append(ct2[i])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            ct1<span style="color:#f92672">.</span>append(ct2[i<span style="color:#f92672">+</span>x])
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ct1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rev_stackAttack</span>(ct1):
+</span></span><span style="display:flex;"><span>    ct <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(ct1)):
+</span></span><span style="display:flex;"><span>        ct<span style="color:#f92672">.</span>append(ct1[i] <span style="color:#f92672">+</span> (i <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ct[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pt <span style="color:#f92672">=</span> rev_stackAttack(rev_recurses(rev_linkDemLists(ct3)))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;flag{&#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(chr(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> pt)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;}&#34;</span>)
+</span></span></code></pre></div><p>Flag:</p>
 <pre tabindex="0"><code>flag{th15_15nt_r0ck3t_sc1nc3_7272}
 </code></pre>
     </div>

