@@ -6,7 +6,18 @@
     <description>Recent content in Rev on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/rev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/rev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[VISHWACTF] Ethereal Crackme</title>
+      <link>https://tzion0.github.io/posts/vishwactf2023-etherealcrackme/</link>
+      <pubDate>Sun, 09 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/vishwactf2023-etherealcrackme/</guid>
+      <description>This challenge provided a two windows executable files called HauntedImage.exe and HauntedCursor.exe.
+Please note that I did not solve this challenge during the competition, only solved it after the competition without completely understanding the challenge.
+HauntedImage.exe Analysis Looking at the binary we noticed that it was huge and looks unlikely to be reverse within 1-2 days (atleast for me). Therefore we chose to execute the binary directly, and it will generate a corrupted image called result.</description>
+    </item>
+    
     <item>
       <title>[WGMY] Stable</title>
       <link>https://tzion0.github.io/posts/wgmy2022-stable/</link>
