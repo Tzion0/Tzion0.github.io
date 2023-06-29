@@ -2,22 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://tzion0.github.io/posts/vishwactf2023-etherealcrackme/</loc>
-    <lastmod>2023-04-09T00:00:00+00:00</lastmod>
+    <loc>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</loc>
+    <lastmod>2023-06-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/tags/2023/</loc>
-    <lastmod>2023-04-09T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/bsidestlvctf/</loc>
+    <lastmod>2023-06-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/posts/</loc>
-    <lastmod>2023-04-09T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/tags/rev/</loc>
-    <lastmod>2023-04-09T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/tags/</loc>
-    <lastmod>2023-04-09T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/</loc>
+    <lastmod>2023-06-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/sharingsession/</loc>
+    <lastmod>2023-06-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/posts/ss1/</loc>
+    <lastmod>2023-06-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/posts/vishwactf2023-etherealcrackme/</loc>
     <lastmod>2023-04-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/tags/vishwactf/</loc>

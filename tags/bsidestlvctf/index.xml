@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BSIDESTLVCTF on Tzion</title>
+    <link>https://tzion0.github.io/tags/bsidestlvctf/</link>
+    <description>Recent content in BSIDESTLVCTF on Tzion</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/bsidestlvctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[BSIDESTLVCTF] Tsebrakhn</title>
+      <link>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</link>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</guid>
+      <description>This challenge provided a binary file and a netcat instance.
+Please note that I did not solve this challenge during the competition; instead, I only managed to understand the flow after the CTF by analyzing the correct passcode provided in Slack.
+The correct passcode: AAAAAAAAAAAAAAAAAAAAAAAAAAAAA!se
+Running the binary prompts us for a passcode, making it clear that we need the correct passcode to obtain the flag.
+When loading the binary in IDA, IDA failed to analyze it well, so pressing F5 for decompilation was not possible.</description>
+    </item>
+    
+  </channel>
+</rss>

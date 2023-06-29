@@ -6,7 +6,30 @@
     <description>Recent content in 2023 on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/2023/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/2023/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[BSIDESTLVCTF] Tsebrakhn</title>
+      <link>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</link>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</guid>
+      <description>This challenge provided a binary file and a netcat instance.
+Please note that I did not solve this challenge during the competition; instead, I only managed to understand the flow after the CTF by analyzing the correct passcode provided in Slack.
+The correct passcode: AAAAAAAAAAAAAAAAAAAAAAAAAAAAA!se
+Running the binary prompts us for a passcode, making it clear that we need the correct passcode to obtain the flag.
+When loading the binary in IDA, IDA failed to analyze it well, so pressing F5 for decompilation was not possible.</description>
+    </item>
+    
+    <item>
+      <title>Unlocking Hidden Realms: Heaven&#39;s Gate in Reverse Engineering</title>
+      <link>https://tzion0.github.io/posts/ss1/</link>
+      <pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/ss1/</guid>
+      <description>On 12/6/2023, with the assistance of RE:Hack, I shared about how we can approached Heavens Gate technique in terms of reverse engineering. Interested readers can view the recording below. Enjoy!
+https://www.youtube.com/watch?v=3AeHKtO9mN0</description>
+    </item>
+    
     <item>
       <title>[VISHWACTF] Ethereal Crackme</title>
       <link>https://tzion0.github.io/posts/vishwactf2023-etherealcrackme/</link>
