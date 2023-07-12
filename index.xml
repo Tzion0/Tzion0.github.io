@@ -6,7 +6,17 @@
     <description>Recent content on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[CYDESCTF] Nihongo Wakaranai</title>
+      <link>https://tzion0.github.io/posts/cydesctf2023-nihongowakaranai/</link>
+      <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/cydesctf2023-nihongowakaranai/</guid>
+      <description>This challenge provided an Excel (.xlsx) file. Here is the challenge file.
+Before we get started, I would like to express my heartfelt gratitude to the organizers National Cyber Security Agency Malaysia (NACSA), Velum Labs and the exceptional technical team WargamesMY for their unwavering efforts in organizing the physically conducted Cyber Warzone CTF challenges. Their meticulous planning, flawless execution, and dedication made the event an incredible experience, fostering a vibrant atmosphere of learning and collaboration.</description>
+    </item>
+    
     <item>
       <title>[BSIDESTLVCTF] Tsebrakhn</title>
       <link>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</link>

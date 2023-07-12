@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>[CYDESCTF] Nihongo Wakaranai // Tzion</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.104.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Tzion" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[CYDESCTF] Nihongo Wakaranai"/>
+<meta name="twitter:description" content="This challenge provided an Excel (.xlsx) file. Here is the challenge file.
+Before we get started, I would like to express my heartfelt gratitude to the organizers National Cyber Security Agency Malaysia (NACSA), Velum Labs and the exceptional technical team WargamesMY for their unwavering efforts in organizing the physically conducted Cyber Warzone CTF challenges. Their meticulous planning, flawless execution, and dedication made the event an incredible experience, fostering a vibrant atmosphere of learning and collaboration."/>
+
+    <meta property="og:title" content="[CYDESCTF] Nihongo Wakaranai" />
+<meta property="og:description" content="This challenge provided an Excel (.xlsx) file. Here is the challenge file.
+Before we get started, I would like to express my heartfelt gratitude to the organizers National Cyber Security Agency Malaysia (NACSA), Velum Labs and the exceptional technical team WargamesMY for their unwavering efforts in organizing the physically conducted Cyber Warzone CTF challenges. Their meticulous planning, flawless execution, and dedication made the event an incredible experience, fostering a vibrant atmosphere of learning and collaboration." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tzion0.github.io/posts/cydesctf2023-nihongowakaranai/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-12T00:00:00+00:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tzion0.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Tzion" /></a>
+      <h1>Tzion</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/posts/">Blog</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>Yet Another Infosec Blog, Enjoy!</p>
+      <div class="app-header-social">
+        
+          <a href="https://twitter.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>My Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://github.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">[CYDESCTF] Nihongo Wakaranai</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 12, 2023
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tzion0.github.io/tags/cydesctf/">CYDESCTF</a>
+              <a class="tag" href="https://tzion0.github.io/tags/rev/">Rev</a>
+              <a class="tag" href="https://tzion0.github.io/tags/2023/">2023</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>This challenge provided an Excel (.xlsx) file. <a href="https://github.com/Tzion0/CTF/tree/master/CydesCTF/Nihongo%20Wakaranai">Here</a> is the challenge file.</p>
+<p>Before we get started, I would like to express my heartfelt gratitude to the organizers <strong>National Cyber Security Agency Malaysia (NACSA)</strong>, <strong>Velum Labs</strong> and the exceptional technical team <strong>WargamesMY</strong> for their unwavering efforts in organizing the physically conducted Cyber Warzone CTF challenges. Their meticulous planning, flawless execution, and dedication made the event an incredible experience, fostering a vibrant atmosphere of learning and collaboration. Thanks again for providing us with an opportunity to challenge our skills, expand our knowledge, and create lasting memories.</p>
+<p>Without further ado, let&rsquo;s get started.</p>
+<p>First we are given an xlsx file, we could use <a href="https://blog.didierstevens.com/programs/oledump-py/"><strong>oledump.py</strong></a> by Didier Stevens to analyze it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>python3 oledump.py nihongo.xlsm
+</span></span></code></pre></div><p><img src="/img/cydesctf2023-nihongowakaranai/img1.png" alt="IMG"></p>
+<p>We are particularly interested in those streams contains letter M (stands for VBA Macros), and we can decompress it with following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>python3 oledump.py nihongo.xlsm -s A3 -v &gt; dump.vba
+</span></span></code></pre></div><h4 id="dumpvba-">dump.vba :</h4>
+<pre tabindex="0"><code class="language-vba" data-lang="vba">Attribute VB_Name = &#34;Module1&#34;
+Sub 関数()
+    Dim オレンジ As String
+    オレンジ = &#34;&#34;
+    &#39; スプーン(オレンジ)
+    &#39; ナイフ(オレンジ)
+    &#39; ???(????, 5)
+    &#39; チョコレート(オレンジ)
+    &#39; ???(????)
+    &#39; バニラ(オレンジ)
+    &#39; Finalfunc(オレンジ)
+    If オレンジ = &#34;0716614B7C284F4AA56307E22434B93C&#34; Then
+        MsgBox &#34;おめでとうございます！オレンジをキャプチャしました&#34;
+    Else
+        MsgBox &#34;申し訳ありませんが、オレンジをキャプチャできませんでした。&#34;
+    End If
+End Sub
+
+
+Function Finalfunc(ByVal text As String) As String
+    Dim md5Obj As Object
+    Set md5Obj = CreateObject(&#34;System.Security.Cryptography.MD5CryptoServiceProvider&#34;)
+    
+    Dim encodingObj As Object
+    Set encodingObj = CreateObject(&#34;System.Text.UTF8Encoding&#34;)
+    
+    Dim inputBytes() As Byte
+    inputBytes = encodingObj.GetBytes_4(text)
+    
+    Dim hashBytes() As Byte
+    hashBytes = md5Obj.ComputeHash_2((inputBytes))
+    
+    Dim i As Integer
+    Dim result As String
+    result = &#34;&#34;
+    
+    For i = 0 To UBound(hashBytes)
+        result = result &amp; Right(&#34;0&#34; &amp; Hex(hashBytes(i)), 2)
+    Next i
+    
+    Finalfunc = result
+End Function
+
+
+Function フォーク(ByVal りんご As String) As Byte()
+    Dim mod4, i, k As Integer
+    Dim クワルテット As String
+    Dim デコードバイト() As Byte
+
+    mod4 = Len(りんご) Mod 4
+    If mod4 &lt;&gt; 0 Then
+        りんご = りんご &amp; String(4 - mod4, &#34;=&#34;)
+    End If
+
+    Dim メープル As String
+    メープル = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#34;
+
+    ReDim デコードバイト((Len(りんご) \ 4) * 3 - 1) As Byte
+
+    i = 0
+    Dim j As Variant
+    Do While i &lt; Len(りんご)
+        クワルテット = Mid(りんご, i + 1, 4)
+        i = i + 4
+
+        For k = 1 To 4
+            j = 0
+            j = j Or (InStr(1, メープル, Mid(クワルテット, k, 1)) - 1)
+            If k Mod 4 &lt;&gt; 0 Then
+                j = j * 64
+            End If
+        Next k
+
+        k = (i \ 4 - 1) * 3
+        デコードバイト(k) = j \ 65536
+        j = j And 65535
+
+        If k + 1 &lt; UBound(デコードバイト) Then
+            デコードバイト(k + 1) = j \ 256
+            デコードバイト(k + 2) = j And 255
+        End If
+    Loop
+    
+    Dim objXML As MSXML2.DOMDocument
+    Dim objNode As MSXML2.IXMLDOMElement
+    Set objXML = New MSXML2.DOMDocument
+    Set objNode = objXML.createElement(&#34;b64&#34;)
+    objNode.DataType = &#34;bin.base64&#34;
+    objNode.text = りんご
+    デコードバイト = objNode.nodeTypedValue
+    Set objNode = Nothing
+    Set objXML = Nothing
+
+    フォーク = デコードバイト
+End Function
+
+
+Function いちご(ByVal 入力オレンジ As String) As String
+    Dim パイナップル As String
+    パイナップル = 入力オレンジ
+    パイナップル = Replace(パイナップル, &#34;b&#34;, &#34;a&#34;)
+    いちご = パイナップル
+End Function
+    
+    
+    
+Function バニラ(ByVal 入力オレンジ As String) As String
+    Dim パイナップル As String
+    パイナップル = 入力オレンジ
+    パイナップル = Replace(パイナップル, &#34;z&#34;, &#34;b&#34;)
+    バニラ = パイナップル
+End Function
+    
+    
+    
+Function チョコレート(ByVal 入力オレンジ As String) As String
+    Dim パイナップル As String
+    パイナップル = 入力オレンジ
+    パイナップル = Replace(パイナップル, &#34;a&#34;, &#34;z&#34;)
+    チョコレート = パイナップル
+End Function
+
+
+Function ボウル(ByVal 入力文字列 As String, ByVal キー As Integer) As String
+    Dim エンコードされた文字列 As String
+    Dim i As Integer
+
+    For i = 1 To Len(入力文字列)
+        エンコードされた文字列 = エンコードされた文字列 &amp; Chr(Asc(Mid(入力文字列, i, 1)) Xor キー)
+    Next i
+
+    ボウル = エンコードされた文字列
+End Function
+
+
+
+Function スプーン(ByVal 入力オレンジ As String) As String
+    Dim パイナップル As String
+    パイナップル = &#34;ZnxhYHZ+MjU8ZmZkNmc9PGY8ZzYyMWQ0Mjw8Njc9YGNjPTQzMzN4&#34;
+    スプーン = パイナップル
+End Function
+
+
+
+
+Function ナイフ(ByVal 入力オレンジ As String) As String
+    Dim バイト() As Byte
+    バイト = フォーク(入力オレンジ)
+    ナイフ = StrConv(バイト, vbUnicode)
+End Function
+</code></pre><p>At this point in the competition, I let my teammate Choo to look at it because I&rsquo;m working on another task and he&rsquo;s more familiar with VBA than I am.</p>
+<p>Out of my surprise ChatGPT able to analyze it well, <a href="https://chat.openai.com/share/a4773291-03bb-46ec-a947-08bf7925125d">here</a> is the our conversation with GPT.</p>
+<p>From the conversation we obtained the following code:</p>
+<pre tabindex="0"><code class="language-vba" data-lang="vba">Attribute VB_Name = &#34;Module1&#34;
+
+Sub Main()
+    Dim orange As String
+    orange = &#34;&#34;
+    
+    &#39; DecodeBase64(Orange)
+    &#39; DecodeBase64ToString(Orange)
+    &#39; ???(????, 5)
+    &#39; ReplaceAWithZ(Orange)
+    &#39; ???(????)
+    &#39; ReplaceZWithB(Orange)
+    &#39; CalculateMD5Hash(Orange)
+    
+    If orange = &#34;0716614B7C284F4AA56307E22434B93C&#34; Then
+        MsgBox &#34;Congratulations! Orange captured.&#34;
+    Else
+        MsgBox &#34;Sorry, unable to capture orange.&#34;
+    End If
+End Sub
+
+Function CalculateMD5Hash()
+&lt;SNIP&gt;
+End Function
+
+Function DecodeBase64()
+&lt;SNIP&gt;
+End Function
+
+Function ReplaceBWithA()
+&lt;SNIP&gt;
+End Function
+
+Function ReplaceZWithB()
+&lt;SNIP&gt;
+End Function
+
+Function ReplaceAWithZ()
+&lt;SNIP&gt;
+End Function
+
+Function XOREncryption()
+&lt;SNIP&gt;
+End Function
+
+Function GetHardcodedString()
+&lt;SNIP&gt;
+End Function
+
+Function DecodeBase64ToString()
+&lt;SNIP&gt;
+End Function
+</code></pre><p>Now we have two unknown question mark functions, but the first one appears to be the best candidate for the XOR function, while the second one clearly is the <code>ReplaceBWithA()</code> function because it hasn&rsquo;t been called yet.</p>
+<p>Following the order to decode using CyberChef, <a href="https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)XOR(%7B'option':'Hex','string':'5'%7D,'Standard',false)Find_/_Replace(%7B'option':'Simple%20string','string':'a'%7D,'z',true,false,true,false)Find_/_Replace(%7B'option':'Simple%20string','string':'b'%7D,'a',true,false,true,false)Find_/_Replace(%7B'option':'Regex','string':'z'%7D,'b',true,false,true,false)&amp;input=Wm54aFlIWitNalU4Wm1aa05tYzlQR1k4WnpZeU1XUTBNanc4TmpjOVlHTmpQVFF6TXpONA">here</a> is the recipe, and we will obtain the final flag.</p>
+<h3 id="flag">Flag:</h3>
+<pre tabindex="0"><code>cydes{709ccb3a89c9a374b1799328eff81666}
+</code></pre>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
