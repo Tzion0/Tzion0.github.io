@@ -6,7 +6,19 @@
     <description>Recent content in Posts on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[ACS] Maze</title>
+      <link>https://tzion0.github.io/posts/acs2023-maze/</link>
+      <pubDate>Mon, 27 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tzion0.github.io/posts/acs2023-maze/</guid>
+      <description>This challenge provided a binary called maze compiled with Rust. Executing it tells us that we are dealing with a maze challenge.
+There are 3 methods IMO to solve this:
+Coding Fully dynamic analysis Partial dynamic + static analysis One thing to note is this maze is different with what we can find online, where it used 3 cells instead of 1 cell:
+Therefore online maze solver script like the following won&amp;rsquo;t help much:</description>
+    </item>
+    
     <item>
       <title>[CYDESCTF] Nihongo Wakaranai</title>
       <link>https://tzion0.github.io/posts/cydesctf2023-nihongowakaranai/</link>
