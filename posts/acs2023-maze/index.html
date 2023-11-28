@@ -131,8 +131,8 @@ Therefore online maze solver script like the following won&rsquo;t help much:" /
 <p><img src="/img/acs2023-maze/img6.png" alt="IMG"></p>
 <p>And later <code>r14</code> is being compared with <code>0x1f</code>, we can assume that it is the end.</p>
 <p>So with these info now we have the memory location of our coordinate, our goal coordinate, let&rsquo;s automate this.</p>
-<p>I created 4 panes to execute respective commands:
-<img src="/img/acs2023-maze/img7.png" alt="IMG"></p>
+<p>I created 4 panes to execute respective commands:</p>
+<p><img src="/img/acs2023-maze/img7.png" alt="IMG"></p>
 <ol>
 <li><code>gdbserver</code> pane is to start the gdbserver and append the output (maze) to <code>out.txt</code></li>
 <li><code>teleport.py</code> pane is to automate the teleport:
