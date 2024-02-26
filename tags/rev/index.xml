@@ -1,154 +1,103 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rev on Tzion</title>
+    <title>REV on Tzion</title>
     <link>https://tzion0.github.io/tags/rev/</link>
-    <description>Recent content in Rev on Tzion</description>
+    <description>Recent content in REV on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/rev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/rev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[BI0SCTF] baeBPF</title>
+      <link>https://tzion0.github.io/posts/bi0sctf2024-baebpf/</link>
+      <pubDate>Sun, 25 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://tzion0.github.io/posts/bi0sctf2024-baebpf/</guid>
+      <description>This challenge only provided a instance deployment.&#xA;Please note that I did not solve this challenge during the competition, only solved it by gaining some extra details after the competition.&#xA;Level 1 Connecting to the challenge deployment, we get to choose the following options:&#xA;1. Generate assembly dump 2. cat any file Level 1 Assembly Dump By dumping the assembly, we can see the follow:&#xA;Assembly dump of the program ========================================Asm dump========================================= int syscall__trace_entry_openat(struct pt_regs * ctx): ; struct pt_regs * __ctx = ctx-&amp;gt;di 0: (79) r6 = *(u64 *)(r1 +112) ; int dfd; bpf_probe_read(&amp;amp;dfd, sizeof(dfd), &amp;amp;__ctx-&amp;gt;di) 1: (bf) r3 = r6 2: (07) r3 += 112 3: (bf) r1 = r10 4: (07) r1 += -4 ; int dfd; bpf_probe_read(&amp;amp;dfd, sizeof(dfd), &amp;amp;__ctx-&amp;gt;di) 5: (b7) r2 = 4 6: (85) call bpf_probe_read_compat#-115168 ; const char __user *filename; bpf_probe_read(&amp;amp;filename, sizeof(filename), &amp;amp;__ctx-&amp;gt;si) 7: (bf) r3 = r6 8: (07) r3 += 104 9: (bf) r1 = r10 10: (07) r1 += -16 ; const char __user *filename; bpf_probe_read(&amp;amp;filename, sizeof(filename), &amp;amp;__ctx-&amp;gt;si) 11: (b7) r2 = 8 12: (85) call bpf_probe_read_compat#-115168 ; int flags; bpf_probe_read(&amp;amp;flags, sizeof(flags), &amp;amp;__ctx-&amp;gt;dx) 13: (07) r6 += 96 14: (bf) r1 = r10 15: (07) r1 += -20 ; int flags; bpf_probe_read(&amp;amp;flags, sizeof(flags), &amp;amp;__ctx-&amp;gt;dx) 16: (b7) r2 = 4 17: (bf) r3 = r6 18: (85) call bpf_probe_read_compat#-115168 19: (b7) r6 = 0 20: (73) *(u8 *)(r10 -24) = r6 21: (79) r3 = *(u64 *)(r10 -16) 22: (bf) r1 = r10 23: (07) r1 += -24 24: (b7) r2 = 1 25: (85) call bpf_probe_read_compat#-115168 26: (71) r1 = *(u8 *)(r10 -24) 27: (55) if r1 !</description>
+    </item>
     <item>
       <title>[CYDESCTF] Nihongo Wakaranai</title>
       <link>https://tzion0.github.io/posts/cydesctf2023-nihongowakaranai/</link>
       <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/cydesctf2023-nihongowakaranai/</guid>
-      <description>This challenge provided an Excel (.xlsx) file. Here is the challenge file.
-Before we get started, I would like to express my heartfelt gratitude to the organizers National Cyber Security Agency Malaysia (NACSA), Velum Labs and the exceptional technical team WargamesMY for their unwavering efforts in organizing the physically conducted Cyber Warzone CTF challenges. Their meticulous planning, flawless execution, and dedication made the event an incredible experience, fostering a vibrant atmosphere of learning and collaboration.</description>
+      <description>This challenge provided an Excel (.xlsx) file. Here is the challenge file.&#xA;Before we get started, I would like to express my heartfelt gratitude to the organizers National Cyber Security Agency Malaysia (NACSA), Velum Labs and the exceptional technical team WargamesMY for their unwavering efforts in organizing the physically conducted Cyber Warzone CTF challenges. Their meticulous planning, flawless execution, and dedication made the event an incredible experience, fostering a vibrant atmosphere of learning and collaboration.</description>
     </item>
-    
     <item>
       <title>[BSIDESTLVCTF] Tsebrakhn</title>
       <link>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</link>
       <pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</guid>
-      <description>This challenge provided a binary file and a netcat instance.
-Please note that I did not solve this challenge during the competition; instead, I only managed to understand the flow after the CTF by analyzing the correct passcode provided in Slack.
-The correct passcode: AAAAAAAAAAAAAAAAAAAAAAAAAAAAA!se
-Running the binary prompts us for a passcode, making it clear that we need the correct passcode to obtain the flag.
-When loading the binary in IDA, IDA failed to analyze it well, so pressing F5 for decompilation was not possible.</description>
+      <description>This challenge provided a binary file and a netcat instance.&#xA;Please note that I did not solve this challenge during the competition; instead, I only managed to understand the flow after the CTF by analyzing the correct passcode provided in Slack.&#xA;The correct passcode: AAAAAAAAAAAAAAAAAAAAAAAAAAAAA!se&#xA;Running the binary prompts us for a passcode, making it clear that we need the correct passcode to obtain the flag.&#xA;When loading the binary in IDA, IDA failed to analyze it well, so pressing F5 for decompilation was not possible.</description>
     </item>
-    
     <item>
       <title>Unlocking Hidden Realms: Heaven&#39;s Gate in Reverse Engineering</title>
       <link>https://tzion0.github.io/posts/ss1/</link>
       <pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/ss1/</guid>
-      <description>On 12/6/2023, with the assistance of RE:Hack, I shared about how we can approached Heavens Gate technique in terms of reverse engineering. Interested readers can view the recording below. Enjoy!
-https://www.youtube.com/watch?v=3AeHKtO9mN0</description>
+      <description>On 12/6/2023, with the assistance of RE:Hack, I shared about how we can approached Heavens Gate technique in terms of reverse engineering. Interested readers can view the recording below. Enjoy!&#xA;https://www.youtube.com/watch?v=3AeHKtO9mN0</description>
     </item>
-    
     <item>
       <title>[VISHWACTF] Ethereal Crackme</title>
       <link>https://tzion0.github.io/posts/vishwactf2023-etherealcrackme/</link>
       <pubDate>Sun, 09 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/vishwactf2023-etherealcrackme/</guid>
-      <description>This challenge provided a two windows executable files called HauntedImage.exe and HauntedCursor.exe.
-Please note that I did not solve this challenge during the competition, only solved it after the competition without completely understanding the challenge.
-HauntedImage.exe Analysis Looking at the binary we noticed that it was huge and looks unlikely to be reverse within 1-2 days (atleast for me). Therefore we chose to execute the binary directly, and it will generate a corrupted image called result.</description>
+      <description>This challenge provided a two windows executable files called HauntedImage.exe and HauntedCursor.exe.&#xA;Please note that I did not solve this challenge during the competition, only solved it after the competition without completely understanding the challenge.&#xA;HauntedImage.exe Analysis Looking at the binary we noticed that it was huge and looks unlikely to be reverse within 1-2 days (atleast for me). Therefore we chose to execute the binary directly, and it will generate a corrupted image called result.</description>
     </item>
-    
     <item>
       <title>[WGMY] Stable</title>
       <link>https://tzion0.github.io/posts/wgmy2022-stable/</link>
       <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/wgmy2022-stable/</guid>
-      <description>Task Description This is very unstable, and they say python is a stable language This challenge provided a Python file called stable.py.
-Please note that I did not solve this challenge during the competition, only solved it after the competition with the help of hints. Huge thanks to Catz for the hints.
-Looking into the Python file, we can see it was obfuscated
-arr = vars(__builtins__) BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3 = arr[&amp;#34;\x5f_\u0069\155p\u006fr\u0074\137_&amp;#34;] LZOGJVLBQSWZO7XGEM4T5LXNT4DVYVTI3ITSTEDHBZNDE4ZCLYINMBPIP62 = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&amp;#34;\151\u006esp\x65\U00000063t&amp;#34;) M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ = arr[&amp;#34;v\x61\U00000072\x73&amp;#34;] LQJ5TKYMCG4BOHSKBGROAB6LQAJIHIWDW2HHGCYR6CKT5YERSO6GNHYO2Z = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(LZOGJVLBQSWZO7XGEM4T5LXNT4DVYVTI3ITSTEDHBZNDE4ZCLYINMBPIP62)[&amp;#34;\147\x65\164\x73\U0000006fu\U00000072\u0063e&amp;#34;] HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&amp;#34;\U00000073\u0079s&amp;#34;) XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED = arr[&amp;#34;\x70\162\u0069nt&amp;#34;] ODZYEJDEIBAQOTUP265UQSON5XNQ6K6VU2JLJCE576B5BMAVMJ2GNSN3EH = LQJ5TKYMCG4BOHSKBGROAB6LQAJIHIWDW2HHGCYR6CKT5YERSO6GNHYO2Z(M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[&amp;#34;\x6d\U0000006f\144\x75\u006c\U00000065\163&amp;#34;][&amp;#34;_\U0000005f\u006d\141i\u006e\U0000005f_&amp;#34;]) YQZ5ROM4W3C3E7OPYI6BN4XSGG6CAR76JZYGEV73NP6DEUT5MTQ3IVZGVP = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[&amp;#34;\x61\U00000072g\x76&amp;#34;] ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[&amp;#34;\u0065\x78i\U00000074&amp;#34;] ZWDPZJHUEX4LZK6TNL3X7ABBACBY2XZR4HQR6CDVOFLOOHRWAXZGNYD3OF = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&amp;#34;\x72\u0065&amp;#34;) QI5FPMPNP3FNLBUTFG23VRTIRD3QURRB26DVM5X4GYYEDVFCBJRF3T3AEB = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(ZWDPZJHUEX4LZK6TNL3X7ABBACBY2XZR4HQR6CDVOFLOOHRWAXZGNYD3OF)[&amp;#34;\x66\u0069\156\x64a\U0000006c\x6c&amp;#34;] EBNIQQWVCVPSF2UM5T56XXII7MP4MEGGNICNWZ2WU6HXDQSCRRXJGHMPP6 = QI5FPMPNP3FNLBUTFG23VRTIRD3QURRB26DVM5X4GYYEDVFCBJRF3T3AEB(&amp;#39;_?</description>
+      <description>Task Description This is very unstable, and they say python is a stable language This challenge provided a Python file called stable.py.&#xA;Please note that I did not solve this challenge during the competition, only solved it after the competition with the help of hints. Huge thanks to Catz for the hints.&#xA;Looking into the Python file, we can see it was obfuscated&#xA;arr = vars(__builtins__) BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3 = arr[&amp;#34;\x5f_\u0069\155p\u006fr\u0074\137_&amp;#34;] LZOGJVLBQSWZO7XGEM4T5LXNT4DVYVTI3ITSTEDHBZNDE4ZCLYINMBPIP62 = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&amp;#34;\151\u006esp\x65\U00000063t&amp;#34;) M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ = arr[&amp;#34;v\x61\U00000072\x73&amp;#34;] LQJ5TKYMCG4BOHSKBGROAB6LQAJIHIWDW2HHGCYR6CKT5YERSO6GNHYO2Z = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(LZOGJVLBQSWZO7XGEM4T5LXNT4DVYVTI3ITSTEDHBZNDE4ZCLYINMBPIP62)[&amp;#34;\147\x65\164\x73\U0000006fu\U00000072\u0063e&amp;#34;] HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&amp;#34;\U00000073\u0079s&amp;#34;) XWIIZVLEG5Q7Y6DFZVGHO7SS2H6QXSOZABY3MHW63THWNNF5K7QQ3T5SED = arr[&amp;#34;\x70\162\u0069nt&amp;#34;] ODZYEJDEIBAQOTUP265UQSON5XNQ6K6VU2JLJCE576B5BMAVMJ2GNSN3EH = LQJ5TKYMCG4BOHSKBGROAB6LQAJIHIWDW2HHGCYR6CKT5YERSO6GNHYO2Z(M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[&amp;#34;\x6d\U0000006f\144\x75\u006c\U00000065\163&amp;#34;][&amp;#34;_\U0000005f\u006d\141i\u006e\U0000005f_&amp;#34;]) YQZ5ROM4W3C3E7OPYI6BN4XSGG6CAR76JZYGEV73NP6DEUT5MTQ3IVZGVP = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[&amp;#34;\x61\U00000072g\x76&amp;#34;] ZA5OAQIR5BNYAB6Q4HSLDPFBKIAW3TPT3YXHESXRX4LHMH4FZHTP4Y57RX = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(HZAECZKTOPGGWPUXM6OIA3QEIJ5WVVLB3UY7A2WGCARMXYO5VW7IPQOL4A)[&amp;#34;\u0065\x78i\U00000074&amp;#34;] ZWDPZJHUEX4LZK6TNL3X7ABBACBY2XZR4HQR6CDVOFLOOHRWAXZGNYD3OF = BSE4E6VG6QTGDVKPB2UN7IFD3XOBR4QRQJE5B42XSBPZ6OSZY2ZWJKXQTW3(&amp;#34;\x72\u0065&amp;#34;) QI5FPMPNP3FNLBUTFG23VRTIRD3QURRB26DVM5X4GYYEDVFCBJRF3T3AEB = M6U5WMD4RLDNXPGONTPAGYB5LPFVTJVQ7FMQCF55WENLFC4T2VQ5TMAZ(ZWDPZJHUEX4LZK6TNL3X7ABBACBY2XZR4HQR6CDVOFLOOHRWAXZGNYD3OF)[&amp;#34;\x66\u0069\156\x64a\U0000006c\x6c&amp;#34;] EBNIQQWVCVPSF2UM5T56XXII7MP4MEGGNICNWZ2WU6HXDQSCRRXJGHMPP6 = QI5FPMPNP3FNLBUTFG23VRTIRD3QURRB26DVM5X4GYYEDVFCBJRF3T3AEB(&amp;#39;_?</description>
     </item>
-    
     <item>
       <title>[HSCTF] atcs-nightmare</title>
       <link>https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/</link>
       <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/hsctf2022-atcs-nightmare/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare
-This challenge provided a java source code.
-Looking at the source code, there are 3 functions which are stackAttack, recurses and linkDemLists. The main function is basically taking our flag input, extract the content of flag input, perform operations with functions starting with stackAttack -&amp;gt; recurses -&amp;gt; linkDemLists, then compare with a cipher text to check whether it is correct or not.
-In order to reverse it, we have to reverse the operations with cipher text, linkDemLists -&amp;gt; recurses -&amp;gt; stackAttack.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare&#xA;This challenge provided a java source code.&#xA;Looking at the source code, there are 3 functions which are stackAttack, recurses and linkDemLists. The main function is basically taking our flag input, extract the content of flag input, perform operations with functions starting with stackAttack -&amp;gt; recurses -&amp;gt; linkDemLists, then compare with a cipher text to check whether it is correct or not.&#xA;In order to reverse it, we have to reverse the operations with cipher text, linkDemLists -&amp;gt; recurses -&amp;gt; stackAttack.</description>
     </item>
-    
     <item>
       <title>[HTBCACTF] Snakecode</title>
       <link>https://tzion0.github.io/posts/htbcactf2022-snakecode/</link>
       <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/htbcactf2022-snakecode/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Reversing/Snakecode
-This challenge provided a pyc file.
-First of all, we need to decompile this pyc file. In order to that, we will be using an online decompiler to assist us: https://www.decompiler.com/
-There are also few CLI decompiler tools like uncompyle, decompile3, pycdc where you can use to decompile it.
-After decompile, you will get the python code below:
-# uncompyle6 version 3.7.4 # Python bytecode 2.7 (62211) # Decompiled from: Python 2.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Reversing/Snakecode&#xA;This challenge provided a pyc file.&#xA;First of all, we need to decompile this pyc file. In order to that, we will be using an online decompiler to assist us: https://www.decompiler.com/&#xA;There are also few CLI decompiler tools like uncompyle, decompile3, pycdc where you can use to decompile it.&#xA;After decompile, you will get the python code below:&#xA;# uncompyle6 version 3.7.4 # Python bytecode 2.7 (62211) # Decompiled from: Python 2.</description>
     </item>
-    
     <item>
       <title>[PICOCTF] Reverse Engineering</title>
       <link>https://tzion0.github.io/posts/picoctf2022-rev/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/picoctf2022-rev/</guid>
-      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Reverse_Engineering
-Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 12 Reverse Engineering category challenges in PicoCTF 2022 that i solved.
-file-run1 Description A program has been provided to you, what happens if you try to run it on the command line?
-This challenge provided an executable.
-We just need to execute the executable to obtain the flag.</description>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Reverse_Engineering&#xA;Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 12 Reverse Engineering category challenges in PicoCTF 2022 that i solved.&#xA;file-run1 Description A program has been provided to you, what happens if you try to run it on the command line?&#xA;This challenge provided an executable.&#xA;We just need to execute the executable to obtain the flag.</description>
     </item>
-    
     <item>
       <title>[KNIGHTCTF] Knight Switch Bank</title>
       <link>https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/</link>
       <pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/knightctf2022-knight_switch_bank/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank
-By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.
-The encoding algorithm:
-for (; inpt[i] != &amp;#39;\0&amp;#39;; i = i + 1) { if ((inpt[i] &amp;lt; &amp;#39;A&amp;#39;) || (&amp;#39;M&amp;#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &amp;#39;a&amp;#39;) || (&amp;#39;m&amp;#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &amp;#39;N&amp;#39;) || (&amp;#39;Z&amp;#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &amp;#39;n&amp;#39;) || (&amp;#39;z&amp;#39; &amp;lt; inpt[i])) { temp[i] = inpt[i] + -0x20; } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + &amp;#39;\r&amp;#39;; } } else { temp[i] = inpt[i] + &amp;#39;\r&amp;#39;; } } for (; temp[x] !</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Switch%20Bank&#xA;By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now), encode again and looping through each character of temp to do final comparison with the encoded flag.&#xA;The encoding algorithm:&#xA;for (; inpt[i] != &amp;#39;\0&amp;#39;; i = i + 1) { if ((inpt[i] &amp;lt; &amp;#39;A&amp;#39;) || (&amp;#39;M&amp;#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &amp;#39;a&amp;#39;) || (&amp;#39;m&amp;#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &amp;#39;N&amp;#39;) || (&amp;#39;Z&amp;#39; &amp;lt; inpt[i])) { if ((inpt[i] &amp;lt; &amp;#39;n&amp;#39;) || (&amp;#39;z&amp;#39; &amp;lt; inpt[i])) { temp[i] = inpt[i] + -0x20; } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + -0xd; } } else { temp[i] = inpt[i] + &amp;#39;\r&amp;#39;; } } else { temp[i] = inpt[i] + &amp;#39;\r&amp;#39;; } } for (; temp[x] !</description>
     </item>
-    
     <item>
       <title>[KNIGHTCTF] Knight Vault</title>
       <link>https://tzion0.github.io/posts/knightctf2022-knight_vault/</link>
       <pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/knightctf2022-knight_vault/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Vault
-By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now) and looping through each character of temp to do final comparison with the encoded flag.
-The encoding algorithm:
-for (c = 0; inpt[c] != &amp;#39;\0&amp;#39;; c = c + 1) { temp[c] = inpt[c] + -10; if (temp[c] == &amp;#39;A&amp;#39;) { temp[c] = &amp;#39;*&amp;#39;; } } Now, let&amp;rsquo;s see what&amp;rsquo;s the encoded flag:</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/KnightCTF/2022/Knight%20Vault&#xA;By importing the ELF executable into Ghidra, we quickly noticed that the code will encode our input, store into a variable (We will call it temp by now) and looping through each character of temp to do final comparison with the encoded flag.&#xA;The encoding algorithm:&#xA;for (c = 0; inpt[c] != &amp;#39;\0&amp;#39;; c = c + 1) { temp[c] = inpt[c] + -10; if (temp[c] == &amp;#39;A&amp;#39;) { temp[c] = &amp;#39;*&amp;#39;; } } Now, let&amp;rsquo;s see what&amp;rsquo;s the encoded flag:</description>
     </item>
-    
     <item>
       <title>[K3RN3LCTF] Integrity Checker</title>
       <link>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker
-Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument.
-Apparently the calling function was the cause of error. Let&amp;rsquo;s view its original class:
-Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source file.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker&#xA;Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument.&#xA;Apparently the calling function was the cause of error. Let&amp;rsquo;s view its original class:&#xA;Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source file.</description>
     </item>
-    
     <item>
       <title>[K3RN3LCTF] K3RN3L DROID</title>
       <link>https://tzion0.github.io/posts/k3rn3lctf2022-k3rn3l_droid/</link>
       <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/k3rn3lctf2022-k3rn3l_droid/</guid>
-      <description>Task source : https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/K3RN3L%20DROID
-Our goal is to retrieve the valid pin number to combine with another half of the flag: flag{K3RN3L_DR0ID_%s}
-The only way to view validPinMessage is through valid_pin. We can see label5 is comparing the pinCode and jump to valid_pin if matched. The table below have references for intructions we need.
-Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow jc, jb, jnae CF = 1 carry / below / not above nor equal jnc, jae, jnb CF = 0 not carry / above or equal / not below je, jz ZF = 1 equal / zero jne, jnz ZF = 0 not equal / not zero jbe, jna CF or ZF = 1 below or equal / not above ja, jnbe CF or ZF = 0 above / not below or equal js SF = 1 sign jns SF = 0 not sign jp, jpe PF = 1 parity / parity even jnp, jpo PF = 0 not parity / parity odd jl, jnge SF xor OF = 1 less / not greater nor equal jge, jnl SF xor OF = 0 greater or equal / not less jle, jng (SF xor OF) or ZF = 1 less or equal / not greater jg, jnle (SF xor OF) or ZF = 0 greater / not less nor equal Apparently the length of pinCode was 8:</description>
+      <description>Task source : https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/K3RN3L%20DROID&#xA;Our goal is to retrieve the valid pin number to combine with another half of the flag: flag{K3RN3L_DR0ID_%s}&#xA;The only way to view validPinMessage is through valid_pin. We can see label5 is comparing the pinCode and jump to valid_pin if matched. The table below have references for intructions we need.&#xA;Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow jc, jb, jnae CF = 1 carry / below / not above nor equal jnc, jae, jnb CF = 0 not carry / above or equal / not below je, jz ZF = 1 equal / zero jne, jnz ZF = 0 not equal / not zero jbe, jna CF or ZF = 1 below or equal / not above ja, jnbe CF or ZF = 0 above / not below or equal js SF = 1 sign jns SF = 0 not sign jp, jpe PF = 1 parity / parity even jnp, jpo PF = 0 not parity / parity odd jl, jnge SF xor OF = 1 less / not greater nor equal jge, jnl SF xor OF = 0 greater or equal / not less jle, jng (SF xor OF) or ZF = 1 less or equal / not greater jg, jnle (SF xor OF) or ZF = 0 greater / not less nor equal Apparently the length of pinCode was 8:</description>
     </item>
-    
   </channel>
 </rss>

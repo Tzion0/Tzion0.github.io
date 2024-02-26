@@ -6,62 +6,42 @@
     <description>Recent content in 2023 on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/2023/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/2023/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[ACS] Maze</title>
       <link>https://tzion0.github.io/posts/acs2023-maze/</link>
       <pubDate>Mon, 27 Nov 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/acs2023-maze/</guid>
-      <description>This challenge provided a binary called maze compiled with Rust. Executing it tells us that we are dealing with a maze challenge.
-There are 3 methods IMO to solve this:
-Coding Fully dynamic analysis Partial dynamic + static analysis One thing to note is this maze is different with what we can find online, where it used 3 cells instead of 1 cell:
-Therefore online maze solver script like the following won&amp;rsquo;t help much:</description>
+      <description>This challenge provided a binary called maze compiled with Rust. Executing it tells us that we are dealing with a maze challenge.&#xA;There are 3 methods IMO to solve this:&#xA;Coding Fully dynamic analysis Partial dynamic + static analysis One thing to note is this maze is different with what we can find online, where it used 3 cells instead of 1 cell:&#xA;Therefore online maze solver script like the following won&amp;rsquo;t help much:</description>
     </item>
-    
     <item>
       <title>[CYDESCTF] Nihongo Wakaranai</title>
       <link>https://tzion0.github.io/posts/cydesctf2023-nihongowakaranai/</link>
       <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/cydesctf2023-nihongowakaranai/</guid>
-      <description>This challenge provided an Excel (.xlsx) file. Here is the challenge file.
-Before we get started, I would like to express my heartfelt gratitude to the organizers National Cyber Security Agency Malaysia (NACSA), Velum Labs and the exceptional technical team WargamesMY for their unwavering efforts in organizing the physically conducted Cyber Warzone CTF challenges. Their meticulous planning, flawless execution, and dedication made the event an incredible experience, fostering a vibrant atmosphere of learning and collaboration.</description>
+      <description>This challenge provided an Excel (.xlsx) file. Here is the challenge file.&#xA;Before we get started, I would like to express my heartfelt gratitude to the organizers National Cyber Security Agency Malaysia (NACSA), Velum Labs and the exceptional technical team WargamesMY for their unwavering efforts in organizing the physically conducted Cyber Warzone CTF challenges. Their meticulous planning, flawless execution, and dedication made the event an incredible experience, fostering a vibrant atmosphere of learning and collaboration.</description>
     </item>
-    
     <item>
       <title>[BSIDESTLVCTF] Tsebrakhn</title>
       <link>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</link>
       <pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</guid>
-      <description>This challenge provided a binary file and a netcat instance.
-Please note that I did not solve this challenge during the competition; instead, I only managed to understand the flow after the CTF by analyzing the correct passcode provided in Slack.
-The correct passcode: AAAAAAAAAAAAAAAAAAAAAAAAAAAAA!se
-Running the binary prompts us for a passcode, making it clear that we need the correct passcode to obtain the flag.
-When loading the binary in IDA, IDA failed to analyze it well, so pressing F5 for decompilation was not possible.</description>
+      <description>This challenge provided a binary file and a netcat instance.&#xA;Please note that I did not solve this challenge during the competition; instead, I only managed to understand the flow after the CTF by analyzing the correct passcode provided in Slack.&#xA;The correct passcode: AAAAAAAAAAAAAAAAAAAAAAAAAAAAA!se&#xA;Running the binary prompts us for a passcode, making it clear that we need the correct passcode to obtain the flag.&#xA;When loading the binary in IDA, IDA failed to analyze it well, so pressing F5 for decompilation was not possible.</description>
     </item>
-    
     <item>
       <title>Unlocking Hidden Realms: Heaven&#39;s Gate in Reverse Engineering</title>
       <link>https://tzion0.github.io/posts/ss1/</link>
       <pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/ss1/</guid>
-      <description>On 12/6/2023, with the assistance of RE:Hack, I shared about how we can approached Heavens Gate technique in terms of reverse engineering. Interested readers can view the recording below. Enjoy!
-https://www.youtube.com/watch?v=3AeHKtO9mN0</description>
+      <description>On 12/6/2023, with the assistance of RE:Hack, I shared about how we can approached Heavens Gate technique in terms of reverse engineering. Interested readers can view the recording below. Enjoy!&#xA;https://www.youtube.com/watch?v=3AeHKtO9mN0</description>
     </item>
-    
     <item>
       <title>[VISHWACTF] Ethereal Crackme</title>
       <link>https://tzion0.github.io/posts/vishwactf2023-etherealcrackme/</link>
       <pubDate>Sun, 09 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/vishwactf2023-etherealcrackme/</guid>
-      <description>This challenge provided a two windows executable files called HauntedImage.exe and HauntedCursor.exe.
-Please note that I did not solve this challenge during the competition, only solved it after the competition without completely understanding the challenge.
-HauntedImage.exe Analysis Looking at the binary we noticed that it was huge and looks unlikely to be reverse within 1-2 days (atleast for me). Therefore we chose to execute the binary directly, and it will generate a corrupted image called result.</description>
+      <description>This challenge provided a two windows executable files called HauntedImage.exe and HauntedCursor.exe.&#xA;Please note that I did not solve this challenge during the competition, only solved it after the competition without completely understanding the challenge.&#xA;HauntedImage.exe Analysis Looking at the binary we noticed that it was huge and looks unlikely to be reverse within 1-2 days (atleast for me). Therefore we chose to execute the binary directly, and it will generate a corrupted image called result.</description>
     </item>
-    
   </channel>
 </rss>

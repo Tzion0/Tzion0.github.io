@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://tzion0.github.io/posts/bi0sctf2024-baebpf/</loc>
+    <lastmod>2024-02-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/2024/</loc>
+    <lastmod>2024-02-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/bi0sctf/</loc>
+    <lastmod>2024-02-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/posts/</loc>
+    <lastmod>2024-02-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/rev/</loc>
+    <lastmod>2024-02-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/</loc>
+    <lastmod>2024-02-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/</loc>
+    <lastmod>2024-02-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://tzion0.github.io/posts/acs2023-maze/</loc>
     <lastmod>2023-11-27T00:00:00+00:00</lastmod>
   </url><url>
@@ -14,22 +35,10 @@
     <loc>https://tzion0.github.io/tags/aseancybershield/</loc>
     <lastmod>2023-11-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tzion0.github.io/posts/</loc>
-    <lastmod>2023-11-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tzion0.github.io/tags/</loc>
-    <lastmod>2023-11-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tzion0.github.io/</loc>
-    <lastmod>2023-11-27T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://tzion0.github.io/posts/cydesctf2023-nihongowakaranai/</loc>
     <lastmod>2023-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/tags/cydesctf/</loc>
-    <lastmod>2023-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tzion0.github.io/tags/rev/</loc>
     <lastmod>2023-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/posts/bsidestlvctf2023-tsebrakhn/</loc>

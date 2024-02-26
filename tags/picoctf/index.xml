@@ -6,45 +6,28 @@
     <description>Recent content in PICOCTF on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/picoctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/picoctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[PICOCTF] Binary Exploitation</title>
       <link>https://tzion0.github.io/posts/picoctf2022-binexp/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/picoctf2022-binexp/</guid>
-      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Binary_Exploitation
-Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 10 out of 14 Binary Exploitation category challenges in PicoCTF 2022 that i solved.
-basic-file-exploit Description The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!
-This challenge provided a C source code:</description>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Binary_Exploitation&#xA;Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 10 out of 14 Binary Exploitation category challenges in PicoCTF 2022 that i solved.&#xA;basic-file-exploit Description The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!&#xA;This challenge provided a C source code:</description>
     </item>
-    
     <item>
       <title>[PICOCTF] Forensics</title>
       <link>https://tzion0.github.io/posts/picoctf2022-for/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/picoctf2022-for/</guid>
-      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Forensics
-Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 13 Forensics category challenges in PicoCTF 2022 that i solved.
-Enhance! Description Download this image file and find the flag.
-This challenge provided a SVG image file.
-To solve it, we just need to view the text inside the SVG image file:
-strings drawing.flag.svg Then concat the flag char by char:</description>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Forensics&#xA;Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 13 Forensics category challenges in PicoCTF 2022 that i solved.&#xA;Enhance! Description Download this image file and find the flag.&#xA;This challenge provided a SVG image file.&#xA;To solve it, we just need to view the text inside the SVG image file:&#xA;strings drawing.flag.svg Then concat the flag char by char:</description>
     </item>
-    
     <item>
       <title>[PICOCTF] Reverse Engineering</title>
       <link>https://tzion0.github.io/posts/picoctf2022-rev/</link>
       <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/picoctf2022-rev/</guid>
-      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Reverse_Engineering
-Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 12 Reverse Engineering category challenges in PicoCTF 2022 that i solved.
-file-run1 Description A program has been provided to you, what happens if you try to run it on the command line?
-This challenge provided an executable.
-We just need to execute the executable to obtain the flag.</description>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Reverse_Engineering&#xA;Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 12 Reverse Engineering category challenges in PicoCTF 2022 that i solved.&#xA;file-run1 Description A program has been provided to you, what happens if you try to run it on the command line?&#xA;This challenge provided an executable.&#xA;We just need to execute the executable to obtain the flag.</description>
     </item>
-    
   </channel>
 </rss>

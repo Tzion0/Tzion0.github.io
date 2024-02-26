@@ -4,15 +4,14 @@
     <title>[PICOCTF] Reverse Engineering // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.104.1" />
+    <meta name="generator" content="Hugo 0.122.0">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[PICOCTF] Reverse Engineering"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="[PICOCTF] Reverse Engineering"/>
 <meta name="twitter:description" content="Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Reverse_Engineering
 Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 11 out of 12 Reverse Engineering category challenges in PicoCTF 2022 that i solved.
 file-run1 Description A program has been provided to you, what happens if you try to run it on the command line?
@@ -91,8 +90,7 @@ We just need to execute the executable to obtain the flag." />
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/picoctf/">PICOCTF</a>
-              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
-              <a class="tag" href="https://tzion0.github.io/tags/rev/">Rev</a>
+              <a class="tag" href="https://tzion0.github.io/tags/rev/">REV</a>
         </div>
       </div>
     </header>
@@ -181,48 +179,48 @@ I forgot the key to my safe but this program is supposed to help me with retriev
 Put the password you recover into the picoCTF flag format like:</p>
 <pre tabindex="0"><code>picoCTF{password}
 </code></pre><p>This challenge provided a plain text java file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.*<span style="color:#f92672">;</span>  
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SafeOpener</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String args<span style="color:#f92672">[])</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        BufferedReader keyboard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> InputStreamReader<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">));</span>
-</span></span><span style="display:flex;"><span>        Base64<span style="color:#f92672">.</span><span style="color:#a6e22e">Encoder</span> encoder <span style="color:#f92672">=</span> Base64<span style="color:#f92672">.</span><span style="color:#a6e22e">getEncoder</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        String encodedkey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        String key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> isOpen<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.*;  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SafeOpener</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String args<span style="color:#f92672">[]</span>) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        BufferedReader keyboard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> InputStreamReader(System.<span style="color:#a6e22e">in</span>));
+</span></span><span style="display:flex;"><span>        Base64.<span style="color:#a6e22e">Encoder</span> encoder <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getEncoder</span>();
+</span></span><span style="display:flex;"><span>        String encodedkey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        String key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> isOpen;
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;</span> 3<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Enter password for the safe: &#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            key <span style="color:#f92672">=</span> keyboard<span style="color:#f92672">.</span><span style="color:#a6e22e">readLine</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> 3) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#34;Enter password for the safe: &#34;</span>);
+</span></span><span style="display:flex;"><span>            key <span style="color:#f92672">=</span> keyboard.<span style="color:#a6e22e">readLine</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            encodedkey <span style="color:#f92672">=</span> encoder<span style="color:#f92672">.</span><span style="color:#a6e22e">encodeToString</span><span style="color:#f92672">(</span>key<span style="color:#f92672">.</span><span style="color:#a6e22e">getBytes</span><span style="color:#f92672">());</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>encodedkey<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            encodedkey <span style="color:#f92672">=</span> encoder.<span style="color:#a6e22e">encodeToString</span>(key.<span style="color:#a6e22e">getBytes</span>());
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(encodedkey);
 </span></span><span style="display:flex;"><span>              
-</span></span><span style="display:flex;"><span>            isOpen <span style="color:#f92672">=</span> openSafe<span style="color:#f92672">(</span>encodedkey<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>isOpen<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;You have  &#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>2 <span style="color:#f92672">-</span> i<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; attempt(s) left&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                i<span style="color:#f92672">++;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            isOpen <span style="color:#f92672">=</span> openSafe(encodedkey);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>isOpen) {
+</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;You have  &#34;</span> <span style="color:#f92672">+</span> (2 <span style="color:#f92672">-</span> i) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; attempt(s) left&#34;</span>);
+</span></span><span style="display:flex;"><span>                i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">openSafe</span><span style="color:#f92672">(</span>String password<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        String encodedkey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cGwzYXMzX2wzdF9tM18xbnQwX3RoM19zYWYz&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">openSafe</span>(String password) {
+</span></span><span style="display:flex;"><span>        String encodedkey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cGwzYXMzX2wzdF9tM18xbnQwX3RoM19zYWYz&#34;</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>password<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>encodedkey<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Sesame open&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Password is incorrect\n&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (password.<span style="color:#a6e22e">equals</span>(encodedkey)) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Sesame open&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Password is incorrect\n&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Again, the password key is hardcoded with base64 encoding. We just need to base64 decode it:</p>
 <pre tabindex="0"><code>echo -n &#34;cGwzYXMzX2wzdF9tM18xbnQwX3RoM19zYWYz&#34; | base64 -d
 </code></pre><p><img src="/img/picoctf2022-rev/safeopener.png" alt="IMG"></p>
@@ -324,158 +322,158 @@ Run this Python program in the same directory as this encrypted flag.</p>
 <p>Can you get the flag?
 Reverse engineer this Java program.</p>
 <p>This challenge provided a java file, by decompiling it, we get:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Decompiled with: CFR 0.151
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Class Version: 11
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">import</span> java.util.Scanner<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Decompiled with: CFR 0.151</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Class Version: 11</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Scanner;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KeygenMe</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> stringArray<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        Scanner scanner <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Scanner<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Enter key:&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        String string <span style="color:#f92672">=</span> scanner<span style="color:#f92672">.</span><span style="color:#a6e22e">nextLine</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> 34<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>33<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;}&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>32<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;9&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>31<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;8&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>30<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>29<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>28<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>27<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;8&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>26<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;3&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>25<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;7&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>24<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>23<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>22<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;3&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>21<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;r&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>20<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>19<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;u&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>18<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;q&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>17<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;3&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>16<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;r&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>15<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>14<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;g&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>13<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;n&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>12<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>11<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;l&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>10<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>9<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>8<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;7&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>7<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;{&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>6<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;F&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>5<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;T&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>4<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;C&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;o&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>2<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;i&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>string<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>0<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;p&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invalid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Valid key&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KeygenMe</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> stringArray) {
+</span></span><span style="display:flex;"><span>        Scanner scanner <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Scanner(System.<span style="color:#a6e22e">in</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Enter key:&#34;</span>);
+</span></span><span style="display:flex;"><span>        String string <span style="color:#f92672">=</span> scanner.<span style="color:#a6e22e">nextLine</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">!=</span> 34) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(33) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;}&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(32) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;9&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(31) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;8&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(30) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;c&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(29) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;a&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(28) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;c&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(27) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;8&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(26) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;3&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(25) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;7&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(24) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;_&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(23) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(22) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;3&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(21) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;r&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(20) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;1&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(19) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;u&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(18) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;q&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(17) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;3&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(16) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;r&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(15) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;_&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(14) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;g&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(13) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;n&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(12) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;1&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(11) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;l&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(10) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;0&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(9) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;0&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(8) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;7&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(7) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;{&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(6) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;F&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(5) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;T&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(4) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;C&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(3) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;o&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(2) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;c&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(1) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;i&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (string.<span style="color:#a6e22e">charAt</span>(0) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;p&#39;</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Invalid key&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Valid key&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Again, hardcoded key, by concating it, we will get the flag.</p>
 <p>Flag:</p>
 <pre tabindex="0"><code>picoCTF{700l1ng_r3qu1r3d_738cac89}
@@ -503,29 +501,29 @@ Reverse engineer this binary.</p>
 </span></span><span style="display:flex;"><span>  local_30 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x3062396630664634</span>;
 </span></span><span style="display:flex;"><span>  local_28 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x65623066635f3d33</span>;
 </span></span><span style="display:flex;"><span>  local_20 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4e326560623535</span>;
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;What</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s my favorite number? &#34;</span>);
-</span></span><span style="display:flex;"><span>  __isoc99_scanf();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;What</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s my favorite number? &#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">__isoc99_scanf</span>();
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (local_48 <span style="color:#f92672">==</span> <span style="color:#ae81ff">549255</span>) {
-</span></span><span style="display:flex;"><span>    __s <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)FUN_00101249(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
-</span></span><span style="display:flex;"><span>    fputs(__s,stdout);
-</span></span><span style="display:flex;"><span>    putchar(<span style="color:#ae81ff">10</span>);
-</span></span><span style="display:flex;"><span>    free(__s);
+</span></span><span style="display:flex;"><span>    __s <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#a6e22e">FUN_00101249</span>(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputs</span>(__s,stdout);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">putchar</span>(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">free</span>(__s);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Sorry, that</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s not it!&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Sorry, that</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s not it!&#34;</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (local_10 <span style="color:#f92672">!=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>)) {
 </span></span><span style="display:flex;"><span>                    <span style="color:#75715e">/* WARNING: Subroutine does not return */</span>
-</span></span><span style="display:flex;"><span>    __stack_chk_fail();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">__stack_chk_fail</span>();
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>From the decompiled code, we can see after it was for favorite number, it performs some kind of comparison:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (local_48 <span style="color:#f92672">==</span> <span style="color:#ae81ff">549255</span>) {
-</span></span><span style="display:flex;"><span>	__s <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)FUN_00101249(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
-</span></span><span style="display:flex;"><span>	fputs(__s,stdout);
-</span></span><span style="display:flex;"><span>	putchar(<span style="color:#ae81ff">10</span>);
-</span></span><span style="display:flex;"><span>	free(__s);
+</span></span><span style="display:flex;"><span>	__s <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#a6e22e">FUN_00101249</span>(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fputs</span>(__s,stdout);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">putchar</span>(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">free</span>(__s);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>So, let&rsquo;s try run the program with the number <code>549255</code>.</p>
 <p><img src="/img/picoctf2022-rev/Bbbbloat.png" alt="IMG"></p>
@@ -559,29 +557,29 @@ Reverse engineer this binary.</p>
 </span></span><span style="display:flex;"><span>  local_28 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x3532666630486637</span>;
 </span></span><span style="display:flex;"><span>  local_20 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x36665f60</span>;
 </span></span><span style="display:flex;"><span>  local_1c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4e</span>;
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;What</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s my favorite number? &#34;</span>);
-</span></span><span style="display:flex;"><span>  __isoc99_scanf(<span style="color:#f92672">&amp;</span>DAT_004b3020,<span style="color:#f92672">&amp;</span>local_44);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;What</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s my favorite number? &#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">__isoc99_scanf</span>(<span style="color:#f92672">&amp;</span>DAT_004b3020,<span style="color:#f92672">&amp;</span>local_44);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (local_44 <span style="color:#f92672">==</span> <span style="color:#ae81ff">754635</span>) {
-</span></span><span style="display:flex;"><span>    local_40 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)rotate_encrypt(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
-</span></span><span style="display:flex;"><span>    fputs(local_40,(FILE <span style="color:#f92672">*</span>)stdout);
-</span></span><span style="display:flex;"><span>    putchar(<span style="color:#ae81ff">10</span>);
-</span></span><span style="display:flex;"><span>    free(local_40);
+</span></span><span style="display:flex;"><span>    local_40 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#a6e22e">rotate_encrypt</span>(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputs</span>(local_40,(FILE <span style="color:#f92672">*</span>)stdout);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">putchar</span>(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">free</span>(local_40);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Sorry, that</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s not it!&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Sorry, that</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s not it!&#34;</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (local_10 <span style="color:#f92672">!=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>)) {
 </span></span><span style="display:flex;"><span>                    <span style="color:#75715e">/* WARNING: Subroutine does not return */</span>
-</span></span><span style="display:flex;"><span>    __stack_chk_fail();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">__stack_chk_fail</span>();
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>From the decompiled code, we can see after it was for favorite number, it performs some kind of comparison:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (local_44 <span style="color:#f92672">==</span> <span style="color:#ae81ff">754635</span>) {
-</span></span><span style="display:flex;"><span>	local_40 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)rotate_encrypt(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
-</span></span><span style="display:flex;"><span>	fputs(local_40,(FILE <span style="color:#f92672">*</span>)stdout);
-</span></span><span style="display:flex;"><span>	putchar(<span style="color:#ae81ff">10</span>);
-</span></span><span style="display:flex;"><span>	free(local_40);
+</span></span><span style="display:flex;"><span>	local_40 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#a6e22e">rotate_encrypt</span>(<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&amp;</span>local_38);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fputs</span>(local_40,(FILE <span style="color:#f92672">*</span>)stdout);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">putchar</span>(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">free</span>(local_40);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>So, let&rsquo;s try run the program with the number <code>754635</code>.</p>
 <p><img src="/img/picoctf2022-rev/unpackme.png" alt="IMG"></p>
@@ -604,18 +602,18 @@ Reverse engineer this binary.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> canary;
 </span></span><span style="display:flex;"><span>  
 </span></span><span style="display:flex;"><span>  canary <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>);
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Enter your license key: &#34;</span>);
-</span></span><span style="display:flex;"><span>  fgets(inpt,<span style="color:#ae81ff">0x25</span>,stdin);
-</span></span><span style="display:flex;"><span>  result <span style="color:#f92672">=</span> validate(inpt);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Enter your license key: &#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fgets</span>(inpt,<span style="color:#ae81ff">0x25</span>,stdin);
+</span></span><span style="display:flex;"><span>  result <span style="color:#f92672">=</span> <span style="color:#a6e22e">validate</span>(inpt);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\0&#39;</span>) {
-</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;That key is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;That key is invalid.&#34;</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;That key is valid.&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;That key is valid.&#34;</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (canary <span style="color:#f92672">!=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>)) {
 </span></span><span style="display:flex;"><span>                    <span style="color:#75715e">/* WARNING: Subroutine does not return */</span>
-</span></span><span style="display:flex;"><span>    __stack_chk_fail();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">__stack_chk_fail</span>();
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
@@ -635,25 +633,25 @@ Reverse engineer this binary.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> full_flag[<span style="color:#ae81ff">72</span>]; <span style="color:#75715e">// [rsp+90h] [rbp-50h] BYREF
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int64</span> v12; <span style="color:#75715e">// [rsp+D8h] [rbp-8h]
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>  v12 <span style="color:#f92672">=</span> __readfsqword(<span style="color:#ae81ff">0x28u</span>);
-</span></span><span style="display:flex;"><span>  strcpy(half_flag, <span style="color:#e6db74">&#34;picoCTF{br1ng_y0ur_0wn_k3y_&#34;</span>);<span style="color:#75715e">// half_flag_len = 27
+</span></span><span style="display:flex;"><span>  v12 <span style="color:#f92672">=</span> <span style="color:#a6e22e">__readfsqword</span>(<span style="color:#ae81ff">0x28u</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">strcpy</span>(half_flag, <span style="color:#e6db74">&#34;picoCTF{br1ng_y0ur_0wn_k3y_&#34;</span>);<span style="color:#75715e">// half_flag_len = 27
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                                <span style="color:#75715e">// flag_len = 37
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                                <span style="color:#75715e">// 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  strcpy(v8, <span style="color:#e6db74">&#34;}&#34;</span>);
-</span></span><span style="display:flex;"><span>  strlen(half_flag);                            <span style="color:#75715e">// 27
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  MD5();
-</span></span><span style="display:flex;"><span>  strlen(v8);                                   <span style="color:#75715e">// 1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  MD5();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">strcpy</span>(v8, <span style="color:#e6db74">&#34;}&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">strlen</span>(half_flag);                            <span style="color:#75715e">// 27
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">MD5</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">strlen</span>(v8);                                   <span style="color:#75715e">// 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">MD5</span>();
 </span></span><span style="display:flex;"><span>  v2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> ( i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">15</span>; <span style="color:#f92672">++</span>i )
 </span></span><span style="display:flex;"><span>  {
-</span></span><span style="display:flex;"><span>    sprintf(<span style="color:#f92672">&amp;</span>half_flag[v2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>], <span style="color:#e6db74">&#34;%02x&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span>)v8[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sprintf</span>(<span style="color:#f92672">&amp;</span>half_flag[v2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>], <span style="color:#e6db74">&#34;%02x&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span>)v8[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>]);
 </span></span><span style="display:flex;"><span>    v2 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  v3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> ( j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">15</span>; <span style="color:#f92672">++</span>j )
 </span></span><span style="display:flex;"><span>  {
-</span></span><span style="display:flex;"><span>    sprintf(<span style="color:#f92672">&amp;</span>full_flag[v3], <span style="color:#e6db74">&#34;%02x&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span>)v8[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">18</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sprintf</span>(<span style="color:#f92672">&amp;</span>full_flag[v3], <span style="color:#e6db74">&#34;%02x&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span>)v8[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">18</span>]);
 </span></span><span style="display:flex;"><span>    v3 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> ( k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">26</span>; <span style="color:#f92672">++</span>k )
@@ -667,7 +665,7 @@ Reverse engineer this binary.</p>
 </span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">65</span>] <span style="color:#f92672">=</span> half_flag[<span style="color:#ae81ff">58</span>];
 </span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">66</span>] <span style="color:#f92672">=</span> v10;
 </span></span><span style="display:flex;"><span>  full_flag[<span style="color:#ae81ff">67</span>] <span style="color:#f92672">=</span> v8[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ( strlen(inpt) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">36</span> )
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ( <span style="color:#a6e22e">strlen</span>(inpt) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">36</span> )
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0LL</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> ( m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">35</span>; <span style="color:#f92672">++</span>m )
 </span></span><span style="display:flex;"><span>  {

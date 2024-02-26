@@ -4,15 +4,14 @@
     <title>[SHELLCTF] OX9OR2 // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.104.1" />
+    <meta name="generator" content="Hugo 0.122.0">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[SHELLCTF] OX9OR2"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="[SHELLCTF] OX9OR2"/>
 <meta name="twitter:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/ShellCTF/2022/OX9OR2
 This challenge provided two files called encryption.py and encrypted. encrypted file contains ciphertext produced by encryption.py
 encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43;= chr(ord(msg[i]) ^ ord(key[i % len(key)])) return o with open(&#39;message&#39;, &#39;r&#39;) as f: msg = &#39;&#39;.join(f.readlines()).rstrip(&#39;\n&#39;) with open(&#39;key&#39;, &#39;r&#39;) as k: key = &#39;&#39;.join(k.readlines()).rstrip(&#39;\n&#39;) assert key.isalnum() and (len(key) == 9) assert &#39;SHELL&#39; in msg with open(&#39;encrypted&#39;, &#39;w&#39;) as fo: fo."/>
@@ -87,7 +86,6 @@ encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/shellctf/">SHELLCTF</a>
-              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
               <a class="tag" href="https://tzion0.github.io/tags/crypto/">Crypto</a>
         </div>
       </div>
@@ -135,7 +133,7 @@ encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43
 </span></span><span style="display:flex;"><span>	key <span style="color:#f92672">=</span> list(<span style="color:#e6db74">&#34;XORISC&#34;</span>) <span style="color:#f92672">+</span> list(p)
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> range(len(ct)):
 </span></span><span style="display:flex;"><span>		flag <span style="color:#f92672">+=</span> chr(ct[c] <span style="color:#f92672">^</span> ord(key[c <span style="color:#f92672">%</span> len(key)]))
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^SHELL{X[A-Za-z0-9]R_1S_R3[A-Za-z0-9]</span><span style="color:#e6db74">{3}</span><span style="color:#e6db74">51BL3}&#34;</span>, flag):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span><span style="color:#66d9ef">match</span>(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^SHELL{X[A-Za-z0-9]R_1S_R3[A-Za-z0-9]</span><span style="color:#e6db74">{3}</span><span style="color:#e6db74">51BL3}&#34;</span>, flag):
 </span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;Flag: &#34;</span> <span style="color:#f92672">+</span> flag, <span style="color:#e6db74">&#34;Key: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(key))
 </span></span></code></pre></div><p>The regex match is basically obtained through trial and error where some of the trials produced some promising plaintext message.</p>
 <p>Execute the script will get output below:

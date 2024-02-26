@@ -4,15 +4,14 @@
     <title>[BOH] format2win // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.104.1" />
+    <meta name="generator" content="Hugo 0.122.0">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[BOH] format2win"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="[BOH] format2win"/>
 <meta name="twitter:description" content="This challenge provided a binary file.
 Since this is a pwn challenge, before we dig into it, let&rsquo;s see its security properties:
 From result we can see that there is no PIE enabled and no stack canary.
@@ -91,7 +90,6 @@ Stack canaries or security cookies are tell-tale values added to binaries during
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/boh/">BOH</a>
-              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
               <a class="tag" href="https://tzion0.github.io/tags/binexp/">BinExp</a>
         </div>
       </div>
@@ -125,18 +123,18 @@ Stack canaries or security cookies are tell-tale values added to binaries during
 <p>First, the <code>gets()</code> in <code>main</code> function is a big no no in term of security, it can lead to Buffer Overflow (BOF) as it will read all available data passing to it into variable assigned regardless of it sizes. In our case the <code>local_58</code> char array has the size of 76 bytes, which means when we insert more than 76 bytes, BOF will occurs:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> local_58 [<span style="color:#ae81ff">76</span>];
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>SNIP<span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>gets(local_58);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">gets</span>(local_58);
 </span></span></code></pre></div><p>Second, the <code>printf(local_d8)</code> in <code>login</code> function, since <code>printf()</code> is <strong>variadic</strong> function, which means it will pop data off from the stack according to the format given.</p>
 <p>Usually we will write <code>printf()</code> like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// This is printing &#34;Hello World&#34; with the %s (string) format.
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>ex <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello World&#34;</span>;
-</span></span><span style="display:flex;"><span>printf(<span style="color:#e6db74">&#34;%s&#34;</span>, ex);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s&#34;</span>, ex);
 </span></span></code></pre></div><p>However in our case the usage of the <code>printf()</code> in the binary is like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>printf(local_d8);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">printf</span>(local_d8);
 </span></span></code></pre></div><p>This will lead to <strong>Format String Vulnerability</strong> as we can pass it formats like <code>%s %p %x</code> and etc to pop out the data off the stack.</p>
 <h2 id="exploit-plan">Exploit plan</h2>
 <p>With all of the information obtained, we can start planning the exploit. Its kinda obvious that first we need to overflow the return address of <strong>main</strong> by exploiting the <code>gets()</code> to redirect the control flow of binary to <code>login</code> function. After that, we can abuse the <code>printf(local_d8)</code> (Format String Vulnerability) to pop out the flag data off the stack. You might be wondering, why the flag data is in the stack? Well, this is because of this line of code in <code>login</code> function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>fgets(local_98, <span style="color:#ae81ff">0x80</span>, local_10);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">fgets</span>(local_98, <span style="color:#ae81ff">0x80</span>, local_10);
 </span></span></code></pre></div><p>The above line of code is essentially loading the flag data into <code>local_98</code> variable, but where do variables live? You&rsquo;re right, in STACK!</p>
 <h2 id="before-we-begin-stack-introduction">Before we begin&hellip; (Stack Introduction)</h2>
 <p>This section is an introduction of Stack for those who aren&rsquo;t familiar with, feel free to skip this part if you know how Stack operates.</p>

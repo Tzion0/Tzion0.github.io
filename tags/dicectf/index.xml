@@ -6,19 +6,14 @@
     <description>Recent content in DICECTF on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/dicectf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/dicectf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[DICECTF] knock-knock</title>
       <link>https://tzion0.github.io/posts/dicectf2022-knock-knock/</link>
       <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/dicectf2022-knock-knock/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/DiceCTF/2022/knock-knock
-Looking at the webpage, it is a site similar to pastebin that let us to create paste.
-After clicking the create button, it will redirect us to a page with an unique token that contains our paste:
-https://knock-knock.mc.ax/note?id=2249&amp;amp;token=262fedf8ca783b2fd19c581064ab48511877fe2bff4f3ad79726c9ae8277cfd5 Fortunately we have source code comes with this challenge:
-const crypto = require(&amp;#39;crypto&amp;#39;); class Database { constructor() { this.notes = []; this.secret = `secret-${crypto.randomUUID}`; } createNote({ data }) { const id = this.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/DiceCTF/2022/knock-knock&#xA;Looking at the webpage, it is a site similar to pastebin that let us to create paste.&#xA;After clicking the create button, it will redirect us to a page with an unique token that contains our paste:&#xA;https://knock-knock.mc.ax/note?id=2249&amp;amp;token=262fedf8ca783b2fd19c581064ab48511877fe2bff4f3ad79726c9ae8277cfd5 Fortunately we have source code comes with this challenge:&#xA;const crypto = require(&amp;#39;crypto&amp;#39;); class Database { constructor() { this.notes = []; this.secret = `secret-${crypto.randomUUID}`; } createNote({ data }) { const id = this.</description>
     </item>
-    
   </channel>
 </rss>

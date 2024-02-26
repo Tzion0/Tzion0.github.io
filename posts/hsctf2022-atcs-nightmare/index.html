@@ -4,15 +4,14 @@
     <title>[HSCTF] atcs-nightmare // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.104.1" />
+    <meta name="generator" content="Hugo 0.122.0">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[HSCTF] atcs-nightmare"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="[HSCTF] atcs-nightmare"/>
 <meta name="twitter:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/HSCTF/2022/atcs-nightmare
 This challenge provided a java source code.
 Looking at the source code, there are 3 functions which are stackAttack, recurses and linkDemLists. The main function is basically taking our flag input, extract the content of flag input, perform operations with functions starting with stackAttack -&gt; recurses -&gt; linkDemLists, then compare with a cipher text to check whether it is correct or not.
@@ -89,8 +88,7 @@ In order to reverse it, we have to reverse the operations with cipher text, link
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/hsctf/">HSCTF</a>
-              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
-              <a class="tag" href="https://tzion0.github.io/tags/rev/">Rev</a>
+              <a class="tag" href="https://tzion0.github.io/tags/rev/">REV</a>
         </div>
       </div>
     </header>
@@ -103,18 +101,18 @@ In order to reverse it, we have to reverse the operations with cipher text, link
 <p>But first, let&rsquo;s see what these functions does.</p>
 <h3 id="linkdemlists">linkDemLists()</h3>
 <p>This function is basically iterates input provided starting from the middle of input:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ListIterator<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">&gt;</span> iter <span style="color:#f92672">=</span> lin<span style="color:#f92672">.</span><span style="color:#a6e22e">listIterator</span><span style="color:#f92672">(</span>in<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">()/</span>2<span style="color:#f92672">);</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ListIterator<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">&gt;</span> iter <span style="color:#f92672">=</span> lin.<span style="color:#a6e22e">listIterator</span>(in.<span style="color:#a6e22e">length</span>()<span style="color:#f92672">/</span>2);
 </span></span></code></pre></div><p>First it check whether the middle of input has next character, if it does, append it to the empty string <code>res</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>iter<span style="color:#f92672">.</span><span style="color:#a6e22e">hasNext</span><span style="color:#f92672">())</span>
-</span></span><span style="display:flex;"><span>	res <span style="color:#f92672">+=</span> iter<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (iter.<span style="color:#a6e22e">hasNext</span>())
+</span></span><span style="display:flex;"><span>	res <span style="color:#f92672">+=</span> iter.<span style="color:#a6e22e">next</span>();
 </span></span></code></pre></div><p>Before:</p>
 <pre tabindex="0"><code># Staring point: c
 ABCDE
 </code></pre><p>After:</p>
 <pre tabindex="0"><code>CDE
 </code></pre><p>Next it check whether the middle of input has previous character, if it does, append it to the string <code>res</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>iter<span style="color:#f92672">.</span><span style="color:#a6e22e">hasPrevious</span><span style="color:#f92672">())</span>
-</span></span><span style="display:flex;"><span>	res <span style="color:#f92672">+=</span> iter<span style="color:#f92672">.</span><span style="color:#a6e22e">previous</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (iter.<span style="color:#a6e22e">hasPrevious</span>())
+</span></span><span style="display:flex;"><span>	res <span style="color:#f92672">+=</span> iter.<span style="color:#a6e22e">previous</span>();
 </span></span></code></pre></div><p>Before:</p>
 <pre tabindex="0"><code># Staring point: c
 ABCDE
@@ -135,8 +133,8 @@ ABCDE
 </code></pre><p>After:</p>
 <pre tabindex="0"><code>A@?&gt;A@?&gt;
 </code></pre><p>For your information, the ASCII number of <code>A</code> is 64, <code>@</code> is 64, <code>?</code> is 63, <code>&gt;</code> is 62. And it make sense because of this code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>res <span style="color:#f92672">+=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">pop</span><span style="color:#f92672">()</span> <span style="color:#f92672">-</span> i<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>i <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> 4<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>res <span style="color:#f92672">+=</span> (<span style="color:#66d9ef">char</span>)(s.<span style="color:#a6e22e">pop</span>() <span style="color:#f92672">-</span> i);
+</span></span><span style="display:flex;"><span>i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> 1) <span style="color:#f92672">%</span> 4;
 </span></span></code></pre></div><h3 id="solution">Solution</h3>
 <p>Finally, after knowing what these functions does, we created a script to assist us in reversing:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>

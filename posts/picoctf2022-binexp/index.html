@@ -4,15 +4,14 @@
     <title>[PICOCTF] Binary Exploitation // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.104.1" />
+    <meta name="generator" content="Hugo 0.122.0">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[PICOCTF] Binary Exploitation"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="[PICOCTF] Binary Exploitation"/>
 <meta name="twitter:description" content="Tasks source: https://github.com/Tzion0/CTF/tree/master/PicoCTF/2022/Binary_Exploitation
 Worth to note that we managed to get rank 468 out of 7794 teams in PicoCTF 2022. This writeup contains 10 out of 14 Binary Exploitation category challenges in PicoCTF 2022 that i solved.
 basic-file-exploit Description The program provided allows you to write to a file and read what you wrote from it. Try playing around with it and see if you can break it!
@@ -89,7 +88,6 @@ This challenge provided a C source code:" />
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/picoctf/">PICOCTF</a>
-              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
               <a class="tag" href="https://tzion0.github.io/tags/binexp/">BinExp</a>
         </div>
       </div>
@@ -136,22 +134,22 @@ This challenge provided a C source code:" />
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>( l <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> )
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;&#39;l&#39; for tgetinput must be greater than 0</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;&#39;l&#39; for tgetinput must be greater than 0</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Empty the FD Set */</span>
-</span></span><span style="display:flex;"><span>    FD_ZERO(<span style="color:#f92672">&amp;</span>input_set );
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">FD_ZERO</span>(<span style="color:#f92672">&amp;</span>input_set );
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Listen to the input descriptor */</span>
-</span></span><span style="display:flex;"><span>    FD_SET(STDIN_FILENO, <span style="color:#f92672">&amp;</span>input_set);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">FD_SET</span>(STDIN_FILENO, <span style="color:#f92672">&amp;</span>input_set);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Waiting for some seconds */</span>
 </span></span><span style="display:flex;"><span>    timeout.tv_sec <span style="color:#f92672">=</span> WAIT;    <span style="color:#75715e">// WAIT seconds
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    timeout.tv_usec <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;    <span style="color:#75715e">// 0 milliseconds
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Listening for input stream for any activity */</span>
-</span></span><span style="display:flex;"><span>    ready_for_reading <span style="color:#f92672">=</span> select(<span style="color:#ae81ff">1</span>, <span style="color:#f92672">&amp;</span>input_set, NULL, NULL, <span style="color:#f92672">&amp;</span>timeout);
+</span></span><span style="display:flex;"><span>    ready_for_reading <span style="color:#f92672">=</span> <span style="color:#a6e22e">select</span>(<span style="color:#ae81ff">1</span>, <span style="color:#f92672">&amp;</span>input_set, NULL, NULL, <span style="color:#f92672">&amp;</span>timeout);
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Here, first parameter is number of FDs in the set, 
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * second is our FD set for reading,
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * third is the FD set in which any write activity needs to updated,
@@ -161,24 +159,24 @@ This challenge provided a C source code:" />
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ready_for_reading <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* Some error has occured in input */</span>
-</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;Unable to read your input</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Unable to read your input</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    } 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ready_for_reading) {
-</span></span><span style="display:flex;"><span>        read_bytes <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, input, l<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        read_bytes <span style="color:#f92672">=</span> <span style="color:#a6e22e">read</span>(<span style="color:#ae81ff">0</span>, input, l<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(input[read_bytes<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;\n&#39;</span>){
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">--</span>read_bytes;
 </span></span><span style="display:flex;"><span>        input[read_bytes]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\0&#39;</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(read_bytes<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>){
-</span></span><span style="display:flex;"><span>            printf(<span style="color:#e6db74">&#34;No data given.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;No data given.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>;
 </span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;Timed out waiting for user input. Press Ctrl-C to disconnect</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Timed out waiting for user input. Press Ctrl-C to disconnect</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
@@ -192,27 +190,27 @@ This challenge provided a C source code:" />
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> length;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Please enter your data:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>  r <span style="color:#f92672">=</span> tgetinput(input, <span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Please enter your data:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  r <span style="color:#f92672">=</span> <span style="color:#a6e22e">tgetinput</span>(input, <span style="color:#ae81ff">100</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Timeout on user input
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
 </span></span><span style="display:flex;"><span>  {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (true) {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Please enter the length of your data:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> tgetinput(len, <span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Please enter the length of your data:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> <span style="color:#a6e22e">tgetinput</span>(len, <span style="color:#ae81ff">4</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Timeout on user input
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>      exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((length <span style="color:#f92672">=</span> strtol(len, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please put in a valid length&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((length <span style="color:#f92672">=</span> <span style="color:#a6e22e">strtol</span>(len, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Please put in a valid length&#34;</span>);
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">break</span>;
 </span></span><span style="display:flex;"><span>    }
@@ -222,10 +220,10 @@ This challenge provided a C source code:" />
 </span></span><span style="display:flex;"><span>    inputs <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  strcpy(data[inputs], input);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">strcpy</span>(data[inputs], input);
 </span></span><span style="display:flex;"><span>  input_lengths[inputs] <span style="color:#f92672">=</span> length;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Your entry number is: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, inputs <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Your entry number is: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, inputs <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>  inputs<span style="color:#f92672">++</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -236,26 +234,26 @@ This challenge provided a C source code:" />
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> output[<span style="color:#ae81ff">100</span>];
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  memset(output, <span style="color:#e6db74">&#39;\0&#39;</span>, <span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">memset</span>(output, <span style="color:#e6db74">&#39;\0&#39;</span>, <span style="color:#ae81ff">100</span>);
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Please enter the entry number of your data:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>  r <span style="color:#f92672">=</span> tgetinput(entry, <span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Please enter the entry number of your data:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  r <span style="color:#f92672">=</span> <span style="color:#a6e22e">tgetinput</span>(entry, <span style="color:#ae81ff">4</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Timeout on user input
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
 </span></span><span style="display:flex;"><span>  {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ((entry_number <span style="color:#f92672">=</span> strtol(entry, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>    puts(flag);
-</span></span><span style="display:flex;"><span>    fseek(stdin, <span style="color:#ae81ff">0</span>, SEEK_END);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ((entry_number <span style="color:#f92672">=</span> <span style="color:#a6e22e">strtol</span>(entry, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(flag);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fseek</span>(stdin, <span style="color:#ae81ff">0</span>, SEEK_END);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  entry_number<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>  strncpy(output, data[entry_number], input_lengths[entry_number]);
-</span></span><span style="display:flex;"><span>  puts(output);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">strncpy</span>(output, data[entry_number], input_lengths[entry_number]);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(output);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
@@ -264,47 +262,47 @@ This challenge provided a C source code:" />
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> command;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Hi, welcome to my echo chamber!&#34;</span>);
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Type &#39;1&#39; to enter a phrase into our database&#34;</span>);
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Type &#39;2&#39; to echo a phrase in our database&#34;</span>);
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Type &#39;3&#39; to exit the program&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Hi, welcome to my echo chamber!&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Type &#39;1&#39; to enter a phrase into our database&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Type &#39;2&#39; to echo a phrase in our database&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Type &#39;3&#39; to exit the program&#34;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (true) {   
-</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> tgetinput(input, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> <span style="color:#a6e22e">tgetinput</span>(input, <span style="color:#ae81ff">3</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Timeout on user input
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>      exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((command <span style="color:#f92672">=</span> strtol(input, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please put in a valid number&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((command <span style="color:#f92672">=</span> <span style="color:#a6e22e">strtol</span>(input, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Please put in a valid number&#34;</span>);
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>      data_write();
-</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Write successful, would you like to do anything else?&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">data_write</span>();
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Write successful, would you like to do anything else?&#34;</span>);
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (inputs <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>        puts(<span style="color:#e6db74">&#34;No data yet&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;No data yet&#34;</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">continue</span>;
 </span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>      data_read();
-</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Read successful, would you like to do anything else?&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">data_read</span>();
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Read successful, would you like to do anything else?&#34;</span>);
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>) {
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please type either 1, 2 or 3&#34;</span>);
-</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Maybe breaking boundaries elsewhere will be helpful&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Please type either 1, 2 or 3&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Maybe breaking boundaries elsewhere will be helpful&#34;</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>We can see that to read the data, we need to provide an entry number and the value we provided will be passing through this check:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ((entry_number <span style="color:#f92672">=</span> strtol(entry, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>	puts(flag);
-</span></span><span style="display:flex;"><span>	fseek(stdin, <span style="color:#ae81ff">0</span>, SEEK_END);
-</span></span><span style="display:flex;"><span>	exit(<span style="color:#ae81ff">0</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ((entry_number <span style="color:#f92672">=</span> <span style="color:#a6e22e">strtol</span>(entry, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">puts</span>(flag);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fseek</span>(stdin, <span style="color:#ae81ff">0</span>, SEEK_END);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>With that being said, we just need to make the return value to be 0, and it can be easily achieve by inputting string instead of number.</p>
 <p><img src="/img/picoctf2022-binexp/bfe.png" alt="IMG"></p>
@@ -332,38 +330,38 @@ This challenge provided a C source code:" />
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> flag[FLAGSIZE_MAX];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sigsegv_handler</span>(<span style="color:#66d9ef">int</span> sig) {
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, flag);
-</span></span><span style="display:flex;"><span>  fflush(stdout);
-</span></span><span style="display:flex;"><span>  exit(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, flag);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fflush</span>(stdout);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>input){
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf2[<span style="color:#ae81ff">16</span>];
-</span></span><span style="display:flex;"><span>  strcpy(buf2, input);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">strcpy</span>(buf2, input);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  fgets(flag,FLAGSIZE_MAX,f);
-</span></span><span style="display:flex;"><span>  signal(SIGSEGV, sigsegv_handler); <span style="color:#75715e">// Set up signal handler
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fgets</span>(flag,FLAGSIZE_MAX,f);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">signal</span>(SIGSEGV, sigsegv_handler); <span style="color:#75715e">// Set up signal handler
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  
-</span></span><span style="display:flex;"><span>  gid_t gid <span style="color:#f92672">=</span> getegid();
-</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">gid_t</span> gid <span style="color:#f92672">=</span> <span style="color:#a6e22e">getegid</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setresgid</span>(gid, gid, gid);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Input: &#34;</span>);
-</span></span><span style="display:flex;"><span>  fflush(stdout);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Input: &#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fflush</span>(stdout);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf1[<span style="color:#ae81ff">100</span>];
-</span></span><span style="display:flex;"><span>  gets(buf1); 
-</span></span><span style="display:flex;"><span>  vuln(buf1);
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;The program will exit now</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gets</span>(buf1); 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">vuln</span>(buf1);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;The program will exit now</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>It looks like it will print out the flag when it encounter SIGSEGV signal. So let&rsquo;s try it:</p>
@@ -387,33 +385,33 @@ Now we&rsquo;re cooking! You can overflow the buffer and return to the flag func
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">win</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[FLAGSIZE];
-</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  fgets(buf,FLAGSIZE,f);
-</span></span><span style="display:flex;"><span>  printf(buf);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fgets</span>(buf,FLAGSIZE,f);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(buf);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[BUFSIZE];
-</span></span><span style="display:flex;"><span>  gets(buf);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gets</span>(buf);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Okay, time to return... Fingers Crossed... Jumping to 0x%x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, get_return_address());
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Okay, time to return... Fingers Crossed... Jumping to 0x%x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#a6e22e">get_return_address</span>());
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setvbuf</span>(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  gid_t gid <span style="color:#f92672">=</span> getegid();
-</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">gid_t</span> gid <span style="color:#f92672">=</span> <span style="color:#a6e22e">getegid</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setresgid</span>(gid, gid, gid);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Please enter your string: &#34;</span>);
-</span></span><span style="display:flex;"><span>  vuln();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Please enter your string: &#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">vuln</span>();
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>From the source code we can see it is a typical ret2win challenge, we just need to overflow the binary then return to the <code>win()</code> function.</p>
@@ -503,36 +501,36 @@ This time you&rsquo;ll need to control the arguments to the function you return 
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">win</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> arg1, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> arg2) {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[FLAGSIZE];
-</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  fgets(buf,FLAGSIZE,f);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fgets</span>(buf,FLAGSIZE,f);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (arg1 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0xCAFEF00D</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (arg2 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0xF00DF00D</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>  printf(buf);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(buf);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[BUFSIZE];
-</span></span><span style="display:flex;"><span>  gets(buf);
-</span></span><span style="display:flex;"><span>  puts(buf);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gets</span>(buf);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(buf);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setvbuf</span>(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  gid_t gid <span style="color:#f92672">=</span> getegid();
-</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">gid_t</span> gid <span style="color:#f92672">=</span> <span style="color:#a6e22e">getegid</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setresgid</span>(gid, gid, gid);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Please enter your string: &#34;</span>);
-</span></span><span style="display:flex;"><span>  vuln();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Please enter your string: &#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">vuln</span>();
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>From the source code, we can see that this challenge is similar to <strong>buffer overflow 1</strong>. However, instead of just returning to <code>win()</code> function, we also need to pass the function arguments.</p>
@@ -619,29 +617,29 @@ It looks like Dr. Oswal added a stack canary to this program to protect against 
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">win</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[FLAGSIZE];
-</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  fgets(buf,FLAGSIZE,f); <span style="color:#75715e">// size bound read
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  puts(buf);
-</span></span><span style="display:flex;"><span>  fflush(stdout);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fgets</span>(buf,FLAGSIZE,f); <span style="color:#75715e">// size bound read
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">puts</span>(buf);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fflush</span>(stdout);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> global_canary[CANARY_SIZE];
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">read_canary</span>() {
-</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;canary.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#34;canary.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;canary.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;canary.txt&#39; in this directory with your&#34;</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging canary.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  fread(global_canary,<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">char</span>),CANARY_SIZE,f);
-</span></span><span style="display:flex;"><span>  fclose(f);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fread</span>(global_canary,<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">char</span>),CANARY_SIZE,f);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fclose</span>(f);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
@@ -650,36 +648,36 @@ It looks like Dr. Oswal added a stack canary to this program to protect against 
 </span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">char</span> length[BUFSIZE];
 </span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> count;
 </span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>   memcpy(canary,global_canary,CANARY_SIZE);
-</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;How Many Bytes will You Write Into the Buffer?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&gt; &#34;</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">memcpy</span>(canary,global_canary,CANARY_SIZE);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;How Many Bytes will You Write Into the Buffer?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&gt; &#34;</span>);
 </span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">while</span> (x<span style="color:#f92672">&lt;</span>BUFSIZE) {
-</span></span><span style="display:flex;"><span>      read(<span style="color:#ae81ff">0</span>,length<span style="color:#f92672">+</span>x,<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">read</span>(<span style="color:#ae81ff">0</span>,length<span style="color:#f92672">+</span>x,<span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (length[x]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;\n&#39;</span>) <span style="color:#66d9ef">break</span>;
 </span></span><span style="display:flex;"><span>      x<span style="color:#f92672">++</span>;
 </span></span><span style="display:flex;"><span>   }
-</span></span><span style="display:flex;"><span>   sscanf(length,<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>count);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">sscanf</span>(length,<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>count);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;Input&gt; &#34;</span>);
-</span></span><span style="display:flex;"><span>   read(<span style="color:#ae81ff">0</span>,buf,count);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Input&gt; &#34;</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">read</span>(<span style="color:#ae81ff">0</span>,buf,count);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (memcmp(canary,global_canary,CANARY_SIZE)) {
-</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;***** Stack Smashing Detected ***** : Canary Value Corrupt!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); <span style="color:#75715e">// crash immediately
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      exit(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">memcmp</span>(canary,global_canary,CANARY_SIZE)) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;***** Stack Smashing Detected ***** : Canary Value Corrupt!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); <span style="color:#75715e">// crash immediately
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#a6e22e">exit</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>   }
-</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;Ok... Now Where&#39;s the Flag?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>   fflush(stdout);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Ok... Now Where&#39;s the Flag?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">fflush</span>(stdout);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setvbuf</span>(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Set the gid to the effective gid
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// this prevents /bin/sh from dropping the privileges
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  gid_t gid <span style="color:#f92672">=</span> getegid();
-</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
-</span></span><span style="display:flex;"><span>  read_canary();
-</span></span><span style="display:flex;"><span>  vuln();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">gid_t</span> gid <span style="color:#f92672">=</span> <span style="color:#a6e22e">getegid</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setresgid</span>(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">read_canary</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">vuln</span>();
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>From the source code we can see it implemented canary, the canary is read from <code>canary.txt</code> with the size of 4 characters/bytes. To bruteforce it, there will be like 2^32 possible of values, which is 4 billion of possibilities.</p>
@@ -853,22 +851,22 @@ deaa (Stack Smash!)
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>( l <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> )
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;&#39;l&#39; for tgetinput must be greater than 0</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;&#39;l&#39; for tgetinput must be greater than 0</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Empty the FD Set */</span>
-</span></span><span style="display:flex;"><span>    FD_ZERO(<span style="color:#f92672">&amp;</span>input_set );
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">FD_ZERO</span>(<span style="color:#f92672">&amp;</span>input_set );
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Listen to the input descriptor */</span>
-</span></span><span style="display:flex;"><span>    FD_SET(STDIN_FILENO, <span style="color:#f92672">&amp;</span>input_set);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">FD_SET</span>(STDIN_FILENO, <span style="color:#f92672">&amp;</span>input_set);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Waiting for some seconds */</span>
 </span></span><span style="display:flex;"><span>    timeout.tv_sec <span style="color:#f92672">=</span> WAIT;    <span style="color:#75715e">// WAIT seconds
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    timeout.tv_usec <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;    <span style="color:#75715e">// 0 milliseconds
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Listening for input stream for any activity */</span>
-</span></span><span style="display:flex;"><span>    ready_for_reading <span style="color:#f92672">=</span> select(<span style="color:#ae81ff">1</span>, <span style="color:#f92672">&amp;</span>input_set, NULL, NULL, <span style="color:#f92672">&amp;</span>timeout);
+</span></span><span style="display:flex;"><span>    ready_for_reading <span style="color:#f92672">=</span> <span style="color:#a6e22e">select</span>(<span style="color:#ae81ff">1</span>, <span style="color:#f92672">&amp;</span>input_set, NULL, NULL, <span style="color:#f92672">&amp;</span>timeout);
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Here, first parameter is number of FDs in the set, 
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * second is our FD set for reading,
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * third is the FD set in which any write activity needs to updated,
@@ -878,24 +876,24 @@ deaa (Stack Smash!)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ready_for_reading <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* Some error has occured in input */</span>
-</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;Unable to read your input</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Unable to read your input</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    } 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ready_for_reading) {
-</span></span><span style="display:flex;"><span>        read_bytes <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, input, l<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        read_bytes <span style="color:#f92672">=</span> <span style="color:#a6e22e">read</span>(<span style="color:#ae81ff">0</span>, input, l<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(input[read_bytes<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;\n&#39;</span>){
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">--</span>read_bytes;
 </span></span><span style="display:flex;"><span>        input[read_bytes]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\0&#39;</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(read_bytes<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>){
-</span></span><span style="display:flex;"><span>            printf(<span style="color:#e6db74">&#34;No data given.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;No data given.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>;
 </span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;Timed out waiting for user input. Press Ctrl-C to disconnect</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Timed out waiting for user input. Press Ctrl-C to disconnect</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
@@ -905,27 +903,27 @@ deaa (Stack Smash!)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">play</span> () {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> player_turn[<span style="color:#ae81ff">100</span>];
-</span></span><span style="display:flex;"><span>  srand(time(<span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">srand</span>(<span style="color:#a6e22e">time</span>(<span style="color:#ae81ff">0</span>));
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;Please make your selection (rock/paper/scissors):</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>  r <span style="color:#f92672">=</span> tgetinput(player_turn, <span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Please make your selection (rock/paper/scissors):</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  r <span style="color:#f92672">=</span> <span style="color:#a6e22e">tgetinput</span>(player_turn, <span style="color:#ae81ff">100</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Timeout on user input
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
 </span></span><span style="display:flex;"><span>  {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> computer_turn <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>;
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;You played: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, player_turn);
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;The computer played: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, hands[computer_turn]);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> computer_turn <span style="color:#f92672">=</span> <span style="color:#a6e22e">rand</span>() <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;You played: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, player_turn);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;The computer played: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, hands[computer_turn]);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (strstr(player_turn, loses[computer_turn])) {
-</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;You win! Play again?&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">strstr</span>(player_turn, loses[computer_turn])) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;You win! Play again?&#34;</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Seems like you didn&#39;t win this time. Play again?&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Seems like you didn&#39;t win this time. Play again?&#34;</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
@@ -936,51 +934,51 @@ deaa (Stack Smash!)
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> command;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> r;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Welcome challenger to the game of Rock, Paper, Scissors&#34;</span>);
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;For anyone that beats me 5 times in a row, I will offer up a flag I found&#34;</span>);
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Are you ready?&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Welcome challenger to the game of Rock, Paper, Scissors&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;For anyone that beats me 5 times in a row, I will offer up a flag I found&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Are you ready?&#34;</span>);
 </span></span><span style="display:flex;"><span>  
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (true) {
-</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Type &#39;1&#39; to play a game&#34;</span>);
-</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;Type &#39;2&#39; to exit the program&#34;</span>);
-</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> tgetinput(input, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Type &#39;1&#39; to play a game&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Type &#39;2&#39; to exit the program&#34;</span>);
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> <span style="color:#a6e22e">tgetinput</span>(input, <span style="color:#ae81ff">3</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Timeout on user input
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>      exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Goodbye!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((command <span style="color:#f92672">=</span> strtol(input, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please put in a valid number&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((command <span style="color:#f92672">=</span> <span style="color:#a6e22e">strtol</span>(input, NULL, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Please put in a valid number&#34;</span>);
 </span></span><span style="display:flex;"><span>      
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (play()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">play</span>()) {
 </span></span><span style="display:flex;"><span>        wins<span style="color:#f92672">++</span>;
 </span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>        wins <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>      }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (wins <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">5</span>) {
-</span></span><span style="display:flex;"><span>        puts(<span style="color:#e6db74">&#34;Congrats, here&#39;s the flag!&#34;</span>);
-</span></span><span style="display:flex;"><span>        puts(flag);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Congrats, here&#39;s the flag!&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">puts</span>(flag);
 </span></span><span style="display:flex;"><span>      }
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (command <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>      puts(<span style="color:#e6db74">&#34;Please type either 1 or 2&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Please type either 1 or 2&#34;</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>From the source code we can see this is a Rock-Paper-Scissors game, and to get the flag, we need to win 5 times in a row. However, we can see it use this piece on code to compare our input to determine whether we win or lose:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (strstr(player_turn, loses[computer_turn])) {
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;You win! Play again?&#34;</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">strstr</span>(player_turn, loses[computer_turn])) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;You win! Play again?&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Seems like you didn&#39;t win this time. Play again?&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Seems like you didn&#39;t win this time. Play again?&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> false;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The <code>strstr()</code> function will return the first occurrence of string that found, which means that we keep winning by inputting the ultimate answer as below:</p>
@@ -1003,29 +1001,29 @@ deaa (Stack Smash!)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">flag</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[FLAGSIZE];
-</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  fgets(buf,FLAGSIZE,f);
-</span></span><span style="display:flex;"><span>  printf(buf);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fgets</span>(buf,FLAGSIZE,f);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(buf);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[BUFFSIZE];
-</span></span><span style="display:flex;"><span>  gets(buf);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gets</span>(buf);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>  gid_t gid <span style="color:#f92672">=</span> getegid();
-</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
-</span></span><span style="display:flex;"><span>  puts(<span style="color:#e6db74">&#34;Welcome to 64-bit. Give me a string that gets you the flag: &#34;</span>);
-</span></span><span style="display:flex;"><span>  vuln();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setvbuf</span>(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">gid_t</span> gid <span style="color:#f92672">=</span> <span style="color:#a6e22e">getegid</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setresgid</span>(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;Welcome to 64-bit. Give me a string that gets you the flag: &#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">vuln</span>();
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>From the source code we can see this is a typical ret2win challenge again, but in 64-bit. Below is the script to get the flag, <code>0x40123b</code> is the address of flag function which can be obtain by using Ghidra:</p>
@@ -1101,43 +1099,43 @@ I&rsquo;m just copying and pasting with this program. What can go wrong?</p>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUFSIZE 64
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define FLAGSIZE 64
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readflag</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> buf, size_t len) {
-</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readflag</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> buf, <span style="color:#66d9ef">size_t</span> len) {
+</span></span><span style="display:flex;"><span>  FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#34;flag.txt&#34;</span>,<span style="color:#e6db74">&#34;r&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, <span style="color:#e6db74">&#34;Please create &#39;flag.txt&#39; in this directory with your&#34;</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;own debugging flag.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  fgets(buf,len,f); <span style="color:#75715e">// size bound read
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fgets</span>(buf,len,f); <span style="color:#75715e">// size bound read
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(){
 </span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">char</span> flag[BUFSIZE];
 </span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">char</span> story[<span style="color:#ae81ff">128</span>];
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   readflag(flag, FLAGSIZE);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">readflag</span>(flag, FLAGSIZE);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;Tell me a story and then I&#39;ll tell you one &gt;&gt; &#34;</span>);
-</span></span><span style="display:flex;"><span>   scanf(<span style="color:#e6db74">&#34;%127s&#34;</span>, story);
-</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;Here&#39;s a story - </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>   printf(story);
-</span></span><span style="display:flex;"><span>   printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Tell me a story and then I&#39;ll tell you one &gt;&gt; &#34;</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">scanf</span>(<span style="color:#e6db74">&#34;%127s&#34;</span>, story);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Here&#39;s a story - </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">printf</span>(story);
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setvbuf</span>(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Set the gid to the effective gid
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// this prevents /bin/sh from dropping the privileges
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  gid_t gid <span style="color:#f92672">=</span> getegid();
-</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
-</span></span><span style="display:flex;"><span>  vuln();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">gid_t</span> gid <span style="color:#f92672">=</span> <span style="color:#a6e22e">getegid</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setresgid</span>(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">vuln</span>();
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>From the source code we can see it will read the flag into flag variable. Besides, vulnerability is format string vulnerability by looking at this code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>printf(story);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">printf</span>(story);
 </span></span></code></pre></div><p>Variables are store in stack, chances are we can leak the flag by utilizing this format string vulnerability.</p>
 <p>I created a simply script to leaked the flag, not perfect but it will do its job:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
@@ -1178,20 +1176,20 @@ I&rsquo;m just copying and pasting with this program. What can go wrong?</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">16</span>];
-</span></span><span style="display:flex;"><span>  printf(<span style="color:#e6db74">&#34;How strong is your ROP-fu? Snatch the shell from my hand, grasshopper!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> gets(buf);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;How strong is your ROP-fu? Snatch the shell from my hand, grasshopper!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gets</span>(buf);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv){
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  setvbuf(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setvbuf</span>(stdout, NULL, _IONBF, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>  
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Set the gid to the effective gid
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// this prevents /bin/sh from dropping the privileges
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  gid_t gid <span style="color:#f92672">=</span> getegid();
-</span></span><span style="display:flex;"><span>  setresgid(gid, gid, gid);
-</span></span><span style="display:flex;"><span>  vuln();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">gid_t</span> gid <span style="color:#f92672">=</span> <span style="color:#a6e22e">getegid</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setresgid</span>(gid, gid, gid);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">vuln</span>();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The challenge clearly indicate we are dealing with ROP. I&rsquo;m not really familiar with it. However, a tool called <strong>ROPgadget</strong> can automate the ROP chain for us with the command below:</p>
 <pre tabindex="0"><code>ROPgadget --binary vuln --ropchain

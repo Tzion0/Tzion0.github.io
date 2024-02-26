@@ -6,19 +6,14 @@
     <description>Recent content in BOH on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/boh/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/boh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[BOH] format2win</title>
       <link>https://tzion0.github.io/posts/boh2022-format2win/</link>
       <pubDate>Thu, 27 Oct 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/boh2022-format2win/</guid>
-      <description>This challenge provided a binary file.
-Since this is a pwn challenge, before we dig into it, let&amp;rsquo;s see its security properties:
-From result we can see that there is no PIE enabled and no stack canary.
-Position Independent Executables (PIE) is a security measure that protect the binary and all of its dependencies by loading it into random locations within virtual memory each time the application is executed.
-Stack canaries or security cookies are tell-tale values added to binaries during compilation to protect critical stack values like the Return Pointer against buffer overflow attacks.</description>
+      <description>This challenge provided a binary file.&#xA;Since this is a pwn challenge, before we dig into it, let&amp;rsquo;s see its security properties:&#xA;From result we can see that there is no PIE enabled and no stack canary.&#xA;Position Independent Executables (PIE) is a security measure that protect the binary and all of its dependencies by loading it into random locations within virtual memory each time the application is executed.&#xA;Stack canaries or security cookies are tell-tale values added to binaries during compilation to protect critical stack values like the Return Pointer against buffer overflow attacks.</description>
     </item>
-    
   </channel>
 </rss>

@@ -6,20 +6,14 @@
     <description>Recent content in HTBCACTF2022 on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/htbcactf2022/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 May 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/htbcactf2022/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[HTBCACTF] Snakecode</title>
       <link>https://tzion0.github.io/posts/htbcactf2022-snakecode/</link>
       <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/htbcactf2022-snakecode/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Reversing/Snakecode
-This challenge provided a pyc file.
-First of all, we need to decompile this pyc file. In order to that, we will be using an online decompiler to assist us: https://www.decompiler.com/
-There are also few CLI decompiler tools like uncompyle, decompile3, pycdc where you can use to decompile it.
-After decompile, you will get the python code below:
-# uncompyle6 version 3.7.4 # Python bytecode 2.7 (62211) # Decompiled from: Python 2.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Reversing/Snakecode&#xA;This challenge provided a pyc file.&#xA;First of all, we need to decompile this pyc file. In order to that, we will be using an online decompiler to assist us: https://www.decompiler.com/&#xA;There are also few CLI decompiler tools like uncompyle, decompile3, pycdc where you can use to decompile it.&#xA;After decompile, you will get the python code below:&#xA;# uncompyle6 version 3.7.4 # Python bytecode 2.7 (62211) # Decompiled from: Python 2.</description>
     </item>
-    
   </channel>
 </rss>

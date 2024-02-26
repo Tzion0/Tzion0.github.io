@@ -6,29 +6,21 @@
     <description>Recent content in Crypto on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/crypto/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/crypto/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[SHELLCTF] OX9OR2</title>
       <link>https://tzion0.github.io/posts/shellctf2022-ox9or2/</link>
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/shellctf2022-ox9or2/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/ShellCTF/2022/OX9OR2
-This challenge provided two files called encryption.py and encrypted. encrypted file contains ciphertext produced by encryption.py
-encryption.py def xor(msg, key): o = &amp;#39;&amp;#39; for i in range(len(msg)): o += chr(ord(msg[i]) ^ ord(key[i % len(key)])) return o with open(&amp;#39;message&amp;#39;, &amp;#39;r&amp;#39;) as f: msg = &amp;#39;&amp;#39;.join(f.readlines()).rstrip(&amp;#39;\n&amp;#39;) with open(&amp;#39;key&amp;#39;, &amp;#39;r&amp;#39;) as k: key = &amp;#39;&amp;#39;.join(k.readlines()).rstrip(&amp;#39;\n&amp;#39;) assert key.isalnum() and (len(key) == 9) assert &amp;#39;SHELL&amp;#39; in msg with open(&amp;#39;encrypted&amp;#39;, &amp;#39;w&amp;#39;) as fo: fo.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/ShellCTF/2022/OX9OR2&#xA;This challenge provided two files called encryption.py and encrypted. encrypted file contains ciphertext produced by encryption.py&#xA;encryption.py def xor(msg, key): o = &amp;#39;&amp;#39; for i in range(len(msg)): o += chr(ord(msg[i]) ^ ord(key[i % len(key)])) return o with open(&amp;#39;message&amp;#39;, &amp;#39;r&amp;#39;) as f: msg = &amp;#39;&amp;#39;.join(f.readlines()).rstrip(&amp;#39;\n&amp;#39;) with open(&amp;#39;key&amp;#39;, &amp;#39;r&amp;#39;) as k: key = &amp;#39;&amp;#39;.join(k.readlines()).rstrip(&amp;#39;\n&amp;#39;) assert key.isalnum() and (len(key) == 9) assert &amp;#39;SHELL&amp;#39; in msg with open(&amp;#39;encrypted&amp;#39;, &amp;#39;w&amp;#39;) as fo: fo.</description>
     </item>
-    
     <item>
       <title>[HTBCACTF] Jenny From The Block</title>
       <link>https://tzion0.github.io/posts/htbcactf2022-jftb/</link>
       <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/htbcactf2022-jftb/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Crypto/Jenny_From_The_Block
-This challenge provided a python source code.
-Looking at the source code, we can see there are few whitelisted commands that we can run:
-allowed_commands = [b&amp;#39;whoami&amp;#39;, b&amp;#39;ls&amp;#39;, b&amp;#39;cat secret.txt&amp;#39;, b&amp;#39;pwd&amp;#39;] In challenge function, the command we input will be execute after passing the check and the command itself and the output will be concat with a string for further block cipher encryption with a random 32 bytes password before sending back to us:</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/HTB/CA_CTF/2022/Crypto/Jenny_From_The_Block&#xA;This challenge provided a python source code.&#xA;Looking at the source code, we can see there are few whitelisted commands that we can run:&#xA;allowed_commands = [b&amp;#39;whoami&amp;#39;, b&amp;#39;ls&amp;#39;, b&amp;#39;cat secret.txt&amp;#39;, b&amp;#39;pwd&amp;#39;] In challenge function, the command we input will be execute after passing the check and the command itself and the output will be concat with a string for further block cipher encryption with a random 32 bytes password before sending back to us:</description>
     </item>
-    
   </channel>
 </rss>

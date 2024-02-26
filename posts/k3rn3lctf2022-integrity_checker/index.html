@@ -4,15 +4,14 @@
     <title>[K3RN3LCTF] Integrity Checker // Tzion</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.104.1" />
+    <meta name="generator" content="Hugo 0.122.0">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Tzion" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[K3RN3LCTF] Integrity Checker"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="[K3RN3LCTF] Integrity Checker"/>
 <meta name="twitter:description" content="Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker
 Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument.
 Apparently the calling function was the cause of error. Let&rsquo;s view its original class:
@@ -89,8 +88,7 @@ Right click class tab -&gt; Class Mode -&gt; Table We can see the Source file." 
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/k3rn3lctf/">K3RN3LCTF</a>
-              <a class="tag" href="https://tzion0.github.io/tags/2021/">2021</a>
-              <a class="tag" href="https://tzion0.github.io/tags/rev/">Rev</a>
+              <a class="tag" href="https://tzion0.github.io/tags/rev/">REV</a>
         </div>
       </div>
     </header>
@@ -106,13 +104,13 @@ Right click class tab -&gt; Class Mode -&gt; Table We can see the Source file." 
 <p>After knowing the original class name, we can rename it.</p>
 <pre tabindex="0"><code>On left side, right click class name -&gt; Rename to Decryptor
 </code></pre><p>After that, we can take a look on <code>Decryptor</code> class. Apparently it is taking the class name <code>Decryptor</code> to convert to array then taking its first 5 characters, <code>throw9[0], throw9[1], throw9[2], throw9[3], throw9[4]</code> to XOR with specific bytes, <code>3, 0xC, 0x20, 5, 0x43</code> and compare with our password.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String throw8 <span style="color:#f92672">=</span> throw6<span style="color:#f92672">[</span>0<span style="color:#f92672">].</span><span style="color:#a6e22e">getClassName</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> throw9 <span style="color:#f92672">=</span> throw8<span style="color:#f92672">.</span><span style="color:#a6e22e">toCharArray</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String throw8 <span style="color:#f92672">=</span> throw6<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>.<span style="color:#a6e22e">getClassName</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> throw9 <span style="color:#f92672">=</span> throw8.<span style="color:#a6e22e">toCharArray</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">((</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 3<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 0xC<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 0x20<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 5<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)(</span>throw9<span style="color:#f92672">[</span>4<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 0x43<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>4<span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>	System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Your password input is invalid!&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;INVALID PASSWORD!&#34;</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ((<span style="color:#66d9ef">char</span>)(throw9<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 3) <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#66d9ef">char</span>)(throw9<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 0xC) <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#66d9ef">char</span>)(throw9<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 0x20) <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#66d9ef">char</span>)(throw9<span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 5) <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#66d9ef">char</span>)(throw9<span style="color:#f92672">[</span>4<span style="color:#f92672">]</span> <span style="color:#f92672">^</span> 0x43) <span style="color:#f92672">!=</span> throw10<span style="color:#f92672">[</span>4<span style="color:#f92672">]</span>) {
+</span></span><span style="display:flex;"><span>	System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Your password input is invalid!&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;INVALID PASSWORD!&#34;</span>;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>We can create a script to find then password:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
 </span></span><span style="display:flex;"><span>

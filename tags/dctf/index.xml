@@ -6,19 +6,14 @@
     <description>Recent content in DCTF on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/dctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/dctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[DCTF] Forensics</title>
       <link>https://tzion0.github.io/posts/dctf2022-for/</link>
       <pubDate>Mon, 18 Apr 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/dctf2022-for/</guid>
-      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/DCTF/2022/Forensics
-This writeup contains all Forensics category challenges in DCTF 2022 that i solved.
-Secure Creds Description With the connection to the victim&amp;rsquo;s computer you managed to dump the lsass.exe process. Can you get the password from the dump file?
-This challenge provided a zip file, unzip it we will get lsass.DMP file.
-From the description we know that we are dealing with lsass.exe, a bit of research shows that we can dump the content using Mimikatz.</description>
+      <description>Tasks source: https://github.com/Tzion0/CTF/tree/master/DCTF/2022/Forensics&#xA;This writeup contains all Forensics category challenges in DCTF 2022 that i solved.&#xA;Secure Creds Description With the connection to the victim&amp;rsquo;s computer you managed to dump the lsass.exe process. Can you get the password from the dump file?&#xA;This challenge provided a zip file, unzip it we will get lsass.DMP file.&#xA;From the description we know that we are dealing with lsass.exe, a bit of research shows that we can dump the content using Mimikatz.</description>
     </item>
-    
   </channel>
 </rss>

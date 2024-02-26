@@ -6,26 +6,21 @@
     <description>Recent content in THM on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/thm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/thm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[THM] Fuscator</title>
       <link>https://tzion0.github.io/posts/thm-fuscator/</link>
       <pubDate>Mon, 05 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/thm-fuscator/</guid>
-      <description>Fuscator is a medium dificulty boot2root machine I created for Malaysia Cyber Security Camp (MCC) 2022 as an assignment using TryHackMe. You can access it here
-Since boot2root usually is more on red team side and MCC participants have different type of skillset, hence I decided to create a machine that required both blue and red team skillset to solve it.
-There are two ways to get user foothold and one way to get root as far as I know.</description>
+      <description>Fuscator is a medium dificulty boot2root machine I created for Malaysia Cyber Security Camp (MCC) 2022 as an assignment using TryHackMe. You can access it here&#xA;Since boot2root usually is more on red team side and MCC participants have different type of skillset, hence I decided to create a machine that required both blue and red team skillset to solve it.&#xA;There are two ways to get user foothold and one way to get root as far as I know.</description>
     </item>
-    
     <item>
       <title>[THM] NoNameCTF</title>
       <link>https://tzion0.github.io/posts/thm-nonamectf/</link>
       <pubDate>Sat, 11 Sep 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/thm-nonamectf/</guid>
       <description>Enumeration nmap -sCV -oN nmap/NoNameCTF &amp;lt;ip&amp;gt; Result Nmap scan report for 10.10.107.235 Host is up (0.36s latency). Not shown: 992 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 12:57:3f:cc:86:39:04:3b:f0:e6:46:bf:72:51:64:0b (RSA) | 256 81:05:75:ad:78:83:62:b2:06:41:5b:e5:a5:a9:82:4d (ECDSA) |_ 256 0f:8d:0e:19:e9:c7:cc:14:39:e9:34:60:5c:f7:aa:fe (ED25519) 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-title: Site doesn&amp;#39;t have a title (text/html). |_http-server-header: Apache/2.4.18 (Ubuntu) 146/tcp filtered iso-tp0 2222/tcp open EtherNetIP-1?</description>
     </item>
-    
   </channel>
 </rss>

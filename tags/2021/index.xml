@@ -6,39 +6,28 @@
     <description>Recent content in 2021 on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://tzion0.github.io/tags/2021/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/2021/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[K3RN3LCTF] Integrity Checker</title>
       <link>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker
-Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument.
-Apparently the calling function was the cause of error. Let&amp;rsquo;s view its original class:
-Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source file.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker&#xA;Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument.&#xA;Apparently the calling function was the cause of error. Let&amp;rsquo;s view its original class:&#xA;Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source file.</description>
     </item>
-    
     <item>
       <title>[K3RN3LCTF] K3RN3L DROID</title>
       <link>https://tzion0.github.io/posts/k3rn3lctf2022-k3rn3l_droid/</link>
       <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/k3rn3lctf2022-k3rn3l_droid/</guid>
-      <description>Task source : https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/K3RN3L%20DROID
-Our goal is to retrieve the valid pin number to combine with another half of the flag: flag{K3RN3L_DR0ID_%s}
-The only way to view validPinMessage is through valid_pin. We can see label5 is comparing the pinCode and jump to valid_pin if matched. The table below have references for intructions we need.
-Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow jc, jb, jnae CF = 1 carry / below / not above nor equal jnc, jae, jnb CF = 0 not carry / above or equal / not below je, jz ZF = 1 equal / zero jne, jnz ZF = 0 not equal / not zero jbe, jna CF or ZF = 1 below or equal / not above ja, jnbe CF or ZF = 0 above / not below or equal js SF = 1 sign jns SF = 0 not sign jp, jpe PF = 1 parity / parity even jnp, jpo PF = 0 not parity / parity odd jl, jnge SF xor OF = 1 less / not greater nor equal jge, jnl SF xor OF = 0 greater or equal / not less jle, jng (SF xor OF) or ZF = 1 less or equal / not greater jg, jnle (SF xor OF) or ZF = 0 greater / not less nor equal Apparently the length of pinCode was 8:</description>
+      <description>Task source : https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/K3RN3L%20DROID&#xA;Our goal is to retrieve the valid pin number to combine with another half of the flag: flag{K3RN3L_DR0ID_%s}&#xA;The only way to view validPinMessage is through valid_pin. We can see label5 is comparing the pinCode and jump to valid_pin if matched. The table below have references for intructions we need.&#xA;Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow jc, jb, jnae CF = 1 carry / below / not above nor equal jnc, jae, jnb CF = 0 not carry / above or equal / not below je, jz ZF = 1 equal / zero jne, jnz ZF = 0 not equal / not zero jbe, jna CF or ZF = 1 below or equal / not above ja, jnbe CF or ZF = 0 above / not below or equal js SF = 1 sign jns SF = 0 not sign jp, jpe PF = 1 parity / parity even jnp, jpo PF = 0 not parity / parity odd jl, jnge SF xor OF = 1 less / not greater nor equal jge, jnl SF xor OF = 0 greater or equal / not less jle, jng (SF xor OF) or ZF = 1 less or equal / not greater jg, jnle (SF xor OF) or ZF = 0 greater / not less nor equal Apparently the length of pinCode was 8:</description>
     </item>
-    
     <item>
       <title>[THM] NoNameCTF</title>
       <link>https://tzion0.github.io/posts/thm-nonamectf/</link>
       <pubDate>Sat, 11 Sep 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://tzion0.github.io/posts/thm-nonamectf/</guid>
       <description>Enumeration nmap -sCV -oN nmap/NoNameCTF &amp;lt;ip&amp;gt; Result Nmap scan report for 10.10.107.235 Host is up (0.36s latency). Not shown: 992 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 12:57:3f:cc:86:39:04:3b:f0:e6:46:bf:72:51:64:0b (RSA) | 256 81:05:75:ad:78:83:62:b2:06:41:5b:e5:a5:a9:82:4d (ECDSA) |_ 256 0f:8d:0e:19:e9:c7:cc:14:39:e9:34:60:5c:f7:aa:fe (ED25519) 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-title: Site doesn&amp;#39;t have a title (text/html). |_http-server-header: Apache/2.4.18 (Ubuntu) 146/tcp filtered iso-tp0 2222/tcp open EtherNetIP-1?</description>
     </item>
-    
   </channel>
 </rss>
