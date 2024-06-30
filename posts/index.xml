@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Tzion</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Jun 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://tzion0.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[MATRIXCUP] My Journey &amp; Experience</title>
+      <link>https://tzion0.github.io/posts/matrixcup2024-journey/</link>
+      <pubDate>Sun, 30 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://tzion0.github.io/posts/matrixcup2024-journey/</guid>
+      <description>I am thrilled to participate in MatrixCup 2024 in QingDao, China with my team, 打个没五分钟充电三小时, humorously named after M53.&#xA;I would like to express my gratitude to Cyberwise Inc and Secure D Global for their support and sponsorship in making this trip possible. I am sincerely appreciative of this unforgettable experience.&#xA;MatrixCup 2024 Adventure The competition category we participate is called 人工智能挑战赛 basically is an AI track competition. Our task is to build an AI to automatically solve Pwn challenges&amp;hellip;</description>
+    </item>
     <item>
       <title>[HACKTHEON] My Journey &amp; Experience</title>
       <link>https://tzion0.github.io/posts/hacktheon2024-journey/</link>
@@ -210,13 +217,6 @@
       <pubDate>Sat, 11 Sep 2021 00:00:00 +0000</pubDate>
       <guid>https://tzion0.github.io/posts/thm-nonamectf/</guid>
       <description>Enumeration nmap -sCV -oN nmap/NoNameCTF &amp;lt;ip&amp;gt; Result Nmap scan report for 10.10.107.235 Host is up (0.36s latency). Not shown: 992 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 12:57:3f:cc:86:39:04:3b:f0:e6:46:bf:72:51:64:0b (RSA) | 256 81:05:75:ad:78:83:62:b2:06:41:5b:e5:a5:a9:82:4d (ECDSA) |_ 256 0f:8d:0e:19:e9:c7:cc:14:39:e9:34:60:5c:f7:aa:fe (ED25519) 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-title: Site doesn&amp;#39;t have a title (text/html). |_http-server-header: Apache/2.4.18 (Ubuntu) 146/tcp filtered iso-tp0 2222/tcp open EtherNetIP-1?</description>
-    </item>
-    <item>
-      <title>[MATRIXCUP] My Journey &amp; Experience</title>
-      <link>https://tzion0.github.io/posts/matrixcup2024-journey/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://tzion0.github.io/posts/matrixcup2024-journey/</guid>
-      <description>I am thrilled to participate in MatrixCup 2024 in QingDao, China with my team, 打个没五分钟充电三小时, humorously named after M53.&#xA;I would like to express my gratitude to Cyberwise Inc and Secure D Global for their support and sponsorship in making this trip possible. I am sincerely appreciative of this unforgettable experience.&#xA;MatrixCup 2024 Adventure The competition category we participate is called 人工智能挑战赛 basically is an AI track competition. Our task is to build an AI to automatically solve Pwn challenges&amp;hellip;</description>
     </item>
   </channel>
 </rss>
