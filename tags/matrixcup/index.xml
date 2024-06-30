@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MATRIXCUP on Tzion</title>
+    <link>https://tzion0.github.io/tags/matrixcup/</link>
+    <description>Recent content in MATRIXCUP on Tzion</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://tzion0.github.io/tags/matrixcup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[MATRIXCUP] My Journey &amp; Experience</title>
+      <link>https://tzion0.github.io/posts/matrixcup2024-journey/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://tzion0.github.io/posts/matrixcup2024-journey/</guid>
+      <description>I am thrilled to participate in MatrixCup 2024 in QingDao, China with my team, 打个没五分钟充电三小时, humorously named after M53.&#xA;I would like to express my gratitude to Cyberwise Inc and Secure D Global for their support and sponsorship in making this trip possible. I am sincerely appreciative of this unforgettable experience.&#xA;MatrixCup 2024 Adventure The competition category we participate is called 人工智能挑战赛 basically is an AI track competition. Our task is to build an AI to automatically solve Pwn challenges&amp;hellip;</description>
+    </item>
+  </channel>
+</rss>
