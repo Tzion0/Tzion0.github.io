@@ -90,6 +90,7 @@ We just need to execute the executable to obtain the flag." />
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/picoctf/">PICOCTF</a>
+              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
               <a class="tag" href="https://tzion0.github.io/tags/rev/">REV</a>
         </div>
       </div>
@@ -143,7 +144,7 @@ Run this Python program in the same directory as this encrypted flag.</p>
 </span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(new_key) <span style="color:#f92672">&lt;</span> len(secret):
 </span></span><span style="display:flex;"><span>        new_key <span style="color:#f92672">=</span> new_key <span style="color:#f92672">+</span> key[i]
-</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len(key)        
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len(key)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join([chr(ord(secret_c) <span style="color:#f92672">^</span> ord(new_key_c)) <span style="color:#66d9ef">for</span> (secret_c,new_key_c) <span style="color:#f92672">in</span> zip(secret,new_key)])
 </span></span><span style="display:flex;"><span><span style="color:#75715e">###############################################################################</span>
 </span></span><span style="display:flex;"><span>
@@ -180,7 +181,7 @@ Put the password you recover into the picoCTF flag format like:</p>
 <pre tabindex="0"><code>picoCTF{password}
 </code></pre><p>This challenge provided a plain text java file:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.*;  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.*;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SafeOpener</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String args<span style="color:#f92672">[]</span>) <span style="color:#66d9ef">throws</span> IOException {
 </span></span><span style="display:flex;"><span>        BufferedReader keyboard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> InputStreamReader(System.<span style="color:#a6e22e">in</span>));
@@ -189,7 +190,7 @@ Put the password you recover into the picoCTF flag format like:</p>
 </span></span><span style="display:flex;"><span>        String key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> isOpen;
-</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> 3) {
 </span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#34;Enter password for the safe: &#34;</span>);
@@ -197,7 +198,7 @@ Put the password you recover into the picoCTF flag format like:</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>            encodedkey <span style="color:#f92672">=</span> encoder.<span style="color:#a6e22e">encodeToString</span>(key.<span style="color:#a6e22e">getBytes</span>());
 </span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(encodedkey);
-</span></span><span style="display:flex;"><span>              
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>            isOpen <span style="color:#f92672">=</span> openSafe(encodedkey);
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>isOpen) {
 </span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;You have  &#34;</span> <span style="color:#f92672">+</span> (2 <span style="color:#f92672">-</span> i) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; attempt(s) left&#34;</span>);
@@ -207,10 +208,10 @@ Put the password you recover into the picoCTF flag format like:</p>
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">openSafe</span>(String password) {
 </span></span><span style="display:flex;"><span>        String encodedkey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cGwzYXMzX2wzdF9tM18xbnQwX3RoM19zYWYz&#34;</span>;
-</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (password.<span style="color:#a6e22e">equals</span>(encodedkey)) {
 </span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Sesame open&#34;</span>);
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
@@ -262,7 +263,7 @@ Run this Python program in the same directory as this encrypted flag.</p>
 </span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(arg433) <span style="color:#f92672">&lt;</span> len(arg432):
 </span></span><span style="display:flex;"><span>        arg433 <span style="color:#f92672">=</span> arg433 <span style="color:#f92672">+</span> arg423[i]
-</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len(arg423)        
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len(arg423)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join([chr(ord(arg422) <span style="color:#f92672">^</span> ord(arg442)) <span style="color:#66d9ef">for</span> (arg422,arg442) <span style="color:#f92672">in</span> zip(arg432,arg433)])
 </span></span><span style="display:flex;"><span>arg444 <span style="color:#f92672">=</span> arg132()
 </span></span><span style="display:flex;"><span>arg432 <span style="color:#f92672">=</span> arg232()
@@ -275,7 +276,7 @@ Run this Python program in the same directory as this encrypted flag.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
 </span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;!</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">#$%&amp;&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span><span style="color:#f92672">+</span> \
 </span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;[</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">]^_`abcdefghijklmnopqrstuvwxyz{|}~ &#34;</span>
-</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_usr_input</span>(usr_input):
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> usr_input <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;happychance&#34;</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
@@ -301,7 +302,7 @@ Run this Python program in the same directory as this encrypted flag.</p>
 </span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(temp) <span style="color:#f92672">&lt;</span> len(usr_input):
 </span></span><span style="display:flex;"><span>        temp <span style="color:#f92672">=</span> temp <span style="color:#f92672">+</span> plain_flag[i]
-</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len(plain_flag)        
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len(plain_flag)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join([chr(ord(x) <span style="color:#f92672">^</span> ord(y)) <span style="color:#66d9ef">for</span> (x,y) <span style="color:#f92672">in</span> zip(usr_input,temp)])
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>encoded <span style="color:#f92672">=</span> open_encoded_txt_file()
@@ -495,7 +496,7 @@ Reverse engineer this binary.</p>
 </span></span><span style="display:flex;"><span>  undefined8 local_28;
 </span></span><span style="display:flex;"><span>  undefined8 local_20;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> local_10;
-</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  local_10 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>);
 </span></span><span style="display:flex;"><span>  local_38 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4c75257240343a41</span>;
 </span></span><span style="display:flex;"><span>  local_30 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x3062396630664634</span>;
@@ -550,7 +551,7 @@ Reverse engineer this binary.</p>
 </span></span><span style="display:flex;"><span>  undefined4 local_20;
 </span></span><span style="display:flex;"><span>  undefined2 local_1c;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> local_10;
-</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  local_10 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>);
 </span></span><span style="display:flex;"><span>  local_38 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4c75257240343a41</span>;
 </span></span><span style="display:flex;"><span>  local_30 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x30623e306b6d4146</span>;
@@ -600,7 +601,7 @@ Reverse engineer this binary.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> in_FS_OFFSET;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> inpt [<span style="color:#ae81ff">40</span>];
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> canary;
-</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  canary <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Enter your license key: &#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fgets</span>(inpt,<span style="color:#ae81ff">0x25</span>,stdin);
@@ -636,7 +637,7 @@ Reverse engineer this binary.</p>
 </span></span><span style="display:flex;"><span>  v12 <span style="color:#f92672">=</span> <span style="color:#a6e22e">__readfsqword</span>(<span style="color:#ae81ff">0x28u</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">strcpy</span>(half_flag, <span style="color:#e6db74">&#34;picoCTF{br1ng_y0ur_0wn_k3y_&#34;</span>);<span style="color:#75715e">// half_flag_len = 27
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                                <span style="color:#75715e">// flag_len = 37
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                                <span style="color:#75715e">// 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                                <span style="color:#75715e">//
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">strcpy</span>(v8, <span style="color:#e6db74">&#34;}&#34;</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">strlen</span>(half_flag);                            <span style="color:#75715e">// 27
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">MD5</span>();

@@ -13,7 +13,7 @@
       <link>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
       <guid>https://tzion0.github.io/posts/k3rn3lctf2022-integrity_checker/</guid>
-      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker&#xA;Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument.&#xA;Apparently the calling function was the cause of error. Let&amp;rsquo;s view its original class:&#xA;Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source file.</description>
+      <description>Task source: https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/Integrity%20Checker&#xA;Load the .jar file into Java bytecode editor, Recaf. We can see it pop out some error (We will deal with it later). Looking at this source code, we know that password length is 5 and it will call the function start with \u0000K3RN3L_CTF{{{{{{ with password as argument. Apparently the calling function was the cause of error. Let&amp;rsquo;s view its original class:&#xA;Right click class tab -&amp;gt; Class Mode -&amp;gt; Table We can see the Source file.</description>
     </item>
     <item>
       <title>[K3RN3LCTF] K3RN3L DROID</title>

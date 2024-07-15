@@ -86,6 +86,7 @@ encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/shellctf/">SHELLCTF</a>
+              <a class="tag" href="https://tzion0.github.io/tags/2022/">2022</a>
               <a class="tag" href="https://tzion0.github.io/tags/crypto/">Crypto</a>
         </div>
       </div>
@@ -100,16 +101,16 @@ encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(msg)):
 </span></span><span style="display:flex;"><span>        o <span style="color:#f92672">+=</span> chr(ord(msg[i]) <span style="color:#f92672">^</span> ord(key[i <span style="color:#f92672">%</span> len(key)]))
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> o
-</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;message&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> f:
 </span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(f<span style="color:#f92672">.</span>readlines())<span style="color:#f92672">.</span>rstrip(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
-</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;key&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> k:
 </span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(k<span style="color:#f92672">.</span>readlines())<span style="color:#f92672">.</span>rstrip(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> key<span style="color:#f92672">.</span>isalnum() <span style="color:#f92672">and</span> (len(key) <span style="color:#f92672">==</span> <span style="color:#ae81ff">9</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> <span style="color:#e6db74">&#39;SHELL&#39;</span> <span style="color:#f92672">in</span> msg
-</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;encrypted&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> fo:
 </span></span><span style="display:flex;"><span>    fo<span style="color:#f92672">.</span>write(xor(msg, key))
 </span></span></code></pre></div><p>Looking at encryption.py, we can conclude that the script is basically doing XOR on message with a key where the key is alphanumeric (isalnum) with the length of 9 and contains &ldquo;SHELL&rdquo; string in it.</p>
@@ -118,7 +119,7 @@ encryption.py def xor(msg, key): o = &#39;&#39; for i in range(len(msg)): o &#43
 <p><img src="/img/shellctf2022-ox9or2/img.png" alt="IMG"></p>
 <p>At this point we are left with remaining 3 characters to get the full key, we can achieve this by bruteforcing it. I created a python script to do this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> product 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> product
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> string
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re
 </span></span><span style="display:flex;"><span>

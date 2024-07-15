@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HITCONCTF-QUALS on Tzion</title>
+    <link>https://tzion0.github.io/tags/hitconctf-quals/</link>
+    <description>Recent content in HITCONCTF-QUALS on Tzion</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/hitconctf-quals/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[HITCONCTF-QUALS] Antivirus</title>
+      <link>https://tzion0.github.io/posts/hitconctf2024quals-antivirus/</link>
+      <pubDate>Sun, 14 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://tzion0.github.io/posts/hitconctf2024quals-antivirus/</guid>
+      <description>I played HITCON Quals CTF 2024 with merger team World Wide Union.&#xA;This challenge provided a run.sh and print_flag.cbc file.&#xA;Content of run.sh is as follow:&#xA;#!/bin/sh docker run -v /home/ctf/clamav/:/test/ --rm -it clamav/clamav clamscan --bytecode-unsigned -d/test/print_flag.cbc /test/sample.exe Looking at it, this is obviously a bytecode challenge, specifically ClamAV&amp;rsquo;s bytecode.&#xA;Setting up ClamAV Below are the commands used to install ClamAV from scratch, please ensure you have ninja installed in prior:</description>
+    </item>
+  </channel>
+</rss>

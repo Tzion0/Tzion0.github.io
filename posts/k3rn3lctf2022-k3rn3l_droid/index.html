@@ -88,6 +88,7 @@ Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
               <a class="tag" href="https://tzion0.github.io/tags/k3rn3lctf/">K3RN3LCTF</a>
+              <a class="tag" href="https://tzion0.github.io/tags/2021/">2021</a>
               <a class="tag" href="https://tzion0.github.io/tags/rev/">REV</a>
         </div>
       </div>
@@ -97,27 +98,27 @@ Mnemonic Condition tested Description jo OF = 1 overflow jno OF = 0 not overflow
 <p><a href="https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/K3RN3L%20DROID">https://github.com/Tzion0/CTF/tree/master/K3RN3LCTF/2021/K3RN3L%20DROID</a></p>
 <p>Our goal is to retrieve the valid pin number to combine with another half of the flag: <code>flag{K3RN3L_DR0ID_%s}</code></p>
 <p>The only way to view <code>validPinMessage</code> is through <code>valid_pin</code>. We can see <code>label5</code> is comparing the <strong>pinCode</strong> and jump to <code>valid_pin</code> if matched. The table below have references for intructions we need.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tasm" data-lang="tasm"><span style="display:flex;"><span><span style="color:#a6e22e">Mnemonic</span>        Condition tested  Description  
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jo</span>              OF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>            overflow 
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jno</span>             OF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>            not overflow 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tasm" data-lang="tasm"><span style="display:flex;"><span><span style="color:#a6e22e">Mnemonic</span>        Condition tested  Description
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jo</span>              OF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>            overflow
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jno</span>             OF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>            not overflow
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">jc</span>, jb, jnae    CF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>            carry <span style="color:#f92672">/</span> below <span style="color:#f92672">/</span> not above nor equal
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">jnc</span>, jae, jnb   CF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>            not carry <span style="color:#f92672">/</span> above or equal <span style="color:#f92672">/</span> not below
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">je</span>, jz          ZF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>            equal <span style="color:#f92672">/</span> zero
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">jne</span>, jnz        ZF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>            not equal <span style="color:#f92672">/</span> not zero
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">jbe</span>, jna        CF or ZF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>      below or equal <span style="color:#f92672">/</span> not above
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">ja</span>, jnbe        CF or ZF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>      above <span style="color:#f92672">/</span> not below or equal
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">js</span>              SF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>            sign 
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jns</span>             SF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>            not sign 
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jp</span>, jpe         PF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>            parity <span style="color:#f92672">/</span> parity even 
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jnp</span>, jpo        PF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>            not parity <span style="color:#f92672">/</span> parity odd 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">js</span>              SF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>            sign
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jns</span>             SF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>            not sign
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jp</span>, jpe         PF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>            parity <span style="color:#f92672">/</span> parity even
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jnp</span>, jpo        PF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>            not parity <span style="color:#f92672">/</span> parity odd
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">jl</span>, jnge        SF xor OF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>     less <span style="color:#f92672">/</span> not greater nor equal
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">jge</span>, jnl        SF xor OF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>     greater or equal <span style="color:#f92672">/</span> not less
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">jle</span>, jng    (SF xor OF) or ZF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> less or equal <span style="color:#f92672">/</span> not greater
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jg</span>, jnle    (SF xor OF) or ZF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> greater <span style="color:#f92672">/</span> not less nor equal 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jg</span>, jnle    (SF xor OF) or ZF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> greater <span style="color:#f92672">/</span> not less nor equal
 </span></span></code></pre></div><p>Apparently the length of <strong>pinCode</strong> was 8:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tasm" data-lang="tasm"><span style="display:flex;"><span><span style="color:#a6e22e">call</span> strlen
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">cmp</span> rax, <span style="color:#ae81ff">0x8</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jne</span> invalid_pin_length 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jne</span> invalid_pin_length
 </span></span></code></pre></div><h3 id="pincode-1">pinCode 1:</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tasm" data-lang="tasm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> r9b, [pinCode <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0</span>]
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">cmp</span> r9b, <span style="color:#ae81ff">0x30</span>

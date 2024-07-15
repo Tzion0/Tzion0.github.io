@@ -2,22 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://tzion0.github.io/posts/hitconctf2024quals-antivirus/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/2024/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/hitconctf-quals/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/posts/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/rev/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/tags/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tzion0.github.io/</loc>
+    <lastmod>2024-07-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://tzion0.github.io/posts/matrixcup2024-journey/</loc>
     <lastmod>2024-06-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tzion0.github.io/tags/2024/</loc>
-    <lastmod>2024-06-30T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://tzion0.github.io/tags/matrixcup/</loc>
-    <lastmod>2024-06-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tzion0.github.io/posts/</loc>
-    <lastmod>2024-06-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tzion0.github.io/tags/</loc>
-    <lastmod>2024-06-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tzion0.github.io/</loc>
     <lastmod>2024-06-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/posts/hacktheon2024-journey/</loc>
@@ -30,9 +39,6 @@
     <lastmod>2024-02-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/tags/bi0sctf/</loc>
-    <lastmod>2024-02-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tzion0.github.io/tags/rev/</loc>
     <lastmod>2024-02-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tzion0.github.io/posts/acs2023-maze/</loc>
