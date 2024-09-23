@@ -126,7 +126,7 @@ The Captcha Verification steps are as follow:" />
 <p><img src="/img/github-scanner-lumma-stealer/img10.png" alt="IMG10"></p>
 <p>Finally, the loader restores the modified thread context (<code>SetThreadContext</code>) to point to the newly injected malicious code, and then resumes the thread using <code>ResumeThread</code>. At this point, <code>RegAsm.exe</code> will execute the malicious code instead of its original program.</p>
 <p><img src="/img/github-scanner-lumma-stealer/img11.png" alt="IMG11"></p>
-<p>The malicious EXE code injected into <code>RegAsm.exe</code> is as follow, at the first glance it seems decrypting itself at runtime:</p>
+<p>The malicious EXE code injected into <code>RegAsm.exe</code> is as follows. At first glance, it appears to decrypt itself at runtime:</p>
 <p><img src="/img/github-scanner-lumma-stealer/img12.png" alt="IMG12"></p>
 <p>Execute it in <a href="https://any.run/">ANY RUN</a> indicates that LUMMA Stealer has been detected:</p>
 <p><img src="/img/github-scanner-lumma-stealer/img13.png" alt="IMG13"></p>
