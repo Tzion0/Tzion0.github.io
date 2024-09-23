@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LUMMA on Tzion</title>
+    <link>https://tzion0.github.io/tags/lumma/</link>
+    <description>Recent content in LUMMA on Tzion</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Sep 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tzion0.github.io/tags/lumma/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[MALWARE] Lumma Stealer Loader Analysis</title>
+      <link>https://tzion0.github.io/posts/github-scanner-lumma-stealer/</link>
+      <pubDate>Sun, 22 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://tzion0.github.io/posts/github-scanner-lumma-stealer/</guid>
+      <description>Introduction On September 19, 2024, I received an email regarding a GitHub Scanner result for my public repository. Initially, the email was not flagged as malicious or spam; however, further investigation revealed it to be part of a malware campaign attempting to distribute Lumma Stealer, disguised as a GitHub Scanner notification.&#xA;Technical Analysis Upon accessing the link (https://github-scanner.com), a Captcha verification page is presented.&#xA;The Captcha Verification steps are as follow:</description>
+    </item>
+  </channel>
+</rss>
