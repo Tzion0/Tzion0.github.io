@@ -116,7 +116,7 @@ analytics:
 author:
   name             : "Tzion"
   avatar           : "/assets/images/tzion.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "CTF / Reverse Engineering / Malware Analysis"
+  bio              : "CTF / Reverse Engineering / Malware Analysis / Threat Intelligence / Threat Hunting"
   location         : "Malaysia"
   email            : "tz0x65@gmail.com"
   links:
