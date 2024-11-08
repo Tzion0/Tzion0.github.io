@@ -29,4 +29,8 @@ toc_label: "Table of Contents"
 ```
 bundle exec jekyll serve
 bundle exec jekyll build
+
+git add .
+git commit -m "blabla"
+git push origin main
 ```
