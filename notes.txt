@@ -1,0 +1,32 @@
+# Example Front Matter
+---
+title: "Edge Case: No Body Content"
+excerpt: "This is a user-defined post excerpt. It should be displayed in place of the post content in archive-index pages."
+excerpt_separator: <!--more-->
+categories:
+  - Edge Case
+tags:
+  - content
+  - edge case
+  - layout
+  - "BI0S" # Note even an integer in the whole string, also need to add quote
+  - "2024"
+toc: true
+toc_sticky: true
+toc_label: "Table of Contents"
+---
+
+# Tips
+- Dealing with images: https://mmistakes.github.io/minimal-mistakes/markup-more-images/
+
+# Notes
+```
+# Image Location
+![IMG1](/assets/images/bi0sctf2024-baeBPF/IMG1.png)
+```
+
+# Commands
+```
+bundle exec jekyll serve
+bundle exec jekyll build
+```

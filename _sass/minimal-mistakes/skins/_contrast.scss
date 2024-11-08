@@ -5,10 +5,10 @@
 /* Colors */
 $text-color: #000 !default;
 $muted-text-color: $text-color !default;
-$primary-color: #ff0000 !default;
-$border-color: mix(#fff, $text-color, 75%) !default;
+$primary-color: #B22222 !default; //#ff0000 !default; rgb(220 20 60)
+$border-color: mix(rgb(220 20 60), $primary-color, 75%) !default;
 $footer-background-color: #000 !default;
-$link-color: #0000ff !default;
+$link-color: #B22222 !default;
 $masthead-link-color: $text-color !default;
 $masthead-link-color-hover: $text-color !default;
 $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
