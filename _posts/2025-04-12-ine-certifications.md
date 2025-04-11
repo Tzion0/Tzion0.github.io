@@ -56,4 +56,4 @@ Which fruit below is healthy? (Apple is healthy)
 - Orange
 ```
 
-Other than that, overall its a good exam as well.
+Other than that, overall its a good exam as well :D
