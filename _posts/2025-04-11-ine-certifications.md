@@ -35,7 +35,7 @@ I'm taking version 2 of this exam because I missed the exchange period for versi
 # eEDA (Enterprise Defense Administrator)
 Take note that crucial information, such as credentials, can be found in the lab description. However, this information will disappear once you start the exam lab, which was a frustrating experience for me. I ended up wasting an attempt because of that. Make sure to check the lab description carefully and take note of it before starting.
 
-# eCPPT (Certified Professional Penetration Tester)
+# eCPPTv3 (Certified Professional Penetration Tester)
 Hear me out, All you need from the Letter of Engagement or guide is the **target scope**. After you get that, feel free to delete the guide.
 
 **Don't trust everything in the guide**
